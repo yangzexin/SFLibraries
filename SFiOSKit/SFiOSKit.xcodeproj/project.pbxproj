@@ -15,6 +15,7 @@
 		3E19D6661831FA1D0048A788 /* UIMenuController+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19D6651831FA1D0048A788 /* UIMenuController+SFAddition.m */; };
 		3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */; };
 		3E2F3F9C1871AA85008170C1 /* SFDivideLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */; };
+		3E337DF51A44298800B5EDA7 /* SFKeychainAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */; };
 		3E384F9018A7993900997C5F /* SFGestureBackDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E384F8F18A7993900997C5F /* SFGestureBackDetector.m */; };
 		3E3A134E18BF0EEF00CF11BE /* SFCollapsableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A134D18BF0EEF00CF11BE /* SFCollapsableLabel.m */; };
 		3E3D125E182B93FD00B3B422 /* UIViewController+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D125D182B93FD00B3B422 /* UIViewController+SFAddition.m */; };
@@ -106,6 +107,8 @@
 		3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SFUDID.m"; sourceTree = "<group>"; };
 		3E2F3F9A1871AA85008170C1 /* SFDivideLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDivideLayout.h; sourceTree = "<group>"; };
 		3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDivideLayout.m; sourceTree = "<group>"; };
+		3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFKeychainAccess.h; sourceTree = "<group>"; };
+		3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFKeychainAccess.m; sourceTree = "<group>"; };
 		3E384F8E18A7993900997C5F /* SFGestureBackDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFGestureBackDetector.h; sourceTree = "<group>"; };
 		3E384F8F18A7993900997C5F /* SFGestureBackDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFGestureBackDetector.m; sourceTree = "<group>"; };
 		3E3A134C18BF0EEF00CF11BE /* SFCollapsableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCollapsableLabel.h; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 			isa = PBXGroup;
 			children = (
 				3ED2CF3B19206EB50008529A /* location */,
+				3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */,
+				3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				3EF61F661828D4340057A6FE /* SFTrangleView.m in Sources */,
 				3E0381A8187D51A800E081AD /* SFGuidePlayer.m in Sources */,
 				3EF61F601828D4340057A6FE /* SFGridViewWrapper.m in Sources */,
+				3E337DF51A44298800B5EDA7 /* SFKeychainAccess.m in Sources */,
 				3E08069818FAC337003C2AC0 /* SFPageIndicator.m in Sources */,
 				3E7DB921182BB730002BB9E2 /* UISearchBar+SFAddition.m in Sources */,
 				3EF77C3B1855C60300B95134 /* SFSideMenuController.m in Sources */,
