@@ -81,7 +81,8 @@ NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcPro
             if ([property.name characterAtIndex:0] == '_') {
                 [dictionary setObject:@"_" forKey:property.name];
             } else {
-                [dictionary setObject:NSNumberForPlainType ? [object valueForKey:[property name]] : [property getStringFromTargetObject:object] forKey:property.name];
+                id propertyValue = NSNumberForPlainType ? [object valueForKey:[property name]] : [property getStringFromTargetObject:object];
+                [dictionary setObject:propertyValue == nil ? [NSNull null] : propertyValue forKey:property.name];
             }
         }
     }
