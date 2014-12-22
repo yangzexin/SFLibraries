@@ -8,6 +8,8 @@
 
 #import "SFButtonContentCenterLayouter.h"
 
+#import "NSString+SFiOSAddition.h"
+
 @implementation SFButtonContentCenterLayouter
 
 - (void)layoutSubviews

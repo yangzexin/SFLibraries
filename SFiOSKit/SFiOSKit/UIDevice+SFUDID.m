@@ -16,6 +16,7 @@
 #import "NSString+SFAddition.h"
 #import "NSData+SFAddition.h"
 #import "NSUserDefaults+SFSafeExt.h"
+#import "SFKeychainAccess.h"
 
 @implementation UIDevice (SFUDID)
 
@@ -75,7 +76,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSString *)sf_udid
+- (NSString *)sf_UDID
 {
     NSString *UDIDString = nil;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
@@ -85,6 +86,22 @@
         if ([UDIDString length] == 0) {
             UDIDString = [[self identifierForVendor] UUIDString];
             [self _sf_saveUDIDToLocalFile:UDIDString];
+        }
+    }
+    
+    return UDIDString;
+}
+
+- (NSString *)sf_UDID_inKeychain
+{
+    NSString *UDIDString = nil;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
+        UDIDString = [[self _macAddress] sf_stringByEncryptingUsingMD5];
+    } else {
+        UDIDString = [SFKeychainAccess stringForKey:@"sf_udid"];
+        if ([UDIDString length] == 0) {
+            UDIDString = [[self identifierForVendor] UUIDString];
+            [SFKeychainAccess setString:UDIDString forKey:@"sf_udid"];
         }
     }
     

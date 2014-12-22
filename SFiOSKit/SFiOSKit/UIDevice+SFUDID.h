@@ -10,6 +10,7 @@
 
 @interface UIDevice (SFUDID)
 
-- (NSString *)sf_udid;
+- (NSString *)sf_UDID;
+- (NSString *)sf_UDID_inKeychain;
 
 @end
