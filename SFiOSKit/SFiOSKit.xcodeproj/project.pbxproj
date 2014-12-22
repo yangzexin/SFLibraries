@@ -16,7 +16,7 @@
 		3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */; };
 		3E2F3F9C1871AA85008170C1 /* SFDivideLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */; };
 		3E337DF51A44298800B5EDA7 /* SFKeychainAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */; };
-		3E337E821A480D7700B5EDA7 /* SFButtonCenterLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E337E811A480D7700B5EDA7 /* SFButtonCenterLayouter.m */; };
+		3E337E821A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E337E811A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m */; };
 		3E384F9018A7993900997C5F /* SFGestureBackDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E384F8F18A7993900997C5F /* SFGestureBackDetector.m */; };
 		3E3A134E18BF0EEF00CF11BE /* SFCollapsableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A134D18BF0EEF00CF11BE /* SFCollapsableLabel.m */; };
 		3E3D125E182B93FD00B3B422 /* UIViewController+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D125D182B93FD00B3B422 /* UIViewController+SFAddition.m */; };
@@ -110,8 +110,8 @@
 		3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDivideLayout.m; sourceTree = "<group>"; };
 		3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFKeychainAccess.h; sourceTree = "<group>"; };
 		3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFKeychainAccess.m; sourceTree = "<group>"; };
-		3E337E801A480D7700B5EDA7 /* SFButtonCenterLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFButtonCenterLayouter.h; sourceTree = "<group>"; };
-		3E337E811A480D7700B5EDA7 /* SFButtonCenterLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFButtonCenterLayouter.m; sourceTree = "<group>"; };
+		3E337E801A480D7700B5EDA7 /* SFButtonContentCenterLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFButtonContentCenterLayouter.h; sourceTree = "<group>"; };
+		3E337E811A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFButtonContentCenterLayouter.m; sourceTree = "<group>"; };
 		3E384F8E18A7993900997C5F /* SFGestureBackDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFGestureBackDetector.h; sourceTree = "<group>"; };
 		3E384F8F18A7993900997C5F /* SFGestureBackDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFGestureBackDetector.m; sourceTree = "<group>"; };
 		3E3A134C18BF0EEF00CF11BE /* SFCollapsableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCollapsableLabel.h; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 				3E7FD088192715C300936C84 /* SFCenterLayout.m */,
 				3E60DA7219A441C3001CD0AF /* SFVerticalLayout.h */,
 				3E60DA7319A441C3001CD0AF /* SFVerticalLayout.m */,
-				3E337E801A480D7700B5EDA7 /* SFButtonCenterLayouter.h */,
-				3E337E811A480D7700B5EDA7 /* SFButtonCenterLayouter.m */,
+				3E337E801A480D7700B5EDA7 /* SFButtonContentCenterLayouter.h */,
+				3E337E811A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
@@ -585,7 +585,7 @@
 				3ED2CF5019206EE20008529A /* SFAppleGeocoder.m in Sources */,
 				3EF61F341828D40D0057A6FE /* UIActionSheet+SFAddition.m in Sources */,
 				3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */,
-				3E337E821A480D7700B5EDA7 /* SFButtonCenterLayouter.m in Sources */,
+				3E337E821A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m in Sources */,
 				3ED2CF5119206EE20008529A /* SFExtremeGeocoder.m in Sources */,
 				3EF61F371828D40D0057A6FE /* UIImagePickerController+SFAddition.m in Sources */,
 				3EF61F381828D40D0057A6FE /* UILabel+SFAddition.m in Sources */,

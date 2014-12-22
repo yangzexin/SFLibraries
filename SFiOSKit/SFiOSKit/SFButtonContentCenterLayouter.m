@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 yangzexin. All rights reserved.
 //
 
-#import "SFButtonCenterLayouter.h"
+#import "SFButtonContentCenterLayouter.h"
 
-@implementation SFButtonCenterLayouter
+@implementation SFButtonContentCenterLayouter
 
 - (void)layoutSubviews
 {

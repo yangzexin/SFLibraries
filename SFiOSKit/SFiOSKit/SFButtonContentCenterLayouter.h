@@ -10,7 +10,7 @@
 
 #import "SFIBCompatibleView.h"
 
-@interface SFButtonCenterLayouter : SFIBCompatibleView
+@interface SFButtonContentCenterLayouter : SFIBCompatibleView
 
 @property (nonatomic, assign) CGFloat spacing;
 
