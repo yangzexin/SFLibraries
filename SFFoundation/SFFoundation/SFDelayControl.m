@@ -11,7 +11,7 @@
 @interface SFDelayControl ()
 
 @property (nonatomic, copy) void(^completion)();
-@property (nonatomic, assign) NSInteger timeInterval;
+@property (nonatomic, assign) NSTimeInterval timeInterval;
 @property (nonatomic, assign) BOOL performed;
 @property (nonatomic, assign) BOOL cancelled;
 
