@@ -268,7 +268,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
         UIViewController *viewController = [self.viewControllers lastObject];
         [[[self class] sharedGestureBackPreparer] prepareViewController:viewController identifier:[self identifierForObject:viewController]];
     }
-    [super pushViewController:viewController animated:YES];
+    [super pushViewController:viewController animated:animated];
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
