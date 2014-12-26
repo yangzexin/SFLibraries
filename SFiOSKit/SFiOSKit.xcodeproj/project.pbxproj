@@ -230,16 +230,16 @@
 		3E2F3F9E1871AA8D008170C1 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				3ECDFC74183A1B6000A55591 /* SFCardLayout.h */,
-				3ECDFC75183A1B6000A55591 /* SFCardLayout.m */,
-				3E2F3F9A1871AA85008170C1 /* SFDivideLayout.h */,
-				3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */,
-				3E7FD087192715C300936C84 /* SFCenterLayout.h */,
-				3E7FD088192715C300936C84 /* SFCenterLayout.m */,
-				3E60DA7219A441C3001CD0AF /* SFVerticalLayout.h */,
-				3E60DA7319A441C3001CD0AF /* SFVerticalLayout.m */,
 				3E337E801A480D7700B5EDA7 /* SFButtonContentCenterLayouter.h */,
 				3E337E811A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m */,
+				3ECDFC74183A1B6000A55591 /* SFCardLayout.h */,
+				3ECDFC75183A1B6000A55591 /* SFCardLayout.m */,
+				3E7FD087192715C300936C84 /* SFCenterLayout.h */,
+				3E7FD088192715C300936C84 /* SFCenterLayout.m */,
+				3E2F3F9A1871AA85008170C1 /* SFDivideLayout.h */,
+				3E2F3F9B1871AA85008170C1 /* SFDivideLayout.m */,
+				3E60DA7219A441C3001CD0AF /* SFVerticalLayout.h */,
+				3E60DA7319A441C3001CD0AF /* SFVerticalLayout.m */,
 			);
 			name = Layout;
 			sourceTree = "<group>";
