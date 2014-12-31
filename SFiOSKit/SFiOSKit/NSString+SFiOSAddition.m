@@ -8,6 +8,8 @@
 
 #import "NSString+SFiOSAddition.h"
 
+#import "UIView+SFAddition.h"
+
 @implementation NSString (SFiOSAddition)
 
 - (CGSize)sf_sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)constrainedToSize
@@ -29,6 +31,7 @@
         size = [self sizeWithFont:font constrainedToSize:constrainedToSize];
 #pragma GCC diagnostic pop
     }
+    
     return size;
 }
 
@@ -48,6 +51,7 @@
         size = [self sizeWithFont:font];
 #pragma GCC diagnostic pop
     }
+    
     return size;
 }
 
@@ -60,7 +64,20 @@
         UIFont *nextFont = [UIFont systemFontOfSize:font.pointSize - stepFontDelta];
         font = nextFont;
     }
+    
     return font;
+}
+
+- (UIImage *)sf_imageWithFont:(UIFont *)font textColor:(UIColor *)textColor
+{
+    CGSize textSize = [self sf_sizeWithFont:font];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = textColor;
+    label.font = font;
+    label.text = self;
+    
+    return [label sf_toImageLegacy];
 }
 
 @end

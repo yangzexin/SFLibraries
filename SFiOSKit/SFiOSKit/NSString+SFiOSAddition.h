@@ -17,4 +17,6 @@
 
 - (UIFont *)sf_fontByFitingWithViewSize:(CGSize)viewSize fromFont:(UIFont *)fromFont stepFontDelta:(CGFloat)stepFontDelta;
 
+- (UIImage *)sf_imageWithFont:(UIFont *)font textColor:(UIColor *)textColor;
+
 @end
