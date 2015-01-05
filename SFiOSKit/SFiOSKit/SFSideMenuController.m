@@ -509,6 +509,9 @@ static CGFloat kValidPanDistance = 37;
         CGFloat menuAvaliableWidth = _menuViewController.view.frame.size.width;
         tmpRect.origin.x = -(menuAvaliableWidth * (1.0f - percent));
         _menuViewController.view.frame = tmpRect;
+        if (self.animatesShowMenu) {
+            _menuViewController.view.alpha = percent + .20f;
+        }
     }
 }
 
