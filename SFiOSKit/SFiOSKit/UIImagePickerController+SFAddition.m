@@ -11,7 +11,7 @@
 #import "NSObject+SFObjectAssociation.h"
 #import "UIActionSheet+SFAddition.h"
 
-@implementation SFDialogExtension
+@implementation SFImagePickerDialogExtension
 
 @end
 
@@ -75,7 +75,7 @@
 
 @interface SFImagePickerControllerWrapper () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) SFDialogExtension *dialogExtension;
+@property (nonatomic, strong) SFImagePickerDialogExtension *dialogExtension;
 
 @property (nonatomic, strong) id<SFMutipleImagePickerViewController> photoImagePickerViewController;
 @property (nonatomic, strong) id<SFMutipleImagePickerViewController> cameraImagePickerViewController;
@@ -88,10 +88,10 @@
 {
     [viewController sf_setAssociatedObject:self key:@"_ImagePickerControllerWrapper"];
     NSMutableArray *imagePickerViewControllers = [NSMutableArray array];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && !(self.dialogExtension.sourceLimitation & SFImagePickerSourceLimitationOnlyLibrary)) {
         [imagePickerViewControllers addObject:_cameraImagePickerViewController];
     }
-    if (_photoImagePickerViewController) {
+    if (_photoImagePickerViewController && !(self.dialogExtension.sourceLimitation & SFImagePickerSourceLimitationOnlyCamera)) {
         [imagePickerViewControllers addObject:_photoImagePickerViewController];
     }
     
@@ -103,31 +103,43 @@
         [actionSheetButtonTitles addObjectsFromArray:_dialogExtension.additionalButtonTitles];
     }
     
-    UIActionSheet *actionSheet = [UIActionSheet sf_actionSheetWithTitle:_dialogExtension.title == nil ? NSLocalizedString(@"Select Picture", nil) : _dialogExtension.title completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
-        if (buttonIndex < imagePickerViewControllers.count) {
-            id<SFMutipleImagePickerViewController> controller = [imagePickerViewControllers objectAtIndex:buttonIndex];
-            __block typeof(viewController) blockViewController = viewController;
-            UIViewController *pickerViewController = [controller viewControllerForPickingImagesWithCompletion:^(NSArray *selectedImages, BOOL cancelled) {
-                [viewController dismissViewControllerAnimated:YES completion:^{
-                    if (completion) {
-                        completion(selectedImages, cancelled);
-                        [blockViewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
-                    }
-                }];
+    UIActionSheet *actionSheet = nil;
+    
+    void(^pickerViewControllerSelected)(id<SFMutipleImagePickerViewController>) = ^(id<SFMutipleImagePickerViewController> targetPickerViewController){
+        __block typeof(viewController) blockViewController = viewController;
+        UIViewController *pickerViewController = [targetPickerViewController viewControllerForPickingImagesWithCompletion:^(NSArray *selectedImages, BOOL cancelled) {
+            [viewController dismissViewControllerAnimated:YES completion:^{
+                if (completion) {
+                    completion(selectedImages, cancelled);
+                    [blockViewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
+                }
             }];
-            [viewController presentViewController:pickerViewController animated:YES completion:nil];
-        } else if (buttonIndex < imagePickerViewControllers.count + self.dialogExtension.additionalButtonTitles.count) {
-            if (self.dialogExtension.additionalButtonTapped) {
-                self.dialogExtension.additionalButtonTapped(buttonTitle);
+        }];
+        [viewController presentViewController:pickerViewController animated:YES completion:nil];
+    };
+    
+    if (imagePickerViewControllers.count == 1 && _dialogExtension.additionalButtonTitles.count == 0) {
+        actionSheet = [[UIActionSheet alloc] init];
+        pickerViewControllerSelected([imagePickerViewControllers lastObject]);
+    } else {
+        actionSheet = [UIActionSheet sf_actionSheetWithTitle:_dialogExtension.title == nil ? NSLocalizedString(@"Select Picture", nil) : _dialogExtension.title completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            if (buttonIndex < imagePickerViewControllers.count) {
+                id<SFMutipleImagePickerViewController> targetPickerViewController = [imagePickerViewControllers objectAtIndex:buttonIndex];
+                pickerViewControllerSelected(targetPickerViewController);
+            } else if (buttonIndex < imagePickerViewControllers.count + self.dialogExtension.additionalButtonTitles.count) {
+                if (self.dialogExtension.additionalButtonTapped) {
+                    self.dialogExtension.additionalButtonTapped(buttonTitle);
+                }
+                [viewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
+            } else {
+                [viewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
+                if (completion) {
+                    completion(nil, YES);
+                }
             }
-            [viewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
-        } else {
-            [viewController sf_removeAssociatedObjectWithKey:@"_ImagePickerControllerWrapper"];
-            if (completion) {
-                completion(nil, YES);
-            }
-        }
-    } cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitleList:actionSheetButtonTitles];
+        } cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitleList:actionSheetButtonTitles];
+        
+    }
     
     return actionSheet;
 }
@@ -136,7 +148,7 @@
 
 @implementation UIImagePickerController (SFAddition)
 
-+ (SFImagePickerControllerWrapper *)_defaultImagePickerControllerWrapperWithExtension:(SFDialogExtension *)extension
++ (SFImagePickerControllerWrapper *)_defaultImagePickerControllerWrapperWithExtension:(SFImagePickerDialogExtension *)extension
 {
     SFImagePickerControllerWrapper *imgPicker = [[SFImagePickerControllerWrapper alloc] init];
     imgPicker.dialogExtension = extension;
@@ -146,7 +158,7 @@
     return imgPicker;
 }
 
-+ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFDialogExtension *)extension completion:(SFImagePickerCompletion)completion
++ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension completion:(SFImagePickerCompletion)completion
 {
     SFImagePickerControllerWrapper *imgPicker = [self _defaultImagePickerControllerWrapperWithExtension:extension];
     return [imgPicker pickImageByActionSheetInViewController:viewController completion:^(NSArray *images, BOOL cancelled){
@@ -162,7 +174,7 @@
 }
 
 + (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                      extension:(SFDialogExtension *)extension
+                                                      extension:(SFImagePickerDialogExtension *)extension
                                mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController
                                                      completion:(SFMutipleImagePickerCompletion)completion
 {

@@ -11,11 +11,18 @@
 typedef void(^SFImagePickerCompletion)(UIImage *selectedImage, BOOL cancelled);
 typedef void(^SFMutipleImagePickerCompletion)(NSArray *selectedImages, BOOL cancelled);
 
-@interface SFDialogExtension : NSObject
+typedef NS_OPTIONS(NSUInteger, SFImagePickerSourceLimitation) {
+    SFImagePickerSourceLimitationNone = 0,
+    SFImagePickerSourceLimitationOnlyLibrary = 1 << 0,
+    SFImagePickerSourceLimitationOnlyCamera = 1 << 1,
+};
+
+@interface SFImagePickerDialogExtension : NSObject
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSArray *additionalButtonTitles;
 @property (nonatomic, copy) void(^additionalButtonTapped)(NSString *buttonTitle);
+@property (nonatomic, assign) SFImagePickerSourceLimitation sourceLimitation;
 
 @end
 
@@ -29,13 +36,14 @@ typedef void(^SFMutipleImagePickerCompletion)(NSArray *selectedImages, BOOL canc
 
 @interface UIImagePickerController (SFAddition)
 
-+ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                        extension:(SFDialogExtension *)extension
-                                                       completion:(SFImagePickerCompletion)completion;
 + (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController completion:(SFImagePickerCompletion)completion;
 
++ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController
+                                                        extension:(SFImagePickerDialogExtension *)extension
+                                                       completion:(SFImagePickerCompletion)completion;
+
 + (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                         extension:(SFDialogExtension *)extension
+                                                         extension:(SFImagePickerDialogExtension *)extension
                                   mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController
                                                         completion:(SFMutipleImagePickerCompletion)completion;
 
