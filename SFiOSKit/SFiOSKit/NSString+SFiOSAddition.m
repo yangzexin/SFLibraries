@@ -73,6 +73,7 @@
     CGSize textSize = [self sf_sizeWithFont:font];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
     label.backgroundColor = [UIColor clearColor];
+    label.opaque = NO;
     label.textColor = textColor;
     label.font = font;
     label.text = self;
