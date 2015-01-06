@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define SFRGB(RED, GREEN, BLUE) ([UIColor sf_colorWithIntegerRed:RED green:GREEN blue:BLUE])
-#define SFRGBA(RED, GREEN, BLUE, ALPHA) [UIColor sf_colorWithIntegerRed:RED green:GREEN blue:BLUE alpha:ALPHA]
+#define SFRGB(RED, GREEN, BLUE)             [UIColor sf_colorWithIntegerRed:RED green:GREEN blue:BLUE]
+#define SFRGBA(RED, GREEN, BLUE, ALPHA)     [UIColor sf_colorWithIntegerRed:RED green:GREEN blue:BLUE alpha:ALPHA]
+#define SFRGBFromHex(HEX)                   [UIColor sf_colorFromHex:HEX]
 
 @interface UIColor (SFAddition)
 
