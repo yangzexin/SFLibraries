@@ -89,3 +89,20 @@
 }
 
 @end
+
+@implementation NSDate (yyyyMMddHHmmss)
+
+- (NSString *)sf_yyyyMMddHHmmss_timeString
+{
+    return [self sf_timeStringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+}
+
+- (NSString *)sf_timeStringWithFormat:(NSString *)format
+{
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:format];
+    return [dateFormatter stringFromDate:self];
+}
+
+@end
+

@@ -31,3 +31,12 @@
 - (NSDate *)sf_monthBeginDate;
 
 @end
+
+@interface NSDate (timeString)
+
+// yyyy-MM-dd HH:mm:ss
+- (NSString *)sf_yyyyMMddHHmmss_timeString;
+
+- (NSString *)sf_timeStringWithFormat:(NSString *)format;
+
+@end
