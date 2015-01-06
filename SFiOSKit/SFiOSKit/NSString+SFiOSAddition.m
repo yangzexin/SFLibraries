@@ -74,7 +74,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
     label.backgroundColor = [UIColor clearColor];
     label.opaque = NO;
-    label.textColor = textColor;
+    label.textColor = textColor == nil ? [UIColor blackColor] : textColor;
     label.font = font;
     label.text = self;
     
