@@ -30,8 +30,15 @@
 #define SFTrackProperty(TARGET, KEYPATH) \
     [self sf_observeKeyPathWithTarget:TARGET name:@SFKeypath(TARGET, KEYPATH) options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial]
 
+#define SFObservePropertyWithIdentifier(TARGET, KEYPATH, IDENTIFIER) \
+    [self sf_observeKeyPathWithTarget:TARGET name:@SFKeypath(TARGET, KEYPATH) options:NSKeyValueObservingOptionNew identifier:IDENTIFIER]
+
+#define SFTrackPropertyWithIdentifier(TARGET, KEYPATH, IDENTIFIER) \
+    [self sf_observeKeyPathWithTarget:TARGET name:@SFKeypath(TARGET, KEYPATH) options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial identifier:IDENTIFIER]
+
 @interface NSObject (SFObserve)
 
 - (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options;
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options identifier:(NSString *)identifier;
 
 @end

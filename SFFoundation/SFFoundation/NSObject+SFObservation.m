@@ -9,6 +9,7 @@
 #import "NSObject+SFObservation.h"
 #import "NSObject+SFObjectRepository.h"
 #import "NSObject+SFAddition.h"
+#import "NSObject+SFObjectAssociation.h"
 #import "SFPropertyObserveContext.h"
 
 @implementation NSObject (SFObserve)
@@ -39,6 +40,28 @@
         }];
     }
     return observing;
+}
+
+- (NSMutableDictionary *)_keyIdentifierValuePropertyObserving
+{
+    NSMutableDictionary *keyIdentifierValuePropertyObserving = [self sf_associatedObjectWithKey:@"_keyIdentifierValuePropertyObserving"];
+    if (keyIdentifierValuePropertyObserving == nil) {
+        keyIdentifierValuePropertyObserving = [NSMutableDictionary dictionary];
+        [self sf_setAssociatedObject:keyIdentifierValuePropertyObserving key:@"_keyIdentifierValuePropertyObserving"];
+    }
+    
+    return keyIdentifierValuePropertyObserving;
+}
+
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options identifier:(NSString *)identifier
+{
+    SFPropertyObserving *existsObserving = [[self _keyIdentifierValuePropertyObserving] objectForKey:identifier];
+    [existsObserving cancel];
+    
+    SFPropertyObserving *newObserving = [self sf_observeKeyPathWithTarget:target name:name options:options];
+    [[self _keyIdentifierValuePropertyObserving] setObject:newObserving forKey:identifier];
+    
+    return newObserving;
 }
 
 @end
