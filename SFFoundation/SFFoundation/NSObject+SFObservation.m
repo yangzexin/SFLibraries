@@ -14,7 +14,9 @@
 
 @implementation NSObject (SFObserve)
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
+                                                name:(NSString *)name
+                                             options:(NSKeyValueObservingOptions)options
 {
     SFPropertyObserving *observing = nil;
     if (target != nil) {
@@ -53,10 +55,18 @@
     return keyIdentifierValuePropertyObserving;
 }
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options identifier:(NSString *)identifier
+- (void)cancelObservingWithIdentifier:(NSString *)identifier
 {
     SFPropertyObserving *existsObserving = [[self _keyIdentifierValuePropertyObserving] objectForKey:identifier];
     [existsObserving cancel];
+}
+
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
+                                                name:(NSString *)name
+                                             options:(NSKeyValueObservingOptions)options
+                                          identifier:(NSString *)identifier
+{
+    [self cancelObservingWithIdentifier:identifier];
     
     SFPropertyObserving *newObserving = [self sf_observeKeyPathWithTarget:target name:name options:options];
     [[self _keyIdentifierValuePropertyObserving] setObject:newObserving forKey:identifier];
