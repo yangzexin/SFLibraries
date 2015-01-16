@@ -184,7 +184,7 @@
 {
     UIView *tipsLabelContainerView = [self sf_associatedObjectWithKey:@"TipsLabelContainerView"];
     UILabel *tipsLabel = [self sf_associatedObjectWithKey:@"TipsLabel"];
-    if (tipsLabel == nil) {
+    if (tipsLabel == nil && containView != nil) {
         tipsLabelContainerView = [[UIView alloc] initWithFrame:containView.bounds];
         tipsLabelContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
