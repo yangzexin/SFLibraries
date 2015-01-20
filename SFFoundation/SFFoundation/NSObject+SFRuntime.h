@@ -12,6 +12,8 @@
 
 + (NSArray *)sf_objcProperties;
 
++ (NSArray *)sf_objcPropertiesStopAtNSObject;
+
 + (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass;
 
 + (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass exceptPropertyNames:(NSArray *)exceptPropertyNames;

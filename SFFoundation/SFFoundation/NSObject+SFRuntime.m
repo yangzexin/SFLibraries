@@ -16,6 +16,11 @@
     return [SFObjcProperty objcPropertiesOfClass:[self class]];
 }
 
++ (NSArray *)sf_objcPropertiesStopAtNSObject
+{
+    return [SFObjcProperty objcPropertiesOfClass:[self class] stopClass:[NSObject class]];
+}
+
 + (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass
 {
     return [SFObjcProperty objcPropertiesOfClass:[self class] searchingSuperClass:searchingSuperClass];

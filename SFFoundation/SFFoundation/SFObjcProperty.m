@@ -335,6 +335,18 @@ NSString *classNameOfDesc(const char *desc)
     }];
 }
 
++ (NSArray *)objcPropertiesOfClass:(Class)clss stopClass:(Class)stopClass
+{
+    return [SFObjcProperty objcPropertiesOfClass:clss stepController:^BOOL(__unsafe_unretained Class tmpClass, BOOL *stop) {
+        if (tmpClass == stopClass) {
+            *stop = YES;
+            return NO;
+        }
+        
+        return YES;
+    }];
+}
+
 + (SFObjcProperty *)objcPropertyWithPropertyName:(NSString *)propertyName targetClass:(Class)targetClass
 {
     SFObjcProperty *targetProperty = nil;

@@ -71,6 +71,8 @@ typedef NS_ENUM(NSUInteger, SFObjcPropertyAccessType) {
 
 + (NSArray *)objcPropertiesOfClass:(Class)clss searchingUntilClass:(Class)untilClass;
 
++ (NSArray *)objcPropertiesOfClass:(Class)clss stopClass:(Class)stopClass;
+
 /**
  classDecider: if return NO, tmpClass will be ignored, if *stop set to YES, searching will be stoped immediately
  */
