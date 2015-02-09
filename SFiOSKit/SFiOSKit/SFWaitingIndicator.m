@@ -131,13 +131,17 @@
     BOOL hidesWaitingView = waitingIdentifiers.count == 0;
     if (!hidesWaitingView) {
         waitingView.hidden = hidesWaitingView;
-        waitingView.alpha = 1.0f;
         [view bringSubviewToFront:waitingView];
+        [UIView animateWithDuration:.25f animations:^{
+            waitingView.alpha = 1.0f;
+        }];
     } else {
         [UIView animateWithDuration:.25f animations:^{
             waitingView.alpha = 0.0f;
         } completion:^(BOOL finished) {
-            waitingView.hidden = hidesWaitingView;
+            if (finished) {
+                waitingView.hidden = hidesWaitingView;
+            }
             waitingView.alpha = 1.0f;
         }];
     }
