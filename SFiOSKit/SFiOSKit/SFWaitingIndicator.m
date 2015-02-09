@@ -131,6 +131,7 @@
     BOOL hidesWaitingView = waitingIdentifiers.count == 0;
     if (!hidesWaitingView) {
         waitingView.hidden = hidesWaitingView;
+        waitingView.alpha = 1.0f;
         [view bringSubviewToFront:waitingView];
     } else {
         [UIView animateWithDuration:.25f animations:^{
