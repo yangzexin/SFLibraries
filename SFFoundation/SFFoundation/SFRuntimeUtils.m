@@ -192,14 +192,20 @@ NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstPa
                     if (tmpParam.length != 0) {
                         char c = [tmpParam characterAtIndex:0];
                         
-                        tmpParam = [tmpParam lowercaseString];
-                        if ([tmpParam isEqualToString:@"yes"] || [tmpParam isEqualToString:@"true"] || [tmpParam isEqualToString:@"1"]) {
+                        if (c == '1') {
                             c = YES;
-                        } else if ([tmpParam isEqualToString:@"no"] || [tmpParam isEqualToString:@"false"] || [tmpParam isEqualToString:@"0"]) {
-                            c = NO;
                         } else {
-                            c = NO;
+                            if (c == 't' || c == 'T' || c == 'y' || c == 'Y') {
+                                c = NO;
+                                tmpParam = [tmpParam lowercaseString];
+                                if ([tmpParam isEqualToString:@"true"] || [tmpParam isEqualToString:@"yes"]) {
+                                    c = YES;
+                                }
+                            } else {
+                                c = NO;
+                            }
                         }
+                        
                         argumentData = &c;
                     }
                     
