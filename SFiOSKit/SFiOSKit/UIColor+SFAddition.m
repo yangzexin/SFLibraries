@@ -23,12 +23,12 @@
                            alpha:alpha];
 }
 
-+ (UIColor *)sf_colorWithIntegerRed:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue
++ (UIColor *)sf_colorWithRed:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue
 {
-    return [self sf_colorWithIntegerRed:red green:green blue:blue alpha:100];
+    return [self sf_colorWithRed:red green:green blue:blue alpha:100];
 }
 
-+ (UIColor *)sf_colorWithIntegerRed:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue alpha:(NSInteger)alpha
++ (UIColor *)sf_colorWithRed:(NSInteger)red green:(NSInteger)green blue:(NSInteger)blue alpha:(NSInteger)alpha
 {
     return [UIColor colorWithRed:red / 255.0f green:green / 255.0f blue:blue / 255.0f alpha:alpha / 100.0f];
 }

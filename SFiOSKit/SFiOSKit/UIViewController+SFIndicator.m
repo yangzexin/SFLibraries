@@ -207,7 +207,7 @@
         tipsLabel.backgroundColor = [UIColor clearColor];
         tipsLabel.textAlignment = NSTextAlignmentCenter;
         tipsLabel.font = [UIFont systemFontOfSize:17.0f];
-        tipsLabel.textColor = [UIColor sf_colorWithIntegerRed:135 green:135 blue:135];
+        tipsLabel.textColor = [UIColor sf_colorWithRed:135 green:135 blue:135];
         tipsLabel.userInteractionEnabled = NO;
         tipsLabel.adjustsFontSizeToFitWidth = YES;
         tipsLabel.numberOfLines = 0;

@@ -82,7 +82,7 @@
     [viewController.view addSubview:container];
     
     SFBlockedButton *backgroundView = [[SFBlockedButton alloc] initWithFrame:container.bounds];
-    backgroundView.backgroundColor = [UIColor sf_colorWithIntegerRed:0 green:0 blue:0 alpha:50];
+    backgroundView.backgroundColor = [UIColor sf_colorWithRed:0 green:0 blue:0 alpha:50];
     backgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [container addSubview:backgroundView];
     
@@ -142,7 +142,7 @@
         rect.origin.y = [strongToolbar sf_bottom];
         strongDatePicker.frame = rect;
         
-        strongBackgroundView.backgroundColor = [UIColor sf_colorWithIntegerRed:0 green:0 blue:0 alpha:0];
+        strongBackgroundView.backgroundColor = [UIColor sf_colorWithRed:0 green:0 blue:0 alpha:0];
     };
     
     [backgroundView setTapHandler:^{
