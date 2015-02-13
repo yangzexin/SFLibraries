@@ -24,6 +24,7 @@
     dispatch_once(&onceToken, ^{
         instance = [[self class] new];
     });
+    
     return instance;
 }
 
@@ -45,8 +46,7 @@
 - (void)addItem:(id<SFEventLoopItem>)item
 {
     [self removeItem:item];
-    
-    @synchronized(self){
+    @synchronized(self) {
         [self.eventLoopItems addObject:item];
         [self startThreadIfNotRunning];
     }
@@ -54,27 +54,27 @@
 
 - (void)removeItem:(id<SFEventLoopItem>)item
 {
-    @synchronized(self){
+    @synchronized(self) {
         [self.eventLoopItems removeObject:item];
     }
 }
 
 - (void)startThreadIfNotRunning
 {
-    @synchronized(self){
-        if(self.running == NO){
+    @synchronized(self) {
+        if (self.running == NO) {
             self.running = YES;
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                while(YES){
+                while (YES) {
                     @autoreleasepool {
                         [NSThread sleepForTimeInterval:1.0f / self.numberOfTicksPerSecond];
-                        @synchronized(self){
+                        @synchronized(self) {
                             NSArray *items = [NSArray arrayWithArray:self.eventLoopItems];
-                            if(items.count == 0){
+                            if (items.count == 0) {
                                 self.running = NO;
                                 break;
-                            }else{
-                                for(id<SFEventLoopItem> item in items){
+                            } else {
+                                for (id<SFEventLoopItem> item in items) {
                                     [item tick];
                                 }
                             }

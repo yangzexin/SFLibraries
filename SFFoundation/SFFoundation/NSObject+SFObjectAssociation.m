@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+SFObjectAssociation.h"
+
 #import <objc/runtime.h>
 
 static const char *SFObjectDictionary = "SFObjectDictionary";
@@ -20,6 +21,7 @@ static const char *SFObjectDictionary = "SFObjectDictionary";
         objectDictionary = [NSMutableDictionary dictionary];
         objc_setAssociatedObject(self, SFObjectDictionary, objectDictionary, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
+    
     return objectDictionary;
 }
 

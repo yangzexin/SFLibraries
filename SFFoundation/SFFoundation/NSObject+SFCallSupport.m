@@ -58,6 +58,7 @@
 - (BOOL)sf_isCallExecutingWithIdentifier:(NSString *)ID
 {
     id<SFCall> call = (id)[self sf_repositionSupportedObjectWithIdentifier:ID];
+    
     return [call isExecuting];
 }
 

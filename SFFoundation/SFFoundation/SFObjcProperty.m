@@ -7,6 +7,7 @@
 //
 
 #import "SFObjcProperty.h"
+
 #import "SFRuntimeUtils.h"
 
 @interface SFObjcProperty ()
@@ -32,6 +33,7 @@
     [className release];
     [setterMethodName release];
     [getterMethodName release];
+    
     [super dealloc];
 }
 
@@ -66,6 +68,7 @@ int str_indexOfChar(const char *str, char ch, int fromIndex)
         
         ++tmpPointer;
     }
+    
     return finded != 0 ? (index + fromIndex) : -1;
 }
 
@@ -81,9 +84,9 @@ void str_sub(const char *originalString, int beginIndex, int endIndex, char *out
 
 SFObjcPropertyType typeOfDesc(const char *desc)
 {
-    if(*desc == 'T' && strlen(desc) > 1){
+    if (*desc == 'T' && strlen(desc) > 1) {
         const unsigned char ctype = *(desc + 1);
-        switch(ctype){
+        switch (ctype) {
             case 'c':
                 return SFObjcPropertyTypeChar;
             case 'i':
@@ -136,6 +139,7 @@ SFObjcPropertyType typeOfDesc(const char *desc)
                 return SFObjcPropertyTypeUnknown;
         }
     }
+    
     return SFObjcPropertyTypeUnknown;
 }
 
@@ -145,6 +149,7 @@ SFObjcPropertyAccessType accessTypeOfDesc(const char *desc)
     if (strlen(desc) == 1) {
         tmp_accessType = *(desc) == 'R' ? SFObjcPropertyAccessTypeReadOnly : SFObjcPropertyAccessTypeReadWrite;;
     }
+    
     return tmp_accessType;
 }
 
@@ -161,12 +166,13 @@ NSString *classNameOfDesc(const char *desc)
         className = [NSString stringWithCString:class_name encoding:NSASCIIStringEncoding];
         free(class_name);
     }
+    
     return className;
 }
 
 - (void)setObjc_property:(objc_property_t)property
 {
-    if(name){
+    if (name) {
         [name release]; name = nil;
     }
     if (className) {
@@ -181,7 +187,7 @@ NSString *classNameOfDesc(const char *desc)
     
     objc_property = property;
     
-    if(objc_property){
+    if (objc_property) {
         const char *cname = property_getName(property);
         const char *cattributes = property_getAttributes(property);
         
@@ -272,6 +278,7 @@ NSString *classNameOfDesc(const char *desc)
             free(tmp_suffix);
             free(setter_method_name);
         }
+        
         if (getterMethodName == nil) {
             getterMethodName = [name copy];
         }
@@ -317,6 +324,7 @@ NSString *classNameOfDesc(const char *desc)
             *stop = YES;
             return NO;
         }
+        
         return YES;
     }];
 }
@@ -331,6 +339,7 @@ NSString *classNameOfDesc(const char *desc)
         if (tmpClass == untilClass) {
             stoped = YES;
         }
+        
         return YES;
     }];
 }
@@ -369,6 +378,7 @@ NSString *classNameOfDesc(const char *desc)
         
         targetClass = class_getSuperclass(targetClass);
     }
+    
     return targetProperty;
 }
 
@@ -397,6 +407,7 @@ NSString *classNameOfDesc(const char *desc)
             break;
         }
     }
+    
     return targetProperty;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFDict2ObjectEnhanced.h"
 
 @interface NSObject (SFSerialization)

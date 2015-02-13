@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFCombinationEnd.h"
 
 // Make a dictionary with key and value as parameters, the key and value can be nil,

@@ -7,8 +7,9 @@
 //
 
 #import "NSObject+SFObservation.h"
+
 #import "NSObject+SFObjectRepository.h"
-#import "NSObject+SFAddition.h"
+#import "NSObject+SFRuntime.h"
 #import "NSObject+SFObjectAssociation.h"
 #import "SFPropertyObserveContext.h"
 
@@ -41,6 +42,7 @@
             [weakObserving cancel];
         }];
     }
+    
     return observing;
 }
 

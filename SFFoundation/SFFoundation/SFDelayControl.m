@@ -57,6 +57,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self delayDidFinish];
     });
+    
     return self;
 }
 

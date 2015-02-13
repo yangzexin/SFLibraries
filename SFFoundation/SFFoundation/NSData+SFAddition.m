@@ -7,6 +7,7 @@
 //
 
 #import "NSData+SFAddition.h"
+
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSData (SFAddition)
@@ -18,6 +19,7 @@
     for (NSInteger i = 0; i < [self length]; ++i) {
         [hexString appendFormat:@"%02x", bytes[i]];
     }
+    
     return [NSString stringWithFormat:@"%@", hexString];
 }
 
@@ -25,6 +27,7 @@
 {
     unsigned char result[16];
     CC_MD5(self.bytes, (CC_LONG)self.length, result);
+    
     return [NSData dataWithBytes:result length:16];
 }
 
@@ -41,6 +44,7 @@
     
     NSData *data = [NSData dataWithBytes:resultBytes length:[self length]];
     free(resultBytes);
+    
     return data;
 }
 
@@ -65,7 +69,7 @@
                                           &bufferNumBytes);
     
     NSData *resultData = nil;
-    if(cryptStatus == kCCSuccess) {
+    if (cryptStatus == kCCSuccess) {
         resultData = [NSData dataWithBytes:buffer length:bufferNumBytes];
     }
     

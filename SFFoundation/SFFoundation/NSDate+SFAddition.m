@@ -47,6 +47,7 @@
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSString *dateString = [dateFormatter stringFromDate:self];
     NSDate *beginningOfDate = [dateFormatter dateFromString:dateString];
+    
     return beginningOfDate;
 }
 
@@ -73,6 +74,7 @@
     if (numberOfDays < 0) {
         numberOfDays = 0 - numberOfDays;
     }
+    
     return numberOfDays;
 }
 
@@ -85,6 +87,7 @@
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM"];
+    
     return [dateFormatter dateFromString:[dateFormatter stringFromDate:self]];
 }
 
@@ -101,6 +104,7 @@
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:format];
+    
     return [dateFormatter stringFromDate:self];
 }
 

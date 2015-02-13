@@ -7,6 +7,7 @@
 //
 
 #import "SFObjectMappingCollector.h"
+
 #import <objc/runtime.h>
 #import "SFPropertyProcessor.h"
 
@@ -28,6 +29,7 @@
 {
     SFClassWrapper *wrapper = [SFClassWrapper new];
     wrapper.clss = clss;
+    
     return wrapper;
 }
 
@@ -51,6 +53,7 @@
     context.targetObjectMapping = objectMapping;
     context.propertyName = propertyName;
     context.className = className;
+    
     return context;
 }
 
@@ -111,6 +114,7 @@
             [context.targetObjectMapping addObjectMapping:subObjectMapping forPropertyName:context.propertyName];
         }
     }
+    
     return rootObjectMapping;
 }
 
@@ -141,6 +145,7 @@
         mapping = [SFObjectMapping objectMappingWithClass:clss];
     }
     *outUnhandledSubObjectMappingContexts = unhandledSubObjectMappingContexts;
+    
     return mapping;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFObjectMapping.h"
 #import "SFObjcProperty.h"
 

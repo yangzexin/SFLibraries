@@ -223,6 +223,7 @@ NSInteger const SFTimeoutTrackingCallErrorCode = -100002;
             self.called = YES;
         }
     }
+    
     return self;
 }
 
@@ -271,7 +272,7 @@ NSInteger const SFTimeoutTrackingCallErrorCode = -100002;
         __weak typeof(self) weakSelf = self;
         void(^finishingCall)(NSString *identifier) = ^(NSString *identifier){
             __strong typeof(weakSelf) self = weakSelf;
-            @synchronized(self.processingIdentifiers){
+            @synchronized(self.processingIdentifiers) {
                 [self.processingIdentifiers removeObject:identifier];
                 if (self.processingIdentifiers.count == 0) {
                     [self finishWithResult:[SFCallResult resultWithObject:self.keyIdentifierValueResult error:nil]];

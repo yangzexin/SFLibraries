@@ -7,6 +7,7 @@
 //
 
 #import "SFMappingStringCollector.h"
+
 #import "NSString+SFJavaLikeStringHandle.h"
 #import "SFPropertyProcessor.h"
 #import "SFRuntimeUtils.h"
@@ -17,7 +18,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     
     va_list params;
     va_start(params, mapping);
-    for(id tmpMapping = mapping; tmpMapping != nil; tmpMapping = va_arg(params, id)){
+    for (id tmpMapping = mapping; tmpMapping != nil; tmpMapping = va_arg(params, id)) {
         [concatedMapping append:tmpMapping];
     }
     va_end(params);
@@ -118,6 +119,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     if (mapping) {
         [collector addMapping:mapping];
     }
+    
     return collector;
 }
 
@@ -194,6 +196,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
         
         self.allCollectorContextClasses = allCollectorContextClasses;
     }
+    
     return _allCollectorContextClasses;
 }
 
@@ -215,6 +218,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
         
         self.allPropertyProcessorsClasses = allPropertyProcessorsClasses;
     }
+    
     return _allPropertyProcessorsClasses;
 }
 

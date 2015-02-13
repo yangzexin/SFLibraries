@@ -7,6 +7,7 @@
 //
 
 #import "SFCache.h"
+
 #import "NSString+SFAddition.h"
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #elif TARGET_OS_MAC
@@ -71,6 +72,7 @@ NSString *SFCurrentApplicationIdentifier()
 + (instancetype)cacheControl
 {
     SFCacheControl *support = [SFCacheControl new];
+    
     return support;
 }
 

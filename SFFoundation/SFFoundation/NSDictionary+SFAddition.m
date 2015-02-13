@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+SFAddition.h"
+
 #import "NSString+SFJavaLikeStringHandle.h"
 #import "NSString+SFAddition.h"
 
@@ -74,7 +75,7 @@
     
     id currentKey = nil;
     NSInteger i = 0;
-    for(NSString *tmpParam = firstKey; (id)tmpParam != [SFCombinationEnd end]; tmpParam = va_arg(params, NSString *), ++i){
+    for (NSString *tmpParam = firstKey; (id)tmpParam != [SFCombinationEnd end]; tmpParam = va_arg(params, NSString *), ++i) {
         if (i % 2 == 0) {
             currentKey = tmpParam;
         } else {

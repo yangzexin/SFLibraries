@@ -51,6 +51,7 @@
 {
     SFRepeatTimer *timer = [[SFRepeatTimer alloc] initWithTimeInterval:timeInterval tick:tick];
     [timer start];
+    
     return timer;
 }
 

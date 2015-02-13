@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+SFObjectRepository.h"
+
 #import "NSObject+SFObjectAssociation.h"
 
 static NSString *const kObjectRepositoryKey = @"kObjectRepositoryKey";
@@ -20,12 +21,14 @@ static NSString *const kObjectRepositoryKey = @"kObjectRepositoryKey";
         obj = [SFObjectRepository objectRepository];
         [self sf_setAssociatedObject:obj key:kObjectRepositoryKey];
     }
+    
     return obj;
 }
 
 - (id)sf_addRepositionSupportedObject:(id<SFRepositionSupportedObject>)object
 {
     [[self objectRepository] addObject:object];
+    
     return object;
 }
 
@@ -37,6 +40,7 @@ static NSString *const kObjectRepositoryKey = @"kObjectRepositoryKey";
 - (id)sf_addRepositionSupportedObject:(id<SFRepositionSupportedObject>)object identifier:(NSString *)identifier
 {
     [[self objectRepository] addObject:object identifier:identifier];
+    
     return object;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "SFObject2Dict.h"
+
 #import "SFRuntimeUtils.h"
 #import "SFObjcProperty.h"
 
@@ -86,6 +87,7 @@ NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcPro
             }
         }
     }
+    
     return dictionary;
 }
 
@@ -100,6 +102,7 @@ NSArray *SFObjects2DictionariesWithObjcProperties(NSArray *objects, NSArray *obj
     for (id object in objects) {
         [dictionaries addObject:SFObject2DictionaryWithObjcProperties(object, objcProperties, NSNumberForPlainType)];
     }
+    
     return dictionaries;
 }
 

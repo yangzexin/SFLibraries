@@ -15,6 +15,7 @@
     if (endIndex >= beginIndex && endIndex <= self.length) {
         return [self substringWithRange:NSMakeRange(beginIndex, endIndex - beginIndex)];
     }
+    
     return nil;
 }
 
@@ -37,6 +38,7 @@
     NSRange range = [self rangeOfString:str
                                 options:options
                                   range:searchRange];
+    
     return range.location == NSNotFound ? -1 : range.location;
 }
 

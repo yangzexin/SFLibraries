@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 #import "SFDict2Object.h"
+
 #import "SFRuntimeUtils.h"
 #import "SFObjectMapping.h"
 
@@ -64,7 +65,7 @@ static id SFDict2ObjectGetObject(NSDictionary *dictionary, id<SFObjectMapping> o
                             value = [NSString stringWithFormat:@"%@", value];
                         }
                         [object setValue:value forKey:objcProperty.name];
-                    } else if([value isKindOfClass:[NSDictionary class]]) {
+                    } else if ([value isKindOfClass:[NSDictionary class]]) {
                         if ([SFRuntimeUtils isClass:[objcProperty propertyClass] replacableByClass:[NSDictionary class]]) {
                             [object setValue:value forKey:property];
                         } else {
@@ -90,6 +91,7 @@ static id SFDict2ObjectGetObject(NSDictionary *dictionary, id<SFObjectMapping> o
             }
         }
     }
+    
     return object;
 }
 
@@ -105,6 +107,7 @@ static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> obj
             }
         }
     }
+    
     return objects;
 }
 

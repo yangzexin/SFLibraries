@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFObjectRepository.h"
 
 @interface SFPropertyObserveContext : NSObject <SFRepositionSupportedObject>

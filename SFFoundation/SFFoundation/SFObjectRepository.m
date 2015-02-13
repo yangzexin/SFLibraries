@@ -87,6 +87,7 @@
             [_objects removeObject:object];
         }
     }
+    
     return removableObjects;
 }
 
@@ -125,7 +126,7 @@
 
 - (void)addObject:(id<SFRepositionSupportedObject>)object
 {
-    @synchronized(self){
+    @synchronized(self) {
         [self _analyze];
         if (object) {
             [_objects addObject:object];
@@ -140,7 +141,7 @@
 - (void)removeObject:(id<SFRepositionSupportedObject>)object
 {
     if (object) {
-        @synchronized(self){
+        @synchronized(self) {
             [object willRemoveFromObjectRepository];
             [_objects removeObject:object];
             [self _objectDidRemove:object];
@@ -190,7 +191,7 @@
 
 - (void)tryCleanRepository
 {
-    @synchronized(self){
+    @synchronized(self) {
         [self _analyze];
     }
 }
@@ -207,7 +208,7 @@
 
 - (void)_releaseAllObjects
 {
-    for(id<SFRepositionSupportedObject> obj in _objects){
+    for (id<SFRepositionSupportedObject> obj in _objects) {
         [obj willRemoveFromObjectRepository];
         [self _objectDidRemove:obj];
     }

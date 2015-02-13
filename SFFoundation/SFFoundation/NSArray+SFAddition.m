@@ -17,7 +17,7 @@
     va_list params;
     va_start(params, object);
     
-    for(id tmpObject = object; (id)tmpObject != [SFCombinationEnd end]; tmpObject = va_arg(params, id)){
+    for (id tmpObject = object; (id)tmpObject != [SFCombinationEnd end]; tmpObject = va_arg(params, id)) {
         if (tmpObject != nil) {
             if ([tmpObject isKindOfClass:[NSArray class]]) {
                 [objects addObjectsFromArray:tmpObject];

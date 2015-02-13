@@ -7,6 +7,7 @@
 //
 
 #import "NSString+SFAddition.h"
+
 #import "NSData+SFAddition.h"
 
 @implementation NSString (SFAddition)
@@ -36,6 +37,7 @@
             [data appendBytes:&intValue length:1];
         }
     }
+    
     return data;
 }
 
@@ -49,6 +51,7 @@
     if (string == nil) {
         string = @"";
     }
+    
     return string;
 }
 
@@ -92,6 +95,7 @@
 {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     NSNumber *num = [formatter numberFromString:self];
+    
     return num != nil;
 }
 

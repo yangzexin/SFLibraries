@@ -79,7 +79,7 @@
 
 - (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier
 {
-    @synchronized(self){
+    @synchronized(self) {
         if (identifier == nil) {
             identifier = [self _randomUniqueIdentifierWthBlock:block];
         }
@@ -91,16 +91,16 @@
 
 - (void)removeCallbackWithIdentifier:(NSString *)identifier
 {
-    @synchronized(self){
+    @synchronized(self) {
         WaitingCallbackWrapper *wrapper = nil;
         NSArray *callbacks = [NSArray arrayWithArray:self.callbacks];
-        for(WaitingCallbackWrapper *tmpWrapper in callbacks){
-            if([tmpWrapper.uniqueIdentifier isEqualToString:identifier]){
+        for (WaitingCallbackWrapper *tmpWrapper in callbacks) {
+            if ([tmpWrapper.uniqueIdentifier isEqualToString:identifier]) {
                 wrapper = tmpWrapper;
                 break;
             }
         }
-        if(wrapper != nil){
+        if (wrapper != nil) {
             [self.callbacks removeObject:wrapper];
         }
     }
@@ -108,9 +108,9 @@
 
 - (void)notfiyAllCallbacks
 {
-    @synchronized(self){
+    @synchronized(self) {
         NSArray *callbacks = [NSArray arrayWithArray:self.callbacks];
-        for(WaitingCallbackWrapper *wrapper in callbacks){
+        for (WaitingCallbackWrapper *wrapper in callbacks) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 wrapper.callback();
             });
@@ -127,8 +127,8 @@
 
 - (void)startCheckCondition
 {
-    @synchronized(self){
-        if(!self.running){
+    @synchronized(self) {
+        if (!self.running) {
             self.running = YES;
             [[SFEventLoop sharedLoop] addItem:self];
         }
@@ -142,7 +142,7 @@
 
 - (void)cancelAll
 {
-    @synchronized(self){
+    @synchronized(self) {
         [[SFEventLoop sharedLoop] removeItem:self];
         self.running = NO;
         self.callbacks = [NSMutableArray array];
@@ -162,8 +162,8 @@
 #pragma mark - SFEventLoopItem
 - (void)tick
 {
-    @synchronized(self){
-        if(self.running && [self checkCondition]){
+    @synchronized(self) {
+        if (self.running && [self checkCondition]) {
             [self notfiyAllCallbacks];
             [self removeAllCallbacks];
             [self cancelAll];

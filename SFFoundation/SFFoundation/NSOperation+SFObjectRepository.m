@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 yangzexin. All rights reserved.
 //
 
-#import "NSOperation+SFAddition.h"
+#import "NSOperation+SFObjectRepository.h"
+
 #import "NSObject+SFObjectRepository.h"
 
 @implementation NSOperation (SFAddition)
@@ -36,6 +37,7 @@
     if (startImmediately) {
         [operation start];
     }
+    
     return operation;
 }
 
@@ -45,6 +47,7 @@
     if (startImmediately) {
         [operation start];
     }
+    
     return operation;
 }
 

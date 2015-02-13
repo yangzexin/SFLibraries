@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+SFSerialization.h"
+
 #import "NSDictionary+SFAddition.h"
 #import "SFObject2Dict.h"
 #import "SFDict2Object.h"

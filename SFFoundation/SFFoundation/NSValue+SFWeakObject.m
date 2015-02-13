@@ -24,6 +24,7 @@
 {
     _WeakObjectWrapper *wrapper = [_WeakObjectWrapper new];
     wrapper.object = object;
+    
     return wrapper;
 }
 
@@ -34,6 +35,7 @@
         _WeakObjectWrapper *wrapper = (_WeakObjectWrapper *)self;
         object = [wrapper object];
     }
+    
     return object;
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFDict2Object.h"
 #import "SFObjectMappingCollector.h"
 

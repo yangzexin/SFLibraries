@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFWaiting.h"
 
 @interface SFMarkWaiting : SFWaiting
