@@ -138,7 +138,6 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
         }
     }
     
-    
     [self sf_setAssociatedObject:[NSValue sf_valueWithWeakObject:presentingTransparentViewController] key:kTransparentViewControllerKey];
     [presentingTransparentViewController sf_setAssociatedObject:[NSValue sf_valueWithWeakObject:self] key:kTransparentParentViewControllerKey];
     

@@ -522,6 +522,7 @@ static CGFloat kValidPanDistance = 37;
     if ([self _shouldTriggerPanGesture]) {
         should = ![_gestureBackDetector isPrepared];
     }
+    
     return should;
 }
 
@@ -531,6 +532,7 @@ static CGFloat kValidPanDistance = 37;
     if (touchPoint.x < _gestureBackDetector.validDistance && gestureRecognizer == _panGestureRecognizer && !_disableGestureShowMenu && [self _shouldTriggerPanGesture]) {
         return YES;
     }
+    
     return NO;
 }
 

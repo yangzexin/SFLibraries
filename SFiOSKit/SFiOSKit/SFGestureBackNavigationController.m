@@ -278,6 +278,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     if(!_disableGestureBack && _preparerInfo){
         [self cleanAnimationViews];
     }
+    
     return vc;
 }
 
@@ -388,6 +389,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
         }
         return identifier.length != 0;
     }
+    
     return NO;
 }
 
@@ -467,6 +469,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     if (self.viewControllers.count != 1) {
         should = ![_gestureBackDetector isPrepared];
     }
+    
     return should;
 }
 

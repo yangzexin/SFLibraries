@@ -192,6 +192,7 @@
     line.vertical = YES;
     line.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [self addSubview:line];
+    
     return line;
 }
 
@@ -203,6 +204,7 @@
     line.alignment = SFLineViewAlignmentBottom;
     line.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
     [self addSubview:line];
+    
     return line;
 }
 
@@ -212,6 +214,7 @@
     line.color = color;
     line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self addSubview:line];
+    
     return line;
 }
 
@@ -226,6 +229,7 @@
     line.alignment = SFLineViewAlignmentBottom;
     line.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [self addSubview:line];
+    
     return line;
 }
 

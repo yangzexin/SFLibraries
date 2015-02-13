@@ -298,6 +298,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     if (attrString == nil) {
         attrString = [[NSAttributedString alloc] initWithString:text attributes:defaultAttrs];;
     }
+    
     return attrString;
 }
 
@@ -791,6 +792,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
             shouldReceiveTouch = YES;
         }
     }
+    
     return shouldReceiveTouch;
 }
 

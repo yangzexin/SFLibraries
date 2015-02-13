@@ -33,6 +33,7 @@
     NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
     NSString *jsPath = [bundlePath stringByAppendingPathComponent:fileName];
     NSString *jsCode = [NSString stringWithContentsOfFile:jsPath encoding:NSASCIIStringEncoding error:nil];
+    
     return jsCode;
 }
 
@@ -40,21 +41,21 @@
 {
     NSString *js =
     @"function replaceTag(targetTag){\
-    var allLinks = document.getElementsByTagName(targetTag);\
-    if (allLinks) {\
-    var i;\
-    for (i=0; i<allLinks.length; i++) {\
-    var link = allLinks[i];\
-    if(link.href){\
-    if(link.href.indexOf('mylink:') == -1){\
-    link.href = 'mylink:' + link.href;\
-    }\
-    }\
-    }\
-    }\
+        var allLinks = document.getElementsByTagName(targetTag);\
+        if (allLinks) {\
+            var i;\
+            for (i=0; i<allLinks.length; i++) {\
+                var link = allLinks[i];\
+                if(link.href){\
+                    if(link.href.indexOf('mylink:') == -1){\
+                        link.href = 'mylink:' + link.href;\
+                    }\
+                }\
+            }\
+        }\
     }\
     function replaceLinkHref() {\
-    replaceTag('a');\
+        replaceTag('a');\
     }";
     [self stringByEvaluatingJavaScriptFromString:js];
     NSString *method = @"replaceLinkHref()";
@@ -70,35 +71,36 @@
 {
     NSString *jsCode =
     @"function MyAppGetLinkSRCAtPoint(x,y) {\n\
-    var tags = '';\n\
-    var e = '';\n\
-    var offset = 0;\n\
-    while ((tags.length == 0) && (offset < 20)) {\n\
-    e = document.elementFromPoint(x,y+offset);\n\
-    while (e) {\n\
-    if (e.src) {\n\
-    tags += e.src;\n\
-    break;\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    if (tags.length == 0) {\n\
-    e = document.elementFromPoint(x,y-offset);\n\
-    while (e) {\n\
-    if (e.src) {\n\
-    tags += e.src;\n\
-    break;\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    }\n\
-    offset++;\n\
-    }\n\
-    return tags;\n\
+        var tags = '';\n\
+        var e = '';\n\
+        var offset = 0;\n\
+        while ((tags.length == 0) && (offset < 20)) {\n\
+            e = document.elementFromPoint(x,y+offset);\n\
+            while (e) {\n\
+                if (e.src) {\n\
+                    tags += e.src;\n\
+                    break;\n\
+                }\n\
+                e = e.parentNode;\n\
+            }\n\
+            if (tags.length == 0) {\n\
+                e = document.elementFromPoint(x,y-offset);\n\
+                while (e) {\n\
+                    if (e.src) {\n\
+                        tags += e.src;\n\
+                        break;\n\
+                    }\n\
+                    e = e.parentNode;\n\
+                }\n\
+            }\n\
+            offset++;\n\
+        }\n\
+        return tags;\n\
     }";
     [self stringByEvaluatingJavaScriptFromString:jsCode];
     NSString *method = [NSString stringWithFormat:@"MyAppGetLinkSRCAtPoint(%ld, %ld)", (long)point.x, (long)point.y];
     NSString *result = [self stringByEvaluatingJavaScriptFromString:method];
+    
     return result;
 }
 
@@ -122,36 +124,36 @@
 {
     NSString *js =
     @"function MyAppGetLinkHREFAtPoint(x,y) {\n\
-    var tags = \"\";\n\
-    var e = \"\";\n\
-    var offset = 0;\n\
-    while ((tags.length == 0) && (offset < 20)) {\n\
-    e = document.elementFromPoint(x,y+offset);\n\
-    while (e) {\n\
-    if (e.href) {\n\
-    tags += e.href;\n\
-    break;\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    if (tags.length == 0) {\n\
-    e = document.elementFromPoint(x,y-offset);\n\
-    while (e) {\n\
-    if (e.href) {\n\
-    tags += e.href;\n\
-    break;\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    }\n\
-    offset++;\n\
-    }\n\
-    return tags;\n\
+        var tags = \"\";\n\
+        var e = \"\";\n\
+        var offset = 0;\n\
+        while ((tags.length == 0) && (offset < 20)) {\n\
+            e = document.elementFromPoint(x,y+offset);\n\
+            while (e) {\n\
+                if (e.href) {\n\
+                    tags += e.href;\n\
+                    break;\n\
+                }\n\
+                e = e.parentNode;\n\
+            }\n\
+            if (tags.length == 0) {\n\
+                e = document.elementFromPoint(x,y-offset);\n\
+                while (e) {\n\
+                    if (e.href) {\n\
+                        tags += e.href;\n\
+                        break;\n\
+                    }\n\
+                    e = e.parentNode;\n\
+                }\n\
+            }\n\
+            offset++;\n\
+        }\n\
+        return tags;\n\
     }";
     [self stringByEvaluatingJavaScriptFromString:js];
     NSString *method = [NSString stringWithFormat:@"MyAppGetLinkHREFAtPoint(%ld, %ld)", (long)point.x, (long)point.y];
     NSString *result = [self stringByEvaluatingJavaScriptFromString:method];
-    //NSLog(@"result:%@", result);
+    
     return result;
 }
 
@@ -159,32 +161,33 @@
 {
     NSString *js =
     @"function MyAppGetHTMLElementsAtPoint(x,y) {\n\
-    var tags = '';\n\
-    var e;\n\
-    var offset = 0;\n\
-    while ((tags.search(',(A|IMG),') < 0) && (offset < 20)) {\n\
-    tags = ',';\n\
-    e = document.elementFromPoint(x,y+offset);\n\
-    while (e) {\n\
-    if (e.tagName) {\n\
-    tags += e.tagName + ',';\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    if (tags.search(',(A|IMG),') < 0) {\n\
-    e = document.elementFromPoint(x,y-offset);\n\
-    while (e) {\n\
-    if (e.tagName) {\n\
-    tags += e.tagName + ',';\n\
-    }\n\
-    e = e.parentNode;\n\
-    }\n\
-    }\n\
-    offset++;\n\
-    }\n\
-    return tags;\n\
+        var tags = '';\n\
+        var e;\n\
+        var offset = 0;\n\
+        while ((tags.search(',(A|IMG),') < 0) && (offset < 20)) {\n\
+            tags = ',';\n\
+            e = document.elementFromPoint(x,y+offset);\n\
+            while (e) {\n\
+                if (e.tagName) {\n\
+                    tags += e.tagName + ',';\n\
+                }\n\
+                e = e.parentNode;\n\
+            }\n\
+            if (tags.search(',(A|IMG),') < 0) {\n\
+                e = document.elementFromPoint(x,y-offset);\n\
+                while (e) {\n\
+                    if (e.tagName) {\n\
+                        tags += e.tagName + ',';\n\
+                    }\n\
+                    e = e.parentNode;\n\
+                }\n\
+            }\n\
+            offset++;\n\
+        }\n\
+        return tags;\n\
     }";
     [self stringByEvaluatingJavaScriptFromString:js];
+    
     return [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"MyAppGetHTMLElementsAtPoint(%f, %f)", point.x, point.y]];
 }
 
@@ -253,6 +256,7 @@
             }
         }
     }
+    
     return nil;
 }
 

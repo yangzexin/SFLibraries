@@ -28,15 +28,15 @@
     self.actionSheet = [UIActionSheet new];
     self.actionSheet.title = title;
     self.actionSheet.delegate = self;
-    for(NSString *title in otherButtonTitles){
+    for (NSString *title in otherButtonTitles) {
         [self.actionSheet addButtonWithTitle:title];
     }
     NSInteger count = otherButtonTitles.count;
-    if(destructiveButtonTitle.length != 0){
+    if (destructiveButtonTitle.length != 0) {
         [self.actionSheet addButtonWithTitle:destructiveButtonTitle];
         self.actionSheet.destructiveButtonIndex = count++;
     }
-    if(cancelButtonTitle.length != 0){
+    if (cancelButtonTitle.length != 0) {
         [self.actionSheet addButtonWithTitle:cancelButtonTitle];
         self.actionSheet.cancelButtonIndex = count;
     }
@@ -49,7 +49,7 @@
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(self.completion){
+    if (self.completion) {
         self.completion(buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -70,7 +70,7 @@
     NSMutableArray *titleList = [NSMutableArray array];
     va_list params;
     va_start(params, otherButtonTitles);
-    for(id item = otherButtonTitles; item != nil; item = va_arg(params, id)){
+    for (id item = otherButtonTitles; item != nil; item = va_arg(params, id)) {
         [titleList addObject:item];
     }
     va_end(params);

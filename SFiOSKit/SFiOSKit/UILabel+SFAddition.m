@@ -23,6 +23,7 @@
     tmpRect.size.height = [self.text sf_sizeWithFont:self.font constrainedToSize:CGSizeMake(self.frame.size.width, maxHeight <= 0 ? MAXFLOAT : maxHeight)].height;
     self.frame = tmpRect;
     self.numberOfLines = tmpRect.size.height / self.font.lineHeight;
+    
     return self.frame.size.height;
 }
 

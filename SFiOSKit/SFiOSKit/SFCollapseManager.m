@@ -118,6 +118,7 @@ NSInteger SFCollapseManagerItemIndexNotFound = -1;
 {
     id<NSCopying> key = [NSNumber numberWithInteger:itemIndex];
     NSNumber *state = [_keyItemIndexValueCollapseState objectForKey:key];
+    
     return [state boolValue];
 }
 
@@ -131,6 +132,7 @@ NSInteger SFCollapseManagerItemIndexNotFound = -1;
             visibleItems += [self numberOfSubItemsAtItemIndex:itemIndex];
         }
     }
+    
     return visibleItems;
 }
 
@@ -140,6 +142,7 @@ NSInteger SFCollapseManagerItemIndexNotFound = -1;
     for (NSInteger i = 0; i < _numberOfItems; ++i) {
         visibleItems += [self visibleItemsAtItemIndex:i];
     }
+    
     return visibleItems;
 }
 

@@ -44,6 +44,7 @@
     width += (_numberOfPages - 1) * _indicatorImage.size.width;
     width += _currentIndicatorImage.size.width;
     width += (_numberOfPages - 1) * _spacing;
+    
     return width;
 }
 
@@ -51,6 +52,7 @@
 {
     UIImage *image = index == _currentPageIndex ? _currentIndicatorImage : _indicatorImage;
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    
     return imageView;
 }
 

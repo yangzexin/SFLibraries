@@ -19,7 +19,7 @@
 
 - (void)dealloc
 {
-    if(self.customView && _customViewTapGestureRecognizer){
+    if (self.customView && _customViewTapGestureRecognizer) {
         [self.customView removeGestureRecognizer:_customViewTapGestureRecognizer];
     }
 }
@@ -61,7 +61,7 @@
 {
     self = [super initWithCustomView:customView];
 
-    if(eventHandler){
+    if (eventHandler) {
         self.customViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customViewTapGestureRecognizer:)];
         [customView addGestureRecognizer:self.customViewTapGestureRecognizer];
     }
@@ -72,7 +72,7 @@
 
 - (void)tapped
 {
-    if(self.eventHandler){
+    if (self.eventHandler) {
         self.eventHandler();
     }
 }
@@ -86,6 +86,7 @@
 {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithTitle:title];
     tmp.eventHandler = eventHandler;
+    
     return tmp;
 }
 
@@ -93,6 +94,7 @@
 {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithImage:image];
     tmp.eventHandler = eventHandler;
+    
     return tmp;
 }
 
@@ -100,6 +102,7 @@
 {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithBarButtonSystemItem:systemItem];
     tmp.eventHandler = eventHandler;
+    
     return tmp;
 }
 
@@ -111,6 +114,7 @@
 + (id)blockedBarButtonItemWithCustomView:(UIView *)customView eventHandler:(void (^)())eventHandler
 {
     SFBlockedBarButtonItem *item = [[SFBlockedBarButtonItem alloc] initWithCustomView:customView eventHandler:eventHandler];
+    
     return item;
 }
 

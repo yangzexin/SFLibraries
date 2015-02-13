@@ -20,6 +20,7 @@
             break;
         }
     }
+    
     return viewControllers;
 }
 
@@ -29,6 +30,7 @@
     while (srcController.presentedViewController != nil) {
         srcController = srcController.presentedViewController;
     }
+    
     return srcController;
 }
 

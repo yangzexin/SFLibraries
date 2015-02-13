@@ -25,6 +25,7 @@
     SFBlockedGeocoder *blockGeocoder = [SFBlockedGeocoder new];
     blockGeocoder.geocoders = @[geocoder];
     blockGeocoder.completion = completion;
+    
     return blockGeocoder;
 }
 
@@ -33,6 +34,7 @@
     SFBlockedGeocoder *blockGeocoder = [SFBlockedGeocoder new];
     blockGeocoder.geocoders = geocoders;
     blockGeocoder.completion = completion;
+    
     return blockGeocoder;
 }
 

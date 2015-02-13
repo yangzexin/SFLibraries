@@ -26,6 +26,7 @@ NSString *const SFKeyboardHeightDidChangeNotification = @"SFKeyboardHeightDidCha
     _SFKeyboardObserverBlockWrapper *wrapper = [_SFKeyboardObserverBlockWrapper new];
     wrapper.identifier = identifier;
     wrapper.block = block;
+    
     return wrapper;
 }
 

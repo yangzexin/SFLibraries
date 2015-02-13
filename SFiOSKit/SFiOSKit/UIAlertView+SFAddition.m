@@ -40,7 +40,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
                                                        delegate:self
                                               cancelButtonTitle:cancelButtonTitle
                                               otherButtonTitles:nil];
-    for(NSString *title in otherButtonTitles){
+    for (NSString *title in otherButtonTitles) {
         [alertView addButtonWithTitle:title];
     }
     [alertView show];
@@ -54,7 +54,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(self.completion){
+    if (self.completion) {
         self.completion(buttonIndex, [alertView buttonTitleAtIndex:buttonIndex]);
     }
     self.alertView = nil;
@@ -108,7 +108,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
                                       otherButtonTitles:approveButtonTitle, nil];
     UITextField *textField = nil;
     self.useCustomTextField = ![self.alertView respondsToSelector:@selector(alertViewStyle)];
-    if(self.useCustomTextField){
+    if (self.useCustomTextField) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(statusBarOrientationDidChangeNotification:)
                                                      name:UIDeviceOrientationDidChangeNotification
@@ -125,7 +125,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
         self.addedTextField = textField;
         [self.alertView addSubview:textField];
         self.alertView.message = [NSString stringWithFormat:@"%@\n\n\n", self.alertView.message ? self.alertView.message : @""];
-    }else{
+    } else {
         self.alertView.alertViewStyle = secureTextEntry ? UIAlertViewStyleSecureTextInput : UIAlertViewStylePlainTextInput;
         [[self.alertView textFieldAtIndex:0] setClearButtonMode:clearButtonMode];
         [self.alertView textFieldAtIndex:0].contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -158,13 +158,13 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *text = nil;
-    if(self.useCustomTextField){
+    if (self.useCustomTextField) {
         UITextField *textField = (id)[alertView viewWithTag:1001];
         text = textField.text;
-    }else{
+    } else {
         text = [[self.alertView textFieldAtIndex:0] text];
     }
-    if(self.completion){
+    if (self.completion) {
         self.completion(text, buttonIndex == 0);
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -196,6 +196,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
         [titleList addObject:item];
     }
     va_end(params);
+    
     return [self sf_alertWithTitle:title message:message completion:completion cancelButtonTitle:cancelButtonTitle otherButtonTitleList:titleList];
 }
 
@@ -207,6 +208,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 {
     SFAlertViewWrapper *alertDialog = [[SFAlertViewWrapper alloc] init];
     [alertDialog showWithTitle:title message:message completion:completion cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitleList];
+    
     return alertDialog.alertView;
 }
 
@@ -283,6 +285,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
              cancelButtonTitle:cancelButtonTitle
             approveButtonTitle:approveButtonTitle
                     completion:completion];
+    
     return [inputDialog inputTextField];
 }
 
@@ -293,30 +296,32 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 - (UILabel *)sf_messageLabel
 {
     UILabel *messageLabel = nil;
-    for(UIView *view in [self subviews]){
-        if([view isKindOfClass:[UILabel class]]){
+    for (UIView *view in [self subviews]) {
+        if ([view isKindOfClass:[UILabel class]]) {
             UILabel *label = (UILabel *)view;
-            if(label.text == self.message){
+            if (label.text == self.message) {
                 messageLabel = label;
                 break;
             }
         }
     }
+    
     return messageLabel;
 }
 
 - (UILabel *)sf_titleLabel
 {
     UILabel *titleLabel = nil;
-    for(UIView *view in [self subviews]){
-        if([view isKindOfClass:[UILabel class]]){
+    for (UIView *view in [self subviews]) {
+        if ([view isKindOfClass:[UILabel class]]) {
             UILabel *label = (UILabel *)view;
-            if(label.text == self.title){
+            if (label.text == self.title) {
                 titleLabel = label;
                 break;
             }
         }
     }
+    
     return titleLabel;
 }
 

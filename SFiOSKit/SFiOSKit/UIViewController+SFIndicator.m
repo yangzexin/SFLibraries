@@ -65,6 +65,7 @@
     if (loadingShowable) {
         showable = [loadingShowable boolValue];
     }
+    
     return showable;
 }
 
