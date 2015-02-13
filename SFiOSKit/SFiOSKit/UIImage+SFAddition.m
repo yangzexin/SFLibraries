@@ -12,6 +12,78 @@
 
 #import "UIView+SFAddition.h"
 
+@interface SFRoundImageOptions ()
+
+@property (nonatomic, strong) UIColor *optionBackgroundColor;
+@property (nonatomic, strong) UIColor *optionBorderColor;
+@property (nonatomic, assign) CGSize optionSize;
+@property (nonatomic, assign) CGFloat optionCornerRadius;
+@property (nonatomic, assign) BOOL optionHidesTopCorner;
+@property (nonatomic, assign) BOOL optionHidesBottomCorner;
+@property (nonatomic, assign) BOOL optionLightBorder;
+
+@end
+
+@implementation SFRoundImageOptions
+
++ (instancetype)options
+{
+    SFRoundImageOptions *options = [self new];
+    
+    return options;
+}
+
+- (instancetype)setBackgroundColor:(UIColor *)backgroundColor
+{
+    self.optionBackgroundColor = backgroundColor;
+    
+    return self;
+}
+
+- (instancetype)setBorderColor:(UIColor *)borderColor
+{
+    self.optionBorderColor = borderColor;
+    
+    return self;
+}
+
+- (instancetype)setSize:(CGSize)size
+{
+    self.optionSize = size;
+    
+    return self;
+}
+
+- (instancetype)setCornerRadius:(CGFloat)cornerRadius
+{
+    self.optionCornerRadius = cornerRadius;
+    
+    return self;
+}
+
+- (instancetype)setHidesTopCorner:(BOOL)hidesTopCorner
+{
+    self.optionHidesTopCorner = hidesTopCorner;
+    
+    return self;
+}
+
+- (instancetype)setHidesBottomCorner:(BOOL)hidesBottomCorner
+{
+    self.optionHidesBottomCorner = hidesBottomCorner;
+    
+    return self;
+}
+
+- (instancetype)setLightBorder:(BOOL)lightBorder
+{
+    self.optionLightBorder = lightBorder;
+    
+    return self;
+}
+
+@end
+
 @implementation UIImage (SFAddition)
 
 + (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size
@@ -37,51 +109,24 @@
     return img;
 }
 
-+ (UIImage *)sf_lineImageWithColor:(UIColor *)color width:(CGFloat)width scale:(CGFloat)scale
++ (UIImage *)sf_roundImageWithOptions:(SFRoundImageOptions *)options
 {
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, 1 * scale), NO, scale);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextBeginPath(context);
-    CGContextMoveToPoint(context, 0, 0);
-    CGContextAddLineToPoint(context, width, 0);
-    CGContextClosePath(context);
-    CGContextSetLineWidth(context, scale);
-    CGContextDrawPath(context, kCGPathStroke);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return image;
+    return [self sf_roundImageWithBackgroundColor:options.optionBackgroundColor
+                                      borderColor:options.optionBorderColor
+                                             size:options.optionSize
+                                     cornerRadius:options.optionCornerRadius
+                                    hideTopCorner:options.optionHidesTopCorner
+                                 hideBottomCorner:options.optionHidesBottomCorner
+                                      lightBorder:options.optionLightBorder];
 }
 
 + (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                               borderColor:(UIColor *)borderColor
-                                      size:(CGSize)size
-                              cornerRadius:(CGFloat)cornerRadius
-{
-    return [self sf_roundImageWithBackgroundColor:backgroundColor borderColor:borderColor size:size cornerRadius:cornerRadius hideTopCorner:NO hideBottomCorner:NO];
-}
-
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                               borderColor:(UIColor *)borderColor
-                                      size:(CGSize)size
-                              cornerRadius:(CGFloat)cornerRadius
-                             hideTopCorner:(BOOL)hideTopCorner
-                          hideBottomCorner:(BOOL)hideBottomCorner
-{
-    return [self sf_roundImageWithBackgroundColor:backgroundColor borderColor:borderColor size:size cornerRadius:cornerRadius hideTopCorner:hideTopCorner hideBottomCorner:hideBottomCorner lightBorder:YES];
-}
-
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                               borderColor:(UIColor *)borderColor
-                                      size:(CGSize)size
-                              cornerRadius:(CGFloat)cornerRadius
-                             hideTopCorner:(BOOL)hideTopCorner
-                          hideBottomCorner:(BOOL)hideBottomCorner
-                               lightBorder:(BOOL)lightBorder
+                                  borderColor:(UIColor *)borderColor
+                                         size:(CGSize)size
+                                 cornerRadius:(CGFloat)cornerRadius
+                                hideTopCorner:(BOOL)hideTopCorner
+                             hideBottomCorner:(BOOL)hideBottomCorner
+                                  lightBorder:(BOOL)lightBorder
 {
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     
@@ -160,6 +205,7 @@
     
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return image;
 }
 
@@ -202,6 +248,17 @@
     return croppedImage;
 }
 
+- (UIImage *)sf_imageByPaddingWithInsets:(UIEdgeInsets)insets
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, insets.left + insets.right + self.size.width, insets.top + insets.bottom + self.size.height)];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:self];
+    imageView.frame = CGRectMake(insets.left, insets.top, self.size.width, self.size.height);
+    [view addSubview:imageView];
+    view.opaque = NO;
+    
+    return [view sf_toImageLegacy];
+}
+
 - (UIImage *)sf_imageWithLeftCapWidth:(NSInteger)leftCapWidth width:(CGFloat)width
 {
     UIImage *image = nil;
@@ -237,6 +294,11 @@
     UIGraphicsEndImageContext();
     
     return tintedImage;
+}
+
+- (UIImage *)sf_imageByResizingWithSize:(CGSize)size fill:(BOOL)fill
+{
+    return [self sf_imageByResizingWithSize:size contentMode:fill ? UIViewContentModeScaleToFill : UIViewContentModeScaleAspectFill];
 }
 
 - (UIImage *)sf_imageByResizingWithSize:(CGSize)size contentMode:(UIViewContentMode)contentMode

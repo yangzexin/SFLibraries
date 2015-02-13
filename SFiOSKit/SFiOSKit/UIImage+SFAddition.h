@@ -8,38 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@class SFRoundImageOptions;
+
 @interface UIImage (SFAddition)
 
 + (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size;
+
 + (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size opaque:(BOOL)opaque;
 
-+ (UIImage *)sf_lineImageWithColor:(UIColor *)color width:(CGFloat)width scale:(CGFloat)scale;
-
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                                  borderColor:(UIColor *)borderColor
-                                         size:(CGSize)size
-                                 cornerRadius:(CGFloat)cornerRadius;
-
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                                  borderColor:(UIColor *)borderColor
-                                         size:(CGSize)size
-                                 cornerRadius:(CGFloat)cornerRadius
-                                hideTopCorner:(BOOL)hideTopCorner
-                             hideBottomCorner:(BOOL)hideBottomCorner;
-
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                                  borderColor:(UIColor *)borderColor
-                                         size:(CGSize)size
-                                 cornerRadius:(CGFloat)cornerRadius
-                                hideTopCorner:(BOOL)hideTopCorner
-                             hideBottomCorner:(BOOL)hideBottomCorner
-                                  lightBorder:(BOOL)lightBorder;
++ (UIImage *)sf_roundImageWithOptions:(SFRoundImageOptions *)options;
 
 + (UIImage *)sf_circleImageWithSize:(CGSize)size color:(UIColor *)color;
 
 + (UIImage *)sf_shadowImageWithColor:(UIColor *)color radius:(CGFloat)radius opacity:(CGFloat)opacity size:(CGSize)size;
 
 - (UIImage *)sf_imageByCroppingWithInsets:(UIEdgeInsets)insets;
+
+- (UIImage *)sf_imageByPaddingWithInsets:(UIEdgeInsets)insets;
 
 - (UIImage *)sf_imageWithLeftCapWidth:(NSInteger)leftCapWidth width:(CGFloat)width;
 
@@ -49,6 +34,23 @@
 
 - (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor blendMode:(CGBlendMode)blendMode;
 
-- (UIImage *)sf_imageByResizingWithSize:(CGSize)size contentMode:(UIViewContentMode)contentMode;
+/**
+ scale of result image is 1.0f
+ */
+- (UIImage *)sf_imageByResizingWithSize:(CGSize)size fill:(BOOL)fill;
+
+@end
+
+@interface SFRoundImageOptions : NSObject
+
++ (instancetype)options;
+
+- (instancetype)setSize:(CGSize)size;
+- (instancetype)setBackgroundColor:(UIColor *)backgroundColor;
+- (instancetype)setBorderColor:(UIColor *)borderColor;
+- (instancetype)setCornerRadius:(CGFloat)cornerRadius;
+- (instancetype)setHidesTopCorner:(BOOL)hidesTopCorner;
+- (instancetype)setHidesBottomCorner:(BOOL)hidesTopCorner;
+- (instancetype)setLightBorder:(BOOL)lightBorder;
 
 @end

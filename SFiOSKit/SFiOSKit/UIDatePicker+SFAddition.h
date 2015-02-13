@@ -8,14 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@interface SFDatePickerDialogOptions : NSObject
+
++ (instancetype)dialogOptionsWithTitle:(NSString *)title;
+
+- (instancetype)setTitle:(NSString *)title;
+- (instancetype)setDate:(NSDate *)date;
+- (instancetype)setMiniumDate:(NSDate *)miniumDate;
+- (instancetype)setMaximumDate:(NSDate *)maximumDate;
+- (instancetype)setMode:(UIDatePickerMode)mode;
+
+@end
+
 @interface UIDatePicker (SFAddition)
 
-+ (void)sf_pickDateWithViewController:(UIViewController *)viewController
-                                title:(NSString *)title
-                                 date:(NSDate *)date
-                          minimumDate:(NSDate *)miniumDate
-                          maximumDate:(NSDate *)maximumDate
-                                 mode:(UIDatePickerMode)mode
-                           completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion;
++ (void)sf_pickWithViewController:(UIViewController *)viewController
+                          options:(SFDatePickerDialogOptions *)options
+                       completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion;
 
 @end

@@ -14,15 +14,68 @@
 #import "UIView+SFAddition.h"
 #import "SFBlockedBarButtonItem.h"
 
+@interface SFDatePickerDialogOptions ()
+
+@property (nonatomic, copy) NSString *_title;
+@property (nonatomic, strong) NSDate *_date;
+@property (nonatomic, strong) NSDate *_miniumDate;
+@property (nonatomic, strong) NSDate *_maximumDate;
+@property (nonatomic, assign) UIDatePickerMode _mode;
+
+@end
+
+@implementation SFDatePickerDialogOptions
+
++ (instancetype)dialogOptionsWithTitle:(NSString *)title
+{
+    SFDatePickerDialogOptions *options = [SFDatePickerDialogOptions new];
+    options._title = title;
+    
+    return options;
+}
+
+- (instancetype)setTitle:(NSString *)title
+{
+    self._title = title;
+    
+    return self;
+}
+
+- (instancetype)setDate:(NSDate *)date
+{
+    self._date = date;
+    
+    return self;
+}
+
+- (instancetype)setMiniumDate:(NSDate *)miniumDate
+{
+    self._miniumDate = miniumDate;
+    
+    return self;
+}
+
+- (instancetype)setMaximumDate:(NSDate *)maximumDate
+{
+    self._maximumDate = maximumDate;
+    
+    return self;
+}
+
+- (instancetype)setMode:(UIDatePickerMode)mode
+{
+    self._mode = mode;
+    
+    return self;
+}
+
+@end
+
 @implementation UIDatePicker (SFAddition)
 
-+ (void)sf_pickDateWithViewController:(UIViewController *)viewController
-                             title:(NSString *)title
-                              date:(NSDate *)date
-                       minimumDate:(NSDate *)miniumDate
-                       maximumDate:(NSDate *)maximumDate
-                              mode:(UIDatePickerMode)mode
-                        completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion
++ (void)sf_pickWithViewController:(UIViewController *)viewController
+                          options:(SFDatePickerDialogOptions *)options
+                       completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion
 {
     UIView *container = [[UIView alloc] initWithFrame:viewController.view.bounds];
     container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -37,19 +90,19 @@
     
     UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, container.frame.size.height - datePickerHeight, container.frame.size.width, datePickerHeight)];
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-    if (date) {
-        datePicker.date = date;
+    if (options._date) {
+        datePicker.date = options._date;
     }
-    if (miniumDate) {
-        datePicker.minimumDate = miniumDate;
+    if (options._miniumDate) {
+        datePicker.minimumDate = options._miniumDate;
     }
-    if (maximumDate) {
-        datePicker.maximumDate = maximumDate;
+    if (options._maximumDate) {
+        datePicker.maximumDate = options._maximumDate;
     }
     if (SFDeviceSystemVersion >= 7.0f) {
         datePicker.backgroundColor = [UIColor whiteColor];
     }
-    datePicker.datePickerMode = mode;
+    datePicker.datePickerMode = options._mode;
     [container addSubview:datePicker];
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, container.frame.size.height - datePickerHeight - 44, container.frame.size.width, 44)];
@@ -64,7 +117,7 @@
     } else {
         titleLabel.textColor = [UIColor darkGrayColor];
     }
-    titleLabel.text = title;
+    titleLabel.text = options._title;
     titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.userInteractionEnabled = NO;
