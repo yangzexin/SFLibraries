@@ -281,7 +281,6 @@
 		3E415C111856EA5400335EFE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3E2EC0121A8D933200A81F76 /* ObjectRepository */,
 				3E46AD9F1A03822C00578334 /* Call */,
 				3E105F151856DEEC007326BE /* dict2object */,
 				3E415C091856E0CD00335EFE /* EventControl */,
@@ -314,17 +313,6 @@
 			name = Call;
 			sourceTree = "<group>";
 		};
-		3E97D9BB18F3D73E00D7E0A8 /* objc */ = {
-			isa = PBXGroup;
-			children = (
-				3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */,
-				3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */,
-				3E0B788318F67A3900593B64 /* NSValue+SFWeakObject.h */,
-				3E0B788418F67A3900593B64 /* NSValue+SFWeakObject.m */,
-			);
-			name = objc;
-			sourceTree = "<group>";
-		};
 		3EC67D581828D10000B6190E = {
 			isa = PBXGroup;
 			children = (
@@ -353,11 +341,11 @@
 		3EC67D661828D10000B6190E /* SFFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				3EF61EEA1828D20E0057A6FE /* Extension */,
+				3E2EC0121A8D933200A81F76 /* ObjectRepository */,
 				3E2EC0111A8D8B0E00A81F76 /* PropertyObserver */,
 				3E2EC0101A8D8AF800A81F76 /* runtime */,
-				3E97D9BB18F3D73E00D7E0A8 /* objc */,
 				3E415C111856EA5400335EFE /* Utils */,
-				3EF61EEA1828D20E0057A6FE /* Extension */,
 				3EC67D691828D10000B6190E /* SFFoundation.h */,
 				3EC67D671828D10000B6190E /* Supporting Files */,
 			);
@@ -375,6 +363,10 @@
 		3EF61EEA1828D20E0057A6FE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */,
+				3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */,
+				3E0B788318F67A3900593B64 /* NSValue+SFWeakObject.h */,
+				3E0B788418F67A3900593B64 /* NSValue+SFWeakObject.m */,
 				3EFF91491990E1A9007A62ED /* NSArray+SFAddition.h */,
 				3EFF914A1990E1A9007A62ED /* NSArray+SFAddition.m */,
 				3EF61EF71828D21D0057A6FE /* NSData+SFAddition.h */,
