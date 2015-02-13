@@ -22,6 +22,7 @@
 #import "SFBlockedLocationManager.h"
 
 #import "SFKeychainAccess.h"
+#import "SFDynamicImageCache.h"
 
 #import "NSString+SFiOSAddition.h"
 #import "UIActionSheet+SFAddition.h"
