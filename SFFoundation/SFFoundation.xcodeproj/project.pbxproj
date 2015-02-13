@@ -14,7 +14,7 @@
 		3E105F221856DF07007326BE /* SFObjectMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F171856DF07007326BE /* SFObjectMapping.m */; };
 		3E105F231856DF07007326BE /* SFDict2Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F191856DF07007326BE /* SFDict2Object.m */; };
 		3E105F241856DF07007326BE /* SFDict2ObjectEnhanced.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F1B1856DF07007326BE /* SFDict2ObjectEnhanced.m */; };
-		3E105F261856DF07007326BE /* SFMappingStringCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F1F1856DF07007326BE /* SFMappingStringCollector.m */; };
+		3E105F261856DF07007326BE /* SFBuildableMappingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F1F1856DF07007326BE /* SFBuildableMappingCollector.m */; };
 		3E105F271856DF07007326BE /* SFObjectMappingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F211856DF07007326BE /* SFObjectMappingCollector.m */; };
 		3E1EA5BB1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA5BA1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m */; };
 		3E415C011856DF5600335EFE /* SFObject2Dict.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E415C001856DF5600335EFE /* SFObject2Dict.m */; };
@@ -85,8 +85,8 @@
 		3E105F191856DF07007326BE /* SFDict2Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDict2Object.m; sourceTree = "<group>"; };
 		3E105F1A1856DF07007326BE /* SFDict2ObjectEnhanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDict2ObjectEnhanced.h; sourceTree = "<group>"; };
 		3E105F1B1856DF07007326BE /* SFDict2ObjectEnhanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDict2ObjectEnhanced.m; sourceTree = "<group>"; };
-		3E105F1E1856DF07007326BE /* SFMappingStringCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMappingStringCollector.h; sourceTree = "<group>"; };
-		3E105F1F1856DF07007326BE /* SFMappingStringCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMappingStringCollector.m; sourceTree = "<group>"; };
+		3E105F1E1856DF07007326BE /* SFBuildableMappingCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBuildableMappingCollector.h; sourceTree = "<group>"; };
+		3E105F1F1856DF07007326BE /* SFBuildableMappingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBuildableMappingCollector.m; sourceTree = "<group>"; };
 		3E105F201856DF07007326BE /* SFObjectMappingCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFObjectMappingCollector.h; sourceTree = "<group>"; };
 		3E105F211856DF07007326BE /* SFObjectMappingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFObjectMappingCollector.m; sourceTree = "<group>"; };
 		3E1EA5B91A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+SFSafeExt.h"; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 				3E105F191856DF07007326BE /* SFDict2Object.m */,
 				3E105F1A1856DF07007326BE /* SFDict2ObjectEnhanced.h */,
 				3E105F1B1856DF07007326BE /* SFDict2ObjectEnhanced.m */,
-				3E105F1E1856DF07007326BE /* SFMappingStringCollector.h */,
-				3E105F1F1856DF07007326BE /* SFMappingStringCollector.m */,
+				3E105F1E1856DF07007326BE /* SFBuildableMappingCollector.h */,
+				3E105F1F1856DF07007326BE /* SFBuildableMappingCollector.m */,
 				3E105F161856DF07007326BE /* SFObjectMapping.h */,
 				3E105F171856DF07007326BE /* SFObjectMapping.m */,
 				3E105F201856DF07007326BE /* SFObjectMappingCollector.h */,
@@ -466,7 +466,7 @@
 				3E105F221856DF07007326BE /* SFObjectMapping.m in Sources */,
 				3EF61EFE1828D21D0057A6FE /* NSString+SFAddition.m in Sources */,
 				3ECF2F7A198883B7000E75C0 /* NSObject+SFRuntime.m in Sources */,
-				3E105F261856DF07007326BE /* SFMappingStringCollector.m in Sources */,
+				3E105F261856DF07007326BE /* SFBuildableMappingCollector.m in Sources */,
 				3EF61F111828D2520057A6FE /* SFRuntimeUtils.m in Sources */,
 				3EF61F1A1828D27A0057A6FE /* SFDelayControl.m in Sources */,
 				3EF61F131828D2520057A6FE /* SFWaiting.m in Sources */,

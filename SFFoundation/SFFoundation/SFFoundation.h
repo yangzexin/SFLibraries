@@ -41,7 +41,7 @@
 #import "SFDict2Object.h"
 #import "SFDict2ObjectEnhanced.h"
 #import "SFObjectMapping.h"
-#import "SFMappingStringCollector.h"
+#import "SFBuildableMappingCollector.h"
 #import "SFObjectMappingCollector.h"
 #import "SFObject2Dict.h"
 #import "SFPropertyProcessor.h"

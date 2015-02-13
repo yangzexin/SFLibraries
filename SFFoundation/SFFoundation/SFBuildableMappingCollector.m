@@ -1,12 +1,12 @@
 //
-//  SFMemoryObjectMappingCollector.m
+//  SFBuildableMappingCollector.m
 //  SFiOSKit
 //
 //  Created by yangzexin on 11/22/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 
-#import "SFMappingStringCollector.h"
+#import "SFBuildableMappingCollector.h"
 
 #import "NSString+SFJavaLikeStringHandle.h"
 #import "SFPropertyProcessor.h"
@@ -92,7 +92,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 @end
 
-@interface SFMappingStringCollector () <SFObjectMappingCollectorDelegate>
+@interface SFBuildableMappingCollector () <SFObjectMappingCollectorDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *keyClassNameValueCollectorContext;
 
@@ -106,7 +106,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 @end
 
-@implementation SFMappingStringCollector
+@implementation SFBuildableMappingCollector
 
 + (instancetype)collector
 {
@@ -115,7 +115,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 + (instancetype)collectorWithMapping:(id)mapping
 {
-    SFMappingStringCollector *collector = [self new];
+    SFBuildableMappingCollector *collector = [self new];
     if (mapping) {
         [collector addMapping:mapping];
     }

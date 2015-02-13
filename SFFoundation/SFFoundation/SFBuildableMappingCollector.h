@@ -1,5 +1,5 @@
 //
-//  SFMemoryObjectMappingCollector.h
+//  SFBuildableMappingCollector.h
 //  SFiOSKit
 //
 //  Created by yangzexin on 11/22/13.
@@ -51,9 +51,12 @@
 
 @end
 
+/**
+ Concats property mappings
+ */
 OBJC_EXPORT SFPropertyMapping *SFConcatPropertyMappings(SFPropertyMapping *mapping, ...) NS_REQUIRES_NIL_TERMINATION;
 
-@interface SFMappingStringCollector : NSObject <SFObjectMappingCollector>
+@interface SFBuildableMappingCollector : NSObject <SFObjectMappingCollector>
 
 + (instancetype)collector;
 + (instancetype)collectorWithMapping:(id)mapping;

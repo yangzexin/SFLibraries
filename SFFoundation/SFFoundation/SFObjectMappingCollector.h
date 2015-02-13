@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFObjectMapping.h"
 
 @protocol SFObjectMappingCollector <NSObject>
@@ -29,9 +30,6 @@
 
 @end
 
-/**
- This class is used by SFDict2ObjectEnhanced
- */
 @interface SFObjectMappingCollector : NSObject <SFObjectMappingCollector>
 
 /**
