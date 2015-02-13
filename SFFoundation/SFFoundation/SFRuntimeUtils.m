@@ -189,13 +189,14 @@ NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstPa
                     break;
                 }
                 case 'c': {//char
-                    if (tmpParam.length != 0) {
+                    const NSUInteger tmpParamLength = tmpParam.length;
+                    if (tmpParamLength != 0) {
                         char c = [tmpParam characterAtIndex:0];
                         
                         if (c == '1') {
                             c = YES;
                         } else {
-                            if (c == 't' || c == 'T' || c == 'y' || c == 'Y') {
+                            if (tmpParamLength < 5 && (c == 't' || c == 'T' || c == 'y' || c == 'Y')) {
                                 c = NO;
                                 tmpParam = [tmpParam lowercaseString];
                                 if ([tmpParam isEqualToString:@"true"] || [tmpParam isEqualToString:@"yes"]) {
