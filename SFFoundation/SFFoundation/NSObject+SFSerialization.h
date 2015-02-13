@@ -33,14 +33,14 @@
 
 /**
  mapping -  The map to mapping property->key or property->Class
- Use marco: SFBeginPropertyMappingWithClass, SFEndPropertyMapping, SFMappingPropertyToClass, SFMappingPropertyToKey to generate mapping
+ Using marco: SFBeginPropertyMappingWithClass, SFEndPropertyMapping, SFMappingPropertyToClass, SFMappingPropertyToKey to generate mapping
  Example:
      SFBeginPropertyMappingWithClass(ClassName)
      SFMappingPropertyToClass(propertyName, propertyClassName)
      SFMappingPropertyToKey(propertyName, keyString)
      SFEndPropertyMapping
  
- Use marco:SFPropertyMappingGroup to generate mapping groups
+ Using marco:SFPropertyMappingGroup to generate mapping groups
  Example:
      SFConcatPropertyMapping(
      SFBeginPropertyMappingWithClass(ClassName)
