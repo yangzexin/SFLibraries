@@ -7,7 +7,9 @@
 //
 
 #import "UIImage+SFAddition.h"
+
 #import <QuartzCore/QuartzCore.h>
+
 #import "UIView+SFAddition.h"
 
 @implementation UIImage (SFAddition)
@@ -186,7 +188,7 @@
     return image;
 }
 
-- (UIImage *)sf_imageCropWithInsets:(UIEdgeInsets)insets
+- (UIImage *)sf_imageByCroppingWithInsets:(UIEdgeInsets)insets
 {
     UIImage *croppedImage = nil;
     CGSize croppedImageSize = self.size;

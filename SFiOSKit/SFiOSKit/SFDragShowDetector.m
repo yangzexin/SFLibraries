@@ -7,6 +7,7 @@
 //
 
 #import "SFDragShowDetector.h"
+
 #import "SFiOSKitConstants.h"
 
 @interface SFDragShowDetector ()

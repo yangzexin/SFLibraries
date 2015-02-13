@@ -53,6 +53,7 @@
         drawAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
         [circle addAnimation:drawAnimation forKey:@"drawCircleAnimation"];
     }
+    
     return circle;
 }
 

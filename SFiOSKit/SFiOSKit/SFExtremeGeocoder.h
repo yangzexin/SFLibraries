@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFGeocoder.h"
 
 @interface SFExtremeGeocoder : NSObject <SFGeocoder>

@@ -7,6 +7,7 @@
 //
 
 #import "SFSwitchTabController.h"
+
 #import "NSObject+SFObservation.h"
 
 @interface SFSwitchTabController () <UIScrollViewDelegate>

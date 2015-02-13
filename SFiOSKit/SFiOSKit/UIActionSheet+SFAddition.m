@@ -7,7 +7,6 @@
 //
 
 #import "UIActionSheet+SFAddition.h"
-#import "NSObject+SFAddition.h"
 
 @interface SFActionSheetWrapper : NSObject <UIActionSheetDelegate>
 

@@ -18,7 +18,7 @@
 
 @end
 
-@interface UIViewController (Loading)
+@interface UIViewController (SFLoading)
 
 - (void)sf_setLoadingSupport:(SFViewControllerLoadingSupport *)support;
 - (SFViewControllerLoadingSupport *)sf_loadingSupport;
@@ -39,7 +39,7 @@
 
 @end
 
-@interface UIViewController (CenterTips)
+@interface UIViewController (SFCenterTips)
 
 - (void)sf_setCenterTipsTransparent:(BOOL)transparent;
 - (BOOL)sf_centerTipsTransparent;
@@ -50,5 +50,14 @@
 - (void)sf_setCenterTips:(NSString *)tips;
 - (void)sf_setCenterTips:(NSString *)tips toView:(UIView *)containView;
 - (void)sf_hideCenterTips;
+
+@end
+
+@interface UIViewController (SFToast)
+
+- (void)toast:(NSString *)text;
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds;
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier;
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion;
 
 @end

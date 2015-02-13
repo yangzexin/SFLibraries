@@ -91,6 +91,7 @@
             return [xmlString substringWithRange:range];
         }
     }
+    
     return nil;
 }
 

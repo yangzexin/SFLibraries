@@ -7,9 +7,11 @@
 //
 
 #import "SFImageLabel.h"
+
+#import <CoreText/CoreText.h>
+
 #import "NSString+SFJavaLikeStringHandle.h"
 #import "NSObject+SFObservation.h"
-#import <CoreText/CoreText.h>
 
 NSString *SFImageLabelDefaultImageLeftMatchingText = @"{IMG";
 NSString *SFImageLabelDefaultImageRightMatchingText = @"}";

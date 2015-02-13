@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "SFLocationDescription.h"
 
 @protocol SFGeocoderDelegate <NSObject>

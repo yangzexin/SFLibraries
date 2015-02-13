@@ -8,7 +8,7 @@
 
 #import "SFKeyboardStateListener.h"
 
-#import "NSObject+SFAddition.h"
+#import "NSObject+SFRuntime.h"
 
 NSString *const SFKeyboardHeightDidChangeNotification = @"SFKeyboardHeightDidChangeNotification";
 

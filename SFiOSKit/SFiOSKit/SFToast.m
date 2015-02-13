@@ -7,9 +7,10 @@
 //
 
 #import "SFToast.h"
+
 #import "NSString+SFiOSAddition.h"
+#import "NSObject+SFRuntime.h"
 #import "SFKeyboardStateListener.h"
-#import "NSObject+SFAddition.h"
 
 @interface SFToastView : UIView
 

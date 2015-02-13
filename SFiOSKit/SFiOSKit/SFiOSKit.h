@@ -38,7 +38,7 @@
 #import "UIView+SFAddition.h"
 #import "UIViewController+SFAddition.h"
 #import "UIWebView+SFAddition.h"
-#import "UIViewController+SFLoading.h"
+#import "UIViewController+SFIndicator.h"
 
 #import "SFBlockedBarButtonItem.h"
 #import "SFBlockedButton.h"

@@ -39,12 +39,14 @@
 
 + (UIImage *)sf_shadowImageWithColor:(UIColor *)color radius:(CGFloat)radius opacity:(CGFloat)opacity size:(CGSize)size;
 
-- (UIImage *)sf_imageCropWithInsets:(UIEdgeInsets)insets;
+- (UIImage *)sf_imageByCroppingWithInsets:(UIEdgeInsets)insets;
 
 - (UIImage *)sf_imageWithLeftCapWidth:(NSInteger)leftCapWidth width:(CGFloat)width;
 
 - (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor;
+
 - (UIImage *)sf_imageWithGradientTintColor:(UIColor *)tintColor;
+
 - (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor blendMode:(CGBlendMode)blendMode;
 
 - (UIImage *)sf_imageByResizingWithSize:(CGSize)size contentMode:(UIViewContentMode)contentMode;

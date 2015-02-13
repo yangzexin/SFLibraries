@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 yangzexin. All rights reserved.
 //
 
-#import "UIViewController+SFLoading.h"
+#import "UIViewController+SFIndicator.h"
+
 #import "NSObject+SFObjectAssociation.h"
 #import "UIColor+SFAddition.h"
+#import "SFToast.h"
+#import "SFWaitingIndicator.h"
 
 @interface SFViewControllerLoadingSupport ()
 
@@ -36,7 +39,7 @@
 
 @end
 
-@implementation UIViewController (Loading)
+@implementation UIViewController (SFLoading)
 
 - (NSMutableArray *)loadingIdentifiersWithHidesMainView:(BOOL)hidesMainView
 {
@@ -75,6 +78,15 @@
     SFViewControllerLoadingSupport *support = [self sf_associatedObjectWithKey:@"sf_loadingSupport"];
     if (support == nil) {
         support = [SFViewControllerLoadingSupport sharedSupport];
+        if (support.loadingUpdate == nil) {
+            [[SFViewControllerLoadingSupport sharedSupport] setLoadingUpdate:^(UIView *superView, BOOL loading, BOOL loadingOrWaiting) {
+                if (loadingOrWaiting) {
+                    [SFWaitingIndicator showLoading:loading inView:superView];
+                } else {
+                    [SFWaitingIndicator showWaiting:loading inView:superView];
+                }
+            }];
+        }
     }
     
     return support;
@@ -173,7 +185,7 @@
 
 @end
 
-@implementation UIViewController (CenterTips)
+@implementation UIViewController (SFCenterTips)
 
 - (void)sf_setCenterTips:(NSString *)tips
 {
@@ -247,6 +259,30 @@
 - (void)sf_setCenterTipsTopMargin:(CGFloat)centerTipsTopMargin
 {
     [self sf_setAssociatedObject:@(centerTipsTopMargin) key:@"centerTipsTopMargin"];
+}
+
+@end
+
+@implementation UIViewController (SFToast)
+
+- (void)toast:(NSString *)text
+{
+    [self toast:text hideAfterSeconds:1.70f];
+}
+
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds
+{
+    [self toast:text hideAfterSeconds:hideAfterSeconds identifier:nil];
+}
+
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier
+{
+    [self toast:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:nil];
+}
+
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion
+{
+    [SFToast toastInView:self.view text:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:completion];
 }
 
 @end

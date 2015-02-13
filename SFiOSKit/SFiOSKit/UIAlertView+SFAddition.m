@@ -7,6 +7,7 @@
 //
 
 #import "UIAlertView+SFAddition.h"
+
 #import "SFObjectRepository.h"
 
 NSString *SFClosePresentingAlertViewOptionsAnimationStateKey = @"SFClosePresentingNotificationConfigAnimatedKey";

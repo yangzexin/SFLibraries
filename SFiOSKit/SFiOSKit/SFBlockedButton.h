@@ -14,6 +14,8 @@
 
 - (void)initialize;
 
-+ (id)blockedButtonWithTapHandler:(void(^)())tapHandler;
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler;
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame;
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame addToSuperview:(UIView *)superview;
 
 @end

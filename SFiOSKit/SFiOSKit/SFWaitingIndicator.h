@@ -13,7 +13,7 @@ typedef enum{
     SFWaitingIndicatorPositionLeft,
     SFWaitingIndicatorPositionRight,
     SFWaitingIndicatorPositionBottom
-}SFWaitingIndicatorPosition;
+} SFWaitingIndicatorPosition;
 
 @interface SFWaitingIndicator : NSObject
 

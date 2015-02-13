@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "SFIBCompatibleView.h"
 
 @interface SFCollapsableLabel : SFIBCompatibleView
