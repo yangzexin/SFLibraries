@@ -14,6 +14,8 @@
 		3E19D6621831F7250048A788 /* UIWebView+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19D6611831F7250048A788 /* UIWebView+SFAddition.m */; };
 		3E19D6661831FA1D0048A788 /* UIMenuController+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19D6651831FA1D0048A788 /* UIMenuController+SFAddition.m */; };
 		3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */; };
+		3E2331331AA14BC30072CB8D /* SFAbstractCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2331301AA14BC30072CB8D /* SFAbstractCache.m */; };
+		3E2331341AA14BC30072CB8D /* SFCacheControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2331321AA14BC30072CB8D /* SFCacheControl.m */; };
 		3E2EC0271A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC0261A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.m */; };
 		3E2EC03A1A8DDBB500A81F76 /* UIImage+SFBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC0391A8DDBB500A81F76 /* UIImage+SFBundle.m */; };
 		3E2EC0481A8DF8FB00A81F76 /* SFBundleImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC0471A8DF8FB00A81F76 /* SFBundleImageCache.m */; };
@@ -110,6 +112,10 @@
 		3E19D6651831FA1D0048A788 /* UIMenuController+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+SFAddition.m"; sourceTree = "<group>"; };
 		3E1EA6C31A1F39E400D1FC12 /* UIDevice+SFUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+SFUDID.h"; sourceTree = "<group>"; };
 		3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SFUDID.m"; sourceTree = "<group>"; };
+		3E23312F1AA14BC30072CB8D /* SFAbstractCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAbstractCache.h; sourceTree = "<group>"; };
+		3E2331301AA14BC30072CB8D /* SFAbstractCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAbstractCache.m; sourceTree = "<group>"; };
+		3E2331311AA14BC30072CB8D /* SFCacheControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCacheControl.h; sourceTree = "<group>"; };
+		3E2331321AA14BC30072CB8D /* SFCacheControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCacheControl.m; sourceTree = "<group>"; };
 		3E2EC0251A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SFTransparentViewController.h"; sourceTree = "<group>"; };
 		3E2EC0261A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SFTransparentViewController.m"; sourceTree = "<group>"; };
 		3E2EC0381A8DDBB500A81F76 /* UIImage+SFBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SFBundle.h"; sourceTree = "<group>"; };
@@ -239,6 +245,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E23312D1AA14BBC0072CB8D /* AbstractCache */ = {
+			isa = PBXGroup;
+			children = (
+				3E23312F1AA14BC30072CB8D /* SFAbstractCache.h */,
+				3E2331301AA14BC30072CB8D /* SFAbstractCache.m */,
+				3E2331311AA14BC30072CB8D /* SFCacheControl.h */,
+				3E2331321AA14BC30072CB8D /* SFCacheControl.m */,
+			);
+			name = AbstractCache;
+			sourceTree = "<group>";
+		};
 		3E2F3F9E1871AA8D008170C1 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,13 +500,14 @@
 		3EF61F671828D4510057A6FE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3E23312D1AA14BBC0072CB8D /* AbstractCache */,
 				3ED2CF3B19206EB50008529A /* location */,
-				3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */,
-				3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */,
 				3E2EC0461A8DF8FB00A81F76 /* SFBundleImageCache.h */,
 				3E2EC0471A8DF8FB00A81F76 /* SFBundleImageCache.m */,
 				3E2EC04A1A8DF94A00A81F76 /* SFDynamicImageCache.h */,
 				3E2EC04B1A8DF94A00A81F76 /* SFDynamicImageCache.m */,
+				3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */,
+				3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -607,6 +625,7 @@
 				3E2EC0481A8DF8FB00A81F76 /* SFBundleImageCache.m in Sources */,
 				3ED2CF5019206EE20008529A /* SFAppleGeocoder.m in Sources */,
 				3EF61F341828D40D0057A6FE /* UIActionSheet+SFAddition.m in Sources */,
+				3E2331341AA14BC30072CB8D /* SFCacheControl.m in Sources */,
 				3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */,
 				3E337E821A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m in Sources */,
 				3ED2CF5119206EE20008529A /* SFExtremeGeocoder.m in Sources */,
@@ -621,6 +640,7 @@
 				3E19D6621831F7250048A788 /* UIWebView+SFAddition.m in Sources */,
 				3ED2CF5A19206EF70008529A /* SFCompatibleGeocoder.m in Sources */,
 				3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */,
+				3E2331331AA14BC30072CB8D /* SFAbstractCache.m in Sources */,
 				3EDC6059183C5919005B82D2 /* SFDotLineView.m in Sources */,
 				3E5735911837A2D200566F33 /* UIColor+SFAddition.m in Sources */,
 			);

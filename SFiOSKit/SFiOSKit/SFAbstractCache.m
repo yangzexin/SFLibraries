@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 yangzexin. All rights reserved.
 //
 
-#import "SFCache.h"
+#import "SFAbstractCache.h"
 
 #import "NSString+SFAddition.h"
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
@@ -23,7 +23,7 @@ NSString *SFCurrentApplicationIdentifier()
 #endif
 }
 
-@interface SFCache ()
+@interface SFAbstractCache ()
 
 @property (nonatomic, assign) NSTimeInterval time;
 @property (nonatomic, strong) NSData *data;
@@ -31,11 +31,11 @@ NSString *SFCurrentApplicationIdentifier()
 
 @end
 
-@implementation SFCache
+@implementation SFAbstractCache
 
 + (instancetype)cacheWithData:(NSData *)data
 {
-    SFCache *cache = [SFCache new];
+    SFAbstractCache *cache = [SFAbstractCache new];
     cache.time = [NSDate timeIntervalSinceReferenceDate];
     cache.data = data;
     cache.applicationIdentifier = SFCurrentApplicationIdentifier();
@@ -59,29 +59,6 @@ NSString *SFCurrentApplicationIdentifier()
     [aCoder encodeDouble:_time forKey:@"time"];
     [aCoder encodeObject:_applicationIdentifier forKey:@"appid"];
     [aCoder encodeObject:_data forKey:@"data"];
-}
-
-@end
-
-@interface SFCacheControl ()
-
-@end
-
-@implementation SFCacheControl
-
-+ (instancetype)cacheControl
-{
-    SFCacheControl *support = [SFCacheControl new];
-    
-    return support;
-}
-
-- (void)cancel
-{
-    if (self.cancelNotifier) {
-        self.cancelNotifier();
-        self.cancelNotifier = nil;
-    }
 }
 
 @end

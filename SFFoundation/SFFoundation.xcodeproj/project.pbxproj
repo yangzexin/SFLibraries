@@ -21,7 +21,6 @@
 		3E4627941867DF8C009092B0 /* SFCountdownControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4627931867DF8C009092B0 /* SFCountdownControl.m */; };
 		3E46ADAF1A03823B00578334 /* SFBuildableCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA11A03823B00578334 /* SFBuildableCall.m */; };
 		3E46ADB01A03823B00578334 /* SFCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA31A03823B00578334 /* SFCall.m */; };
-		3E46ADB11A03823B00578334 /* SFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA51A03823B00578334 /* SFCache.m */; };
 		3E46ADB21A03823B00578334 /* SFCall+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA71A03823B00578334 /* SFCall+Utils.m */; };
 		3E46ADB41A03823B00578334 /* SFNullParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADAC1A03823B00578334 /* SFNullParameter.m */; };
 		3E46ADB51A03823B00578334 /* SFUpdatableParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADAE1A03823B00578334 /* SFUpdatableParameter.m */; };
@@ -99,8 +98,6 @@
 		3E46ADA11A03823B00578334 /* SFBuildableCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBuildableCall.m; sourceTree = "<group>"; };
 		3E46ADA21A03823B00578334 /* SFCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCall.h; sourceTree = "<group>"; };
 		3E46ADA31A03823B00578334 /* SFCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCall.m; sourceTree = "<group>"; };
-		3E46ADA41A03823B00578334 /* SFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCache.h; sourceTree = "<group>"; };
-		3E46ADA51A03823B00578334 /* SFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCache.m; sourceTree = "<group>"; };
 		3E46ADA61A03823B00578334 /* SFCall+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFCall+Utils.h"; sourceTree = "<group>"; };
 		3E46ADA71A03823B00578334 /* SFCall+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SFCall+Utils.m"; sourceTree = "<group>"; };
 		3E46ADAB1A03823B00578334 /* SFNullParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFNullParameter.h; sourceTree = "<group>"; };
@@ -298,8 +295,6 @@
 				3E87965E1A09B1F50063DEEC /* SFAsyncCall.m */,
 				3E46ADA01A03823B00578334 /* SFBuildableCall.h */,
 				3E46ADA11A03823B00578334 /* SFBuildableCall.m */,
-				3E46ADA41A03823B00578334 /* SFCache.h */,
-				3E46ADA51A03823B00578334 /* SFCache.m */,
 				3E46ADA21A03823B00578334 /* SFCall.h */,
 				3E46ADA31A03823B00578334 /* SFCall.m */,
 				3E8BEB1A1A067B4B001ACDC9 /* SFCall+Private.h */,
@@ -483,7 +478,6 @@
 				3E105F271856DF07007326BE /* SFObjectMappingCollector.m in Sources */,
 				3EF61F161828D2520057A6FE /* SFRepeatTimer.m in Sources */,
 				3E1EA5BB1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m in Sources */,
-				3E46ADB11A03823B00578334 /* SFCache.m in Sources */,
 				3E0ABD7D1928FD94000E9242 /* SFPropertyProcessor.m in Sources */,
 				3EF61F171828D2520057A6FE /* SFObjectRepository.m in Sources */,
 			);
