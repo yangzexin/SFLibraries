@@ -51,6 +51,5 @@
 #import "SFAsyncCall.h"
 #import "SFCall.h"
 #import "SFCall+Utils.h"
-#import "SFCache.h"
 #import "SFNullParameter.h"
 #import "SFUpdatableParameter.h"

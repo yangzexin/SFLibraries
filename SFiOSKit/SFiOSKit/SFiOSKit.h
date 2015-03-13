@@ -8,6 +8,9 @@
 
 #import "SFiOSKitConstants.h"
 
+#import "SFAbstractCache.h"
+#import "SFCacheControl.h"
+
 #import "SFGeocoder.h"
 #import "SFAppleGeocoder.h"
 #import "SFExtremeGeocoder.h"
