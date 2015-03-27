@@ -53,6 +53,7 @@
 		3ED59DBD1828D33A002531DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59DBC1828D33A002531DD /* Foundation.framework */; };
 		3ED59DC21828D33A002531DD /* SFiOSKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED59DC11828D33A002531DD /* SFiOSKit.h */; };
 		3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59DC31828D33A002531DD /* SFiOSKit.m */; };
+		3ED853BA1AC548B90033A123 /* SFWebViewCallTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */; };
 		3EDC6019183B5370005B82D2 /* SFIBCompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC6018183B5370005B82D2 /* SFIBCompatibleView.m */; };
 		3EDC6059183C5919005B82D2 /* SFDotLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC6058183C5919005B82D2 /* SFDotLineView.m */; };
 		3EDC630C1920712F005B7FD1 /* SFBlockedLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC630B1920712F005B7FD1 /* SFBlockedLocationManager.m */; };
@@ -191,6 +192,8 @@
 		3ED59DC01828D33A002531DD /* SFiOSKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFiOSKit-Prefix.pch"; sourceTree = "<group>"; };
 		3ED59DC11828D33A002531DD /* SFiOSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFiOSKit.h; sourceTree = "<group>"; };
 		3ED59DC31828D33A002531DD /* SFiOSKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFiOSKit.m; sourceTree = "<group>"; };
+		3ED853B81AC548B90033A123 /* SFWebViewCallTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFWebViewCallTracker.h; sourceTree = "<group>"; };
+		3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFWebViewCallTracker.m; sourceTree = "<group>"; };
 		3EDC6017183B5370005B82D2 /* SFIBCompatibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFIBCompatibleView.h; sourceTree = "<group>"; };
 		3EDC6018183B5370005B82D2 /* SFIBCompatibleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFIBCompatibleView.m; sourceTree = "<group>"; };
 		3EDC6057183C5919005B82D2 /* SFDotLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDotLineView.h; sourceTree = "<group>"; };
@@ -508,6 +511,8 @@
 				3E2EC04B1A8DF94A00A81F76 /* SFDynamicImageCache.m */,
 				3E337DF31A44298800B5EDA7 /* SFKeychainAccess.h */,
 				3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */,
+				3ED853B81AC548B90033A123 /* SFWebViewCallTracker.h */,
+				3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				3ED2CF4819206EDB0008529A /* SFPreciseLocationManager.m in Sources */,
 				3ED2CF4719206EDB0008529A /* SFMapkitLocationManager.m in Sources */,
 				3EF61F391828D40D0057A6FE /* UIView+SFAddition.m in Sources */,
+				3ED853BA1AC548B90033A123 /* SFWebViewCallTracker.m in Sources */,
 				3EFF52A11942C20F00FBFCC9 /* NSString+SFiOSAddition.m in Sources */,
 				3E08068C18FAB66A003C2AC0 /* SFKeyboardStateListener.m in Sources */,
 				3ED2CF5919206EF70008529A /* SFLocationDescription.m in Sources */,
