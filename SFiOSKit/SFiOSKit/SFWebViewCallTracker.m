@@ -94,19 +94,39 @@
             }
             
             NSString *callbackFuncName = [params objectForKey:SFWebViewProtocolCallbackMethodKey];
+            NSString *userData = [params objectForKey:SFWebViewProtocolUserDataKey];
             if (callbackFuncName != nil) {
                 [params removeObjectForKey:SFWebViewProtocolCallbackMethodKey];
             }
+            if (userData != nil) {
+                [params removeObjectForKey:SFWebViewProtocolUserDataKey];
+            }
             
-            context.handler(method, [params copy], ^(NSString *result){
-                javascriptExecutor([NSString stringWithFormat:@"%@(\"%@\");", callbackFuncName, [result stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]]);
-            });
+            if (userData != nil) {
+                NSString *userDataParamValue = [NSString stringWithFormat:@"\"%@\"", _SFCommonCallbackValueFilter(userData)];
+                
+                context.handler(method, [params copy], ^(NSString *result){
+                    javascriptExecutor([NSString stringWithFormat:@"%@(%@, \"%@\");", callbackFuncName, userDataParamValue, _SFCommonCallbackValueFilter(result)]);
+                });
+            } else {
+                context.handler(method, [params copy], ^(NSString *result){
+                    javascriptExecutor([NSString stringWithFormat:@"%@(\"%@\");", callbackFuncName, _SFCommonCallbackValueFilter(result)]);
+                });
+            }
             
             break;
         }
     }
     
     return processed;
+}
+
+NSString *_SFCommonCallbackValueFilter(NSString *value)
+{
+    value = [value stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    value = [value stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    
+    return value;
 }
 
 @end
