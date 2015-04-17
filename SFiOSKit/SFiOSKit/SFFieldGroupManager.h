@@ -11,21 +11,14 @@
 @interface SFFieldGroupManager : NSObject
 
 @property (nonatomic, readonly) NSArray *fields;
-
-/**
- default is YES
- */
 @property (nonatomic, assign) BOOL setReturnKeyAutomatically;
-
+@property (nonatomic, assign, readonly) CGFloat keyboardHeight;
+@property (nonatomic, assign) CGFloat keyboardInset;
 @property (nonatomic, assign) id<UITextFieldDelegate> textFieldDelegate;
 
-@property (nonatomic, assign) UIReturnKeyType doneReturnKeyType;
-
-/**
- fieldPositor:if field == nil, fields did end editing.
- */
-+ (instancetype)fieldGroupManagerWithFieldPositor:(void(^)(id field))fieldPositor;
-+ (instancetype)fieldGroupManagerWithFieldPositor:(void(^)(id field))fieldPositor doneHandler:(void(^)())doneHandler;
+@property (nonatomic, copy) void(^fieldPositor)(id field);
+@property (nonatomic, copy) void(^doneHandler)();
+@property (nonatomic, assign) UIView *fieldsContainView;
 
 - (void)resignFirstResponder;
 - (void)becomeFirstResponder;
