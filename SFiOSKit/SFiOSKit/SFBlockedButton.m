@@ -37,7 +37,7 @@
     [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *backgroundImage = nil;
-    UIColor *backgroundImageColor = self.backgroundColor == nil ? [UIColor whiteColor] : self.backgroundColor;
+    UIColor *backgroundImageColor = self.backgroundColor == nil ? [UIColor clearColor] : self.backgroundColor;
     
     if (_round) {
         if (_roundSize == 0) {
