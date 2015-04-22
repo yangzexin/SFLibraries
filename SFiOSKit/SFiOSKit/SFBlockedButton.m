@@ -8,6 +8,8 @@
 
 #import "SFBlockedButton.h"
 
+#import "UIImage+SFAddition.h"
+
 @interface SFBlockedButton ()
 
 @end
@@ -33,6 +35,36 @@
 - (void)initialize
 {
     [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *backgroundImage = nil;
+    UIColor *backgroundImageColor = self.backgroundColor == nil ? [UIColor whiteColor] : self.backgroundColor;
+    
+    if (_round) {
+        if (_roundSize == 0) {
+            self.roundSize = 3;
+        }
+        UIColor *borderColor = backgroundImageColor;
+        if (self.border && self.borderColor) {
+            borderColor = self.borderColor;
+        }
+        backgroundImage = [UIImage sf_roundImageWithOptions:[[[[[SFRoundImageOptions options] setBackgroundColor:backgroundImageColor] setBorderColor:borderColor] setSize:CGSizeMake(20, 20)] setCornerRadius:_roundSize]];
+        backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    } else {
+        backgroundImage = [UIImage sf_imageWithColor:backgroundImageColor size:CGSizeMake(1, 1)];
+    }
+    self.backgroundColor = [UIColor clearColor];
+    [self setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+    
+    if (self.highlightBackgroundColor) {
+        UIImage *highlightBackgroundImage = nil;
+        if (_round) {
+            highlightBackgroundImage = [UIImage sf_roundImageWithOptions:[[[[[SFRoundImageOptions options] setBackgroundColor:self.highlightBackgroundColor] setBorderColor:self.highlightBackgroundColor] setSize:CGSizeMake(20, 20)] setCornerRadius:_roundSize]];
+            highlightBackgroundImage = [highlightBackgroundImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+        } else {
+            highlightBackgroundImage = [UIImage sf_imageWithColor:self.highlightBackgroundColor size:CGSizeMake(1, 1)];
+        }
+        [self setBackgroundImage:highlightBackgroundImage forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)tapped

@@ -12,6 +12,12 @@
 
 @property (nonatomic, copy) void(^tapHandler)();
 
+@property (nonatomic, assign) BOOL round;
+@property (nonatomic, assign) CGFloat roundSize;
+@property (nonatomic, strong) UIColor *highlightBackgroundColor;
+@property (nonatomic, assign) BOOL border;
+@property (nonatomic, strong) UIColor *borderColor;
+
 - (void)initialize;
 
 + (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler;
