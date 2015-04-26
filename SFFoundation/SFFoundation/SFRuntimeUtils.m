@@ -189,6 +189,8 @@ NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstPa
                     break;
                 }
                 case 'c': {//char
+                }
+                case 'B' : {//bool
                     const NSUInteger tmpParamLength = tmpParam.length;
                     if (tmpParamLength != 0) {
                         char c = [tmpParam characterAtIndex:0];
@@ -271,12 +273,6 @@ NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstPa
                 case 'Q' : {//unsigned long long
                     unsigned long long ull = [tmpParam longLongValue];
                     argumentData = &ull;
-                    
-                    break;
-                }
-                case 'B' : {//bool
-                    int b = [tmpParam intValue];
-                    argumentData = &b;
                     
                     break;
                 }
