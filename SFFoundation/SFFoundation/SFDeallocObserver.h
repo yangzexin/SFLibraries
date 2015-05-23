@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SFDeallocObserver : NSObject
+#import "SFDepositable.h"
+
+@interface SFDeallocObserver : NSObject <SFDepositable>
 
 - (void)cancel;
 

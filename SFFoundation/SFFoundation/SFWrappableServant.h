@@ -10,7 +10,7 @@
 
 #import "SFServant.h"
 
-OBJC_EXPORT NSString *const SFWrappableServantlTimeoutErrorDomain;
+OBJC_EXPORT NSString *const SFWrappableServantTimeoutErrorDomain;
 OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 
 @interface SFWrappableServant : SFServant
@@ -28,9 +28,9 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 - (SFWrappableServant *)sync;
 
 /**
- Listen feedback
+ Intercept feedback
  */
-- (SFWrappableServant *)intercept:(void(^)(SFFeedback *callReturn))interceptor;
+- (SFWrappableServant *)intercept:(void(^)(SFFeedback *feedback))interceptor;
 
 /**
  Once limitation

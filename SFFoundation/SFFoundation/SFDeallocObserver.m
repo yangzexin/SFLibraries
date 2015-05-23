@@ -35,4 +35,14 @@
     }
 }
 
+- (BOOL)shouldRemoveDepositable
+{
+    return self.trigger == nil;
+}
+
+- (void)depositableWillRemove
+{
+    [self cancel];
+}
+
 @end

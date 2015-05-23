@@ -31,9 +31,9 @@
 }
 
 - (void)sf_limitTimeWithIdentifier:(NSString *)identifier
-                       interval:(NSTimeInterval)interval
-                        doBlock:(void(^)())doBlock
-                   delayDoBlock:(void(^)())delayDoBlock
+                          interval:(NSTimeInterval)interval
+                           doBlock:(void(^)())doBlock
+                      delayDoBlock:(void(^)())delayDoBlock
 {
     __weak typeof(self) weakSelf = self;
     [self sf_limitTimeWithIdentifier:identifier interval:interval orCondition:nil doBlock:doBlock failBlock:^(NSTimeInterval remainingTime) {
@@ -43,18 +43,18 @@
 }
 
 - (void)sf_limitTimeWithIdentifier:(NSString *)identifier
-                       interval:(NSTimeInterval)interval
-                    orCondition:(BOOL(^)())orCondition
-                        doBlock:(void(^)())doBlock
+                          interval:(NSTimeInterval)interval
+                       orCondition:(BOOL(^)())orCondition
+                           doBlock:(void(^)())doBlock
 {
     [self sf_limitTimeWithIdentifier:identifier interval:interval orCondition:orCondition doBlock:doBlock failBlock:nil];
 }
 
 - (void)sf_limitTimeWithIdentifier:(NSString *)identifier
-                       interval:(NSTimeInterval)interval
-                    orCondition:(BOOL(^)())orCondition
-                        doBlock:(void(^)())doBlock
-                      failBlock:(void(^)(NSTimeInterval remainingTime))failBlock
+                          interval:(NSTimeInterval)interval
+                       orCondition:(BOOL(^)())orCondition
+                           doBlock:(void(^)())doBlock
+                         failBlock:(void(^)(NSTimeInterval remainingTime))failBlock
 {
     BOOL executeNow = NO;
     if (orCondition) {

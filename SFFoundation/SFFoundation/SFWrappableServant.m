@@ -12,7 +12,7 @@
 
 #import "SFServant+Private.h"
 
-NSString *const SFWrappableServantlTimeoutErrorDomain = @"SFWrappableServantlTimeoutErrorDomain";
+NSString *const SFWrappableServantTimeoutErrorDomain = @"SFWrappableServantTimeoutErrorDomain";
 NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @interface SFWrappableServant ()
@@ -66,7 +66,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 - (void)didStart
 {
-    NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread");
+    NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     
@@ -216,7 +216,9 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 - (NSError *)_errorForTimeout
 {
-    return [NSError errorWithDomain:SFWrappableServantlTimeoutErrorDomain code:SFWrappableServantTimeoutErrorCode userInfo:@{NSLocalizedDescriptionKey : @"Servant Time out"}];
+    return [NSError errorWithDomain:SFWrappableServantTimeoutErrorDomain
+                               code:SFWrappableServantTimeoutErrorCode
+                           userInfo:@{NSLocalizedDescriptionKey : @"Servant Time out"}];
 }
 
 @end
@@ -302,27 +304,25 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     NSArray *allIdentifiers = [self.keyIdentifierValueServant allKeys];
     self.processingIdentifiers = [NSMutableArray arrayWithArray:allIdentifiers];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __weak typeof(self) weakSelf = self;
-        void(^sendFeedback)(NSString *identifier) = ^(NSString *identifier){
-            __strong typeof(weakSelf) self = weakSelf;
-            @synchronized(self.processingIdentifiers) {
-                [self.processingIdentifiers removeObject:identifier];
-                if (self.processingIdentifiers.count == 0) {
-                    [self sendFeedback:[SFFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
-                }
+    __weak typeof(self) weakSelf = self;
+    void(^sendFeedback)(NSString *identifier) = ^(NSString *identifier){
+        __strong typeof(weakSelf) self = weakSelf;
+        @synchronized(self.processingIdentifiers) {
+            [self.processingIdentifiers removeObject:identifier];
+            if (self.processingIdentifiers.count == 0) {
+                [self sendFeedback:[SFFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
             }
-        };
-        
-        for (NSString *identifier in allIdentifiers) {
-            id<SFServant> servant = [self.keyIdentifierValueServant objectForKey:identifier];
-            [servant goWithCallback:^(SFFeedback *feedback) {
-                __strong typeof(weakSelf) self = weakSelf;
-                [self.keyIdentifierValueFeedback setObject:feedback == nil ? [NSNull null] : feedback forKey:identifier];
-                sendFeedback(identifier);
-            }];
         }
-    });
+    };
+    
+    for (NSString *identifier in allIdentifiers) {
+        id<SFServant> servant = [self.keyIdentifierValueServant objectForKey:identifier];
+        [servant goWithCallback:^(SFFeedback *feedback) {
+            __strong typeof(weakSelf) self = weakSelf;
+            [self.keyIdentifierValueFeedback setObject:feedback == nil ? [NSNull null] : feedback forKey:identifier];
+            sendFeedback(identifier);
+        }];
+    }
 }
 
 @end

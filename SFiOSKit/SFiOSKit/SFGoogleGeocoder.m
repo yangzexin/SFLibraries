@@ -1,9 +1,9 @@
 //
 //  GoogleGecoder.m
-//  TestGeocoder
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-9-27.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 yangzexin. All rights reserved.
 //
 
 #import "SFGoogleGeocoder.h"

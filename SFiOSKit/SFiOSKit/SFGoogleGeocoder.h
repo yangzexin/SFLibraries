@@ -1,9 +1,9 @@
 //
 //  GoogleGeocoderProvider.h
-//  MovieSDKDemo
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-4-27.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 yangzexin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

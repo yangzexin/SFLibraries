@@ -1,8 +1,8 @@
 //
 //  SFDict2Object.h
-//  SimpleFrameworkTest
+//  SFFoundation
 //
-//  Created by RMBP on 8/28/13.
+//  Created by yangzexin on 8/28/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 
