@@ -1,6 +1,6 @@
 //
-//  SFDragShowDetector.h
-//  SFiOSKit
+//  MMDragShowDetector.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/21/13.
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.

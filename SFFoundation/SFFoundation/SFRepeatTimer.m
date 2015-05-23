@@ -1,5 +1,5 @@
 //
-//  SFTimer.m
+//  MMTimer.m
 //  
 //
 //  Created by yangzexin on 10/18/13.

@@ -1,6 +1,6 @@
 //
-//  SFToast.m
-//  SFiOSKit
+//  MMToast.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/14/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

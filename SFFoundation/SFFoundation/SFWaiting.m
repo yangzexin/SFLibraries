@@ -1,5 +1,5 @@
 //
-//  SFWaiting.m
+//  MMWaiting.m
 //  
 //
 //  Created by yangzexin on 8/27/13.

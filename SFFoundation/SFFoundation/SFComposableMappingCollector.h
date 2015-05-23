@@ -1,6 +1,6 @@
 //
-//  SFComposableMappingCollector.h
-//  SFFoundation
+//  MMComposableMappingCollector.h
+//  MMFoundation
 //
 //  Created by yangzexin on 11/22/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

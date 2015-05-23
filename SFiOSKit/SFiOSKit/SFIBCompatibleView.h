@@ -1,6 +1,6 @@
 //
-//  SFIBView.h
-//  SFiOSKit
+//  MMIBView.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/19/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  SFVerticalLayout.m
-//  SFiOSKit
+//  MMVerticalLayout.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 8/20/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

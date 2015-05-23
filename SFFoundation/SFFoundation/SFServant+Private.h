@@ -1,6 +1,6 @@
 //
-//  SFServant+Private.h
-//  SFFoundation
+//  MMServant+Private.h
+//  MMFoundation
 //
 //  Created by yangzexin on 11/2/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

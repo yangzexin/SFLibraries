@@ -1,6 +1,6 @@
 //
 //  SSFObjectMappingCollector.h
-//  SFiOSKit
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/22/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

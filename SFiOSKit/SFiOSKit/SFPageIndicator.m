@@ -1,6 +1,6 @@
 //
-//  SFPageIndicator.m
-//  SFiOSKit
+//  MMPageIndicator.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 1/9/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

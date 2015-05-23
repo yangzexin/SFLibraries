@@ -1,6 +1,6 @@
 //
-//  SFCacheControl.m
-//  SFFoundation
+//  MMCacheControl.m
+//  MMFoundation
 //
 //  Created by yangzexin on 2/28/15.
 //  Copyright (c) 2015 yangzexin. All rights reserved.

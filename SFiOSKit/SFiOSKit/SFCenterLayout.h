@@ -1,6 +1,6 @@
 //
-//  SFCenterLayout.h
-//  SFiOSKit
+//  MMCenterLayout.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 5/17/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

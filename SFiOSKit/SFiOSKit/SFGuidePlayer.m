@@ -1,6 +1,6 @@
 //
-//  SFGuidePlayer.m
-//  SFiOSKit
+//  MMGuidePlayer.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 1/8/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

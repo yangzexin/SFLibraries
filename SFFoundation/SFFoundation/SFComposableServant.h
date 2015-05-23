@@ -1,6 +1,6 @@
 //
-//  SFComposableServant.h
-//  SFFoundation
+//  MMComposableServant.h
+//  MMFoundation
 //
 //  Created by yangzexin on 10/21/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

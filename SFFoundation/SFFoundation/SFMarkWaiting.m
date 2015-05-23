@@ -1,5 +1,5 @@
 //
-//  SFMarkWaiter.m
+//  MMMarkWaiter.m
 //  
 //
 //  Created by yangzexin on 9/22/13.

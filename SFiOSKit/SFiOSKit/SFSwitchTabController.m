@@ -1,5 +1,5 @@
 //
-//  SFSwitchTabController.m
+//  MMSwitchTabController.m
 //  esl
 //
 //  Created by yangzexin on 5/20/14.

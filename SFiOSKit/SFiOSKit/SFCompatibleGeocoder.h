@@ -1,5 +1,5 @@
 //
-//  SFCompatibleGeocoder.h
+//  MMCompatibleGeocoder.h
 //  Htinns
 //
 //  Created by yangzexin on 10/9/13.

@@ -1,6 +1,6 @@
 //
-//  SFAsyncServant.m
-//  SFFoundation
+//  MMAsyncServant.m
+//  MMFoundation
 //
 //  Created by yangzexin on 11/5/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

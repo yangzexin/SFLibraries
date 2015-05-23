@@ -1,6 +1,6 @@
 //
-//  SFPropertyObserving.h
-//  SFFoundation
+//  MMPropertyObserving.h
+//  MMFoundation
 //
 //  Created by yangzexin on 5/18/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

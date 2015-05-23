@@ -1,6 +1,6 @@
 //
-//  SFCollapsableLabel.h
-//  SFiOSKit
+//  MMCollapsableLabel.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 2/27/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

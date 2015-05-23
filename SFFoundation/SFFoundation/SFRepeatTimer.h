@@ -1,5 +1,5 @@
 //
-//  SFTimer.h
+//  MMTimer.h
 //  
 //
 //  Created by yangzexin on 10/18/13.

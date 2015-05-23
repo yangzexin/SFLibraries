@@ -1,5 +1,5 @@
 //
-//  SFObject2Dict.m
+//  MMObject2Dict.m
 //  SimpleFramework
 //
 //  Created by yangzexin on 10/27/13.

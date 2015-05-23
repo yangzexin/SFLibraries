@@ -1,6 +1,6 @@
 //
-//  SFGestureBackDetector.m
-//  SFiOSKit
+//  MMGestureBackDetector.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 2/9/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

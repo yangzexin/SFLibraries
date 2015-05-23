@@ -1,6 +1,6 @@
 //
 //  NSObject+SFServantSupport.m
-//  SFFoundation
+//  MMFoundation
 //
 //  Created by yangzexin on 4/11/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

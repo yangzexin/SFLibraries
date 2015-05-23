@@ -1,5 +1,5 @@
 //
-//  SFObjectMapping.h
+//  MMObjectMapping.h
 //  SimpleFramework
 //
 //  Created by RMBP on 8/29/13.

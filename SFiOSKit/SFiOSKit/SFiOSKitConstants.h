@@ -1,6 +1,6 @@
 //
-//  SFiOSKitConstants.h
-//  SFiOSKit
+//  MMiOSKitConstants.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 12/9/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  SFDeallocObserver.h
-//  SFFoundation
+//  MMDeallocObserver.h
+//  MMFoundation
 //
 //  Created by yangzexin on 5/24/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

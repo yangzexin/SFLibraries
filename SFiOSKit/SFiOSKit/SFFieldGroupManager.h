@@ -1,6 +1,6 @@
 //
-//  SFFieldGroupManager.h
-//  SFiOSKit
+//  MMFieldGroupManager.h
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/6/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
@@ -14,17 +14,18 @@
 @property (nonatomic, assign) BOOL setReturnKeyAutomatically;
 @property (nonatomic, assign) id<UITextFieldDelegate> textFieldDelegate;
 
-@property (nonatomic, copy) void(^fieldPositor)(id field);
-@property (nonatomic, copy) void(^doneHandler)();
+@property (nonatomic, assign) UIReturnKeyType doneReturnKeyTyoe;
+
+@property (nonatomic, copy) void(^whenFieldBecameFirstResponder)(id field);
+@property (nonatomic, copy) void(^whenFieldGroupReturnDone)();
 
 - (void)resignFirstResponder;
 - (void)becomeFirstResponder;
 - (BOOL)isFirstResponder;
 
-- (void)addTextField:(UITextField *)textField;
 - (void)addTextField:(UITextField *)textField setDelegate:(BOOL)setDelegate;
 - (void)addTextView:(UITextView *)textView;
-- (void)removeItem:(id)item;
+- (void)removeField:(id)field;
 
 - (void)fieldWillBeginEditing:(id)field;
 - (void)fieldDidEndEditing:(id)field;

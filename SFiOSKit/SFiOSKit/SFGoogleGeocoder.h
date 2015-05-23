@@ -1,6 +1,6 @@
 //
 //  GoogleGeocoderProvider.h
-//  SFiOSKit
+//  MMiOSKit
 //
 //  Created by yangzexin on 12-4-27.
 //  Copyright (c) 2012年 yangzexin. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UIColor+SFAddition.m
-//  SFiOSKit
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/16/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

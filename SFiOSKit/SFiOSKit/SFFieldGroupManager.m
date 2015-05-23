@@ -1,6 +1,6 @@
 //
-//  SFFieldGroupManager.m
-//  SFiOSKit
+//  MMFieldGroupManager.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/6/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
@@ -14,13 +14,7 @@
 
 @property (nonatomic, strong) NSMutableArray *addedFields;
 @property (nonatomic, assign) BOOL animating;
-@property (nonatomic, assign) CGFloat keyboardHeight;
-@property (nonatomic, strong) NSValue *keyboardFrame;
-@property (nonatomic, strong) NSNumber *animationCurve;
-@property (nonatomic, strong) NSNumber *animationDuration;
 @property (nonatomic, strong) SFWaiting *waitingForNotAnimating;
-@property (nonatomic, assign) CGRect tmpFrame;
-@property (nonatomic, assign) BOOL tmpFrameDirty;
 @end
 
 @implementation SFFieldGroupManager
@@ -30,6 +24,8 @@
     self = [super init];
     
     _addedFields = [NSMutableArray array];
+    
+    self.doneReturnKeyTyoe = UIReturnKeyDone;
 
     __weak typeof(self) weakSelf = self;
     self.waitingForNotAnimating = [SFWaiting waitWithCondition:^BOOL{
@@ -63,11 +59,6 @@
 {
     [self removeField:textView];
     [self.addedFields addObject:textView];
-}
-
-- (void)removeItem:(id)item
-{
-    [self removeField:item];
 }
 
 - (NSArray *)fields
@@ -106,14 +97,14 @@
 {
     self.animating = YES;
     [UIView animateWithDuration:.25f animations:^{
-        if (self.fieldPositor) {
-            self.fieldPositor(field);
+        if (self.whenFieldBecameFirstResponder) {
+            self.whenFieldBecameFirstResponder(field);
         }
         if (self.setReturnKeyAutomatically && [field isKindOfClass:[UITextField class]]) {
             NSUInteger index = [self.fields indexOfObject:field];
             if (index != NSNotFound) {
                 UITextField *textField = field;
-                textField.returnKeyType = index == self.fields.count - 1 ? UIReturnKeyDone : UIReturnKeyNext;
+                textField.returnKeyType = index == self.fields.count - 1 ? self.doneReturnKeyTyoe : UIReturnKeyNext;
             }
         }
     } completion:^(BOOL finished) {
@@ -123,24 +114,13 @@
 
 - (void)fieldDidEndEditing:(id)field
 {
-    if ([field isKindOfClass:[UITextField class]]) {
-        NSUInteger index = [self.fields indexOfObject:field];
-        if (index != NSNotFound) {
-            if (index == self.fields.count - 1) {
-                if (_doneHandler) {
-                    _doneHandler();
-                }
-            }
-        }
-    }
-    
     __weak typeof(self) weakSelf = self;
     [self.waitingForNotAnimating wait:^{
         __strong typeof(weakSelf) self = weakSelf;
         if (![self isFirstResponder]) {
             [UIView animateWithDuration:0.25f animations:^{
-                if (self.fieldPositor) {
-                    self.fieldPositor(nil);
+                if (self.whenFieldBecameFirstResponder) {
+                    self.whenFieldBecameFirstResponder(nil);
                 }
             }];
         }
@@ -154,6 +134,9 @@
         NSInteger nextTextFieldIndex = ++textFieldIndex;
         if (nextTextFieldIndex == [self.addedFields count]) {
             [(UIResponder *)field resignFirstResponder];
+            if (self.whenFieldGroupReturnDone) {
+                self.whenFieldGroupReturnDone();
+            }
         } else {
             UITextField *nextField = [self.addedFields objectAtIndex:nextTextFieldIndex];
             [nextField becomeFirstResponder];

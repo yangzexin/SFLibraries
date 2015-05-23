@@ -1,6 +1,6 @@
 //
-//  SFButtonCenterLayouter.m
-//  SFiOSKit
+//  MMButtonCenterLayouter.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 12/22/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

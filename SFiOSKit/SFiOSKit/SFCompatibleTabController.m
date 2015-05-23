@@ -1,5 +1,5 @@
 //
-//  SFCompatibleTabController.m
+//  MMCompatibleTabController.m
 //  SimpleFramework
 //
 //  Created by yangzexin on 10/7/13.

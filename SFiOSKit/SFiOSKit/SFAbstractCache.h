@@ -1,6 +1,6 @@
 //
-//  SFCache.h
-//  SFFoundation
+//  MMCache.h
+//  MMFoundation
 //
 //  Created by yangzexin on 6/9/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

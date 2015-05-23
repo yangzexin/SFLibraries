@@ -1,6 +1,6 @@
 //
 //  NSString+SFiOSAddition.h
-//  SFiOSKit
+//  MMiOSKit
 //
 //  Created by yangzexin on 6/7/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

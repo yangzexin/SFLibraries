@@ -1,5 +1,5 @@
 //
-//  SFWaiting.h
+//  MMWaiting.h
 //  
 //
 //  Created by yangzexin on 8/27/13.

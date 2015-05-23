@@ -1,6 +1,6 @@
 //
-//  SFCardLayout.m
-//  SFiOSKit
+//  MMCardLayout.m
+//  MMiOSKit
 //
 //  Created by yangzexin on 11/18/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
