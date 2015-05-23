@@ -19,16 +19,16 @@
 		3E1EA5BB1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA5BA1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m */; };
 		3E415C011856DF5600335EFE /* SFObject2Dict.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E415C001856DF5600335EFE /* SFObject2Dict.m */; };
 		3E4627941867DF8C009092B0 /* SFCountdownControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4627931867DF8C009092B0 /* SFCountdownControl.m */; };
-		3E46ADAF1A03823B00578334 /* SFComposableCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA11A03823B00578334 /* SFComposableCall.m */; };
-		3E46ADB01A03823B00578334 /* SFCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA31A03823B00578334 /* SFCall.m */; };
+		3E46ADAF1A03823B00578334 /* SFComposableServant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA11A03823B00578334 /* SFComposableServant.m */; };
+		3E46ADB01A03823B00578334 /* SFServant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA31A03823B00578334 /* SFServant.m */; };
 		3E46ADB41A03823B00578334 /* SFNullParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADAC1A03823B00578334 /* SFNullParameter.m */; };
 		3E46ADB51A03823B00578334 /* SFUpdatableParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADAE1A03823B00578334 /* SFUpdatableParameter.m */; };
-		3E46ADBB1A03830D00578334 /* NSObject+SFCallSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADBA1A03830D00578334 /* NSObject+SFCallSupport.m */; };
+		3E46ADBB1A03830D00578334 /* NSObject+SFServantSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADBA1A03830D00578334 /* NSObject+SFServantSupport.m */; };
 		3E473BA2193057650022BF23 /* SFCancellable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E473BA1193057650022BF23 /* SFCancellable.m */; };
 		3E473BA5193058F10022BF23 /* SFResourceDisposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E473BA4193058F10022BF23 /* SFResourceDisposer.m */; };
 		3E8795DF1A086AE80063DEEC /* NSValue+SFBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */; };
-		3E87965F1A09B1F50063DEEC /* SFAsyncCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E87965E1A09B1F50063DEEC /* SFAsyncCall.m */; };
-		3E938F6E1B100BCA00D24E78 /* SFWrappedCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E938F6D1B100BCA00D24E78 /* SFWrappedCall.m */; };
+		3E87965F1A09B1F50063DEEC /* SFAsyncServant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E87965E1A09B1F50063DEEC /* SFAsyncServant.m */; };
+		3E938F6E1B100BCA00D24E78 /* SFWrappableServant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E938F6D1B100BCA00D24E78 /* SFWrappableServant.m */; };
 		3E97D93118F3A9A400D7E0A8 /* NSOperation+SFObjectRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E97D93018F3A9A400D7E0A8 /* NSOperation+SFObjectRepository.m */; };
 		3EBA2281182B39AB003B768C /* NSDictionary+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */; };
 		3EC67D651828D10000B6190E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC67D641828D10000B6190E /* Foundation.framework */; };
@@ -94,27 +94,27 @@
 		3E415C001856DF5600335EFE /* SFObject2Dict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFObject2Dict.m; sourceTree = "<group>"; };
 		3E4627921867DF8C009092B0 /* SFCountdownControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCountdownControl.h; sourceTree = "<group>"; };
 		3E4627931867DF8C009092B0 /* SFCountdownControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCountdownControl.m; sourceTree = "<group>"; };
-		3E46ADA01A03823B00578334 /* SFComposableCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFComposableCall.h; sourceTree = "<group>"; };
-		3E46ADA11A03823B00578334 /* SFComposableCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFComposableCall.m; sourceTree = "<group>"; };
-		3E46ADA21A03823B00578334 /* SFCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCall.h; sourceTree = "<group>"; };
-		3E46ADA31A03823B00578334 /* SFCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCall.m; sourceTree = "<group>"; };
+		3E46ADA01A03823B00578334 /* SFComposableServant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFComposableServant.h; sourceTree = "<group>"; };
+		3E46ADA11A03823B00578334 /* SFComposableServant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFComposableServant.m; sourceTree = "<group>"; };
+		3E46ADA21A03823B00578334 /* SFServant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFServant.h; sourceTree = "<group>"; };
+		3E46ADA31A03823B00578334 /* SFServant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFServant.m; sourceTree = "<group>"; };
 		3E46ADAB1A03823B00578334 /* SFNullParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFNullParameter.h; sourceTree = "<group>"; };
 		3E46ADAC1A03823B00578334 /* SFNullParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFNullParameter.m; sourceTree = "<group>"; };
 		3E46ADAD1A03823B00578334 /* SFUpdatableParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUpdatableParameter.h; sourceTree = "<group>"; };
 		3E46ADAE1A03823B00578334 /* SFUpdatableParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFUpdatableParameter.m; sourceTree = "<group>"; };
-		3E46ADB91A03830D00578334 /* NSObject+SFCallSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFCallSupport.h"; sourceTree = "<group>"; };
-		3E46ADBA1A03830D00578334 /* NSObject+SFCallSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFCallSupport.m"; sourceTree = "<group>"; };
+		3E46ADB91A03830D00578334 /* NSObject+SFServantSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFServantSupport.h"; sourceTree = "<group>"; };
+		3E46ADBA1A03830D00578334 /* NSObject+SFServantSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFServantSupport.m"; sourceTree = "<group>"; };
 		3E473BA0193057650022BF23 /* SFCancellable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCancellable.h; sourceTree = "<group>"; };
 		3E473BA1193057650022BF23 /* SFCancellable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCancellable.m; sourceTree = "<group>"; };
 		3E473BA3193058F10022BF23 /* SFResourceDisposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFResourceDisposer.h; sourceTree = "<group>"; };
 		3E473BA4193058F10022BF23 /* SFResourceDisposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFResourceDisposer.m; sourceTree = "<group>"; };
 		3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+SFBlock.h"; sourceTree = "<group>"; };
 		3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+SFBlock.m"; sourceTree = "<group>"; };
-		3E87965D1A09B1F50063DEEC /* SFAsyncCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAsyncCall.h; sourceTree = "<group>"; };
-		3E87965E1A09B1F50063DEEC /* SFAsyncCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAsyncCall.m; sourceTree = "<group>"; };
-		3E8BEB1A1A067B4B001ACDC9 /* SFCall+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFCall+Private.h"; sourceTree = "<group>"; };
-		3E938F6C1B100BCA00D24E78 /* SFWrappedCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFWrappedCall.h; sourceTree = "<group>"; };
-		3E938F6D1B100BCA00D24E78 /* SFWrappedCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFWrappedCall.m; sourceTree = "<group>"; };
+		3E87965D1A09B1F50063DEEC /* SFAsyncServant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAsyncServant.h; sourceTree = "<group>"; };
+		3E87965E1A09B1F50063DEEC /* SFAsyncServant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAsyncServant.m; sourceTree = "<group>"; };
+		3E8BEB1A1A067B4B001ACDC9 /* SFServant+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFServant+Private.h"; sourceTree = "<group>"; };
+		3E938F6C1B100BCA00D24E78 /* SFWrappableServant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFWrappableServant.h; sourceTree = "<group>"; };
+		3E938F6D1B100BCA00D24E78 /* SFWrappableServant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFWrappableServant.m; sourceTree = "<group>"; };
 		3E97D92F18F3A9A400D7E0A8 /* NSOperation+SFObjectRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOperation+SFObjectRepository.h"; sourceTree = "<group>"; };
 		3E97D93018F3A9A400D7E0A8 /* NSOperation+SFObjectRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOperation+SFObjectRepository.m"; sourceTree = "<group>"; };
 		3EBA227F182B39AB003B768C /* NSDictionary+SFAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SFAddition.h"; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 			name = PropertyObserver;
 			sourceTree = "<group>";
 		};
-		3E2EC0121A8D933200A81F76 /* ObjectRepository */ = {
+		3E2EC0121A8D933200A81F76 /* Depositable */ = {
 			isa = PBXGroup;
 			children = (
 				3ECF2F6C19888199000E75C0 /* NSObject+SFObjectRepository.h */,
@@ -240,7 +240,7 @@
 				3EF61F0E1828D2520057A6FE /* SFObjectRepository.h */,
 				3EF61F0F1828D2520057A6FE /* SFObjectRepository.m */,
 			);
-			name = ObjectRepository;
+			name = Depositable;
 			sourceTree = "<group>";
 		};
 		3E415BFE1856DF4700335EFE /* object2dict */ = {
@@ -278,7 +278,8 @@
 		3E415C111856EA5400335EFE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3E46AD9F1A03822C00578334 /* Call */,
+				3E2EC0121A8D933200A81F76 /* Depositable */,
+				3E46AD9F1A03822C00578334 /* Servant */,
 				3E105F151856DEEC007326BE /* dict2object */,
 				3E415C091856E0CD00335EFE /* EventControl */,
 				3E415BFE1856DF4700335EFE /* object2dict */,
@@ -286,26 +287,26 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		3E46AD9F1A03822C00578334 /* Call */ = {
+		3E46AD9F1A03822C00578334 /* Servant */ = {
 			isa = PBXGroup;
 			children = (
-				3E46ADB91A03830D00578334 /* NSObject+SFCallSupport.h */,
-				3E46ADBA1A03830D00578334 /* NSObject+SFCallSupport.m */,
-				3E87965D1A09B1F50063DEEC /* SFAsyncCall.h */,
-				3E87965E1A09B1F50063DEEC /* SFAsyncCall.m */,
-				3E46ADA01A03823B00578334 /* SFComposableCall.h */,
-				3E46ADA11A03823B00578334 /* SFComposableCall.m */,
-				3E46ADA21A03823B00578334 /* SFCall.h */,
-				3E46ADA31A03823B00578334 /* SFCall.m */,
-				3E8BEB1A1A067B4B001ACDC9 /* SFCall+Private.h */,
+				3E46ADB91A03830D00578334 /* NSObject+SFServantSupport.h */,
+				3E46ADBA1A03830D00578334 /* NSObject+SFServantSupport.m */,
+				3E87965D1A09B1F50063DEEC /* SFAsyncServant.h */,
+				3E87965E1A09B1F50063DEEC /* SFAsyncServant.m */,
+				3E46ADA01A03823B00578334 /* SFComposableServant.h */,
+				3E46ADA11A03823B00578334 /* SFComposableServant.m */,
+				3E46ADA21A03823B00578334 /* SFServant.h */,
+				3E46ADA31A03823B00578334 /* SFServant.m */,
+				3E8BEB1A1A067B4B001ACDC9 /* SFServant+Private.h */,
 				3E46ADAB1A03823B00578334 /* SFNullParameter.h */,
 				3E46ADAC1A03823B00578334 /* SFNullParameter.m */,
 				3E46ADAD1A03823B00578334 /* SFUpdatableParameter.h */,
 				3E46ADAE1A03823B00578334 /* SFUpdatableParameter.m */,
-				3E938F6C1B100BCA00D24E78 /* SFWrappedCall.h */,
-				3E938F6D1B100BCA00D24E78 /* SFWrappedCall.m */,
+				3E938F6C1B100BCA00D24E78 /* SFWrappableServant.h */,
+				3E938F6D1B100BCA00D24E78 /* SFWrappableServant.m */,
 			);
-			name = Call;
+			name = Servant;
 			sourceTree = "<group>";
 		};
 		3EC67D581828D10000B6190E = {
@@ -337,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				3EF61EEA1828D20E0057A6FE /* Extension */,
-				3E2EC0121A8D933200A81F76 /* ObjectRepository */,
 				3E2EC0111A8D8B0E00A81F76 /* PropertyObserver */,
 				3E2EC0101A8D8AF800A81F76 /* runtime */,
 				3E415C111856EA5400335EFE /* Utils */,
@@ -437,13 +437,13 @@
 			files = (
 				3EF61F141828D2520057A6FE /* SFMarkWaiting.m in Sources */,
 				3E473BA2193057650022BF23 /* SFCancellable.m in Sources */,
-				3E46ADBB1A03830D00578334 /* NSObject+SFCallSupport.m in Sources */,
-				3E46ADAF1A03823B00578334 /* SFComposableCall.m in Sources */,
+				3E46ADBB1A03830D00578334 /* NSObject+SFServantSupport.m in Sources */,
+				3E46ADAF1A03823B00578334 /* SFComposableServant.m in Sources */,
 				3E0ABD8919290E39000E9242 /* SFPropertyObserveContext.m in Sources */,
 				3EFF91481990DF97007A62ED /* SFCombinationEnd.m in Sources */,
 				3EBA2281182B39AB003B768C /* NSDictionary+SFAddition.m in Sources */,
 				3E105F241856DF07007326BE /* SFDict2ObjectEnhanced.m in Sources */,
-				3E938F6E1B100BCA00D24E78 /* SFWrappedCall.m in Sources */,
+				3E938F6E1B100BCA00D24E78 /* SFWrappableServant.m in Sources */,
 				3E46ADB51A03823B00578334 /* SFUpdatableParameter.m in Sources */,
 				3E105F231856DF07007326BE /* SFDict2Object.m in Sources */,
 				3ECF2F7D1988845C000E75C0 /* NSObject+SFTimeLimitation.m in Sources */,
@@ -467,12 +467,12 @@
 				3EF61F1A1828D27A0057A6FE /* SFDelayControl.m in Sources */,
 				3EF61F131828D2520057A6FE /* SFWaiting.m in Sources */,
 				3EF304B9191922C60070B9BC /* SFTimeLimitation.m in Sources */,
-				3E87965F1A09B1F50063DEEC /* SFAsyncCall.m in Sources */,
+				3E87965F1A09B1F50063DEEC /* SFAsyncServant.m in Sources */,
 				3E97D93118F3A9A400D7E0A8 /* NSOperation+SFObjectRepository.m in Sources */,
 				3EF61EFB1828D21D0057A6FE /* NSDate+SFAddition.m in Sources */,
 				3EF61F121828D2520057A6FE /* SFEventLoop.m in Sources */,
 				3E415C011856DF5600335EFE /* SFObject2Dict.m in Sources */,
-				3E46ADB01A03823B00578334 /* SFCall.m in Sources */,
+				3E46ADB01A03823B00578334 /* SFServant.m in Sources */,
 				3E0B788518F67A3900593B64 /* NSValue+SFWeakObject.m in Sources */,
 				3ECF2F6E19888199000E75C0 /* NSObject+SFObjectRepository.m in Sources */,
 				3E105F271856DF07007326BE /* SFObjectMappingCollector.m in Sources */,

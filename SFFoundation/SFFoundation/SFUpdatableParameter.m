@@ -1,5 +1,5 @@
 //
-//  SFUpdatableParamValue.m
+//  SFUpdatableParameter.m
 //  SFFoundation
 //
 //  Created by yangzexin on 10/21/14.
