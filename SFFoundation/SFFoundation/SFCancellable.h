@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFCancellable : NSObject <SFRepositionSupportedObject>
+@interface SFCancellable : NSObject <SFDepositable>
 
 + (instancetype)cancellableWithWhenCancel:(void(^)())block;
 

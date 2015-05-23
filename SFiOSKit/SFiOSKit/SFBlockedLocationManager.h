@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import "SFLocationManager.h"
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFBlockedLocationManager : NSObject <SFRepositionSupportedObject, SFLocationManager>
+@interface SFBlockedLocationManager : NSObject <SFDepositable, SFLocationManager>
 
 @property (nonatomic, strong) id<SFLocationManager> locationManager;
 @property (nonatomic, copy) void(^completion)(CLLocation *, NSError *);

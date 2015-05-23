@@ -8,7 +8,7 @@
 
 #import "NSObject+SFObservation.h"
 
-#import "NSObject+SFObjectRepository.h"
+#import "NSObject+SFDepositable.h"
 #import "NSObject+SFRuntime.h"
 #import "NSObject+SFObjectAssociation.h"
 #import "SFPropertyObserveContext.h"
@@ -27,7 +27,7 @@
                 observing.changeBlock(value);
             }
         }];
-        [self sf_addRepositionSupportedObject:context];
+        [self sf_deposit:context];
         __weak typeof(context) weakContext = context;
         __weak typeof(self) weakSelf = self;
         [observing setObserveStarted:^{
@@ -35,10 +35,10 @@
         }];
         [observing setCancelHandler:^{
             [weakContext cancelObserve];
-            [weakSelf sf_removeRepositionSupportedObject:weakContext];
+            [weakSelf sf_removeDepositable:weakContext];
         }];
         __weak typeof(observing) weakObserving = observing;
-        [target sf_addResourceDisposerWithBlock:^{
+        [target sf_addDeallocObserver:^{
             [weakObserving cancel];
         }];
     }

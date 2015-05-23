@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFPropertyObserveContext : NSObject <SFRepositionSupportedObject>
+@interface SFPropertyObserveContext : NSObject <SFDepositable>
 
 - (void)startObserve;
 - (void)cancelObserve;

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFDelayControl : NSObject <SFRepositionSupportedObject>
+@interface SFDelayControl : NSObject <SFDepositable>
 
 - (instancetype)initWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion;
 - (instancetype)start;

@@ -11,7 +11,7 @@
 #import "NSDictionary+SFAddition.h"
 #import "SFObject2Dict.h"
 #import "SFDict2Object.h"
-#import "SFBuildableMappingCollector.h"
+#import "SFComposableMappingCollector.h"
 
 @implementation NSObject (SFSerialization)
 
@@ -54,7 +54,7 @@
         return nil;
     }
     
-    SFBuildableMappingCollector *mappingStringCollector = [SFBuildableMappingCollector collectorWithMapping:mapping];
+    SFComposableMappingCollector *mappingStringCollector = [SFComposableMappingCollector collectorWithMapping:mapping];
     if (propertyProcessors) {
         [mappingStringCollector addPropertyProcessors:propertyProcessors];
     }

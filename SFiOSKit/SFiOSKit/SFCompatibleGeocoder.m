@@ -92,12 +92,12 @@
 }
 
 #pragma mark -
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
     return _finished && self.geocoding;
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
     [self cancel];
 }

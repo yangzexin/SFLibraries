@@ -98,12 +98,12 @@
     }
 }
 
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
-    return _finished && ![self isExecuting];
+    return self.finished && ![self isExecuting];
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
     [self cancel];
 }

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFCountdownControl : NSObject <SFRepositionSupportedObject>
+@interface SFCountdownControl : NSObject <SFDepositable>
 
 @property (nonatomic, assign) NSTimeInterval deltaTimeInterval;
 

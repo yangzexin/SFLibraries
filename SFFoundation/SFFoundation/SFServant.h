@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
 @protocol SFServant;
 
@@ -26,7 +26,7 @@
 
 typedef void(^SFServantCallback)(SFFeedback *callReturn);
 
-@protocol SFServant <SFRepositionSupportedObject>
+@protocol SFServant <SFDepositable>
 
 - (id<SFServant>)goWithCallback:(SFServantCallback)completion;
 - (BOOL)isExecuting;

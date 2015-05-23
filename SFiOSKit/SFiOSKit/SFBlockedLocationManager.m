@@ -64,12 +64,12 @@
     [self _finishWithLocation:nil error:error];
 }
 
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
     return _finished && !_executing;
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
     [self cancel];
 }

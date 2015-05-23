@@ -1,5 +1,5 @@
 //
-//  SFResourceDisposer.h
+//  SFDeallocObserver.h
 //  SFFoundation
 //
 //  Created by yangzexin on 5/24/14.
@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SFResourceDisposer : NSObject
-
-+ (instancetype)resourceDisposerWithBlock:(void(^)())block;
+@interface SFDeallocObserver : NSObject
 
 - (void)cancel;
 

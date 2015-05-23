@@ -85,12 +85,12 @@
 }
 
 #pragma mark - SFRepositionSupportedObject
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
     return self.geocoding == NO;
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
     [self cancel];
 }

@@ -9,8 +9,10 @@
 #import "NSObject+SFRuntime.h"
 
 #import "SFObjcProperty.h"
+#import "SFDeallocObserver+Private.h"
+#import "NSObject+SFObjectAssociation.h"
 
-static const char *SFResourceDisposers = "SFResourceDisposers";
+static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObserver";
 
 @implementation NSObject (SFRuntime)
 
@@ -60,52 +62,72 @@ static const char *SFResourceDisposers = "SFResourceDisposers";
     }
 }
 
-- (NSMutableArray *)_resourceDisposers
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger
 {
-    NSMutableArray *resourceDisposers = objc_getAssociatedObject(self, SFResourceDisposers);
+    return [self sf_addDeallocObserver:trigger identifier:nil];
+}
+
+- (void)sf_removeDeallocObserver:(SFDeallocObserver *)observer
+{
+    [self sf_removeDeallocObserverByIdentifier:[observer sf_associatedObjectWithKey:@"_identifier"]];
+}
+
+- (NSMutableDictionary *)_keyIdentifierValueDeallocObserver
+{
+    NSMutableDictionary *keyIdentifierValueDeallocObserver = objc_getAssociatedObject(self, SFKeyIdentifierDeallocObserver);
     @synchronized(self) {
-        if (resourceDisposers == nil) {
-            resourceDisposers = [NSMutableArray array];
-            objc_setAssociatedObject(self, SFResourceDisposers, resourceDisposers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        if (keyIdentifierValueDeallocObserver == nil) {
+            keyIdentifierValueDeallocObserver = [NSMutableDictionary dictionary];
+            objc_setAssociatedObject(self, SFKeyIdentifierDeallocObserver, keyIdentifierValueDeallocObserver, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
     }
     
-    return resourceDisposers;
+    return keyIdentifierValueDeallocObserver;
 }
 
-- (SFResourceDisposer *)sf_addResourceDisposerWithBlock:(void(^)())block
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier
 {
-    NSMutableArray *resourceDisposers = [self _resourceDisposers];
-    
-    SFResourceDisposer *resourceDisposer = [SFResourceDisposer resourceDisposerWithBlock:block];
-    [resourceDisposers addObject:resourceDisposer];
-    
-    return resourceDisposer;
-}
-
-- (void)sf_removeResourceDisposer:(SFResourceDisposer *)resouceDisposer
-{
-    NSMutableArray *resourceDisposers = [self _resourceDisposers];
-    
-    NSInteger index = -1;
-    for (NSInteger i = 0; i < resourceDisposers.count; ++i) {
-        SFResourceDisposer *disposer = [resourceDisposers objectAtIndex:i];
-        if (disposer == resouceDisposer) {
-            [disposer cancel];
-            index = i;
-            break;
+    SFDeallocObserver *observer = nil;
+    @synchronized(self) {
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%f", [NSDate timeIntervalSinceReferenceDate]];
         }
+        
+        observer = [SFDeallocObserver observerWthTrigger:trigger];
+        [observer sf_setAssociatedObject:identifier key:@"_identifier"];
+        [[self _keyIdentifierValueDeallocObserver] setObject:observer forKey:identifier];
     }
-    if (index != -1) {
-        [resourceDisposers removeObjectAtIndex:index];
+    
+    return observer;
+}
+
+- (void)sf_removeDeallocObserverByIdentifier:(NSString *)identifier
+{
+    if (identifier) {
+        @synchronized(self) {
+            NSMutableDictionary *keyIdentifierValueDeallocObserver = [self _keyIdentifierValueDeallocObserver];
+            SFDeallocObserver *observer = [keyIdentifierValueDeallocObserver objectForKey:identifier];
+            [observer cancel];
+            [keyIdentifierValueDeallocObserver removeObjectForKey:identifier];
+        }
     }
 }
 
 - (void)sf_depositNotificationObserver:(id)observer
 {
-    [self sf_addResourceDisposerWithBlock:^{
+    [self sf_depositNotificationObserver:observer identifier:nil];
+}
+
+- (void)sf_depositNotificationObserver:(id)observer identifier:(NSString *)identifier
+{
+    [self sf_addDeallocObserver:^{
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
-    }];
+    } identifier:identifier];
+}
+
+- (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier
+{
+    [self sf_removeDeallocObserverByIdentifier:identifier];
 }
 
 @end

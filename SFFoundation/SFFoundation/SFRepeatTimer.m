@@ -56,12 +56,12 @@
 }
 
 #pragma mark - SFProviderPoolable
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
     [self stop];
 }
 
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
     return [_timer isValid] == NO;
 }

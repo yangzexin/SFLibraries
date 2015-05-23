@@ -1,6 +1,6 @@
 //
-//  SFBuildableMappingCollector.h
-//  SFiOSKit
+//  SFComposableMappingCollector.h
+//  SFFoundation
 //
 //  Created by yangzexin on 11/22/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
@@ -56,7 +56,7 @@
  */
 OBJC_EXPORT SFPropertyMapping *SFConcatPropertyMappings(SFPropertyMapping *mapping, ...) NS_REQUIRES_NIL_TERMINATION;
 
-@interface SFBuildableMappingCollector : NSObject <SFObjectMappingCollector>
+@interface SFComposableMappingCollector : NSObject <SFObjectMappingCollector>
 
 + (instancetype)collector;
 + (instancetype)collectorWithMapping:(id)mapping;

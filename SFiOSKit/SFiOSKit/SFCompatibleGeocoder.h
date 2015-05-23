@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
 @class CLLocation;
 
-@interface SFCompatibleGeocoder : NSObject <SFRepositionSupportedObject>
+@interface SFCompatibleGeocoder : NSObject <SFDepositable>
 
 - (void)reverseGeocodeLocation:(CLLocation *)location completion:(void(^)(NSArray *placemarks, NSError *error))completion;
 - (void)cancel;

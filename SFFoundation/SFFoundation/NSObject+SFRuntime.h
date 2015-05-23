@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFResourceDisposer.h"
+#import "SFDeallocObserver.h"
 
 @interface NSObject (SFRuntime)
 
@@ -33,13 +33,15 @@
 - (void)sf_copyPropertyValuesFromObject:(id)object specificObjcProperties:(NSArray *)specificObjcProperties exceptPropertyNames:(NSArray *)exceptPropertyNames;
 
 /**
- The resource disposer will be disposed when object will be dealloc.
- 
- block  - the block will be invoked when object will be dealloc
+ trigger  - the block will be invoked when object will be dealloc
  */
-- (SFResourceDisposer *)sf_addResourceDisposerWithBlock:(void(^)())block;
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger;
 
-- (void)sf_removeResourceDisposer:(SFResourceDisposer *)resouceDisposer;
+- (void)sf_removeDeallocObserver:(SFDeallocObserver *)observer;
+
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier;
+
+- (void)sf_removeDeallocObserverByIdentifier:(NSString *)identifier;
 
 /**
  This method is used to auto remove notification observer when object will be dealloc.
@@ -47,5 +49,9 @@
  observer   - The return value of method: NSNotificationCenter addObserverForName
  */
 - (void)sf_depositNotificationObserver:(id)observer;
+
+- (void)sf_depositNotificationObserver:(id)observer identifier:(NSString *)identifier;
+
+- (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier;
 
 @end

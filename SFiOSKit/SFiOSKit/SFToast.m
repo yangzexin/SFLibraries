@@ -194,7 +194,7 @@
         [[SFKeyboardStateListener sharedListener] addKeyboardHeightObserverWithIdentifier:identifier usingBlock:^(SFKeyboardState *state) {
             positBlock(YES);
         }];
-        [toastView sf_addResourceDisposerWithBlock:^{
+        [toastView sf_addDeallocObserver:^{
             [[SFKeyboardStateListener sharedListener] removeKeyboardObserverWithIdentifier:identifier];
         }];
     }

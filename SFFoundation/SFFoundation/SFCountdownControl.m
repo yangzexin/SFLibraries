@@ -56,14 +56,14 @@
 }
 
 #pragma mark - SFRepositionSupportedObject
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
-    return [_timer shouldRemoveFromObjectRepository];
+    return [_timer shouldRemoveDepositable];
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
-    [_timer willRemoveFromObjectRepository];
+    [_timer depositableWillRemove];
 }
 
 @end

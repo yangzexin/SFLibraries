@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFRepeatTimer : NSObject <SFRepositionSupportedObject>
+@interface SFRepeatTimer : NSObject <SFDepositable>
 
 @property (nonatomic, assign) NSTimeInterval timeInterval;
 @property (nonatomic, copy) void(^tick)();

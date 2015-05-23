@@ -12,9 +12,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "SFObjectRepository.h"
+#import "SFDepositable.h"
 
-@interface SFWaiting : NSObject <SFRepositionSupportedObject>
+@interface SFWaiting : NSObject <SFDepositable>
 
 @property (nonatomic, copy) NSString *name;
 

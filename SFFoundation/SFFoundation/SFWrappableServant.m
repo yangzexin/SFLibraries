@@ -8,7 +8,7 @@
 
 #import "SFWrappableServant.h"
 
-#import "NSObject+SFObjectRepository.h"
+#import "NSObject+SFDepositable.h"
 
 #import "SFServant+Private.h"
 
@@ -362,15 +362,15 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     [self.servant cancel];
 }
 
-- (BOOL)shouldRemoveFromObjectRepository
+- (BOOL)shouldRemoveDepositable
 {
-    return self.servant ? [self.servant shouldRemoveFromObjectRepository] : [super shouldRemoveFromObjectRepository];
+    return self.servant ? [self.servant shouldRemoveDepositable] : [super shouldRemoveDepositable];
 }
 
-- (void)willRemoveFromObjectRepository
+- (void)depositableWillRemove
 {
-    [self.servant willRemoveFromObjectRepository];
-    [super willRemoveFromObjectRepository];
+    [self.servant depositableWillRemove];
+    [super depositableWillRemove];
 }
 
 - (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *original))feedbackWrapper

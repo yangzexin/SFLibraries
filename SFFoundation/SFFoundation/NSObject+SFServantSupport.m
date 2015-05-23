@@ -8,7 +8,7 @@
 
 #import "NSObject+SFServantSupport.h"
 
-#import "NSObject+SFObjectRepository.h"
+#import "NSObject+SFDepositable.h"
 
 @implementation NSObject (SFServantSupport)
 
@@ -34,7 +34,7 @@
 
 - (void)sf_useServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier
 { 
-    [self sf_addRepositionSupportedObject:[servant goWithCallback:^(SFFeedback *feedback) {
+    [self sf_deposit:[servant goWithCallback:^(SFFeedback *feedback) {
         if (feedback.error != nil) {
             if (failed) {
                 failed(feedback.error);
@@ -52,12 +52,12 @@
 
 - (void)sf_interruptServantWithIdentifier:(NSString *)identifier
 {
-    [self sf_removeRepositionSupportedObjectWithIdentifier:identifier];
+    [self sf_removeDepositableWithIdentifier:identifier];
 }
 
 - (BOOL)sf_isServantExistingWithIdentifier:(NSString *)identifier
 {
-    id<SFServant> servant = (id)[self sf_repositionSupportedObjectWithIdentifier:identifier];
+    id<SFServant> servant = (id)[self sf_depositableWithIdentifier:identifier];
     
     return [servant isExecuting];
 }

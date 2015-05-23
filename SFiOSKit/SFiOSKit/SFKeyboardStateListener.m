@@ -203,13 +203,13 @@ NSString *const SFKeyboardHeightDidChangeNotification = @"SFKeyboardHeightDidCha
 {
     NSString *identifier = [NSString stringWithFormat:@"%p", change];
     [[SFKeyboardStateListener sharedListener] addKeyboardHeightObserverWithIdentifier:identifier usingBlock:change];
-    SFResourceDisposer *disposer = [self sf_addResourceDisposerWithBlock:^{
+    SFDeallocObserver *disposer = [self sf_addDeallocObserver:^{
         [[SFKeyboardStateListener sharedListener] removeKeyboardObserverWithIdentifier:identifier];
     }];
     
     __weak typeof(self) weakSelf = self;
     return [SFCancellable cancellableWithWhenCancel:^{
-        [weakSelf sf_removeResourceDisposer:disposer];
+        [weakSelf sf_removeDeallocObserver:disposer];
         [[SFKeyboardStateListener sharedListener] removeKeyboardObserverWithIdentifier:identifier];
     }];
 }

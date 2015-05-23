@@ -10,7 +10,7 @@
 
 #import "NSObject+SFObjectAssociation.h"
 #import "SFDelayControl.h"
-#import "NSObject+SFObjectRepository.h"
+#import "NSObject+SFDepositable.h"
 #import "SFTimeLimitation.h"
 
 @implementation NSObject (SFLimitation)
@@ -38,7 +38,7 @@
     __weak typeof(self) weakSelf = self;
     [self sf_limitTimeWithIdentifier:identifier interval:interval orCondition:nil doBlock:doBlock failBlock:^(NSTimeInterval remainingTime) {
         __strong typeof(weakSelf) self = weakSelf;
-        [self sf_addRepositionSupportedObject:[SFDelayControl delayWithInterval:remainingTime completion:delayDoBlock] identifier:identifier];
+        [self sf_deposit:[SFDelayControl delayWithInterval:remainingTime completion:delayDoBlock] identifier:identifier];
     }];
 }
 
