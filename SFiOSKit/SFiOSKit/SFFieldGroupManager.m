@@ -26,6 +26,7 @@
     _addedFields = [NSMutableArray array];
     
     self.doneReturnKeyTyoe = UIReturnKeyDone;
+    self.setReturnKeyAutomatically = YES;
 
     __weak typeof(self) weakSelf = self;
     self.waitingForNotAnimating = [SFWaiting waitWithCondition:^BOOL{
@@ -134,8 +135,8 @@
         NSInteger nextTextFieldIndex = ++textFieldIndex;
         if (nextTextFieldIndex == [self.addedFields count]) {
             [(UIResponder *)field resignFirstResponder];
-            if (self.whenFieldGroupReturnDone) {
-                self.whenFieldGroupReturnDone();
+            if (self.whenReturnDone) {
+                self.whenReturnDone();
             }
         } else {
             UITextField *nextField = [self.addedFields objectAtIndex:nextTextFieldIndex];

@@ -17,7 +17,7 @@
 @property (nonatomic, assign) UIReturnKeyType doneReturnKeyTyoe;
 
 @property (nonatomic, copy) void(^whenFieldBecameFirstResponder)(id field);
-@property (nonatomic, copy) void(^whenFieldGroupReturnDone)();
+@property (nonatomic, copy) void(^whenReturnDone)();
 
 - (void)resignFirstResponder;
 - (void)becomeFirstResponder;
