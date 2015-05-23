@@ -30,8 +30,6 @@
     self = [super init];
     
     _addedFields = [NSMutableArray array];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     __weak typeof(self) weakSelf = self;
     self.waitingForNotAnimating = [SFWaiting waitWithCondition:^BOOL{
@@ -59,8 +57,6 @@
     if (setDelegate) {
         textField.delegate = self;
     }
-    
-    [self searchContainViewFrom:textField];
 }
 
 - (void)addTextView:(UITextView *)textView
@@ -112,8 +108,6 @@
     [UIView animateWithDuration:.25f animations:^{
         if (self.fieldPositor) {
             self.fieldPositor(field);
-        } else if (field) {
-            [self _scrollViewForFirstResponder:field];
         }
         if (self.setReturnKeyAutomatically && [field isKindOfClass:[UITextField class]]) {
             NSUInteger index = [self.fields indexOfObject:field];
@@ -125,92 +119,6 @@
     } completion:^(BOOL finished) {
         self.animating = NO;
     }];
-}
-
-#pragma mark scroll to suitable position
-- (void)_scrollViewForFirstResponder:(UIView *)firstResponder
-{
-    CGFloat screenHeight = [[UIScreen mainScreen] currentMode].size.height / [[UIScreen mainScreen] scale];
-    CGFloat statusBarHeight = [self statusBarHeight];
-    
-    CGRect r = [self _rectToKeyWindow:firstResponder];
-    CGFloat bottom = CGRectGetMaxY(r);
-    CGFloat scrollOffsetY = MAXFLOAT;
-    
-    CGFloat oldOffset = ([_fieldsContainView isKindOfClass:[UIScrollView class]] ? [(UIScrollView *)_fieldsContainView contentOffset].y : 0);
-    
-    if (r.origin.y < statusBarHeight) {
-        //上面盖住了
-        CGFloat offsetY = r.origin.y + oldOffset;
-        
-        if (offsetY >= statusBarHeight) {
-            scrollOffsetY = 0;
-        } else if (offsetY >= 0) {
-            scrollOffsetY = -statusBarHeight;
-        }
-        
-    } else if (bottom + self.keyboardHeight + self.keyboardInset > screenHeight) {
-        //键盘盖住输入框了
-        scrollOffsetY = bottom + self.keyboardHeight + self.keyboardInset - screenHeight + oldOffset;
-    }
-    
-    if (scrollOffsetY != MAXFLOAT) {
-        [self setfieldsSuperviewOffset:scrollOffsetY];
-    }
-}
-
-- (CGFloat)statusBarHeight
-{
-    return CGRectGetHeight([[UIApplication sharedApplication] statusBarFrame]);
-}
-
-- (void)setfieldsSuperviewOffset:(CGFloat)offsetY
-{
-    if (_fieldsContainView) {
-        if ([_fieldsContainView isKindOfClass:[UIScrollView class]]) {
-            UIScrollView *scroll = (UIScrollView *)_fieldsContainView;
-            [scroll setContentOffset:CGPointMake(scroll.contentOffset.x, offsetY)];
-        } else {
-            if (!self.tmpFrameDirty) {
-                _tmpFrame = _fieldsContainView.frame;
-                self.tmpFrameDirty = YES;
-            }
-            CGRect rect = _fieldsContainView.frame;
-            rect.origin.y = _fieldsContainView.frame.origin.y - offsetY;
-            _fieldsContainView.frame = rect;
-        }
-    }
-}
-
-- (void)restoreFieldsSuperview
-{
-    if (_fieldsContainView) {
-        if ([_fieldsContainView isKindOfClass:[UIScrollView class]]) {
-            UIScrollView *scroll = (UIScrollView *)_fieldsContainView;
-            [scroll setContentOffset:CGPointMake(scroll.contentOffset.x, 0)];
-        } else {
-            _fieldsContainView.frame = _tmpFrame;
-        }
-    }
-}
-
-- (CGRect)_rectToKeyWindow:(UIView *)fromView
-{
-    return [fromView convertRect:fromView.bounds toView:[[UIApplication sharedApplication] keyWindow]];
-}
-
-
-- (void)searchContainViewFrom:(UIView *)field
-{
-    if (_fieldsContainView == nil) {
-        UIViewController *cont = [field sf_viewController];
-        _fieldsContainView = cont ? cont.view : field.superview;
-    }
-}
-
-- (void)setfieldsContainView:(UIView *)fieldsContainView
-{
-    _fieldsContainView = fieldsContainView;
 }
 
 - (void)fieldDidEndEditing:(id)field
@@ -233,8 +141,6 @@
             [UIView animateWithDuration:0.25f animations:^{
                 if (self.fieldPositor) {
                     self.fieldPositor(nil);
-                } else {
-                    [self restoreFieldsSuperview];
                 }
             }];
         }
@@ -324,45 +230,6 @@
     }
     
     return shouldReturn;
-}
-
-#pragma mark track keyboard frame
-- (void)_keyboardWillChangeFrameNotification:(NSNotification *)n
-{
-    [self updateKeyboardStatus:n];
-}
-
-- (void)updateKeyboardStatus:(NSNotification *)notice
-{
-    NSValue *tmpValue = notice.userInfo[UIKeyboardFrameEndUserInfoKey];
-    if (self.keyboardFrame && [tmpValue isEqualToValue:self.keyboardFrame]) {
-        return;
-    } else {
-        self.keyboardFrame = tmpValue;
-    }
-    
-    self.animationCurve = notice.userInfo[UIKeyboardAnimationCurveUserInfoKey];
-    self.animationDuration = notice.userInfo[UIKeyboardAnimationDurationUserInfoKey];
-    self.keyboardHeight = [tmpValue CGRectValue].size.height;
-    
-    UIControl *firstResponder = nil;
-    for (int i = 0; i < self.addedFields.count; i++) {
-        UIControl *field = self.addedFields[i];
-        if ([field isFirstResponder]) {
-            firstResponder = field;
-            break;
-        }
-    }
-    
-    if (firstResponder) {
-        [self _scrollViewForFirstResponder:firstResponder];
-    }
-}
-
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

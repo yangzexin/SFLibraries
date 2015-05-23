@@ -10,7 +10,7 @@
 
 #import "SFCall.h"
 
-typedef void(^SFAsyncCallNotifier)(SFCallResult *result);
+typedef void(^SFAsyncCallNotifier)(SFCallReturn *callReturn);
 
 @interface SFAsyncCall : SFCall
 

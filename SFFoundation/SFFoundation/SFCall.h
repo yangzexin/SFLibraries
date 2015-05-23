@@ -12,20 +12,19 @@
 
 @protocol SFCall;
 
-@interface SFCallResult : NSObject
+@interface SFCallReturn : NSObject
 
 @property (nonatomic, strong, readonly) id object;
 @property (nonatomic, strong, readonly) NSError *error;
 
-+ (instancetype)resultWithObject:(id)object error:(NSError *)error;
-+ (instancetype)resultWithObject:(id)object;
-+ (instancetype)resultWithError:(NSError *)error;
++ (instancetype)callReturnWithObject:(id)object;
++ (instancetype)callReturnWithError:(NSError *)error;
 
-- (id<SFCall>)resultCall;
+- (id<SFCall>)callForReturn;
 
 @end
 
-typedef void(^SFCallCompletion)(SFCallResult *result);
+typedef void(^SFCallCompletion)(SFCallReturn *callReturn);
 
 @protocol SFCall <SFRepositionSupportedObject>
 
@@ -39,13 +38,16 @@ typedef void(^SFCallCompletion)(SFCallResult *result);
 
 @property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 
-- (void)finishWithResult:(SFCallResult *)result;
+/**
+ Manual finish
+ */
+- (void)finishWithCallReturn:(SFCallReturn *)callReturn;
 
-#pragma mark - Life Cycle
-- (void)callDidLaunch;
+#pragma mark - Call life cycle
+- (void)didStart;
 
-- (void)callDidFinishWithObject:(id)object;
+- (void)didFinishWithObject:(id)object;
 
-- (void)callDidFailWithError:(NSError *)error;
+- (void)didFailWithError:(NSError *)error;
 
 @end

@@ -26,13 +26,10 @@ typedef void(^SFCallFinish)();
 
 - (void)sf_startCall:(id<SFCall>)call success:(SFCallSuccess)success error:(SFCallError)error finish:(SFCallFinish)finish;
 
-// 通过这个方法来执行call，可以将call的生命周期绑定到当前对象，当前对象释放时，会自动处理call的回收
 - (void)sf_startCall:(id<SFCall>)call success:(SFCallSuccess)success error:(SFCallError)error finish:(SFCallFinish)finish identifier:(NSString *)identifier;
 
-// 取消
 - (void)sf_cancelCallWithIdentifier:(NSString *)identifier;
 
-// 是否正在执行
 - (BOOL)sf_isCallExecutingWithIdentifier:(NSString *)identifier;
 
 @end

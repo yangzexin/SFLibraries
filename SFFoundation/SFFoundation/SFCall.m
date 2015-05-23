@@ -11,47 +11,54 @@
 #import "SFCall+Private.h"
 #import "SFAsyncCall.h"
 
-@interface SFCallResult ()
+@interface SFCallReturn ()
 
 @property (nonatomic, strong) id object;
 @property (nonatomic, strong) NSError *error;
 
 @end
 
-@implementation SFCallResult
+@implementation SFCallReturn
 
-+ (instancetype)resultWithObject:(id)object error:(NSError *)error
++ (instancetype)callReturnWithObject:(id)object error:(NSError *)error
 {
-    SFCallResult *result = [SFCallResult new];
-    result.object = object;
-    result.error = error;
+    SFCallReturn *callReturn = [SFCallReturn new];
+    callReturn.object = object;
+    callReturn.error = error;
     
-    return result;
+    return callReturn;
 }
 
-+ (instancetype)resultWithObject:(id)object
++ (instancetype)callReturnWithObject:(id)object
 {
-    return [self resultWithObject:object error:nil];
+    return [self callReturnWithObject:object error:nil];
 }
 
-+ (instancetype)resultWithError:(NSError *)error
++ (instancetype)callReturnWithError:(NSError *)error
 {
-    return [self resultWithObject:nil error:error];
+    return [self callReturnWithObject:nil error:error];
 }
 
-- (id<SFCall>)resultCall
+- (id<SFCall>)callForReturn
 {
     id object = self.object;
     NSError *error = self.error;
     
     return [SFAsyncCall asyncCallWithExecution:^(SFAsyncCallNotifier notifier) {
-        notifier([SFCallResult resultWithObject:object error:error]);
+        notifier([SFCallReturn callReturnWithObject:object error:error]);
     }];
 }
 
 @end
 
 @implementation SFCall
+
+- (void)dealloc
+{
+#ifdef DEBUG
+    NSLog(@"%@ dealloc", self);
+#endif
+}
 
 - (id<SFCall>)startWithCompletion:(SFCallCompletion)completion
 {
@@ -62,19 +69,19 @@
         self.executing = YES;
         self.cancelled = NO;
         
-        [self callDidLaunch];
+        [self didStart];
     }
     
     return self;
 }
 
-- (void)finishWithResult:(SFCallResult *)result
+- (void)finishWithCallReturn:(SFCallReturn *)callReturn
 {
     @synchronized(self) {
         CFRetain(((__bridge CFTypeRef)self));
         if (![self isCancelled]) {
             if (_completion) {
-                _completion(result);
+                _completion(callReturn);
                 self.completion = nil;
             }
         }
@@ -107,15 +114,15 @@
     [self cancel];
 }
 
-- (void)callDidLaunch
+- (void)didStart
 {
 }
 
-- (void)callDidFinishWithObject:(id)object
+- (void)didFinishWithObject:(id)object
 {
 }
 
-- (void)callDidFailWithError:(NSError *)error
+- (void)didFailWithError:(NSError *)error
 {
 }
 

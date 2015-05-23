@@ -34,14 +34,14 @@
 
 - (void)sf_startCall:(id<SFCall>)call success:(SFCallSuccess)success error:(SFCallError)error finish:(SFCallFinish)finish identifier:(NSString *)identifier
 { 
-    [self sf_addRepositionSupportedObject:[call startWithCompletion:^(SFCallResult *result) {
-        if (result.error != nil) {
+    [self sf_addRepositionSupportedObject:[call startWithCompletion:^(SFCallReturn *callReturn) {
+        if (callReturn.error != nil) {
             if (error) {
-                error(result.error);
+                error(callReturn.error);
             }
         } else {
             if (success) {
-                success(result.object);
+                success(callReturn.object);
             }
         }
         if (finish) {

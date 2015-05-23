@@ -12,13 +12,10 @@
 
 @property (nonatomic, readonly) NSArray *fields;
 @property (nonatomic, assign) BOOL setReturnKeyAutomatically;
-@property (nonatomic, assign, readonly) CGFloat keyboardHeight;
-@property (nonatomic, assign) CGFloat keyboardInset;
 @property (nonatomic, assign) id<UITextFieldDelegate> textFieldDelegate;
 
 @property (nonatomic, copy) void(^fieldPositor)(id field);
 @property (nonatomic, copy) void(^doneHandler)();
-@property (nonatomic, assign) UIView *fieldsContainView;
 
 - (void)resignFirstResponder;
 - (void)becomeFirstResponder;

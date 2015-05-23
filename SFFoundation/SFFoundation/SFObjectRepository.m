@@ -32,22 +32,6 @@
     return instance;
 }
 
-- (id)init
-{
-    self = [super init];
-    
-#if TARGET_OS_IPHONE
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidReceiveMemoryWarningNotification:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-#endif
-    
-    return self;
-}
-
-- (void)_applicationDidReceiveMemoryWarningNotification:(NSNotification *)note
-{
-    [self tryCleanRepository];
-}
-
 @end
 
 @interface SFRepositoryAnalyzerDefault : NSObject <SFRepositoryAnalyzer>
@@ -121,7 +105,16 @@
     self.analyzer = [SFRepositoryAnalyzerDefault new];
     self.keyIdentifierValueObject = [NSMutableDictionary dictionary];
     
+#if TARGET_OS_IPHONE
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applicationDidReceiveMemoryWarningNotification:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
+    
     return self;
+}
+
+- (void)_applicationDidReceiveMemoryWarningNotification:(NSNotification *)note
+{
+    [self tryCleanRepository];
 }
 
 - (void)addObject:(id<SFRepositionSupportedObject>)object

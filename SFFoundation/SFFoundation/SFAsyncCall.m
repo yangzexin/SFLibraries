@@ -30,13 +30,13 @@
     return [self asyncCallWithExecution:execution didCancelled:nil];
 }
 
-- (void)callDidLaunch
+- (void)didStart
 {
-    [super callDidLaunch];
+    [super didStart];
     __weak typeof(self) weakSelf = self;
-    self.execution(^(SFCallResult *result){
+    self.execution(^(SFCallReturn *callReturn){
         __strong typeof(weakSelf) self = weakSelf;
-        [self finishWithResult:result];
+        [self finishWithCallReturn:callReturn];
     });
 }
 
