@@ -25,7 +25,7 @@
     
     _addedFields = [NSMutableArray array];
     
-    self.doneReturnKeyTyoe = UIReturnKeyDone;
+    self.doneReturnKeyType = UIReturnKeyDone;
     self.setReturnKeyAutomatically = YES;
 
     __weak typeof(self) weakSelf = self;
@@ -105,7 +105,7 @@
             NSUInteger index = [self.fields indexOfObject:field];
             if (index != NSNotFound) {
                 UITextField *textField = field;
-                textField.returnKeyType = index == self.fields.count - 1 ? self.doneReturnKeyTyoe : UIReturnKeyNext;
+                textField.returnKeyType = index == self.fields.count - 1 ? self.doneReturnKeyType : UIReturnKeyNext;
             }
         }
     } completion:^(BOOL finished) {

@@ -14,7 +14,7 @@
 @property (nonatomic, assign) BOOL setReturnKeyAutomatically;
 @property (nonatomic, assign) id<UITextFieldDelegate> textFieldDelegate;
 
-@property (nonatomic, assign) UIReturnKeyType doneReturnKeyTyoe;
+@property (nonatomic, assign) UIReturnKeyType doneReturnKeyType;
 
 @property (nonatomic, copy) void(^whenFieldBecameFirstResponder)(id field);
 @property (nonatomic, copy) void(^whenReturnDone)();
