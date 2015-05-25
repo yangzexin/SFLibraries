@@ -41,6 +41,7 @@
 #import "UIMenuController+SFAddition.h"
 #import "UISearchBar+SFAddition.h"
 #import "UITableViewCell+SFAddition.h"
+#import "UITextField+NotEmpty.h"
 #import "UIView+SFAddition.h"
 #import "UIViewController+SFAddition.h"
 #import "UIViewController+SFIndicator.h"

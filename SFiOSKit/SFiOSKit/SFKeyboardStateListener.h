@@ -15,6 +15,7 @@ OBJC_EXPORT NSString *const SFKeyboardHeightDidChangeNotification;
 
 @interface SFKeyboardStateListener : NSObject
 
+@property (nonatomic, readonly, getter=isListening) BOOL listening;
 @property (nonatomic, readonly, getter=isKeyboardVisible) BOOL keyboardVisible;
 @property (nonatomic, readonly) CGFloat keyboardHeight;
 @property (nonatomic, readonly) CGFloat keyboardY;

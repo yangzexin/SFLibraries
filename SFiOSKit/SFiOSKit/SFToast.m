@@ -162,7 +162,9 @@
 
 + (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds autoPositionForKeyboard:(BOOL)autoPositionForKeyboard identifier:(NSString *)identifier completion:(void(^)())completion
 {
-    
+    if (![[SFKeyboardStateListener sharedListener] isListening]) {
+        [[SFKeyboardStateListener sharedListener] startListening];
+    }
     SFToastView *toastView = [[SFToastView alloc] initWithFrame:CGRectZero];
     toastView.maxSize = CGSizeMake(view.frame.size.width - 20, view.frame.size.height - 20);
     toastView.textLabelEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
