@@ -28,7 +28,7 @@ typedef void(^SFServantCallback)(SFFeedback *callReturn);
 
 @protocol SFServant <SFDepositable>
 
-- (id<SFServant>)goWithCallback:(SFServantCallback)completion;
+- (id<SFServant>)sendWithCallback:(SFServantCallback)callback;
 - (BOOL)isExecuting;
 - (void)cancel;
 
@@ -39,15 +39,18 @@ typedef void(^SFServantCallback)(SFFeedback *callReturn);
 @property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 
 /**
- Manual finish
+ Manual return feedback
  */
 - (void)sendFeedback:(SFFeedback *)feedback;
 
 #pragma mark - Servant life cycle
-- (void)didStart;
+/**
+ Servant is all ready for starting service, start service here.
+ */
+- (void)servantIsAllReady;
 
-- (void)didFinishWithValue:(id)value;
+- (void)servantDidSucceedWithValue:(id)value;
 
-- (void)didFailWithError:(NSError *)error;
+- (void)servantDidFailWithError:(NSError *)error;
 
 @end

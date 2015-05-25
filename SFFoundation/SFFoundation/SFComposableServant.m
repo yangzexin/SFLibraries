@@ -10,6 +10,8 @@
 
 @interface SFComposableServant ()
 
+@property (nonatomic, copy) SFFeedback *(^feedbackBuilder)();
+
 @end
 
 @implementation SFComposableServant
@@ -28,9 +30,9 @@
     return servant;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
-    [super didStart];
+    [super servantIsAllReady];
     
     if (self.synchronous) {
         SFFeedback *callReturn = self.feedbackBuilder();

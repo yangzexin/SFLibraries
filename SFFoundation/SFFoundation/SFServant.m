@@ -54,7 +54,7 @@
 #endif
 }
 
-- (id<SFServant>)goWithCallback:(SFServantCallback)callback
+- (id<SFServant>)sendWithCallback:(SFServantCallback)callback
 {
     @synchronized(self) {
         self.callback = callback;
@@ -63,7 +63,7 @@
         self.executing = YES;
         self.cancelled = NO;
         
-        [self didStart];
+        [self servantIsAllReady];
     }
     
     return self;
@@ -108,15 +108,15 @@
     [self cancel];
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
 }
 
-- (void)didFinishWithValue:(id)value
+- (void)servantDidSucceedWithValue:(id)value
 {
 }
 
-- (void)didFailWithError:(NSError *)error
+- (void)servantDidFailWithError:(NSError *)error
 {
 }
 

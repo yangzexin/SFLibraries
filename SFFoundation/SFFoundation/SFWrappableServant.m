@@ -44,10 +44,10 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     __weak typeof(self) wself = self;
-    [self.servant goWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
@@ -64,14 +64,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFSyncWrappedServant
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     
     __block SFFeedback *_feedback = nil;
-    [self.servant goWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFFeedback *feedback) {
         _feedback = feedback;
         dispatch_semaphore_signal(sema);
     }];
@@ -106,10 +106,10 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     __weak typeof(self) wself = self;
-    [self.servant goWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             self.interceptor(feedback);
@@ -141,14 +141,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (id<SFServant>)goWithCallback:(SFServantCallback)completion
+- (id<SFServant>)sendWithCallback:(SFServantCallback)completion
 {
     id<SFServant> returnServant = self;
     
     @synchronized(self) {
         if (!self.called) {
             self.called = YES;
-            returnServant = [super goWithCallback:completion];
+            returnServant = [super sendWithCallback:completion];
         }
     }
     
@@ -163,10 +163,10 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFMainthreadCallbackWrappedServant
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     __weak typeof(self) wself = self;
-    [self.servant goWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __weak typeof(wself) self = wself;
         if ([NSThread isMainThread]) {
             [self sendFeedback:feedback];
@@ -201,9 +201,9 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
-    [super didStart];
+    [super servantIsAllReady];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.timeoutSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SFWrappableServant *wrappedServant = self.servant;
@@ -245,14 +245,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     __weak typeof(self) wself = self;
-    [self.servant goWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             self.continuingServant = self.continuing(feedback);
-            [self.continuingServant goWithCallback:^(SFFeedback *feedback) {
+            [self.continuingServant sendWithCallback:^(SFFeedback *feedback) {
                 __strong typeof(wself) self = wself;
                 [self sendFeedback:feedback];
             }];
@@ -298,7 +298,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return servant;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
     self.keyIdentifierValueFeedback = [NSMutableDictionary dictionary];
     NSArray *allIdentifiers = [self.keyIdentifierValueServant allKeys];
@@ -317,7 +317,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     
     for (NSString *identifier in allIdentifiers) {
         id<SFServant> servant = [self.keyIdentifierValueServant objectForKey:identifier];
-        [servant goWithCallback:^(SFFeedback *feedback) {
+        [servant sendWithCallback:^(SFFeedback *feedback) {
             __strong typeof(weakSelf) self = weakSelf;
             [self.keyIdentifierValueFeedback setObject:feedback == nil ? [NSNull null] : feedback forKey:identifier];
             sendFeedback(identifier);
@@ -338,12 +338,12 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)didStart
+- (void)servantIsAllReady
 {
-    [super didStart];
+    [super servantIsAllReady];
     if (self.servant) {
         __weak typeof(self) wself = self;
-        [self.servant goWithCallback:^(SFFeedback *feedback) {
+        [self.servant sendWithCallback:^(SFFeedback *feedback) {
             __strong typeof(wself) self = wself;
             [self sendFeedback:feedback];
         }];

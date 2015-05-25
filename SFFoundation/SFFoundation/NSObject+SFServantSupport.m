@@ -12,29 +12,29 @@
 
 @implementation NSObject (SFServantSupport)
 
-- (void)sf_useServant:(id<SFServant>)servant
+- (void)sf_sendServant:(id<SFServant>)servant
 {
-    [self sf_useServant:servant succeeded:nil];
+    [self sf_sendServant:servant succeeded:nil];
 }
 
-- (void)sf_useServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded
 {
-    [self sf_useServant:servant succeeded:succeeded failed:nil];
+    [self sf_sendServant:servant succeeded:succeeded failed:nil];
 }
 
-- (void)sf_useServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed
 {
-    [self sf_useServant:servant succeeded:succeeded failed:failed completed:nil];
+    [self sf_sendServant:servant succeeded:succeeded failed:failed completed:nil];
 }
 
-- (void)sf_useServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed
 {
-    [self sf_useServant:servant succeeded:succeeded failed:failed completed:completed identifier:nil];
+    [self sf_sendServant:servant succeeded:succeeded failed:failed completed:completed identifier:nil];
 }
 
-- (void)sf_useServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier
 { 
-    [self sf_deposit:[servant goWithCallback:^(SFFeedback *feedback) {
+    [self sf_deposit:[servant sendWithCallback:^(SFFeedback *feedback) {
         if (feedback.error != nil) {
             if (failed) {
                 failed(feedback.error);
