@@ -48,6 +48,6 @@
                                              options:(NSKeyValueObservingOptions)options
                                           identifier:(NSString *)identifier;
 
-- (void)cancelObservingWithIdentifier:(NSString *)identifier;
+- (void)sf_cancelObservingWithIdentifier:(NSString *)identifier;
 
 @end
