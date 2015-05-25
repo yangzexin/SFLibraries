@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, SFTrangleViewDirection){
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) SFTrangleViewDirection direction;
 @property (nonatomic, assign) CGFloat borderWidth;
-@property (nonatomic, assign) BOOL lightBorder;
+@property (nonatomic, assign, getter=isLightBorder) BOOL lightBorder;
 @property (nonatomic, strong) UIColor *borderColor;
 
 @end

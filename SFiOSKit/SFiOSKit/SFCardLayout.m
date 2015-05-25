@@ -11,55 +11,64 @@
 #import "NSString+SFiOSAddition.h"
 #import "NSObject+SFObjectAssociation.h"
 
-@implementation UILabel (SFCardLayoutWidthCalculatable_ext)
+@interface UILabel (SFCLICalculatableExt) <SFCLICalculatable>
 
-- (CGFloat)widthForCardLayout
+@end
+
+@implementation UILabel (SFCLICalculatableExt)
+
+- (CGFloat)widthForCLI
 {
     return [self.text sf_sizeWithFont:self.font].width;
 }
 
+- (CGFloat)heightForCLI
+{
+    return [self.text sf_sizeWithFont:self.font].height;
+}
+
 @end
 
-@implementation UIView (SFCardLayout_MaxSize)
+@implementation UIView (SFCardLayoutItem_MaxSize)
 
-- (void)setCLMaxWidth:(CGFloat)maxWidth
+- (void)setCLIMaxWidth:(CGFloat)maxWidth
 {
-    [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxWidth] key:@"_cardLayout_maxWidth"];
+    [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxWidth] key:@"CLI_maxWidth"];
 }
 
-- (CGFloat)CLMaxWidth
+- (CGFloat)CLIMaxWidth
 {
-    return [[self sf_associatedObjectWithKey:@"_cardLayout_maxWidth"] floatValue];
+    return [[self sf_associatedObjectWithKey:@"CLI_maxWidth"] floatValue];
 }
 
-- (void)setCLMaxWidthPercent:(float)percent
+- (void)setCLIMaxWidthPercent:(float)percent
 {
-    [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"_cardLayout_maxWidthPercent"];
+    [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"CLI_maxWidthPercent"];
 }
 
-- (CGFloat)CLMaxWidthPercent
+- (CGFloat)CLIMaxWidthPercent
 {
-    return [[self sf_associatedObjectWithKey:@"_cardLayout_maxWidthPercent"] floatValue];
+    return [[self sf_associatedObjectWithKey:@"CLI_maxWidthPercent"] floatValue];
 }
 
-- (void)setCLMaxHeight:(CGFloat)maxHeight
+- (void)setCLIMaxHeight:(CGFloat)maxHeight
 {
-    [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxHeight] key:@"_cardLayout_maxHeight"];
+    [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxHeight] key:@"CLI_maxHeight"];
 }
 
-- (CGFloat)CLMaxHeight
+- (CGFloat)CLIMaxHeight
 {
-    return [[self sf_associatedObjectWithKey:@"_cardLayout_maxHeight"] floatValue];
+    return [[self sf_associatedObjectWithKey:@"CLI_maxHeight"] floatValue];
 }
 
-- (void)setCLMaxHeightPercent:(float)percent
+- (void)setCLIMaxHeightPercent:(float)percent
 {
-    [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"_cardLayout_maxHeightPercent"];
+    [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"CLI_maxHeightPercent"];
 }
 
-- (CGFloat)CLMaxHeightPercent
+- (CGFloat)CLIMaxHeightPercent
 {
-    return [[self sf_associatedObjectWithKey:@"_cardLayout_maxHeightPercent"] floatValue];
+    return [[self sf_associatedObjectWithKey:@"CLI_maxHeightPercent"] floatValue];
 }
 
 @end
@@ -85,16 +94,16 @@
                     ++numberOfHiddenSubviews;
                 } else {
                     CGFloat subviewWidth = 0;
-                    if ([subview respondsToSelector:@selector(widthForCardLayout)]) {
-                        subviewWidth = [(id)subview widthForCardLayout];
+                    if ([subview respondsToSelector:@selector(widthForCLI)]) {
+                        subviewWidth = [(id)subview widthForCLI];
                     } else {
                         subviewWidth = subview.frame.size.width;
                     }
-                    CGFloat maxWidth = [subview CLMaxWidth];
+                    CGFloat maxWidth = [subview CLIMaxWidth];
                     if (maxWidth != 0 && subviewWidth > maxWidth) {
                         subviewWidth = maxWidth;
                     }
-                    float maxWidthPercent = [subview CLMaxWidthPercent];
+                    float maxWidthPercent = [subview CLIMaxWidthPercent];
                     if (maxWidthPercent != 0 && maxWidthPercent <= 1.0f) {
                         CGFloat tmpMaxWidth = maxWidthPercent * self.frame.size.width;
                         if (subviewWidth > tmpMaxWidth) {
@@ -113,16 +122,16 @@
         [self.subviews enumerateObjectsWithOptions:self.alignment == SFCardLayoutAlignmentRight ? NSEnumerationReverse : 0 usingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
             if (subview.hidden == NO) {
                 CGFloat subviewWidth = 0;
-                if ([subview respondsToSelector:@selector(widthForCardLayout)]) {
-                    subviewWidth = [(id)subview widthForCardLayout];
+                if ([subview respondsToSelector:@selector(widthForCLI)]) {
+                    subviewWidth = [(id)subview widthForCLI];
                 } else {
                     subviewWidth = subview.frame.size.width;
                 }
-                CGFloat maxWidth = [subview CLMaxWidth];
+                CGFloat maxWidth = [subview CLIMaxWidth];
                 if (maxWidth != 0 && subviewWidth > maxWidth) {
                     subviewWidth = maxWidth;
                 }
-                float maxWidthPercent = [subview CLMaxWidthPercent];
+                float maxWidthPercent = [subview CLIMaxWidthPercent];
                 if (maxWidthPercent != 0 && maxWidthPercent <= 1.0f) {
                     CGFloat tmpMaxWidth = maxWidthPercent * self.frame.size.width;
                     if (subviewWidth > tmpMaxWidth) {
@@ -148,16 +157,16 @@
                     ++numberOfHiddenSubviews;
                 } else {
                     CGFloat subviewHeight = 0.0f;
-                    if ([subview respondsToSelector:@selector(heightForCardLayout)]) {
-                        subviewHeight = [(id)subview heightForCardLayout];
+                    if ([subview respondsToSelector:@selector(heightForCLI)]) {
+                        subviewHeight = [(id)subview heightForCLI];
                     } else {
                         subviewHeight = subview.frame.size.height;
                     }
-                    CGFloat maxHeight = [subview CLMaxHeight];
+                    CGFloat maxHeight = [subview CLIMaxHeight];
                     if (maxHeight != 0 && subviewHeight > maxHeight) {
                         subviewHeight = maxHeight;
                     }
-                    float maxHeightPercent = [subview CLMaxHeightPercent];
+                    float maxHeightPercent = [subview CLIMaxHeightPercent];
                     if (maxHeightPercent != 0 && maxHeightPercent <= 1.0f) {
                         CGFloat tmpMaxHeight = maxHeightPercent * self.frame.size.height;
                         if (subviewHeight > tmpMaxHeight) {
@@ -176,16 +185,16 @@
         [self.subviews enumerateObjectsWithOptions:self.alignment == SFCardLayoutAlignmentBottom ? NSEnumerationReverse : 0 usingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
             if (subview.hidden == NO) {
                 CGFloat subviewHeight = 0.0f;
-                if ([subview respondsToSelector:@selector(heightForCardLayout)]) {
-                    subviewHeight = [(id)subview heightForCardLayout];
+                if ([subview respondsToSelector:@selector(heightForCLI)]) {
+                    subviewHeight = [(id)subview heightForCLI];
                 } else {
                     subviewHeight = subview.frame.size.height;
                 }
-                CGFloat maxHeight = [subview CLMaxHeight];
+                CGFloat maxHeight = [subview CLIMaxHeight];
                 if (maxHeight != 0 && subviewHeight > maxHeight) {
                     subviewHeight = maxHeight;
                 }
-                float maxHeightPercent = [subview CLMaxHeightPercent];
+                float maxHeightPercent = [subview CLIMaxHeightPercent];
                 if (maxHeightPercent != 0 && maxHeightPercent <= 1.0f) {
                     CGFloat tmpMaxHeight = maxHeightPercent * self.frame.size.height;
                     if (subviewHeight > tmpMaxHeight) {

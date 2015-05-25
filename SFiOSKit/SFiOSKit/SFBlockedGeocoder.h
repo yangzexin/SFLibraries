@@ -13,7 +13,9 @@
 
 @interface SFBlockedGeocoder : NSObject <SFDepositable, SFGeocoder>
 
-+ (instancetype)geocoderWithGeocoder:(id<SFGeocoder>)geocoder completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion;
-+ (instancetype)geocoderWithGeocoders:(NSArray *)geocoders completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion;
++ (instancetype)geocoderWithGeocoder:(id<SFGeocoder>)geocoder
+                          completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion;
++ (instancetype)geocoderWithGeocoders:(NSArray *)geocoders
+                           completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion;
 
 @end

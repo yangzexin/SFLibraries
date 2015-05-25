@@ -47,7 +47,14 @@
         if (self.border && self.borderColor) {
             borderColor = self.borderColor;
         }
-        backgroundImage = [UIImage sf_roundImageWithOptions:[[[[[SFRoundImageOptions options] setBackgroundColor:backgroundImageColor] setBorderColor:borderColor] setSize:CGSizeMake(20, 20)] setCornerRadius:_roundSize]];
+        backgroundImage = [UIImage sf_roundImageWithOptions:({
+            SFRoundImageOptions *options = [SFRoundImageOptions options];
+            options.backgroundColor = backgroundImageColor;
+            options.borderColor = borderColor;
+            options.size = CGSizeMake(20, 20);
+            options.cornerRadius = _roundSize;
+            options;
+        })];
         backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     } else {
         backgroundImage = [UIImage sf_imageWithColor:backgroundImageColor size:CGSizeMake(1, 1)];
@@ -58,7 +65,14 @@
     if (self.highlightBackgroundColor) {
         UIImage *highlightBackgroundImage = nil;
         if (_round) {
-            highlightBackgroundImage = [UIImage sf_roundImageWithOptions:[[[[[SFRoundImageOptions options] setBackgroundColor:self.highlightBackgroundColor] setBorderColor:self.highlightBackgroundColor] setSize:CGSizeMake(20, 20)] setCornerRadius:_roundSize]];
+            highlightBackgroundImage = [UIImage sf_roundImageWithOptions:({
+                SFRoundImageOptions *options = [SFRoundImageOptions options];
+                options.backgroundColor = self.highlightBackgroundColor;
+                options.borderColor = self.highlightBackgroundColor;
+                options.size = CGSizeMake(20, 20);
+                options.cornerRadius = _roundSize;
+                options;
+            })];
             highlightBackgroundImage = [highlightBackgroundImage stretchableImageWithLeftCapWidth:10 topCapHeight:10];
         } else {
             highlightBackgroundImage = [UIImage sf_imageWithColor:self.highlightBackgroundColor size:CGSizeMake(1, 1)];

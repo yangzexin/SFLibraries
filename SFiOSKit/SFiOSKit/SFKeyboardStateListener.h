@@ -15,7 +15,7 @@ OBJC_EXPORT NSString *const SFKeyboardHeightDidChangeNotification;
 
 @interface SFKeyboardStateListener : NSObject
 
-@property (nonatomic, readonly, getter = isKeyboardVisible) BOOL keyboardVisible;
+@property (nonatomic, readonly, getter=isKeyboardVisible) BOOL keyboardVisible;
 @property (nonatomic, readonly) CGFloat keyboardHeight;
 @property (nonatomic, readonly) CGFloat keyboardY;
 
@@ -56,5 +56,6 @@ typedef NS_ENUM(NSUInteger, SFKeyboardStateType){
 @interface UIViewController (SFKeyboardStateListenerExt)
 
 - (SFCancellable *)sf_trackKeyboardStateChange:(void(^)(SFKeyboardState *state))change;
+- (SFCancellable *)sf_trackKeyboardStateChange:(void(^)(SFKeyboardState *state))change identifier:(NSString *)identifier;
 
 @end

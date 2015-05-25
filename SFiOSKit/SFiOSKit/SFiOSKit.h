@@ -20,7 +20,6 @@
 #import "SFMapkitLocationManager.h"
 #import "SFPreciseLocationManager.h"
 #import "SFLocationDescription.h"
-#import "SFCompatibleGeocoder.h"
 #import "SFBlockedGeocoder.h"
 #import "SFBlockedLocationManager.h"
 
@@ -54,6 +53,7 @@
 #import "SFCollapsableLabel.h"
 #import "SFDotLineView.h"
 #import "SFGridViewWrapper.h"
+#import "SFGuidePlayer.h"
 #import "SFIBCompatibleView.h"
 #import "SFImageLabel.h"
 #import "SFLineView.h"
@@ -75,7 +75,6 @@
 #import "SFToast.h"
 #import "SFFieldGroupManager.h"
 #import "SFDragShowDetector.h"
-#import "SFGuidePlayer.h"
 #import "SFCollapsableLabel.h"
 #import "SFAnimationDelegateProxy.h"
 #import "SFCollapseManager.h"

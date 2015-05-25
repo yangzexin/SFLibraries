@@ -48,7 +48,6 @@
 		3ED2CF5119206EE20008529A /* SFExtremeGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF4D19206EE20008529A /* SFExtremeGeocoder.m */; };
 		3ED2CF5219206EE20008529A /* SFGoogleGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF4F19206EE20008529A /* SFGoogleGeocoder.m */; };
 		3ED2CF5919206EF70008529A /* SFLocationDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5419206EF70008529A /* SFLocationDescription.m */; };
-		3ED2CF5A19206EF70008529A /* SFCompatibleGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5619206EF70008529A /* SFCompatibleGeocoder.m */; };
 		3ED2CF5B19206EF70008529A /* SFBlockedGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5819206EF70008529A /* SFBlockedGeocoder.m */; };
 		3ED59DBD1828D33A002531DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59DBC1828D33A002531DD /* Foundation.framework */; };
 		3ED59DC21828D33A002531DD /* SFiOSKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED59DC11828D33A002531DD /* SFiOSKit.h */; };
@@ -183,8 +182,6 @@
 		3ED2CF4F19206EE20008529A /* SFGoogleGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFGoogleGeocoder.m; sourceTree = "<group>"; };
 		3ED2CF5319206EF70008529A /* SFLocationDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFLocationDescription.h; sourceTree = "<group>"; };
 		3ED2CF5419206EF70008529A /* SFLocationDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFLocationDescription.m; sourceTree = "<group>"; };
-		3ED2CF5519206EF70008529A /* SFCompatibleGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCompatibleGeocoder.h; sourceTree = "<group>"; };
-		3ED2CF5619206EF70008529A /* SFCompatibleGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCompatibleGeocoder.m; sourceTree = "<group>"; };
 		3ED2CF5719206EF70008529A /* SFBlockedGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBlockedGeocoder.h; sourceTree = "<group>"; };
 		3ED2CF5819206EF70008529A /* SFBlockedGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBlockedGeocoder.m; sourceTree = "<group>"; };
 		3ED59DB91828D33A002531DD /* libSFiOSKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSFiOSKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,7 +245,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E23312D1AA14BBC0072CB8D /* AbstractCache */ = {
+		3E23312D1AA14BBC0072CB8D /* cache */ = {
 			isa = PBXGroup;
 			children = (
 				3E23312F1AA14BC30072CB8D /* SFAbstractCache.h */,
@@ -256,7 +253,7 @@
 				3E2331311AA14BC30072CB8D /* SFCacheControl.h */,
 				3E2331321AA14BC30072CB8D /* SFCacheControl.m */,
 			);
-			name = AbstractCache;
+			name = cache;
 			sourceTree = "<group>";
 		};
 		3E2F3F9E1871AA8D008170C1 /* Layout */ = {
@@ -283,8 +280,6 @@
 				3ED2CF3D19206EC20008529A /* manager */,
 				3ED2CF5319206EF70008529A /* SFLocationDescription.h */,
 				3ED2CF5419206EF70008529A /* SFLocationDescription.m */,
-				3ED2CF5519206EF70008529A /* SFCompatibleGeocoder.h */,
-				3ED2CF5619206EF70008529A /* SFCompatibleGeocoder.m */,
 				3ED2CF5719206EF70008529A /* SFBlockedGeocoder.h */,
 				3ED2CF5819206EF70008529A /* SFBlockedGeocoder.m */,
 				3EDC630A1920712F005B7FD1 /* SFBlockedLocationManager.h */,
@@ -399,8 +394,6 @@
 				3E171DDE1835037200A894AD /* SFToast.m */,
 				3EF620991828D62E0057A6FE /* SFWaitingIndicator.h */,
 				3EF6209A1828D62E0057A6FE /* SFWaitingIndicator.m */,
-				3E0381A6187D51A800E081AD /* SFGuidePlayer.h */,
-				3E0381A7187D51A800E081AD /* SFGuidePlayer.m */,
 				3E607A4118B312D4009AE98C /* SFAnimationDelegateProxy.h */,
 				3E607A4218B312D4009AE98C /* SFAnimationDelegateProxy.m */,
 				3E3D677C18CEED54008530CF /* SFCollapseManager.h */,
@@ -486,6 +479,8 @@
 				3EDC6058183C5919005B82D2 /* SFDotLineView.m */,
 				3EF61F4E1828D4340057A6FE /* SFGridViewWrapper.h */,
 				3EF61F4F1828D4340057A6FE /* SFGridViewWrapper.m */,
+				3E0381A6187D51A800E081AD /* SFGuidePlayer.h */,
+				3E0381A7187D51A800E081AD /* SFGuidePlayer.m */,
 				3EDC6017183B5370005B82D2 /* SFIBCompatibleView.h */,
 				3EDC6018183B5370005B82D2 /* SFIBCompatibleView.m */,
 				3E88F1E1191BA4F40019818B /* SFImageLabel.h */,
@@ -503,7 +498,7 @@
 		3EF61F671828D4510057A6FE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3E23312D1AA14BBC0072CB8D /* AbstractCache */,
+				3E23312D1AA14BBC0072CB8D /* cache */,
 				3ED2CF3B19206EB50008529A /* location */,
 				3E2EC0461A8DF8FB00A81F76 /* SFBundleImageCache.h */,
 				3E2EC0471A8DF8FB00A81F76 /* SFBundleImageCache.m */,
@@ -644,7 +639,6 @@
 				3E2EC03A1A8DDBB500A81F76 /* UIImage+SFBundle.m in Sources */,
 				3ED2CF5B19206EF70008529A /* SFBlockedGeocoder.m in Sources */,
 				3E19D6621831F7250048A788 /* UIWebView+SFAddition.m in Sources */,
-				3ED2CF5A19206EF70008529A /* SFCompatibleGeocoder.m in Sources */,
 				3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */,
 				3E2331331AA14BC30072CB8D /* SFAbstractCache.m in Sources */,
 				3EDC6059183C5919005B82D2 /* SFDotLineView.m in Sources */,

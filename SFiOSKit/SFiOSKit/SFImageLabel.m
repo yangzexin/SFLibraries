@@ -657,7 +657,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
             CGRect runPositionAndHeight = [[textRunPositionAndHeights objectAtIndex:runIndex] CGRectValue];
             
             CFRange runTextRange = CTRunGetStringRange(run);
-            CGFloat runY = runPositionAndHeight.origin.y + (maxImageHeight != 0 ? (fabsf(maxImageHeight - runPositionAndHeight.size.height) / 2)  : 0);
+            CGFloat runY = runPositionAndHeight.origin.y + (maxImageHeight != 0 ? (fabs(maxImageHeight - runPositionAndHeight.size.height) / 2)  : 0);
             CGRect runRect = [[runRects objectAtIndex:runIndex] CGRectValue];
             runRect.origin.y = runY - 4;
             runRect.origin.x -= 0;

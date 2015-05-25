@@ -8,26 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SFCardLayoutWidthCalculatable <NSObject>
+/**
+ CardLayoutItem calculatable
+ */
+@protocol SFCLICalculatable <NSObject>
 
-- (CGFloat)widthForCardLayout;
-- (CGFloat)heightForCardLayout; // when vertical is ture
+- (CGFloat)widthForCLI;
+- (CGFloat)heightForCLI; // when vertical is ture
 
 @end
 
-@interface UIView (SFCardLayout_MaxSize)
+@interface UIView (SFCardLayoutItem_MaxSize)
 
-- (void)setCLMaxWidth:(CGFloat)maxWidth;
-- (CGFloat)CLMaxWidth;
+- (void)setCLIMaxWidth:(CGFloat)maxWidth;
+- (CGFloat)CLIMaxWidth;
 
-- (void)setCLMaxWidthPercent:(float)percent;
-- (CGFloat)CLMaxWidthPercent;
+- (void)setCLIMaxWidthPercent:(float)percent;
+- (CGFloat)CLIMaxWidthPercent;
 
-- (void)setCLMaxHeight:(CGFloat)maxHeight;
-- (CGFloat)CLMaxHeight;
+- (void)setCLIMaxHeight:(CGFloat)maxHeight;
+- (CGFloat)CLIMaxHeight;
 
-- (void)setCLMaxHeightPercent:(float)percent;
-- (CGFloat)CLMaxHeightPercent;
+- (void)setCLIMaxHeightPercent:(float)percent;
+- (CGFloat)CLIMaxHeightPercent;
 
 @end
 
@@ -42,7 +45,12 @@ typedef NS_ENUM(NSUInteger, SFCardLayoutAlignment) {
 @interface SFCardLayout : UIView
 
 @property (nonatomic, assign) CGFloat spacing;
+
 @property (nonatomic, assign) SFCardLayoutAlignment alignment;
+
+/**
+ default is NO
+ */
 @property (nonatomic, assign) BOOL vertical;
 
 @end

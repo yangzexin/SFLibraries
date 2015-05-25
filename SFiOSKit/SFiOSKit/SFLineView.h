@@ -19,6 +19,6 @@ typedef NS_ENUM(NSUInteger, SFLineViewAlignment) {
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) BOOL vertical;
 @property (nonatomic, assign) SFLineViewAlignment alignment;
-@property (nonatomic, assign) BOOL normalBorder;
+@property (nonatomic, assign, getter=isNormalBorder) BOOL normalBorder;
 
 @end

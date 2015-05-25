@@ -76,7 +76,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         CGFloat maxDeltaY = 0;
         for (NSValue *pointValue in _touches) {
             CGPoint point = [pointValue CGPointValue];
-            CGFloat tmpDeltaY = fabsf(point.y - _beginPoint.y);
+            CGFloat tmpDeltaY = fabs(point.y - _beginPoint.y);
             if (tmpDeltaY > maxDeltaY) {
                 maxDeltaY = tmpDeltaY;
             }
@@ -181,8 +181,8 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         CGFloat totalMoveDistance = _lastTouchX - _triggerTouchX;
         self.direction = totalMoveDistance > _quickSlideMinimalMoveDistance ? SFGestureBackDetectorDirectionRight : SFGestureBackDetectorDirectionLeft;
         NSTimeInterval timeInterval = [NSDate timeIntervalSinceReferenceDate] - self.beginTouchTime;
-        self.velocity = fabsf(totalMoveDistance) / timeInterval;
-        self.quickSlide = (timeInterval < _quickSlideMinimalTimeInterval) && (fabsf(totalMoveDistance) > _quickSlideMinimalMoveDistance);
+        self.velocity = fabs(totalMoveDistance) / timeInterval;
+        self.quickSlide = (timeInterval < _quickSlideMinimalTimeInterval) && (fabs(totalMoveDistance) > _quickSlideMinimalMoveDistance);
         if ([_delegate respondsToSelector:@selector(gestureBackDetectorGestureDidRelease:gestureBackable:)]) {
             [_delegate gestureBackDetectorGestureDidRelease:self gestureBackable:_gestureGoback];
         }

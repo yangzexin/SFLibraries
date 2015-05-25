@@ -12,18 +12,6 @@
 
 #import "UIView+SFAddition.h"
 
-@interface SFRoundImageOptions ()
-
-@property (nonatomic, strong) UIColor *optionBackgroundColor;
-@property (nonatomic, strong) UIColor *optionBorderColor;
-@property (nonatomic, assign) CGSize optionSize;
-@property (nonatomic, assign) CGFloat optionCornerRadius;
-@property (nonatomic, assign) BOOL optionHidesTopCorner;
-@property (nonatomic, assign) BOOL optionHidesBottomCorner;
-@property (nonatomic, assign) BOOL optionLightBorder;
-
-@end
-
 @implementation SFRoundImageOptions
 
 + (instancetype)options
@@ -31,55 +19,6 @@
     SFRoundImageOptions *options = [self new];
     
     return options;
-}
-
-- (instancetype)setBackgroundColor:(UIColor *)backgroundColor
-{
-    self.optionBackgroundColor = backgroundColor;
-    
-    return self;
-}
-
-- (instancetype)setBorderColor:(UIColor *)borderColor
-{
-    self.optionBorderColor = borderColor;
-    
-    return self;
-}
-
-- (instancetype)setSize:(CGSize)size
-{
-    self.optionSize = size;
-    
-    return self;
-}
-
-- (instancetype)setCornerRadius:(CGFloat)cornerRadius
-{
-    self.optionCornerRadius = cornerRadius;
-    
-    return self;
-}
-
-- (instancetype)setHidesTopCorner:(BOOL)hidesTopCorner
-{
-    self.optionHidesTopCorner = hidesTopCorner;
-    
-    return self;
-}
-
-- (instancetype)setHidesBottomCorner:(BOOL)hidesBottomCorner
-{
-    self.optionHidesBottomCorner = hidesBottomCorner;
-    
-    return self;
-}
-
-- (instancetype)setLightBorder:(BOOL)lightBorder
-{
-    self.optionLightBorder = lightBorder;
-    
-    return self;
 }
 
 @end
@@ -111,13 +50,13 @@
 
 + (UIImage *)sf_roundImageWithOptions:(SFRoundImageOptions *)options
 {
-    return [self sf_roundImageWithBackgroundColor:options.optionBackgroundColor
-                                      borderColor:options.optionBorderColor
-                                             size:options.optionSize
-                                     cornerRadius:options.optionCornerRadius
-                                    hideTopCorner:options.optionHidesTopCorner
-                                 hideBottomCorner:options.optionHidesBottomCorner
-                                      lightBorder:options.optionLightBorder];
+    return [self sf_roundImageWithBackgroundColor:options.backgroundColor
+                                      borderColor:options.borderColor
+                                             size:options.size
+                                     cornerRadius:options.cornerRadius
+                                    hideTopCorner:options.hidesTopCorner
+                                 hideBottomCorner:options.hidesBottomCorner
+                                      lightBorder:options.lightBorder];
 }
 
 + (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor

@@ -73,9 +73,9 @@
 
 @implementation UIDatePicker (SFAddition)
 
-+ (void)sf_pickWithViewController:(UIViewController *)viewController
-                          options:(SFDatePickerDialogOptions *)options
-                       completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion
++ (void)sf_pickInViewController:(UIViewController *)viewController
+                        options:(SFDatePickerDialogOptions *)options
+                     completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion
 {
     UIView *container = [[UIView alloc] initWithFrame:viewController.view.bounds];
     container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

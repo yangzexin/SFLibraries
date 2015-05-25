@@ -202,6 +202,12 @@ NSString *const SFKeyboardHeightDidChangeNotification = @"SFKeyboardHeightDidCha
 - (SFCancellable *)sf_trackKeyboardStateChange:(void(^)(SFKeyboardState *state))change
 {
     NSString *identifier = [NSString stringWithFormat:@"%p", change];
+    
+    return [self sf_trackKeyboardStateChange:change identifier:identifier];
+}
+
+- (SFCancellable *)sf_trackKeyboardStateChange:(void(^)(SFKeyboardState *state))change identifier:(NSString *)identifier
+{
     [[SFKeyboardStateListener sharedListener] addKeyboardHeightObserverWithIdentifier:identifier usingBlock:change];
     SFDeallocObserver *disposer = [self sf_addDeallocObserver:^{
         [[SFKeyboardStateListener sharedListener] removeKeyboardObserverWithIdentifier:identifier];

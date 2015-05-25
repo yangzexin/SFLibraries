@@ -11,7 +11,7 @@
 @interface SFServant ()
 
 @property (nonatomic, assign) BOOL finished;
-@property (nonatomic, assign, getter = isExecuting) BOOL executing;
+@property (nonatomic, assign, getter=isExecuting) BOOL executing;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, copy) SFServantCallback callback;
 

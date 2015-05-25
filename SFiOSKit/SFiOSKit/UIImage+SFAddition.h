@@ -43,14 +43,14 @@
 
 @interface SFRoundImageOptions : NSObject
 
-+ (instancetype)options;
+@property (nonatomic, assign) CGSize size;
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, assign) BOOL hidesTopCorner;
+@property (nonatomic, assign) BOOL hidesBottomCorner;
+@property (nonatomic, assign, getter=isLightBorder) BOOL lightBorder;
 
-- (instancetype)setSize:(CGSize)size;
-- (instancetype)setBackgroundColor:(UIColor *)backgroundColor;
-- (instancetype)setBorderColor:(UIColor *)borderColor;
-- (instancetype)setCornerRadius:(CGFloat)cornerRadius;
-- (instancetype)setHidesTopCorner:(BOOL)hidesTopCorner;
-- (instancetype)setHidesBottomCorner:(BOOL)hidesTopCorner;
-- (instancetype)setLightBorder:(BOOL)lightBorder;
++ (instancetype)options;
 
 @end
