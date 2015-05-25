@@ -23,7 +23,7 @@
 + (instancetype)feedbackWithValue:(id)value
 {
     SFFeedback *feedback = [SFFeedback new];
-    feedback.value = feedback;
+    feedback.value = value;
     
     return feedback;
 }
