@@ -30,18 +30,18 @@
     return servant;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
-    [super servantIsAllReady];
+    [super servantStartingService];
     
     if (self.synchronous) {
         SFFeedback *callReturn = self.feedbackBuilder();
-        [self sendFeedback:callReturn];
+        [self returnWithFeedback:callReturn];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             SFFeedback *callReturn = self.feedbackBuilder();
             if (![self isCancelled]) {
-                [self sendFeedback:callReturn];
+                [self returnWithFeedback:callReturn];
             }
         });
     }

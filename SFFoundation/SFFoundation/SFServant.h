@@ -41,13 +41,13 @@ typedef void(^SFServantCallback)(SFFeedback *callReturn);
 /**
  Manual return feedback
  */
-- (void)sendFeedback:(SFFeedback *)feedback;
+- (void)returnWithFeedback:(SFFeedback *)feedback;
 
 #pragma mark - Servant life cycle
 /**
- Servant is all ready for starting service, start service here.
+ Servant is ready for starting service, custom servant behavior here.
  */
-- (void)servantIsAllReady;
+- (void)servantStartingService;
 
 - (void)servantDidSucceedWithValue:(id)value;
 

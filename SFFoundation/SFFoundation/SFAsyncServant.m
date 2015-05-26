@@ -30,13 +30,13 @@
     return [self servantWithAsyncExecution:execution whenCancelled:nil];
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
-    [super servantIsAllReady];
+    [super servantStartingService];
     __weak typeof(self) weakSelf = self;
     self.execution(^(SFFeedback *callReturn){
         __strong typeof(weakSelf) self = weakSelf;
-        [self sendFeedback:callReturn];
+        [self returnWithFeedback:callReturn];
     });
 }
 

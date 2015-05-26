@@ -63,13 +63,13 @@
         self.executing = YES;
         self.cancelled = NO;
         
-        [self servantIsAllReady];
+        [self servantStartingService];
     }
     
     return self;
 }
 
-- (void)sendFeedback:(SFFeedback *)feedback
+- (void)returnWithFeedback:(SFFeedback *)feedback
 {
     @synchronized(self) {
         CFRetain(((__bridge CFTypeRef)self));
@@ -108,7 +108,7 @@
     [self cancel];
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
 }
 

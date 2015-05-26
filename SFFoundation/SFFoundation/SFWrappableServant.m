@@ -44,14 +44,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
-            [self sendFeedback:wrappedFeedback];
+            [self returnWithFeedback:wrappedFeedback];
         }
     }];
 }
@@ -64,7 +64,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFSyncWrappedServant
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
     
@@ -78,7 +78,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     
     dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
     
-    [self sendFeedback:_feedback];
+    [self returnWithFeedback:_feedback];
 }
 
 @end
@@ -106,14 +106,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             self.interceptor(feedback);
-            [self sendFeedback:feedback];
+            [self returnWithFeedback:feedback];
         }
     }];
 }
@@ -163,16 +163,16 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFMainthreadCallbackWrappedServant
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __weak typeof(wself) self = wself;
         if ([NSThread isMainThread]) {
-            [self sendFeedback:feedback];
+            [self returnWithFeedback:feedback];
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self sendFeedback:feedback];
+                [self returnWithFeedback:feedback];
             });
         }
     }];
@@ -201,15 +201,15 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
-    [super servantIsAllReady];
+    [super servantStartingService];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.timeoutSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SFWrappableServant *wrappedServant = self.servant;
         if (!wrappedServant.finished) {
             [wrappedServant cancel];
-            [self sendFeedback:[SFFeedback feedbackWithError:[self _errorForTimeout]]];
+            [self returnWithFeedback:[SFFeedback feedbackWithError:[self _errorForTimeout]]];
         }
     });
 }
@@ -245,7 +245,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
@@ -254,7 +254,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
             self.continuingServant = self.continuing(feedback);
             [self.continuingServant sendWithCallback:^(SFFeedback *feedback) {
                 __strong typeof(wself) self = wself;
-                [self sendFeedback:feedback];
+                [self returnWithFeedback:feedback];
             }];
         }
     }];
@@ -298,7 +298,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return servant;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
     self.keyIdentifierValueFeedback = [NSMutableDictionary dictionary];
     NSArray *allIdentifiers = [self.keyIdentifierValueServant allKeys];
@@ -310,7 +310,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
         @synchronized(self.processingIdentifiers) {
             [self.processingIdentifiers removeObject:identifier];
             if (self.processingIdentifiers.count == 0) {
-                [self sendFeedback:[SFFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
+                [self returnWithFeedback:[SFFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
             }
         }
     };
@@ -338,14 +338,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantIsAllReady
+- (void)servantStartingService
 {
-    [super servantIsAllReady];
+    [super servantStartingService];
     if (self.servant) {
         __weak typeof(self) wself = self;
         [self.servant sendWithCallback:^(SFFeedback *feedback) {
             __strong typeof(wself) self = wself;
-            [self sendFeedback:feedback];
+            [self returnWithFeedback:feedback];
         }];
     }
 }
