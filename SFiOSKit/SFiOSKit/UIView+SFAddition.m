@@ -220,15 +220,15 @@
 
 - (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color
 {
-    CGFloat offsetY = 1.0f;
+    UIView *superView = self;
     if ([self isKindOfClass:[UITableViewCell class]] && [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        offsetY = 0;
+        superView = [(id)self contentView];
     }
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - offsetY, self.frame.size.width, 1)];
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, superView.frame.size.height - 1.0f, superView.frame.size.width, 1)];
     line.color = color;
     line.alignment = SFLineViewAlignmentBottom;
     line.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self addSubview:line];
+    [superView addSubview:line];
     
     return line;
 }
