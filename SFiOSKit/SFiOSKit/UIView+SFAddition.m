@@ -220,18 +220,13 @@
 
 - (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color
 {
-    UIView *superView = self;
-    if ([self isKindOfClass:[UITableViewCell class]] && [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) {
-        superView = [(id)self contentView];
-    }
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, superView.frame.size.height - 1.0f, superView.frame.size.width, 1)];
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
     line.color = color;
     line.alignment = SFLineViewAlignmentBottom;
     line.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [superView addSubview:line];
+    [self addSubview:line];
     
-    return line;
-}
+    return line;}
 
 - (void)sf_addTapListener:(void(^)())tapListener
 {
