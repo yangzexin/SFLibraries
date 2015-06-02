@@ -35,6 +35,7 @@
 		3E6640A8185D9C4900C05D90 /* SFCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6640A7185D9C4900C05D90 /* SFCircleProgressView.m */; };
 		3E7DB921182BB730002BB9E2 /* UISearchBar+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7DB920182BB730002BB9E2 /* UISearchBar+SFAddition.m */; };
 		3E7F06AA1915E49900C13710 /* UIDatePicker+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F06A91915E49900C13710 /* UIDatePicker+SFAddition.m */; };
+		3E7F70A11B1DA2570022BC50 /* UITextView+SFPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F70A01B1DA2570022BC50 /* UITextView+SFPlaceholder.m */; };
 		3E7FD089192715C300936C84 /* SFCenterLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7FD088192715C300936C84 /* SFCenterLayout.m */; };
 		3E8159D7192B21D500A5C78F /* SFSwitchTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8159D6192B21D500A5C78F /* SFSwitchTabController.m */; };
 		3E86B9881B136EFD0089BAC3 /* UITextField+NotEmpty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86B9871B136EFD0089BAC3 /* UITextField+NotEmpty.m */; };
@@ -155,6 +156,8 @@
 		3E7DB920182BB730002BB9E2 /* UISearchBar+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+SFAddition.m"; sourceTree = "<group>"; };
 		3E7F06A81915E49900C13710 /* UIDatePicker+SFAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDatePicker+SFAddition.h"; sourceTree = "<group>"; };
 		3E7F06A91915E49900C13710 /* UIDatePicker+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDatePicker+SFAddition.m"; sourceTree = "<group>"; };
+		3E7F709F1B1DA2570022BC50 /* UITextView+SFPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+SFPlaceholder.h"; sourceTree = "<group>"; };
+		3E7F70A01B1DA2570022BC50 /* UITextView+SFPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+SFPlaceholder.m"; sourceTree = "<group>"; };
 		3E7FD087192715C300936C84 /* SFCenterLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCenterLayout.h; sourceTree = "<group>"; };
 		3E7FD088192715C300936C84 /* SFCenterLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCenterLayout.m; sourceTree = "<group>"; };
 		3E8159D5192B21D500A5C78F /* SFSwitchTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSwitchTabController.h; sourceTree = "<group>"; };
@@ -438,6 +441,8 @@
 				3E46275F18654BFD009092B0 /* UITableViewCell+SFAddition.m */,
 				3E86B9861B136EFD0089BAC3 /* UITextField+NotEmpty.h */,
 				3E86B9871B136EFD0089BAC3 /* UITextField+NotEmpty.m */,
+				3E7F709F1B1DA2570022BC50 /* UITextView+SFPlaceholder.h */,
+				3E7F70A01B1DA2570022BC50 /* UITextView+SFPlaceholder.m */,
 				3EF61F321828D40D0057A6FE /* UIView+SFAddition.h */,
 				3EF61F331828D40D0057A6FE /* UIView+SFAddition.m */,
 				3E3D125C182B93FD00B3B422 /* UIViewController+SFAddition.h */,
@@ -590,6 +595,7 @@
 				3EF61F5E1828D4340057A6FE /* SFBlockedBarButtonItem.m in Sources */,
 				3E86B9881B136EFD0089BAC3 /* UITextField+NotEmpty.m in Sources */,
 				3E2F3F9C1871AA85008170C1 /* SFDivideLayout.m in Sources */,
+				3E7F70A11B1DA2570022BC50 /* UITextView+SFPlaceholder.m in Sources */,
 				3E607A4318B312D4009AE98C /* SFAnimationDelegateProxy.m in Sources */,
 				3ED2CF5219206EE20008529A /* SFGoogleGeocoder.m in Sources */,
 				3E171DDF1835037200A894AD /* SFToast.m in Sources */,
