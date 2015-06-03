@@ -51,6 +51,7 @@
 
 #import "SFBlockedBarButtonItem.h"
 #import "SFBlockedButton.h"
+#import "SFBorderedTextField.h"
 #import "SFCircleProgressView.h"
 #import "SFCollapsableLabel.h"
 #import "SFDotLineView.h"
