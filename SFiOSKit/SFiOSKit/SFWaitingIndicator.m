@@ -37,7 +37,7 @@
     self.backgroundRoundView = [[UIView alloc] init];
     _backgroundRoundView.backgroundColor = [UIColor blackColor];
     _backgroundRoundView.layer.cornerRadius = 12.0f;
-    _backgroundRoundView.alpha = 0.72f;
+    _backgroundRoundView.alpha = 0.57f;
     [_containerView addSubview:_backgroundRoundView];
     
     self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
