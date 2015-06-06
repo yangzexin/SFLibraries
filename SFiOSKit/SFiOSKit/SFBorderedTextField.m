@@ -35,6 +35,7 @@
         [options setBorderColor:[UIColor lightGrayColor]];
         [options setSize:CGSizeMake(10, 10)];
         [options setLightBorder:YES];
+        [options setBackgroundColor:[UIColor whiteColor]];
         options;
     })] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
     imageView.userInteractionEnabled = NO;
