@@ -40,7 +40,7 @@
 {
     return [SFComposableServant servantWithFeedbackBuilder:^SFFeedback *{
         return self;
-    }];
+    } synchronous:YES];
 }
 
 @end

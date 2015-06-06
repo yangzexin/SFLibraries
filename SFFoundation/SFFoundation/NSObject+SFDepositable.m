@@ -117,7 +117,6 @@
 - (void)addDepositable:(id<SFDepositable>)depositable
 {
     @synchronized(self) {
-        [self _analyze];
         if (depositable) {
             [_depositables addObject:depositable];
             if ([depositable respondsToSelector:@selector(depositableDidAdd)]) {
