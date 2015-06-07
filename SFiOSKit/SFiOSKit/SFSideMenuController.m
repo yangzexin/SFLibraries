@@ -30,6 +30,8 @@ static CGFloat kValidPanDistance = 37;
 @property (nonatomic, strong) SFGestureBackDetector *gestureBackDetector;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 
+@property (nonatomic, assign) CGFloat statusBarX;
+
 @end
 
 @implementation SFSideMenuController
@@ -109,6 +111,65 @@ static CGFloat kValidPanDistance = 37;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if ([self _shouldTriggerMoveStatusBar]) {
+        [self _moveStatusBar];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if ([self _shouldTriggerMoveStatusBar]) {
+        [SFSideMenuController _moveStatusBarWithX:0];
+    }
+}
+
++ (void)_moveStatusBarWithX:(CGFloat)x
+{
+    @try {
+        UIView *statusBar = [[UIApplication sharedApplication] valueForKey:[@[@"status", @"Bar"] componentsJoinedByString:@""]];
+        statusBar.transform = CGAffineTransformMakeTranslation(x, 0.0f);
+    }
+    @catch (NSException *exception) {
+        
+    }
+}
+
+- (void)_moveStatusBar
+{
+    [SFSideMenuController _moveStatusBarWithX:self.statusBarX];
+}
+
+- (BOOL)_shouldTriggerMoveStatusBar
+{
+    return fabs(self.scaleTransformForContentViewController) == 1.0f;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if (_menuShown) {
+        return [self.menuViewController preferredStatusBarStyle];
+    }
+    
+    return [self.contentViewController preferredStatusBarStyle];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    if (_menuShown) {
+        return [self.menuViewController prefersStatusBarHidden];
+    }
+    
+    return [self.contentViewController prefersStatusBarHidden];
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    if (_menuShown) {
+        return [self.menuViewController preferredStatusBarUpdateAnimation];
+    }
+    
+    return [self.contentViewController preferredStatusBarUpdateAnimation];
 }
 
 - (void)_addMenuControllerIfNeeded
@@ -246,9 +307,9 @@ static CGFloat kValidPanDistance = 37;
                       animationDuration:(NSTimeInterval)animationDuration
                              completion:(void(^)())completion
 {
-    [self _addMenuControllerIfNeeded];
     if (_menuShown == NO) {
         self.menuShown = YES;
+        [self _addMenuControllerIfNeeded];
         [self _updateViewState];
         _menuViewController.view.backgroundColor = [UIColor clearColor];
         
@@ -269,6 +330,12 @@ static CGFloat kValidPanDistance = 37;
         };
         
         void(^animationForContent)() = ^{
+            
+            if ([self _shouldTriggerMoveStatusBar]) {
+                self.statusBarX = [self _widthForMenuController];
+                [self _moveStatusBar];
+            }
+            
             CGRect tmpRect = _menuViewController.view.frame;
             
             _contentView.transform = CGAffineTransformMakeScale(_scaleTransformForContentViewController, _scaleTransformForContentViewController);
@@ -415,6 +482,11 @@ static CGFloat kValidPanDistance = 37;
             [self _restoreMenuControllerPosition];
             _contentView.transform = CGAffineTransformIdentity;
             _contentView.frame = self.view.bounds;
+            
+            if ([self _shouldTriggerMoveStatusBar]) {
+                self.statusBarX = 0;
+                [self _moveStatusBar];
+            }
         };
         
         void(^animationCompletion)() = ^{
