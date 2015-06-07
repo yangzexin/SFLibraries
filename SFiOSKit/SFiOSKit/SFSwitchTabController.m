@@ -95,6 +95,8 @@
     _viewControllers = viewControllers;
     
     _scrollView.contentSize = CGSizeMake(self.view.frame.size.width * _viewControllers.count, self.view.frame.size.height);
+    
+    [self scrollViewDidScroll:_scrollView];
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex
