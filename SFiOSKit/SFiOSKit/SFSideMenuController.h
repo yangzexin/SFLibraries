@@ -40,6 +40,7 @@
 
 @property (nonatomic, assign) BOOL disableGestureShowMenu;
 @property (nonatomic, assign) BOOL animatesShowMenu;
+@property (nonatomic, assign) BOOL parallexAnimation;
 
 @property (nonatomic, assign) BOOL endEditingWhenGestureWillTrigger;
 

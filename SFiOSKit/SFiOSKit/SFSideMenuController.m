@@ -259,16 +259,29 @@ static CGFloat kValidPanDistance = 37;
             [self _restoreMenuControllerPosition];
         }
         
-        void(^animationBlock)() = ^{
+        BOOL parallex = self.parallexAnimation;
+        
+        void(^animationForMenu)() = ^{
             CGRect tmpRect = _menuViewController.view.frame;
             tmpRect.origin.x = 0;
             _menuViewController.view.frame = tmpRect;
-            _menuViewController.view.alpha = animatesMenu ? 0.50f : 1.0f;
+            _menuViewController.view.alpha = animatesMenu ? 0.80f : 1.0f;
+        };
+        
+        void(^animationForContent)() = ^{
+            CGRect tmpRect = _menuViewController.view.frame;
             
             _contentView.transform = CGAffineTransformMakeScale(_scaleTransformForContentViewController, _scaleTransformForContentViewController);
             tmpRect = _contentView.frame;
             tmpRect.origin.x = [self _widthForMenuController];
             _contentView.frame = tmpRect;
+        };
+        
+        void(^animationBlock)() = ^{
+            if (!parallex || !animated) {
+                animationForMenu();
+            }
+            animationForContent();
         };
         void(^animationCompletion)() = ^{
             [_contentViewController endAppearanceTransition];
@@ -279,15 +292,33 @@ static CGFloat kValidPanDistance = 37;
         };
         if (animated) {
             [[self class] _animateWithDuration:animationDuration block:animationBlock completion:^{
-                if (animatesMenu) {
+                if (animatesMenu && !parallex) {
                     [UIView animateWithDuration:0.07f animations:^{
                         _menuViewController.view.alpha = 1.0f;
                     }];
                 }
-                if (animationCompletion) {
-                    animationCompletion();
+                
+                if (!parallex) {
+                    if (animationCompletion) {
+                        animationCompletion();
+                    }
                 }
             }];
+            if (parallex) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.05f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SFSideMenuController _animateWithDuration:.25f block:animationForMenu completion:^{
+                        if (animatesMenu) {
+                            [UIView animateWithDuration:0.07f animations:^{
+                                _menuViewController.view.alpha = 1.0f;
+                            }];
+                        }
+                        
+                        if (animationCompletion) {
+                            animationCompletion();
+                        }
+                    }];
+                });
+            }
         } else {
             animationBlock();
             animationCompletion();
