@@ -268,7 +268,12 @@
 
 - (void)toast:(NSString *)text
 {
-    [self toast:text hideAfterSeconds:1.70f];
+    [self toast:text completion:nil];
+}
+
+- (void)toast:(NSString *)text completion:(void(^)())completion
+{
+    [self toast:text hideAfterSeconds:1.70f identifier:nil completion:completion];
 }
 
 - (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds
