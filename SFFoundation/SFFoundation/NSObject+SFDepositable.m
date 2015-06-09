@@ -92,6 +92,7 @@
 - (void)dealloc
 {
     [self _releaseAllObjects];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)init
