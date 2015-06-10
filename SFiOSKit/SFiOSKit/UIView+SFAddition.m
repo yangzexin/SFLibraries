@@ -266,6 +266,13 @@
 {
     NSMutableDictionary *keyIdentifierValueTapListener = [self sf_associatedObjectWithKey:@"sf_keyIdentifierValueTapListener"];
     [keyIdentifierValueTapListener removeObjectForKey:identifier];
+    if (keyIdentifierValueTapListener.count == 0) {
+        SFTapGestureRecognizer *gr = [self sf_associatedObjectWithKey:@"sf_tap_gesture_recognizer"];
+        if (gr) {
+            [self removeGestureRecognizer:gr];
+            [self sf_removeAssociatedObjectWithKey:@"sf_tap_gesture_recognizer"];
+        }
+    }
 }
 
 @end

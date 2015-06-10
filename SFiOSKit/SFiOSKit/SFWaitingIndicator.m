@@ -19,6 +19,9 @@
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @property (nonatomic, assign) SFWaitingIndicatorPosition indicatorPosition;
 
+@property (nonatomic, assign) BOOL animatingShowing;
+@property (nonatomic, assign) BOOL animatingHiddenning;
+
 @end
 
 @implementation WaitingView
@@ -37,7 +40,7 @@
     self.backgroundRoundView = [[UIView alloc] init];
     _backgroundRoundView.backgroundColor = [UIColor blackColor];
     _backgroundRoundView.layer.cornerRadius = 12.0f;
-    _backgroundRoundView.alpha = 0.14f;
+    _backgroundRoundView.alpha = 0.72f;
     [_containerView addSubview:_backgroundRoundView];
     
     self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -63,7 +66,7 @@
     CGFloat textLabelHeight = 50.0f;
     
     _containerView.frame = CGRectMake((self.frame.size.width - containerViewWidth) / 2,
-                                      (self.frame.size.height - containerViewHeight) / 2,
+                                      (self.frame.size.height - containerViewHeight) / 2 - containerViewHeight / 2,
                                       containerViewWidth,
                                       containerViewHeight);
     _backgroundRoundView.frame = _containerView.bounds;
@@ -133,17 +136,22 @@
     if (!hidesWaitingView) {
         waitingView.hidden = hidesWaitingView;
         [view bringSubviewToFront:waitingView];
+        waitingView.animatingShowing = YES;
         [UIView animateWithDuration:.25f animations:^{
             waitingView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            waitingView.animatingShowing = NO;
         }];
     } else {
+        waitingView.animatingHiddenning = YES;
         [UIView animateWithDuration:.25f animations:^{
             waitingView.alpha = 0.0f;
         } completion:^(BOOL finished) {
-            if (finished) {
+            if (!waitingView.animatingShowing) {
                 waitingView.hidden = hidesWaitingView;
             }
             waitingView.alpha = 1.0f;
+            waitingView.animatingHiddenning = NO;
         }];
     }
 }
