@@ -20,7 +20,7 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 /**
  returns new feedback for wrapping
  */
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *original))feedbackWrapper;
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper;
 
 /**
  Force executing synchronous

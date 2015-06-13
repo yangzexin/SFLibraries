@@ -43,6 +43,15 @@
     } synchronous:YES];
 }
 
+- (NSString *)description
+{
+    if (self.error) {
+        return [NSString stringWithFormat:@"%@<error: %@>", NSStringFromClass([self class]), self.error];
+    } else {
+        return [NSString stringWithFormat:@"%@<value: %@>", NSStringFromClass([self class]), self.value];
+    }
+}
+
 @end
 
 @implementation SFServant

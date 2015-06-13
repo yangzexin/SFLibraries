@@ -96,6 +96,12 @@
     return keyParamNameValueParamValue;
 }
 
+- (NSString *)sf_JSONString
+{
+    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self options:0 error:nil]
+                                 encoding:NSUTF8StringEncoding];
+}
+
 @end
 
 @implementation NSMutableDictionary (SFAddition)

@@ -12,12 +12,18 @@
 #import "SFObject2Dict.h"
 #import "SFDict2Object.h"
 #import "SFComposableMappingCollector.h"
+#import "NSObject+SFRuntime.h"
 
 @implementation NSObject (SFSerialization)
 
 - (id)sf_dictionary
 {
     return [self sf_dictionaryWithSpecificObjcProperties:nil];
+}
+
+- (id)sf_dictionaryUntilNSObject
+{
+    return [self sf_dictionaryWithSpecificObjcProperties:[[self class] sf_objcPropertiesStopAtNSObject]];
 }
 
 - (id)sf_dictionaryWithSpecificObjcProperties:(NSArray *)specificObjcProperties

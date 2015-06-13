@@ -47,6 +47,8 @@
 // Returns a dictionary with all keys and values.
 - (instancetype)sf_combineWithKeysAndValues:(id)firstKey, ...;
 
+- (NSString *)sf_JSONString;
+
 @end
 
 @interface NSMutableDictionary (SFAddition)

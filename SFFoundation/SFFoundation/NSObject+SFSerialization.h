@@ -17,6 +17,8 @@
  */
 - (id)sf_dictionary;
 
+- (id)sf_dictionaryUntilNSObject;
+
 /**
  specificObjcProperties - Array of SFObjcProperty
  */

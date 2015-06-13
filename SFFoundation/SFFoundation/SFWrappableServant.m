@@ -23,19 +23,19 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @interface SFFeedbackWrappedServant : SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *original))feedbackWrapper;
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper;
 
 @end
 
 @interface SFFeedbackWrappedServant ()
 
-@property (nonatomic, copy) SFFeedback *(^feedbackWrapper)(SFFeedback *original);
+@property (nonatomic, copy) SFFeedback *(^feedbackWrapper)(SFFeedback *feedback);
 
 @end
 
 @implementation SFFeedbackWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *original))feedbackWrapper
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
 {
     self = [super initWithServant:servant];
     
@@ -373,7 +373,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     [super depositableWillRemove];
 }
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *original))feedbackWrapper
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
 {
     return [[SFFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:feedbackWrapper];
 }
