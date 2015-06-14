@@ -169,6 +169,7 @@
     toastView.maxSize = CGSizeMake(view.frame.size.width - 20, view.frame.size.height - 20);
     toastView.textLabelEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [toastView setText:text];
+    toastView.userInteractionEnabled = NO;
     
     if (identifier) {
         [[SFToastManager sharedManager] addView:toastView identifier:identifier];
