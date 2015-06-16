@@ -372,19 +372,17 @@ static CGFloat kValidPanDistance = 37;
                 }
             }];
             if (parallex) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.05f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [SFSideMenuController _animateWithDuration:.25f block:animationForMenu completion:^{
-                        if (animatesMenu) {
-                            [UIView animateWithDuration:0.07f animations:^{
-                                _menuViewController.view.alpha = 1.0f;
-                            }];
-                        }
-                        
-                        if (animationCompletion) {
-                            animationCompletion();
-                        }
-                    }];
-                });
+                [SFSideMenuController _animateWithDuration:.10f block:animationForMenu completion:^{
+                    if (animatesMenu) {
+                        [UIView animateWithDuration:0.07f animations:^{
+                            _menuViewController.view.alpha = 1.0f;
+                        }];
+                    }
+                    
+                    if (animationCompletion) {
+                        animationCompletion();
+                    }
+                }];
             }
         } else {
             animationBlock();
