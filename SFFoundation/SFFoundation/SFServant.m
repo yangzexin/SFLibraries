@@ -46,9 +46,9 @@
 - (NSString *)description
 {
     if (self.error) {
-        return [NSString stringWithFormat:@"%@<error: %@>", NSStringFromClass([self class]), self.error];
+        return [NSString stringWithFormat:@"<%@> error: %@", NSStringFromClass([self class]), self.error];
     } else {
-        return [NSString stringWithFormat:@"%@<value: %@>", NSStringFromClass([self class]), self.value];
+        return [NSString stringWithFormat:@"<%@> value: %@", NSStringFromClass([self class]), self.value];
     }
 }
 
@@ -83,9 +83,11 @@
     @synchronized(self) {
         CFRetain(((__bridge CFTypeRef)self));
         if (![self isCancelled]) {
-            if (_callback) {
-                _callback(feedback);
-                self.callback = nil;
+            if (self.callback) {
+                self.callback(feedback);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.callback = nil;
+                });
             }
         }
         self.executing = NO;

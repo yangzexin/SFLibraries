@@ -23,23 +23,29 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @interface SFFeedbackWrappedServant : SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper;
+- (id)initWithServant:(id<SFServant>)servant
+      feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
+                async:(BOOL)async;
 
 @end
 
 @interface SFFeedbackWrappedServant ()
 
 @property (nonatomic, copy) SFFeedback *(^feedbackWrapper)(SFFeedback *feedback);
+@property (nonatomic, assign) BOOL async;
 
 @end
 
 @implementation SFFeedbackWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
+- (id)initWithServant:(id<SFServant>)servant
+      feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
+                async:(BOOL)async
 {
     self = [super initWithServant:servant];
     
     self.feedbackWrapper = feedbackWrapper;
+    self.async = async;
     
     return self;
 }
@@ -49,11 +55,20 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
-        if (self) {
-            SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
-            [self returnWithFeedback:wrappedFeedback];
+        if (self.async) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self _wrapFeedback:feedback];
+            });
+        } else {
+            [self _wrapFeedback:feedback];
         }
     }];
+}
+
+- (void)_wrapFeedback:(SFFeedback *)feedback
+{
+    SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
+    [self returnWithFeedback:wrappedFeedback];
 }
 
 @end
@@ -375,7 +390,12 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 - (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
 {
-    return [[SFFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:feedbackWrapper];
+    return [self wrapFeedback:feedbackWrapper async:NO];
+}
+
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async
+{
+    return [[SFFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:feedbackWrapper async:async];
 }
 
 - (SFWrappableServant *)sync
