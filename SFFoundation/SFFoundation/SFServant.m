@@ -116,7 +116,9 @@
 
 - (void)depositableWillRemove
 {
-    [self cancel];
+    if (!self.finished) {
+        [self cancel];
+    }
 }
 
 - (void)servantStartingService
