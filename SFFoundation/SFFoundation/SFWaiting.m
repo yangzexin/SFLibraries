@@ -7,7 +7,8 @@
 //
 
 #import "SFWaiting.h"
-#import "SFEventLoop.h"
+
+#import "SFWaiting+Private.h"
 
 @interface WaitingCallbackWrapper : NSObject
 
@@ -26,14 +27,6 @@
     
     return wrapper;
 }
-
-@end
-
-@interface SFWaiting () <SFEventLoopItem>
-
-@property (nonatomic, copy) BOOL(^condition)();
-@property (nonatomic, assign) BOOL running;
-@property (nonatomic, strong) NSMutableArray *callbacks;
 
 @end
 
@@ -85,7 +78,10 @@
         }
         [self removeCallbackWithIdentifier:identifier];
         [self.callbacks addObject:[WaitingCallbackWrapper wrapperWithCallback:block identifier:identifier]];
-        [self startCheckCondition];
+        
+        if ([self shouldAddToEventLoop]) {
+            [self startCheckCondition];
+        }
     }
 }
 
@@ -106,19 +102,25 @@
     }
 }
 
-- (void)notfiyAllCallbacks
+- (void)notfiyCallbacksSync:(BOOL)sync
 {
     @synchronized(self) {
         NSArray *callbacks = [NSArray arrayWithArray:self.callbacks];
-        for (WaitingCallbackWrapper *wrapper in callbacks) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        if (sync) {
+            for (WaitingCallbackWrapper *wrapper in callbacks) {
                 wrapper.callback();
-            });
+            }
+        } else {
+            for (WaitingCallbackWrapper *wrapper in callbacks) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    wrapper.callback();
+                });
+            }
         }
     }
 }
 
-- (void)removeAllCallbacks
+- (void)removeCallbacks
 {
     @synchronized(self){
         [self.callbacks removeAllObjects];
@@ -135,7 +137,7 @@
     }
 }
 
-- (void)cancelWithUniqueIdentifier:(NSString *)identifier
+- (void)cancelByUniqueIdentifier:(NSString *)identifier
 {
     [self removeCallbackWithIdentifier:identifier];
 }
@@ -147,6 +149,11 @@
         self.running = NO;
         self.callbacks = [NSMutableArray array];
     }
+}
+
+- (BOOL)shouldAddToEventLoop
+{
+    return YES;
 }
 
 - (NSString *)description
@@ -164,8 +171,8 @@
 {
     @synchronized(self) {
         if (self.running && [self checkCondition]) {
-            [self notfiyAllCallbacks];
-            [self removeAllCallbacks];
+            [self notfiyCallbacksSync:NO];
+            [self removeCallbacks];
             [self cancelAll];
         }
     }

@@ -220,11 +220,15 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 {
     [super servantStartingService];
     
+    __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.timeoutSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        SFWrappableServant *wrappedServant = self.servant;
-        if (!wrappedServant.finished) {
-            [wrappedServant cancel];
-            [self returnWithFeedback:[SFFeedback feedbackWithError:[self _errorForTimeout]]];
+        if (weakSelf) {
+            __strong typeof(weakSelf) self = weakSelf;
+            SFWrappableServant *wrappedServant = self.servant;
+            if (!wrappedServant.finished) {
+                [wrappedServant cancel];
+                [self returnWithFeedback:[SFFeedback feedbackWithError:[self _errorForTimeout]]];
+            }
         }
     });
 }

@@ -55,8 +55,7 @@
 @property (nonatomic, weak) UIScrollView *rootScrollView;
 
 @property (nonatomic, strong) NSMutableArray *addedFields;
-@property (nonatomic, assign) BOOL animating;
-@property (nonatomic, strong) SFWaiting *waitingForNotAnimating;
+@property (nonatomic, strong) SFMarkWaiting *waitingForNotAnimating;
 @property (nonatomic, strong) SFMarkWaiting *waitingForKeyboardShown;
 
 @property (nonatomic, assign) CGFloat topSuperViewLastPositionY;
@@ -91,14 +90,10 @@
     self.setReturnKeyAutomatically = YES;
     self.setPositionAutomatically = YES;
 
-    __weak typeof(self) weakSelf = self;
-    self.waitingForNotAnimating = [SFWaiting waitWithCondition:^BOOL{
-        __strong typeof(weakSelf) self = weakSelf;
-        return !self.animating;
-    }];
-    
+    self.waitingForNotAnimating = [SFMarkWaiting markWaiting];
     self.waitingForKeyboardShown = [SFMarkWaiting markWaiting];
     
+    __weak typeof(self) weakSelf = self;
     [self sf_depositNotificationObserver:[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         __strong typeof(weakSelf) self = weakSelf;
         [self.waitingForKeyboardShown markAsFinish];
@@ -226,13 +221,13 @@
                 
                 if (gap < minimalGapHeight || self.alwaysAutoSetPosition) {
                     self.topSuperViewPositionReseted = YES;
-                    self.animating = YES;
+                    [self.waitingForNotAnimating resetMark];
                     [UIView animateWithDuration:.25f animations:^{
                         CGRect tmpFrame = topSuperView.frame;
                         tmpFrame.origin.y = self.topSuperViewLastPositionY - (minimalGapHeight - gap);
                         topSuperView.frame = tmpFrame;
                     } completion:^(BOOL finished) {
-                        self.animating = NO;
+                        [self.waitingForNotAnimating markAsFinish];
                     }];
                 }
             } else {
@@ -246,13 +241,13 @@
                 
                 if (gap < minimalGapHeight || self.alwaysAutoSetPosition) {
                     self.topSuperViewPositionReseted = YES;
-                    self.animating = YES;
+                    [self.waitingForNotAnimating resetMark];
                     [UIView animateWithDuration:.25f animations:^{
                         CGPoint contentOffset = self.rootScrollView.contentOffset;
                         contentOffset.y = self.rootScrollView.contentOffset.y + (minimalGapHeight - gap);
                         self.rootScrollView.contentOffset = contentOffset;
                     } completion:^(BOOL finished) {
-                        self.animating = NO;
+                        [self.waitingForNotAnimating markAsFinish];
                     }];
                 }
             }

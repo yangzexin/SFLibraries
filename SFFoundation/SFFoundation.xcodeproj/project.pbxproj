@@ -70,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E0383E91B3AAB9C003A5EF4 /* SFWaiting+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFWaiting+Private.h"; sourceTree = "<group>"; };
 		3E0ABD7B1928FD94000E9242 /* SFPropertyProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPropertyProcessor.h; sourceTree = "<group>"; };
 		3E0ABD7C1928FD94000E9242 /* SFPropertyProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFPropertyProcessor.m; sourceTree = "<group>"; };
 		3E0ABD8419290E2A000E9242 /* SFPropertyObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFPropertyObserving.h; sourceTree = "<group>"; };
@@ -272,6 +273,7 @@
 				3EF304B7191922C60070B9BC /* SFTimeLimitation.h */,
 				3EF304B8191922C60070B9BC /* SFTimeLimitation.m */,
 				3EF61F061828D2520057A6FE /* SFWaiting.h */,
+				3E0383E91B3AAB9C003A5EF4 /* SFWaiting+Private.h */,
 				3EF61F071828D2520057A6FE /* SFWaiting.m */,
 			);
 			name = EventControl;

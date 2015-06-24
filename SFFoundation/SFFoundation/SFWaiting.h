@@ -24,7 +24,7 @@
 
 - (void)wait:(void(^)())block;
 - (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier;
-- (void)cancelWithUniqueIdentifier:(NSString *)identifier;
+- (void)cancelByUniqueIdentifier:(NSString *)identifier;
 - (void)cancelAll;
 
 @end

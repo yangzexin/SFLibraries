@@ -8,6 +8,8 @@
 
 #import "SFMarkWaiting.h"
 
+#import "SFWaiting+Private.h"
+
 @interface SFMarkWaiting ()
 
 @property (nonatomic, assign) BOOL mark;
@@ -24,14 +26,28 @@
     return waiting;
 }
 
-- (BOOL)checkCondition
+- (BOOL)shouldAddToEventLoop
 {
-    return _mark;
+    return NO;
 }
 
 - (void)markAsFinish
 {
     self.mark = YES;
+    
+    [self notfiyCallbacksSync:YES];
+    [self removeCallbacks];
+}
+
+- (void)wait:(void (^)())block uniqueIdentifier:(NSString *)identifier
+{
+    if ([self isMarked]) {
+        if (block) {
+            block();
+        }
+    } else {
+        [super wait:block uniqueIdentifier:identifier];
+    }
 }
 
 - (void)resetMark
