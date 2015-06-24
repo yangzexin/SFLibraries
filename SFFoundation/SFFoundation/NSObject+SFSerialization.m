@@ -56,6 +56,11 @@
 
 + (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors
 {
+    return [self sf_objectFromDictionary:dictionary mapping:mapping propertyProcessors:propertyProcessors givenObject:nil];
+}
+
++ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors givenObject:(id)givenObject
+{
     if (dictionary == nil) {
         return nil;
     }
@@ -66,6 +71,9 @@
     }
     
     SFDict2ObjectEnhanced *dict2Obj = [SFDict2ObjectEnhanced dict2ObjectEnhancedWithClass:[self class] objectMappingCollector:mappingStringCollector];
+    if (givenObject) {
+        dict2Obj.givenObject = givenObject;
+    }
     
     id object = nil;
     if ([dictionary isKindOfClass:[NSArray class]]) {
@@ -75,6 +83,21 @@
     }
     
     return object;
+}
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary
+{
+    return [self sf_setPropertyValuesFromDictionary:dictionary mapping:nil];
+}
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping
+{
+    return [self sf_setPropertyValuesFromDictionary:dictionary mapping:mapping propertyProcessors:nil];
+}
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors
+{
+    return [[self class] sf_objectFromDictionary:dictionary mapping:mapping propertyProcessors:propertyProcessors givenObject:self];
 }
 
 @end

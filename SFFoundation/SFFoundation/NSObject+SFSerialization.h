@@ -17,6 +17,10 @@
  */
 - (id)sf_dictionary;
 
+/**
+ Returns a dictionary or dictionaries includes property name as keys and value of property as values
+ , except property values of NSObject
+ */
 - (id)sf_dictionaryUntilNSObject;
 
 /**
@@ -62,5 +66,11 @@
  propertyProcessors - Array of SFPropertyProcessor
  */
 + (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors;
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary;
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping;
+
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors;
 
 @end

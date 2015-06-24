@@ -27,6 +27,16 @@
     return enhanced;
 }
 
+- (void)setGivenObject:(id)givenObject
+{
+    self.dict2Object.givenObject = givenObject;
+}
+
+- (id)givenObject
+{
+    return self.dict2Object.givenObject;
+}
+
 - (id)objectsFromDictionaries:(NSArray *)dictionaries
 {
     return [self.dict2Object objectsFromDictionaries:dictionaries];

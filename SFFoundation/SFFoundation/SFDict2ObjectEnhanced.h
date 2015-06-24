@@ -16,6 +16,7 @@ typedef void(^SFDict2ObjectUnhandlablePropertyHandler)(SFObjcProperty *property,
 @interface SFDict2ObjectEnhanced : NSObject <SFDict2Object>
 
 @property (nonatomic, copy) SFDict2ObjectUnhandlablePropertyHandler unhandlablePropertyHandler;
+@property (nonatomic, strong) id givenObject;
 
 + (instancetype)dict2ObjectEnhancedWithClass:(Class)clss objectMappingCollector:(id<SFObjectMappingCollector>)objectMappingCollector;
 

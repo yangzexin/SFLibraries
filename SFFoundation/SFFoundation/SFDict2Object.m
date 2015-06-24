@@ -26,12 +26,17 @@ id SFDictToObject(Class clss, id dict)
 
 @implementation SFDict2Object
 
-static id SFDict2ObjectGetObject(NSDictionary *dictionary, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate)
+static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate)
 {
-    id object = nil;
+    id object = givenObject;
+    
     if ([dictionary isKindOfClass:[NSDictionary class]]) {
         Class objectClass = [objectMapping mappingClass];
-        object = [objectClass new];
+        
+        if (object == nil) {
+            object = [objectClass new];
+        }
+        
         for (NSString *key in [dictionary allKeys]) {
             NSString *mappingProperty = [objectMapping propertyNameForPropertyNameMapping:key];
             NSString *property = mappingProperty.length == 0 ? key : mappingProperty;
@@ -44,7 +49,7 @@ static id SFDict2ObjectGetObject(NSDictionary *dictionary, id<SFObjectMapping> o
                 if ([subDictionary isKindOfClass:[NSArray class]] && [subDictionary count] != 0) {
                     subObject = SFDict2ObjectGetObjects(subDictionary, subObjectMapping, delegate);
                 } else {
-                    subObject = SFDict2ObjectGetObject(subDictionary, subObjectMapping, delegate);
+                    subObject = SFDict2ObjectGetObject(nil, subDictionary, subObjectMapping, delegate);
                 }
                 
                 if (subObject && [SFRuntimeUtils isClass:[objcProperty propertyClass] replacableByClass:[subObject class]]) {
@@ -77,7 +82,7 @@ static id SFDict2ObjectGetObject(NSDictionary *dictionary, id<SFObjectMapping> o
                                 }
                                 
                                 if (tmpObjectMapping) {
-                                    id subObject = SFDict2ObjectGetObject(value, tmpObjectMapping, delegate);
+                                    id subObject = SFDict2ObjectGetObject(nil, value, tmpObjectMapping, delegate);
                                     [object setValue:subObject forKey:property];
                                 }
                             }
@@ -101,7 +106,7 @@ static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> obj
     if ([dictionaries isKindOfClass:[NSArray class]]) {
         objects = [NSMutableArray array];
         for (NSDictionary *dictionary in dictionaries) {
-            id object = SFDict2ObjectGetObject(dictionary, objectMapping, delegate);
+            id object = SFDict2ObjectGetObject(nil, dictionary, objectMapping, delegate);
             if (object) {
                 [objects addObject:object];
             }
@@ -121,7 +126,7 @@ static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> obj
 
 - (id)objectFromDictionary:(NSDictionary *)dictionary
 {
-    return SFDict2ObjectGetObject(dictionary, _objectMapping, _delegate);
+    return SFDict2ObjectGetObject(self.givenObject, dictionary, _objectMapping, _delegate);
 }
 
 - (id)objectsFromDictionaries:(NSArray *)dictionaries

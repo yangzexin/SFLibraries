@@ -39,6 +39,8 @@ OBJC_EXPORT id SFDictToObject(Class clss, id dict);
 @property (nonatomic, strong) id<SFObjectMapping> objectMapping;
 @property (nonatomic, assign) id<SFDict2ObjectDelegate> delegate;
 
+@property (nonatomic, strong) id givenObject;
+
 + (instancetype)dict2ObjectWithObjectMapping:(id<SFObjectMapping>)objectMapping;
 
 @end
