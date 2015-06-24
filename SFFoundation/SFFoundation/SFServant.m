@@ -116,7 +116,7 @@
 
 - (void)depositableWillRemove
 {
-    if (!self.finished) {
+    if (!self.finished && !self.cancelled) {
         [self cancel];
     }
 }
