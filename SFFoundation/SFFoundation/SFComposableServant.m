@@ -10,11 +10,14 @@
 
 @interface SFComposableServant ()
 
-@property (nonatomic, copy) SFFeedback *(^feedbackBuilder)();
-
 @end
 
 @implementation SFComposableServant
+
++ (instancetype)servant
+{
+    return [self servantWithFeedbackBuilder:nil];
+}
 
 + (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder
 {
