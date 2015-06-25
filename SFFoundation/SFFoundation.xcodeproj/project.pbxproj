@@ -17,6 +17,7 @@
 		3E105F261856DF07007326BE /* SFComposableMappingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F1F1856DF07007326BE /* SFComposableMappingCollector.m */; };
 		3E105F271856DF07007326BE /* SFObjectMappingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E105F211856DF07007326BE /* SFObjectMappingCollector.m */; };
 		3E1EA5BB1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA5BA1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m */; };
+		3E3D11201B3B84C300A0F356 /* NSobject+SFMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E3D111F1B3B84C300A0F356 /* NSobject+SFMethodSwizzling.m */; };
 		3E415C011856DF5600335EFE /* SFObject2Dict.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E415C001856DF5600335EFE /* SFObject2Dict.m */; };
 		3E4627941867DF8C009092B0 /* SFCountdownControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4627931867DF8C009092B0 /* SFCountdownControl.m */; };
 		3E46ADAF1A03823B00578334 /* SFComposableServant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E46ADA11A03823B00578334 /* SFComposableServant.m */; };
@@ -91,6 +92,8 @@
 		3E105F211856DF07007326BE /* SFObjectMappingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFObjectMappingCollector.m; sourceTree = "<group>"; };
 		3E1EA5B91A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+SFSafeExt.h"; sourceTree = "<group>"; };
 		3E1EA5BA1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+SFSafeExt.m"; sourceTree = "<group>"; };
+		3E3D111E1B3B84C300A0F356 /* NSobject+SFMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSobject+SFMethodSwizzling.h"; sourceTree = "<group>"; };
+		3E3D111F1B3B84C300A0F356 /* NSobject+SFMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSobject+SFMethodSwizzling.m"; sourceTree = "<group>"; };
 		3E415BFF1856DF5600335EFE /* SFObject2Dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFObject2Dict.h; sourceTree = "<group>"; };
 		3E415C001856DF5600335EFE /* SFObject2Dict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFObject2Dict.m; sourceTree = "<group>"; };
 		3E4627921867DF8C009092B0 /* SFCountdownControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCountdownControl.h; sourceTree = "<group>"; };
@@ -362,10 +365,6 @@
 		3EF61EEA1828D20E0057A6FE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */,
-				3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */,
-				3E0B788318F67A3900593B64 /* NSValue+SFWeakObject.h */,
-				3E0B788418F67A3900593B64 /* NSValue+SFWeakObject.m */,
 				3EFF91491990E1A9007A62ED /* NSArray+SFAddition.h */,
 				3EFF914A1990E1A9007A62ED /* NSArray+SFAddition.m */,
 				3EF61EF71828D21D0057A6FE /* NSData+SFAddition.h */,
@@ -374,6 +373,8 @@
 				3EF61EF01828D21D0057A6FE /* NSDate+SFAddition.m */,
 				3EBA227F182B39AB003B768C /* NSDictionary+SFAddition.h */,
 				3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */,
+				3E3D111E1B3B84C300A0F356 /* NSobject+SFMethodSwizzling.h */,
+				3E3D111F1B3B84C300A0F356 /* NSobject+SFMethodSwizzling.m */,
 				3ECF2F7B1988845C000E75C0 /* NSObject+SFTimeLimitation.h */,
 				3ECF2F7C1988845C000E75C0 /* NSObject+SFTimeLimitation.m */,
 				3EF61EF51828D21D0057A6FE /* NSString+SFAddition.h */,
@@ -382,6 +383,10 @@
 				3EF61EF41828D21D0057A6FE /* NSString+SFJavaLikeStringHandle.m */,
 				3E1EA5B91A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.h */,
 				3E1EA5BA1A1AD8F700D1FC12 /* NSUserDefaults+SFSafeExt.m */,
+				3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */,
+				3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */,
+				3E0B788318F67A3900593B64 /* NSValue+SFWeakObject.h */,
+				3E0B788418F67A3900593B64 /* NSValue+SFWeakObject.m */,
 				3EFF91461990DF97007A62ED /* SFCombinationEnd.h */,
 				3EFF91471990DF97007A62ED /* SFCombinationEnd.m */,
 			);
@@ -466,6 +471,7 @@
 				3E105F221856DF07007326BE /* SFObjectMapping.m in Sources */,
 				3EF61EFE1828D21D0057A6FE /* NSString+SFAddition.m in Sources */,
 				3ECF2F7A198883B7000E75C0 /* NSObject+SFRuntime.m in Sources */,
+				3E3D11201B3B84C300A0F356 /* NSobject+SFMethodSwizzling.m in Sources */,
 				3E105F261856DF07007326BE /* SFComposableMappingCollector.m in Sources */,
 				3EF61F111828D2520057A6FE /* SFRuntimeUtils.m in Sources */,
 				3EF61F1A1828D27A0057A6FE /* SFDelayControl.m in Sources */,

@@ -25,6 +25,7 @@
 #import "NSData+SFAddition.h"
 #import "NSDate+SFAddition.h"
 #import "NSDictionary+SFAddition.h"
+#import "NSobject+SFMethodSwizzling.h"
 #import "NSObject+SFObjectAssociation.h"
 #import "NSObject+SFDepositable.h"
 #import "NSObject+SFObservation.h"
