@@ -25,8 +25,12 @@
 
 - (void)sf_setX:(CGFloat)x;
 - (void)sf_setY:(CGFloat)y;
+
 - (void)sf_setWidth:(CGFloat)width;
 - (void)sf_setHeight:(CGFloat)height;
+
+- (void)sf_setX:(CGFloat)x y:(CGFloat)y;
+- (void)sf_setWidth:(CGFloat)width height:(CGFloat)height;
 
 - (void)sf_removeAllSubviews;
 

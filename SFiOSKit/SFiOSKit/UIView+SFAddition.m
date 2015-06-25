@@ -141,6 +141,22 @@
     self.frame = tmpFrame;
 }
 
+- (void)sf_setX:(CGFloat)x y:(CGFloat)y
+{
+    CGRect tmpFrame = self.frame;
+    tmpFrame.origin.x = x;
+    tmpFrame.origin.y = y;
+    self.frame = tmpFrame;
+}
+
+- (void)sf_setWidth:(CGFloat)width height:(CGFloat)height
+{
+    CGRect tmpFrame = self.frame;
+    tmpFrame.size.width = width;
+    tmpFrame.size.height = height;
+    self.frame = tmpFrame;
+}
+
 - (void)sf_removeAllSubviews
 {
     for (UIView *view in [self subviews]) {
