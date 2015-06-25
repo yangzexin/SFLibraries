@@ -291,6 +291,30 @@
     }
 }
 
+- (void)sf_setSmallWaiting:(BOOL)waiting
+{
+    UIActivityIndicatorView *indicatorView = [self sf_associatedObjectWithKey:@"sf_smallWaitingIndicator"];
+    if (indicatorView == nil) {
+        UIView *view = [[UIView alloc] initWithFrame:self.bounds];
+        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.72f];
+        [self addSubview:view];
+        
+        indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:view.bounds];
+        indicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        indicatorView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [view addSubview:indicatorView];
+        [self sf_setAssociatedObject:indicatorView key:@"sf_smallWaitingIndicator"];
+    }
+    indicatorView.superview.hidden = !waiting;
+    if (waiting) {
+        [self bringSubviewToFront:indicatorView.superview];
+        [indicatorView startAnimating];
+    } else {
+        [indicatorView stopAnimating];
+    }
+}
+
 @end
 
 

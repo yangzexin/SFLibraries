@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum{
-    SFWaitingIndicatorPositionTop,
-    SFWaitingIndicatorPositionLeft,
-    SFWaitingIndicatorPositionRight,
-    SFWaitingIndicatorPositionBottom
-} SFWaitingIndicatorPosition;
-
 @interface SFWaitingIndicator : NSObject
 
 + (void)showWaiting:(BOOL)waiting inView:(UIView *)view;

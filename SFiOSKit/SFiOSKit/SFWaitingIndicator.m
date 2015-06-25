@@ -10,6 +10,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSObject+SFObjectAssociation.h"
 
+typedef enum{
+    SFWaitingIndicatorPositionTop,
+    SFWaitingIndicatorPositionLeft,
+    SFWaitingIndicatorPositionRight,
+    SFWaitingIndicatorPositionBottom
+} SFWaitingIndicatorPosition;
+
 @interface WaitingView : UIView
 
 @property (nonatomic, strong) UIView *blockView;
