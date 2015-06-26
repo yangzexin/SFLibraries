@@ -58,7 +58,17 @@ NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcPro
                         NSArray *array = propertyValue;
                         if ([array isKindOfClass:[NSArray class]]) {
                             for (NSObject *obj in array) {
-                                [dictionaries addObject:_SFObject2DictionaryWithObjcProperties(obj, nil, searchedObjects, NSNumberForPlainType)];
+                                if ([obj isKindOfClass:[NSString class]]
+                                    || [obj isKindOfClass:[NSNumber class]]
+//                                    || [obj isKindOfClass:[NSValue class]]
+//                                    || [obj isKindOfClass:[NSDate class]]
+//                                    || [obj isKindOfClass:[NSURL class]]
+//                                    || [obj isKindOfClass:[NSError class]]
+                                    ) {
+                                    [dictionaries addObject:obj];
+                                } else {
+                                    [dictionaries addObject:_SFObject2DictionaryWithObjcProperties(obj, nil, searchedObjects, NSNumberForPlainType)];
+                                }
                             }
                             [dictionary setObject:dictionaries forKey:property.name];
                         }
