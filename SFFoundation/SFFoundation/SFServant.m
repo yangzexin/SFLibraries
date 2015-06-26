@@ -59,7 +59,7 @@
 - (void)dealloc
 {
 #ifdef DEBUG
-    NSLog(@"%@ dealloc", self);
+//    NSLog(@"%@ dealloc", self);
 #endif
 }
 
