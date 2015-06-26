@@ -49,6 +49,8 @@
 - (void)sf_addTapListener:(void(^)())tapListener identifier:(NSString *)identifier;
 - (void)sf_removeTapListenerWithIdentifier:(NSString *)identifier;
 
+- (CGFloat)sf_smallWaitingAlpha;
+- (void)sf_setSmallWaitingAlpha:(CGFloat)alpha;
 - (void)sf_setSmallWaiting:(BOOL)waiting;
 
 @end

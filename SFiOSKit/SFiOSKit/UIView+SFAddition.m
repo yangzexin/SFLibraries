@@ -291,13 +291,29 @@
     }
 }
 
+- (CGFloat)sf_smallWaitingAlpha
+{
+    NSNumber *alpha = [self sf_associatedObjectWithKey:@"sf_smallWaitingAlpha"];
+    if (alpha == nil) {
+        alpha = @(.72f);
+        [self sf_setSmallWaitingAlpha:[alpha floatValue]];
+    }
+    
+    return [alpha floatValue];
+}
+
+- (void)sf_setSmallWaitingAlpha:(CGFloat)alpha
+{
+    [self sf_setAssociatedObject:@(alpha) key:@"sf_smallWaitingAlpha"];
+}
+
 - (void)sf_setSmallWaiting:(BOOL)waiting
 {
     UIActivityIndicatorView *indicatorView = [self sf_associatedObjectWithKey:@"sf_smallWaitingIndicator"];
     if (indicatorView == nil) {
         UIView *view = [[UIView alloc] initWithFrame:self.bounds];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.72f];
+        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:[self sf_smallWaitingAlpha]];
         [self addSubview:view];
         
         indicatorView = [[UIActivityIndicatorView alloc] initWithFrame:view.bounds];
