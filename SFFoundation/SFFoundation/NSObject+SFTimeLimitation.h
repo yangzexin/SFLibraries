@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (SFLimitation)
+@interface NSObject (SFTimeLimitation)
 
 /**
  The time limitation of execution.

@@ -72,6 +72,11 @@
 
 - (void)sf_fitToShowAllSubviews
 {
+    [self sf_fitToShowAllSubviewsWithPadding:CGSizeZero];
+}
+
+- (void)sf_fitToShowAllSubviewsWithPadding:(CGSize)padding
+{
     CGFloat originalWidth = self.frame.size.width;
     
     CGFloat maxWidth = 0;
@@ -88,9 +93,28 @@
     }
     if (maxWidth != 0 && maxHeight != 0) {
         CGRect tmpRect = self.frame;
-        tmpRect.size = CGSizeMake(maxWidth < originalWidth ? originalWidth : maxWidth, maxHeight);
+        tmpRect.size = CGSizeMake(maxWidth < originalWidth ? originalWidth : maxWidth + padding.width, maxHeight + padding.height);
         self.frame = tmpRect;
     }
+}
+
+- (void)sf_removeAllSubviews
+{
+    for (UIView *view in [self subviews]) {
+        [view removeFromSuperview];
+    }
+}
+
+- (UIViewController *)sf_viewController
+{
+    UIView *view = self;
+    UIViewController *vc = (UIViewController *)view.nextResponder;
+    
+    while (vc != nil && ![vc isKindOfClass:[UIViewController class]]) {
+        vc = (UIViewController *)vc.nextResponder;
+    }
+    
+    return vc;
 }
 
 - (CGFloat)sf_bottom
@@ -157,92 +181,9 @@
     self.frame = tmpFrame;
 }
 
-- (void)sf_removeAllSubviews
-{
-    for (UIView *view in [self subviews]) {
-        [view removeFromSuperview];
-    }
-}
+@end
 
-- (UIView *)sf_loadFromXibName:(NSString *)xibName
-{
-    return [self sf_loadFromXibName:xibName owner:nil];
-}
-
-- (UIView *)sf_loadFromXibName:(NSString *)xibName bundle:(NSBundle *)bundle
-{
-    return [self sf_loadFromXibName:xibName owner:nil bundle:bundle];
-}
-
-- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner
-{
-    return [self sf_loadFromXibName:xibName owner:owner bundle:[NSBundle mainBundle]];
-}
-
-- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner bundle:(NSBundle *)bundle
-{
-    UIView *view = [[bundle loadNibNamed:xibName owner:owner == nil ? self : owner options:nil] lastObject];
-    
-    if ([self isKindOfClass:[UITableViewCell class]]) {
-        view.frame = [(id)self contentView].bounds;
-        [[(id)self contentView] addSubview:view];
-    } else {
-        view.frame = self.bounds;
-        [self addSubview:view];
-    }
-    
-    [self sf_setAssociatedObject:[NSValue sf_valueWithWeakObject:view] key:@"__xib_view"];
-    
-    return view;
-}
-
-- (UIView *)sf_xibView
-{
-    return [[self sf_associatedObjectWithKey:@"__xib_view"] sf_weakObject];
-}
-
-- (SFLineView *)sf_addLeftLineWithColor:(UIColor *)color
-{
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, 1, self.frame.size.height)];
-    line.color = color;
-    line.vertical = YES;
-    line.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [self addSubview:line];
-    
-    return line;
-}
-
-- (SFLineView *)sf_addRightLineWithColor:(UIColor *)color
-{
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(self.frame.size.width - 1, 0, 1, self.frame.size.height)];
-    line.color = color;
-    line.vertical = YES;
-    line.alignment = SFLineViewAlignmentBottom;
-    line.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
-    [self addSubview:line];
-    
-    return line;
-}
-
-- (SFLineView *)sf_addTopLineWithColor:(UIColor *)color
-{
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
-    line.color = color;
-    line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self addSubview:line];
-    
-    return line;
-}
-
-- (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color
-{
-    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
-    line.color = color;
-    line.alignment = SFLineViewAlignmentBottom;
-    line.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self addSubview:line];
-    
-    return line;}
+@implementation UIView (SFTapSupport)
 
 - (void)sf_addTapListener:(void(^)())tapListener
 {
@@ -291,6 +232,99 @@
     }
 }
 
+@end
+
+@implementation UIView (SFXibSupport)
+
+- (UIView *)sf_loadFromXibName:(NSString *)xibName
+{
+    return [self sf_loadFromXibName:xibName owner:nil];
+}
+
+- (UIView *)sf_loadFromXibName:(NSString *)xibName bundle:(NSBundle *)bundle
+{
+    return [self sf_loadFromXibName:xibName owner:nil bundle:bundle];
+}
+
+- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner
+{
+    return [self sf_loadFromXibName:xibName owner:owner bundle:[NSBundle mainBundle]];
+}
+
+- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner bundle:(NSBundle *)bundle
+{
+    UIView *view = [[bundle loadNibNamed:xibName owner:owner == nil ? self : owner options:nil] lastObject];
+    
+    if ([self isKindOfClass:[UITableViewCell class]]) {
+        view.frame = [(id)self contentView].bounds;
+        [[(id)self contentView] addSubview:view];
+    } else {
+        view.frame = self.bounds;
+        [self addSubview:view];
+    }
+    
+    [self sf_setAssociatedObject:[NSValue sf_valueWithWeakObject:view] key:@"__xib_view"];
+    
+    return view;
+}
+
+- (UIView *)sf_xibView
+{
+    return [[self sf_associatedObjectWithKey:@"__xib_view"] sf_weakObject];
+}
+
+@end
+
+@implementation UIView (SFSeparator)
+
+- (SFLineView *)sf_addLeftLineWithColor:(UIColor *)color
+{
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, 1, self.frame.size.height)];
+    line.color = color;
+    line.vertical = YES;
+    line.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [self addSubview:line];
+    
+    return line;
+}
+
+- (SFLineView *)sf_addRightLineWithColor:(UIColor *)color
+{
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(self.frame.size.width - 1, 0, 1, self.frame.size.height)];
+    line.color = color;
+    line.vertical = YES;
+    line.alignment = SFLineViewAlignmentBottom;
+    line.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
+    [self addSubview:line];
+    
+    return line;
+}
+
+- (SFLineView *)sf_addTopLineWithColor:(UIColor *)color
+{
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
+    line.color = color;
+    line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self addSubview:line];
+    
+    return line;
+}
+
+- (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color
+{
+    SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
+    line.color = color;
+    line.alignment = SFLineViewAlignmentBottom;
+    line.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self addSubview:line];
+    
+    return line;
+}
+
+@end
+
+@implementation UIView (SFSmallWaiting)
+
 - (CGFloat)sf_smallWaitingAlpha
 {
     NSNumber *alpha = [self sf_associatedObjectWithKey:@"sf_smallWaitingAlpha"];
@@ -329,23 +363,6 @@
     } else {
         [indicatorView stopAnimating];
     }
-}
-
-@end
-
-
-@implementation UIView (UIViewController)
-
-- (UIViewController *)sf_viewController
-{
-    UIView *view = self;
-    UIViewController *vc = (UIViewController *)view.nextResponder;
-    
-    while (vc != nil && ![vc isKindOfClass:[UIViewController class]]) {
-        vc = (UIViewController *)vc.nextResponder;
-    }
-    
-    return vc;
 }
 
 @end

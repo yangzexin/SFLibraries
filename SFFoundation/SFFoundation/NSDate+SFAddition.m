@@ -93,7 +93,7 @@
 
 @end
 
-@implementation NSDate (yyyyMMddHHmmss)
+@implementation NSDate (SFDateString)
 
 - (NSString *)sf_yyyyMMddHHmmss_timeString
 {

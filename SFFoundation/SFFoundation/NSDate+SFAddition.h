@@ -32,7 +32,7 @@
 
 @end
 
-@interface NSDate (timeString)
+@interface NSDate (SFDateString)
 
 // yyyy-MM-dd HH:mm:ss
 - (NSString *)sf_yyyyMMddHHmmss_timeString;

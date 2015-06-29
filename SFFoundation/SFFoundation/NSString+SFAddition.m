@@ -101,7 +101,7 @@
 
 @end
 
-@implementation NSString (Pinyin)
+@implementation NSString (SFPinyin)
 
 - (NSString *)sf_firstPinyin
 {

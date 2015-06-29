@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UITextField (NotEmpty)
+@interface UITextField (SFNotEmpty)
 
-- (BOOL)isNotEmptyWithTips:(NSString *)tips;
+- (BOOL)sf_isNotEmptyWithTips:(NSString *)tips;
 
 @end

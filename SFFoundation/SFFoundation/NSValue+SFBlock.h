@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSValue (Block)
+@interface NSValue (SFBlock)
 
 + (instancetype)sf_valueWithBlock:(id)block;
 - (id)sf_block;

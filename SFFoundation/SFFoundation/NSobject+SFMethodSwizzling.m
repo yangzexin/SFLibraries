@@ -10,9 +10,9 @@
 
 #import <objc/runtime.h>
 
-@implementation NSObject (Swizzle)
+@implementation NSObject (SFSwizzle)
 
-+ (IMP)swizzleInstanceMethod:(SEL)originalSelector withMethod:(SEL)newSelector
++ (IMP)sf_swizzleInstanceMethod:(SEL)originalSelector withMethod:(SEL)newSelector
 {
     Method originalMethod = class_getInstanceMethod(self, originalSelector);
     Method newMethod = class_getInstanceMethod(self, newSelector);

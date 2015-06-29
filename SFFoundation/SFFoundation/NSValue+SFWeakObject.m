@@ -18,7 +18,7 @@
 
 @end
 
-@implementation NSValue (WeakObject)
+@implementation NSValue (SFWeakObject)
 
 + (instancetype)sf_valueWithWeakObject:(id)object
 {

@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 yangzexin. All rights reserved.
 //
 
-#import "UITextField+NotEmpty.h"
+#import "UITextField+SFNotEmpty.h"
 
 #import "UIAlertView+SFAddition.h"
 
-@implementation UITextField (NotEmpty)
+@implementation UITextField (SFNotEmpty)
 
-- (BOOL)isNotEmptyWithTips:(NSString *)tips
+- (BOOL)sf_isNotEmptyWithTips:(NSString *)tips
 {
     if (self.text.length == 0) {
         [UIAlertView sf_alertWithTitle:NSLocalizedString(@"Prompt", nil) message:tips completion:^(NSInteger buttonIndex, NSString *buttonTitle) {

@@ -34,7 +34,7 @@
 
 @end
 
-@implementation NSValue (Block)
+@implementation NSValue (SFBlock)
 
 + (instancetype)sf_valueWithBlock:(id)block
 {

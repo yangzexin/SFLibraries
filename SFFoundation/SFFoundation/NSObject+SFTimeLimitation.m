@@ -13,7 +13,7 @@
 #import "NSObject+SFDepositable.h"
 #import "SFTimeLimitation.h"
 
-@implementation NSObject (SFLimitation)
+@implementation NSObject (SFTimeLimitation)
 
 - (SFTimeLimitation *)sf_time_limitation
 {

@@ -24,7 +24,7 @@
 
 @end
 
-@interface NSString (Pinyin)
+@interface NSString (SFPinyin)
 
 - (NSString *)sf_firstPinyin;
 - (NSString *)sf_pinyin;

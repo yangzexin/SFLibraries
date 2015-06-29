@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Swizzle)
+@interface NSObject (SFSwizzle)
 
-+ (IMP)swizzleInstanceMethod:(SEL)originalSelector withMethod:(SEL)newSelector;
++ (IMP)sf_swizzleInstanceMethod:(SEL)originalSelector withMethod:(SEL)newSelector;
 
 @end

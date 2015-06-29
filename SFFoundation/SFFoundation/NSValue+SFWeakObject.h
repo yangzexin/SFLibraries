@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSValue (WeakObject)
+@interface NSValue (SFWeakObject)
 
 + (instancetype)sf_valueWithWeakObject:(id)object;
 - (id)sf_weakObject;
