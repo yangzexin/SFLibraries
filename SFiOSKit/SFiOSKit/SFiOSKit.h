@@ -85,3 +85,5 @@
 
 OBJC_EXPORT id SFWrapNil(id object);
 OBJC_EXPORT id SFRestoreNil(id object);
+
+OBJC_EXPORT NSString *SFWrapNilString(NSString *s);

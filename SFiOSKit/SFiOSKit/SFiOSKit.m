@@ -24,3 +24,8 @@ id SFRestoreNil(id object)
     }
     return originalObject;
 }
+
+NSString *SFWrapNilString(NSString *s)
+{
+    return s == nil ? @"" : s;
+}
