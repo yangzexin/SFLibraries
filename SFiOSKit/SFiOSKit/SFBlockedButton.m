@@ -95,7 +95,7 @@
 
 + (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame
 {
-    return [self blockedButtonWithTapHandler:tapHandler frame:frame];
+    return [self blockedButtonWithTapHandler:tapHandler frame:frame addToSuperview:nil];
 }
 
 + (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame addToSuperview:(UIView *)superview
