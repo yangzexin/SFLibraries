@@ -271,6 +271,11 @@
     [self toast:text completion:nil];
 }
 
+- (void)toast:(NSString *)text identifier:(NSString *)identifier
+{
+    [self toast:text hideAfterSeconds:1.70f identifier:identifier];
+}
+
 - (void)toast:(NSString *)text completion:(void(^)())completion
 {
     [self toast:text hideAfterSeconds:1.70f identifier:nil completion:completion];
