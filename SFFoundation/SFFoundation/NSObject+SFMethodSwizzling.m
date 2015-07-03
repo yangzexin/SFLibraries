@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 yangzexin. All rights reserved.
 //
 
-#import "NSobject+SFMethodSwizzling.h"
+#import "NSObject+SFMethodSwizzling.h"
 
 #import <objc/runtime.h>
 

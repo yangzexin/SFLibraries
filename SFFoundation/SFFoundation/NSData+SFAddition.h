@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonCryptor.h>
 
+OBJC_EXPORT NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList);
+OBJC_EXPORT NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList);
+
 @interface NSData (SFAddition)
 
 - (NSString *)sf_hexRepresentation;

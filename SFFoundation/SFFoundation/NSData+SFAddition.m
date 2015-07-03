@@ -10,6 +10,76 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
+char _SFCustomHexCharForByte(unsigned char c, const char *customHexList)
+{
+    return *(customHexList + c);
+}
+
+unsigned char _SFByteForCustomHexChar(char c, const char *customHexList)
+{
+    size_t len = strlen(customHexList);
+    for(int i = 0; i < len; ++i){
+        if(c == *(customHexList + i)){
+            return i;
+        }
+    }
+    
+    return 0;
+}
+
+NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList)
+{
+    char *bytes = malloc(sizeof(unsigned char) * [data length]);
+    [data getBytes:bytes length:data.length];
+    
+    size_t len = sizeof(char) * [data length] * 2 + 1;
+    char *result = malloc(len);
+    for(int i = 0; i < [data length]; ++i){
+        unsigned char tmp = *(bytes + i);
+        unsigned char low = tmp & 0xF;
+        unsigned char high = (tmp & 0xF0) >> 4;
+        *(result + i * 2) = _SFCustomHexCharForByte(low, customHexList);
+        *(result + i * 2 + 1) = _SFCustomHexCharForByte(high, customHexList);
+    }
+    free(bytes);
+    
+    *(result + len - 1) = '\0';
+    
+    NSString *str = [NSString stringWithUTF8String:result];
+    free(result);
+    
+    return str;
+}
+
+NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
+{
+    if([string isEqualToString:@""]){
+        return nil;
+    }
+    if([string length] % 2 != 0){
+        return nil;
+    }
+    size_t resultBytesLen = sizeof(char) * [string length] / 2;
+    char *resultBytes = malloc(resultBytesLen);
+    
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    char *bytes = malloc(sizeof(char) * [data length]);
+    [data getBytes:bytes length:data.length];
+    for(int i = 0, j = 0; i < [data length]; i += 2, ++j){
+        unsigned char low = _SFByteForCustomHexChar(*(bytes + i), customHexList);
+        unsigned char high = _SFByteForCustomHexChar(*(bytes + i + 1), customHexList);
+        unsigned char tmp = ((high << 4) & 0xF0) + low;
+        *(resultBytes + j) = tmp;
+    }
+    
+    free(bytes);
+    
+    NSData *resultData = [NSData dataWithBytes:resultBytes length:resultBytesLen];
+    free(resultBytes);
+    
+    return resultData;
+}
+
 @implementation NSData (SFAddition)
 
 - (NSString *)sf_hexRepresentation
