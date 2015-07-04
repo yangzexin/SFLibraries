@@ -237,7 +237,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 {
     return [NSError errorWithDomain:SFWrappableServantTimeoutErrorDomain
                                code:SFWrappableServantTimeoutErrorCode
-                           userInfo:@{NSLocalizedDescriptionKey : @"Servant Time out"}];
+                           userInfo:@{NSLocalizedDescriptionKey : @"Send servant timed out."}];
 }
 
 @end
