@@ -44,6 +44,7 @@
 #import "UITextField+SFNotEmpty.h"
 #import "UITextView+SFPlaceholder.h"
 #import "UIView+SFAddition.h"
+#import "UIView+SFDownloadImage.h"
 #import "UIViewController+SFAddition.h"
 #import "UIViewController+SFIndicator.h"
 #import "UIViewController+SFTransparentViewController.h"

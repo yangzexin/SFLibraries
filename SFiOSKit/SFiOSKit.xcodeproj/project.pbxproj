@@ -74,6 +74,7 @@
 		3EF6209B1828D62E0057A6FE /* SFWaitingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF6209A1828D62E0057A6FE /* SFWaitingIndicator.m */; };
 		3EF77C231855C51A00B95134 /* SFDragShowDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF77C221855C51A00B95134 /* SFDragShowDetector.m */; };
 		3EF77C3B1855C60300B95134 /* SFSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF77C3A1855C60300B95134 /* SFSideMenuController.m */; };
+		3EF823531B49F93900F5B7C0 /* UIView+SFDownloadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF823521B49F93900F5B7C0 /* UIView+SFDownloadImage.m */; };
 		3EFF52A11942C20F00FBFCC9 /* NSString+SFiOSAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF52A01942C20F00FBFCC9 /* NSString+SFiOSAddition.m */; };
 /* End PBXBuildFile section */
 
@@ -238,6 +239,8 @@
 		3EF77C381855C57400B95134 /* SFiOSKitConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFiOSKitConstants.h; sourceTree = "<group>"; };
 		3EF77C391855C60300B95134 /* SFSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSideMenuController.h; sourceTree = "<group>"; };
 		3EF77C3A1855C60300B95134 /* SFSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSideMenuController.m; sourceTree = "<group>"; };
+		3EF823511B49F93900F5B7C0 /* UIView+SFDownloadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SFDownloadImage.h"; sourceTree = "<group>"; };
+		3EF823521B49F93900F5B7C0 /* UIView+SFDownloadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SFDownloadImage.m"; sourceTree = "<group>"; };
 		3EFF529F1942C20F00FBFCC9 /* NSString+SFiOSAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFiOSAddition.h"; sourceTree = "<group>"; };
 		3EFF52A01942C20F00FBFCC9 /* NSString+SFiOSAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SFiOSAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -448,6 +451,8 @@
 				3E7F70A01B1DA2570022BC50 /* UITextView+SFPlaceholder.m */,
 				3EF61F321828D40D0057A6FE /* UIView+SFAddition.h */,
 				3EF61F331828D40D0057A6FE /* UIView+SFAddition.m */,
+				3EF823511B49F93900F5B7C0 /* UIView+SFDownloadImage.h */,
+				3EF823521B49F93900F5B7C0 /* UIView+SFDownloadImage.m */,
 				3E3D125C182B93FD00B3B422 /* UIViewController+SFAddition.h */,
 				3E3D125D182B93FD00B3B422 /* UIViewController+SFAddition.m */,
 				3EC435EF1A071C4000EC4C42 /* UIViewController+SFIndicator.h */,
@@ -614,6 +619,7 @@
 				3ED2CF5919206EF70008529A /* SFLocationDescription.m in Sources */,
 				3EC36DEF1B1E9D4E0055C9E4 /* SFBorderedTextField.m in Sources */,
 				3EF61F361828D40D0057A6FE /* UIImage+SFAddition.m in Sources */,
+				3EF823531B49F93900F5B7C0 /* UIView+SFDownloadImage.m in Sources */,
 				3EF6209B1828D62E0057A6FE /* SFWaitingIndicator.m in Sources */,
 				3E7F06AA1915E49900C13710 /* UIDatePicker+SFAddition.m in Sources */,
 				3E6640A8185D9C4900C05D90 /* SFCircleProgressView.m in Sources */,
