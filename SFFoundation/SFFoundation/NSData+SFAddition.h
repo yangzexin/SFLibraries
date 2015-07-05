@@ -19,6 +19,7 @@ OBJC_EXPORT NSData *SFDataByDecodingHexString(NSString *string, const char *cust
 - (NSData *)sf_dataByEncryptingUsingMD5;
 
 - (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation key:(NSString *)key;
+- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation options:(CCOptions)options key:(NSString *)key;
 
 - (NSData *)sf_dataByExchangingByteHigh4ToLow4;
 

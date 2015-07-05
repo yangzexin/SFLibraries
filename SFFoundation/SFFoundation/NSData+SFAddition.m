@@ -120,6 +120,11 @@ NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
 
 - (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation key:(NSString *)key
 {
+    return [self sf_dataByPerformingDESOperation:operation options:kCCOptionPKCS7Padding | kCCOptionECBMode key:key];
+}
+
+- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation options:(CCOptions)options key:(NSString *)key
+{
     NSUInteger dataLength = [self length];
     size_t bufferSize = dataLength + kCCBlockSizeDES;
     void *buffer = malloc(bufferSize);
@@ -128,7 +133,7 @@ NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
     size_t bufferNumBytes;
     CCCryptorStatus cryptStatus = CCCrypt(operation,
                                           kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                          options,
                                           [key UTF8String],
                                           kCCKeySizeDES,
                                           NULL,
