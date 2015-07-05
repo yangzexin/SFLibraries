@@ -29,7 +29,7 @@ unsigned char _SFByteForCustomHexChar(char c, const char *customHexList)
 
 NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList)
 {
-    char *bytes = malloc(sizeof(unsigned char) * [data length]);
+    unsigned char *bytes = malloc(sizeof(unsigned char) * [data length]);
     [data getBytes:bytes length:data.length];
     
     size_t len = sizeof(char) * [data length] * 2 + 1;
