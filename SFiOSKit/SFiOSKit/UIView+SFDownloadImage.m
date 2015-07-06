@@ -17,7 +17,7 @@
 static NSOperationQueue *SFSharedDownloadImageQueue();
 static NSString *SFDownloadImageFolderPath();
 static NSMutableDictionary *SFKeyURLValueOperation();
-static void SFDownloadImage(NSURL *url, CGSize maxSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error));
+static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error));
 
 @interface SFDownloadImageOperation : NSOperation
 
@@ -31,7 +31,7 @@ static void SFDownloadImage(NSURL *url, CGSize maxSize, void(^completion)(UIImag
 
 @property (nonatomic, strong) NSMutableArray *callbacks;
 
-@property (nonatomic, assign) CGSize maxSize;
+@property (nonatomic, assign) CGFloat maxPixelSize;
 
 @property (nonatomic, copy) void(^whenFinished)();
 
@@ -69,23 +69,43 @@ static void SFDownloadImage(NSURL *url, CGSize maxSize, void(^completion)(UIImag
     }
     
     UIImage *image = nil;
-    CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)[NSURL fileURLWithPath:filePath], NULL);
-    if (imageSource){
-        CGImageRef imgRef = NULL;
-        if (CGSizeEqualToSize(self.maxSize, CGSizeZero)) {
-            imgRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
-        } else {
-            NSDictionary *options = @{(id)kCGImageSourceCreateThumbnailWithTransform : (id)kCFBooleanFalse
-                                      , (id)kCGImageSourceCreateThumbnailFromImageIfAbsent : (id)kCFBooleanTrue
-                                      , (id)kCGImageSourceThumbnailMaxPixelSize : (id)[NSNumber numberWithFloat:self.maxSize.width]
-                                      };
-            imgRef = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)options);
+    
+    NSString *targetImageFilePath = filePath;
+    BOOL thumbnailExists = NO;
+    NSString *thumbnailFilePath = nil;
+    BOOL wantsScale = self.maxPixelSize != .0f;
+    
+    if (wantsScale) {
+        thumbnailFilePath = [NSString stringWithFormat:@"%@-%.0f", filePath, self.maxPixelSize];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:thumbnailFilePath isDirectory:nil]) {
+            targetImageFilePath = thumbnailFilePath;
+            thumbnailExists = YES;
+        }
+    }
+    
+    CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)[NSURL fileURLWithPath:targetImageFilePath], NULL);
+    if (imageSource) {
+        NSDictionary *options = NULL;
+        if (wantsScale) {
+            options = @{(id)kCGImageSourceCreateThumbnailWithTransform : (id)kCFBooleanFalse
+                        , (id)kCGImageSourceCreateThumbnailFromImageIfAbsent : (id)kCFBooleanTrue
+                        , (id)kCGImageSourceThumbnailMaxPixelSize : (id)[NSNumber numberWithFloat:self.maxPixelSize]
+                        };
         }
         
-        image = [UIImage imageWithCGImage:imgRef];
+        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)options);
+        image = [UIImage imageWithCGImage:imageRef];
         
-        CGImageRelease(imgRef);
+        if (wantsScale && !thumbnailExists) {
+            NSData *imageData = UIImagePNGRepresentation(image);
+            [imageData writeToFile:thumbnailFilePath atomically:YES];
+            imageData = nil;
+        }
+        
+        CGImageRelease(imageRef);
         CFRelease(imageSource);
+    } else {
+        error = [NSError errorWithDomain:NSStringFromClass([self class]) code:-8001 userInfo:@{NSLocalizedDescriptionKey : @"imageSource is NULL"}];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -151,14 +171,14 @@ static NSMutableDictionary *SFKeyURLValueOperation()
     return keyURLValueOperation;
 }
 
-static void SFDownloadImage(NSURL *url, CGSize maxSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error))
+static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error))
 {
     NSMutableDictionary *keyURLValueOperation = SFKeyURLValueOperation();
     @synchronized (keyURLValueOperation) {
         SFDownloadImageOperation *operation = [keyURLValueOperation objectForKey:url];
         if (operation == nil) {
             operation = [[SFDownloadImageOperation alloc] initWithURL:url];
-            operation.maxSize = maxSize;
+            operation.maxPixelSize = maxPixelSize;
             
             [keyURLValueOperation setObject:operation forKey:url];
             
@@ -179,17 +199,16 @@ static void SFDownloadImage(NSURL *url, CGSize maxSize, void(^completion)(UIImag
 
 - (void)sf_downloadImageWithURL:(NSURL *)url completion:(void(^)(UIImage *image, NSError *error))completion
 {
-    [self sf_downloadImageWithURL:url maxSize:CGSizeZero completion:completion];
+    [self sf_downloadImageWithURL:url maxPixelSize:.0f completion:completion];
 }
 
-- (void)sf_downloadImageWithURL:(NSURL *)url maxSize:(CGSize)maxSize completion:(void(^)(UIImage *image, NSError *error))completion
+- (void)sf_downloadImageWithURL:(NSURL *)url maxPixelSize:(CGFloat)maxPixelSize completion:(void(^)(UIImage *image, NSError *error))completion
 {
-    maxSize.width *= [UIScreen mainScreen].scale;
-    maxSize.height *= [UIScreen mainScreen].scale;
+    maxPixelSize *= [UIScreen mainScreen].scale;
     
     void(^previousCompletion)(UIImage *image, NSError *error) = [[self sf_associatedObjectWithKey:@"_SFPreviousCompletion"] sf_block];
     
-    SFDownloadImage(url, maxSize, completion, previousCompletion);
+    SFDownloadImage(url, maxPixelSize, completion, previousCompletion);
     
     [self sf_setAssociatedObject:[NSValue sf_valueWithBlock:completion] key:@"_SFPreviousCompletion"];
 }
