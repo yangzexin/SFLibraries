@@ -31,7 +31,6 @@
 #import "NSObject+SFObservation.h"
 #import "NSObject+SFRuntime.h"
 #import "NSObject+SFSerialization.h"
-#import "NSObject+SFTimeLimitation.h"
 #import "NSOperation+SFDepositable.h"
 #import "NSString+SFAddition.h"
 #import "NSString+SFJavaLikeStringHandle.h"

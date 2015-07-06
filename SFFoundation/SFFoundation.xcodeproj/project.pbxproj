@@ -39,8 +39,6 @@
 		3ECF2F7419888255000E75C0 /* NSObject+SFSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F7319888255000E75C0 /* NSObject+SFSerialization.m */; };
 		3ECF2F7719888333000E75C0 /* NSObject+SFObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F7619888332000E75C0 /* NSObject+SFObservation.m */; };
 		3ECF2F7A198883B7000E75C0 /* NSObject+SFRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F79198883B7000E75C0 /* NSObject+SFRuntime.m */; };
-		3ECF2F7D1988845C000E75C0 /* NSObject+SFTimeLimitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F7C1988845C000E75C0 /* NSObject+SFTimeLimitation.m */; };
-		3EF304B9191922C60070B9BC /* SFTimeLimitation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF304B8191922C60070B9BC /* SFTimeLimitation.m */; };
 		3EF61EFB1828D21D0057A6FE /* NSDate+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF61EF01828D21D0057A6FE /* NSDate+SFAddition.m */; };
 		3EF61EFD1828D21D0057A6FE /* NSString+SFJavaLikeStringHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF61EF41828D21D0057A6FE /* NSString+SFJavaLikeStringHandle.m */; };
 		3EF61EFE1828D21D0057A6FE /* NSString+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF61EF61828D21D0057A6FE /* NSString+SFAddition.m */; };
@@ -138,10 +136,6 @@
 		3ECF2F7619888332000E75C0 /* NSObject+SFObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFObservation.m"; sourceTree = "<group>"; };
 		3ECF2F78198883B7000E75C0 /* NSObject+SFRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFRuntime.h"; sourceTree = "<group>"; };
 		3ECF2F79198883B7000E75C0 /* NSObject+SFRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFRuntime.m"; sourceTree = "<group>"; };
-		3ECF2F7B1988845C000E75C0 /* NSObject+SFTimeLimitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFTimeLimitation.h"; sourceTree = "<group>"; };
-		3ECF2F7C1988845C000E75C0 /* NSObject+SFTimeLimitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFTimeLimitation.m"; sourceTree = "<group>"; };
-		3EF304B7191922C60070B9BC /* SFTimeLimitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTimeLimitation.h; sourceTree = "<group>"; };
-		3EF304B8191922C60070B9BC /* SFTimeLimitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTimeLimitation.m; sourceTree = "<group>"; };
 		3EF61EEF1828D21D0057A6FE /* NSDate+SFAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SFAddition.h"; sourceTree = "<group>"; };
 		3EF61EF01828D21D0057A6FE /* NSDate+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SFAddition.m"; sourceTree = "<group>"; };
 		3EF61EF31828D21D0057A6FE /* NSString+SFJavaLikeStringHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFJavaLikeStringHandle.h"; sourceTree = "<group>"; };
@@ -273,8 +267,6 @@
 				3EF61F091828D2520057A6FE /* SFMarkWaiting.m */,
 				3EF61F0C1828D2520057A6FE /* SFRepeatTimer.h */,
 				3EF61F0D1828D2520057A6FE /* SFRepeatTimer.m */,
-				3EF304B7191922C60070B9BC /* SFTimeLimitation.h */,
-				3EF304B8191922C60070B9BC /* SFTimeLimitation.m */,
 				3EF61F061828D2520057A6FE /* SFWaiting.h */,
 				3E0383E91B3AAB9C003A5EF4 /* SFWaiting+Private.h */,
 				3EF61F071828D2520057A6FE /* SFWaiting.m */,
@@ -375,8 +367,6 @@
 				3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */,
 				3E3D111E1B3B84C300A0F356 /* NSObject+SFMethodSwizzling.h */,
 				3E3D111F1B3B84C300A0F356 /* NSObject+SFMethodSwizzling.m */,
-				3ECF2F7B1988845C000E75C0 /* NSObject+SFTimeLimitation.h */,
-				3ECF2F7C1988845C000E75C0 /* NSObject+SFTimeLimitation.m */,
 				3EF61EF51828D21D0057A6FE /* NSString+SFAddition.h */,
 				3EF61EF61828D21D0057A6FE /* NSString+SFAddition.m */,
 				3EF61EF31828D21D0057A6FE /* NSString+SFJavaLikeStringHandle.h */,
@@ -455,7 +445,6 @@
 				3E938F6E1B100BCA00D24E78 /* SFWrappableServant.m in Sources */,
 				3E46ADB51A03823B00578334 /* SFUpdatableParameter.m in Sources */,
 				3E105F231856DF07007326BE /* SFDict2Object.m in Sources */,
-				3ECF2F7D1988845C000E75C0 /* NSObject+SFTimeLimitation.m in Sources */,
 				3E0ABD8619290E2A000E9242 /* SFPropertyObserving.m in Sources */,
 				3ECF2F7419888255000E75C0 /* NSObject+SFSerialization.m in Sources */,
 				3ECF2F7719888333000E75C0 /* NSObject+SFObservation.m in Sources */,
@@ -476,7 +465,6 @@
 				3EF61F111828D2520057A6FE /* SFRuntimeUtils.m in Sources */,
 				3EF61F1A1828D27A0057A6FE /* SFDelayControl.m in Sources */,
 				3EF61F131828D2520057A6FE /* SFWaiting.m in Sources */,
-				3EF304B9191922C60070B9BC /* SFTimeLimitation.m in Sources */,
 				3E87965F1A09B1F50063DEEC /* SFAsyncServant.m in Sources */,
 				3E97D93118F3A9A400D7E0A8 /* NSOperation+SFDepositable.m in Sources */,
 				3EF61EFB1828D21D0057A6FE /* NSDate+SFAddition.m in Sources */,
