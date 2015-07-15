@@ -21,8 +21,7 @@
 
 @implementation SFTapGestureRecognizer
 
-- (id)initWithTapHandler:(void(^)())tapHandler
-{
+- (id)initWithTapHandler:(void(^)())tapHandler {
     self = [self initWithTarget:self action:@selector(_tapped:)];
     
     self.tapHandler = tapHandler;
@@ -30,8 +29,7 @@
     return self;
 }
 
-- (void)_tapped:(id)gr
-{
+- (void)_tapped:(id)gr {
     if (_tapHandler) {
         _tapHandler();
     }
@@ -41,8 +39,7 @@
 
 @implementation UIView (SFAddition)
 
-- (UIImage *)sf_toImage
-{
+- (UIImage *)sf_toImage {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, [UIScreen mainScreen].scale);
     if ([UIDevice currentDevice].systemVersion.floatValue < 7.0f) {
         [self.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -57,8 +54,7 @@
     return img;
 }
 
-- (UIImage *)sf_toImageLegacy
-{
+- (UIImage *)sf_toImageLegacy {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, [UIScreen mainScreen].scale);
     
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -70,13 +66,11 @@
     return img;
 }
 
-- (void)sf_fitToShowAllSubviews
-{
+- (void)sf_fitToShowAllSubviews {
     [self sf_fitToShowAllSubviewsWithPadding:CGSizeZero];
 }
 
-- (void)sf_fitToShowAllSubviewsWithPadding:(CGSize)padding
-{
+- (void)sf_fitToShowAllSubviewsWithPadding:(CGSize)padding {
     CGFloat originalWidth = self.frame.size.width;
     
     CGFloat maxWidth = 0;
@@ -98,15 +92,13 @@
     }
 }
 
-- (void)sf_removeAllSubviews
-{
+- (void)sf_removeAllSubviews {
     for (UIView *view in [self subviews]) {
         [view removeFromSuperview];
     }
 }
 
-- (UIViewController *)sf_viewController
-{
+- (UIViewController *)sf_viewController {
     UIView *view = self;
     UIViewController *vc = (UIViewController *)view.nextResponder;
     
@@ -117,64 +109,54 @@
     return vc;
 }
 
-- (CGFloat)sf_bottom
-{
+- (CGFloat)sf_bottom {
     return self.frame.origin.y + self.frame.size.height;
 }
 
-- (CGFloat)sf_right
-{
+- (CGFloat)sf_right {
     return self.frame.origin.x + self.frame.size.width;
 }
 
-- (CGFloat)sf_width
-{
+- (CGFloat)sf_width {
     return self.frame.size.width;
 }
 
-- (CGFloat)sf_height
-{
+- (CGFloat)sf_height {
     return self.frame.size.height;
 }
 
-- (void)sf_setX:(CGFloat)x
-{
+- (void)sf_setX:(CGFloat)x {
     CGRect tmpFrame = self.frame;
     tmpFrame.origin.x = x;
     self.frame = tmpFrame;
 }
 
-- (void)sf_setY:(CGFloat)y
-{
+- (void)sf_setY:(CGFloat)y {
     CGRect tmpFrame = self.frame;
     tmpFrame.origin.y = y;
     self.frame = tmpFrame;
 }
 
-- (void)sf_setWidth:(CGFloat)width
-{
+- (void)sf_setWidth:(CGFloat)width {
     CGRect tmpFrame = self.frame;
     tmpFrame.size.width = width;
     self.frame = tmpFrame;
 }
 
-- (void)sf_setHeight:(CGFloat)height
-{
+- (void)sf_setHeight:(CGFloat)height {
     CGRect tmpFrame = self.frame;
     tmpFrame.size.height = height;
     self.frame = tmpFrame;
 }
 
-- (void)sf_setX:(CGFloat)x y:(CGFloat)y
-{
+- (void)sf_setX:(CGFloat)x y:(CGFloat)y {
     CGRect tmpFrame = self.frame;
     tmpFrame.origin.x = x;
     tmpFrame.origin.y = y;
     self.frame = tmpFrame;
 }
 
-- (void)sf_setWidth:(CGFloat)width height:(CGFloat)height
-{
+- (void)sf_setWidth:(CGFloat)width height:(CGFloat)height {
     CGRect tmpFrame = self.frame;
     tmpFrame.size.width = width;
     tmpFrame.size.height = height;
@@ -185,13 +167,11 @@
 
 @implementation UIView (SFTapSupport)
 
-- (void)sf_addTapListener:(void(^)())tapListener
-{
+- (void)sf_addTapListener:(void(^)())tapListener {
     [self sf_addTapListener:tapListener identifier:nil];
 }
 
-- (void)sf_addTapListener:(void(^)())tapListener identifier:(NSString *)identifier
-{
+- (void)sf_addTapListener:(void(^)())tapListener identifier:(NSString *)identifier {
     NSMutableDictionary *keyIdentifierValueTapListener = [self sf_associatedObjectWithKey:@"sf_keyIdentifierValueTapListener"];
     if (keyIdentifierValueTapListener == nil) {
         keyIdentifierValueTapListener = [NSMutableDictionary dictionary];
@@ -219,8 +199,7 @@
     }
 }
 
-- (void)sf_removeTapListenerWithIdentifier:(NSString *)identifier
-{
+- (void)sf_removeTapListenerWithIdentifier:(NSString *)identifier {
     NSMutableDictionary *keyIdentifierValueTapListener = [self sf_associatedObjectWithKey:@"sf_keyIdentifierValueTapListener"];
     [keyIdentifierValueTapListener removeObjectForKey:identifier];
     if (keyIdentifierValueTapListener.count == 0) {
@@ -236,23 +215,19 @@
 
 @implementation UIView (SFXibSupport)
 
-- (UIView *)sf_loadFromXibName:(NSString *)xibName
-{
+- (UIView *)sf_loadFromXibName:(NSString *)xibName {
     return [self sf_loadFromXibName:xibName owner:nil];
 }
 
-- (UIView *)sf_loadFromXibName:(NSString *)xibName bundle:(NSBundle *)bundle
-{
+- (UIView *)sf_loadFromXibName:(NSString *)xibName bundle:(NSBundle *)bundle {
     return [self sf_loadFromXibName:xibName owner:nil bundle:bundle];
 }
 
-- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner
-{
+- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner {
     return [self sf_loadFromXibName:xibName owner:owner bundle:[NSBundle mainBundle]];
 }
 
-- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner bundle:(NSBundle *)bundle
-{
+- (UIView *)sf_loadFromXibName:(NSString *)xibName owner:(id)owner bundle:(NSBundle *)bundle {
     UIView *view = [[bundle loadNibNamed:xibName owner:owner == nil ? self : owner options:nil] lastObject];
     
     if ([self isKindOfClass:[UITableViewCell class]]) {
@@ -268,8 +243,7 @@
     return view;
 }
 
-- (UIView *)sf_xibView
-{
+- (UIView *)sf_xibView {
     return [[self sf_associatedObjectWithKey:@"__xib_view"] sf_weakObject];
 }
 
@@ -277,8 +251,7 @@
 
 @implementation UIView (SFSeparator)
 
-- (SFLineView *)sf_addLeftLineWithColor:(UIColor *)color
-{
+- (SFLineView *)sf_addLeftLineWithColor:(UIColor *)color {
     SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, 1, self.frame.size.height)];
     line.color = color;
     line.vertical = YES;
@@ -288,8 +261,7 @@
     return line;
 }
 
-- (SFLineView *)sf_addRightLineWithColor:(UIColor *)color
-{
+- (SFLineView *)sf_addRightLineWithColor:(UIColor *)color {
     SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(self.frame.size.width - 1, 0, 1, self.frame.size.height)];
     line.color = color;
     line.vertical = YES;
@@ -300,8 +272,7 @@
     return line;
 }
 
-- (SFLineView *)sf_addTopLineWithColor:(UIColor *)color
-{
+- (SFLineView *)sf_addTopLineWithColor:(UIColor *)color {
     SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
     line.color = color;
     line.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -310,8 +281,7 @@
     return line;
 }
 
-- (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color
-{
+- (SFLineView *)sf_addBottomLineWithColor:(UIColor *)color {
     SFLineView *line = [[SFLineView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
     line.color = color;
     line.alignment = SFLineViewAlignmentBottom;
@@ -325,8 +295,7 @@
 
 @implementation UIView (SFSmallWaiting)
 
-- (CGFloat)sf_smallWaitingAlpha
-{
+- (CGFloat)sf_smallWaitingAlpha {
     NSNumber *alpha = [self sf_associatedObjectWithKey:@"sf_smallWaitingAlpha"];
     if (alpha == nil) {
         alpha = @(.72f);
@@ -336,13 +305,11 @@
     return [alpha floatValue];
 }
 
-- (void)sf_setSmallWaitingAlpha:(CGFloat)alpha
-{
+- (void)sf_setSmallWaitingAlpha:(CGFloat)alpha {
     [self sf_setAssociatedObject:@(alpha) key:@"sf_smallWaitingAlpha"];
 }
 
-- (void)sf_setSmallWaiting:(BOOL)waiting
-{
+- (void)sf_setSmallWaiting:(BOOL)waiting {
     UIActivityIndicatorView *indicatorView = [self sf_associatedObjectWithKey:@"sf_smallWaitingIndicator"];
     if (indicatorView == nil) {
         UIView *view = [[UIView alloc] initWithFrame:self.bounds];

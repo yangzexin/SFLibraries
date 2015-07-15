@@ -12,8 +12,7 @@
 
 @implementation SFTrangleView
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     [self initialize];
@@ -21,8 +20,7 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self initialize];
@@ -30,22 +28,19 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     [self setNeedsDisplay];
 }
 
-- (void)initialize
-{
+- (void)initialize {
     self.color = [UIColor blackColor];
     self.borderColor = [UIColor blackColor];
     self.lightBorder = YES;
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetShouldAntialias(context, YES);
     CGContextSetAllowsAntialiasing(context, YES);
@@ -102,8 +97,7 @@
     CGContextDrawPath(context, borderWidth == 0 ? kCGPathFill : kCGPathFillStroke);
 }
 
-- (void)setDirection:(SFTrangleViewDirection)direction
-{
+- (void)setDirection:(SFTrangleViewDirection)direction {
     _direction = direction;
     [self setNeedsDisplay];
 }

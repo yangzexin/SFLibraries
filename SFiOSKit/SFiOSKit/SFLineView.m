@@ -10,7 +10,7 @@
 
 #import "UIImage+SFAddition.h"
 
-typedef struct{
+typedef struct {
     BOOL vertical;
     BOOL normalBorder;
     CGSize viewSize;
@@ -26,8 +26,7 @@ typedef struct{
 
 @implementation SFLineView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self _init];
@@ -35,24 +34,21 @@ typedef struct{
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     self.color = self.backgroundColor;
     self.backgroundColor = [UIColor clearColor];
     [self _init];
 }
 
-- (void)_init
-{
+- (void)_init {
     self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
     self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.imageView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.imageView];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     if (self.alignment == SFLineViewAlignmentTop) {
         self.imageView.contentMode = UIViewContentModeTop;
@@ -82,8 +78,7 @@ typedef struct{
     }
 }
 
-- (void)setAlignment:(SFLineViewAlignment)alignment
-{
+- (void)setAlignment:(SFLineViewAlignment)alignment {
     _alignment = alignment;
     [self setNeedsLayout];
 }

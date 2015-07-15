@@ -19,13 +19,11 @@
 
 @synthesize delegate;
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self cancel];
 }
 
-- (id)initWithGeocoders:(NSArray *)gecoders
-{
+- (id)initWithGeocoders:(NSArray *)gecoders {
     self = [super init];
     
     self.geocoderList = gecoders;
@@ -33,8 +31,7 @@
     return self;
 }
 
-- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude
-{
+- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude {
     [self cancelAllGeocoder];
     if (self.geocoderList.count == 0) {
         [self notifyFail:[NSError errorWithDomain:NSStringFromClass([self class])
@@ -52,49 +49,42 @@
     }
 }
 
-- (void)cancel
-{
+- (void)cancel {
     [self cancelAllGeocoder];
     self.delegate = nil;
 }
 
-- (void)cancelAllGeocoder
-{
+- (void)cancelAllGeocoder {
     for (id<SFGeocoder> tmpGeocoder in self.geocoderList) {
         [tmpGeocoder cancel];
     }
 }
 
-- (NSString *)identifierForGeocoder:(id<SFGeocoder>)geocoder
-{
+- (NSString *)identifierForGeocoder:(id<SFGeocoder>)geocoder {
     return [NSString stringWithFormat:@"%@", geocoder];
 }
 
-- (void)notifySuccess:(SFLocationDescription *)locationDesc
-{
+- (void)notifySuccess:(SFLocationDescription *)locationDesc {
     if ([self.delegate respondsToSelector:@selector(geocoder:didRecieveLocality:)]) {
         [self.delegate geocoder:self didRecieveLocality:locationDesc];
     }
 }
 
-- (void)notifyFail:(NSError *)error
-{
+- (void)notifyFail:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(geocoder:didError:)]) {
         [self.delegate geocoder:self didError:error];
     }
 }
 
 #pragma mark - GeocoderDelegate
-- (void)geocoder:(id)geocoder didRecieveLocality:(SFLocationDescription *)info
-{
+- (void)geocoder:(id)geocoder didRecieveLocality:(SFLocationDescription *)info {
     @synchronized(self) {
         [self cancelAllGeocoder];
         [self notifySuccess:info];
     }
 }
 
-- (void)geocoder:(id)geocoder didError:(NSError *)error
-{
+- (void)geocoder:(id)geocoder didError:(NSError *)error {
     @synchronized(self) {
         [self.geocoderStatusDict setObject:[NSNumber numberWithBool:YES] forKey:[self identifierForGeocoder:geocoder]];
         

@@ -24,8 +24,7 @@
 
 @implementation SFBlockWrapper
 
-+ (instancetype)wrapperWithBlock:(id)block
-{
++ (instancetype)wrapperWithBlock:(id)block {
     SFBlockWrapper *wrapper = [SFBlockWrapper new];
     wrapper.block = block;
     
@@ -36,13 +35,11 @@
 
 @implementation NSValue (SFBlock)
 
-+ (instancetype)sf_valueWithBlock:(id)block
-{
++ (instancetype)sf_valueWithBlock:(id)block {
     return [SFBlockWrapper wrapperWithBlock:block];
 }
 
-- (id)sf_block
-{
+- (id)sf_block {
     id block = nil;
     
     if ([self isKindOfClass:[SFBlockWrapper class]]) {

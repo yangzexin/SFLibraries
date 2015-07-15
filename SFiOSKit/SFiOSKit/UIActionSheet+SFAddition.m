@@ -17,12 +17,7 @@
 
 @implementation SFActionSheetWrapper
 
-- (UIActionSheet *)actionSheetWithTitle:(NSString *)title
-                             completion:(SFActionSheetDialogCompletion)completion
-                      cancelButtonTitle:(NSString *)cancelButtonTitle
-                 destructiveButtonTitle:(NSString *)destructiveButtonTitle
-                      otherButtonTitles:(NSArray *)otherButtonTitles
-{
+- (UIActionSheet *)actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles {
     CFRetain((__bridge CFTypeRef)(self));
     self.completion = completion;
     self.actionSheet = [UIActionSheet new];
@@ -47,8 +42,7 @@
 }
 
 #pragma mark - UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (self.completion) {
         self.completion(buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
     }
@@ -61,12 +55,7 @@
 
 @implementation UIActionSheet (SFAddition)
 
-+ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title
-                             completion:(SFActionSheetDialogCompletion)completion
-                      cancelButtonTitle:(NSString *)cancelButtonTitle
-                 destructiveButtonTitle:(NSString *)destructiveButtonTitle
-                      otherButtonTitles:(NSString *)otherButtonTitles, ...
-{
++ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     NSMutableArray *titleList = [NSMutableArray array];
     va_list params;
     va_start(params, otherButtonTitles);
@@ -81,12 +70,7 @@
                  otherButtonTitleList:titleList];
 }
 
-+ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title
-                             completion:(SFActionSheetDialogCompletion)completion
-                      cancelButtonTitle:(NSString *)cancelButtonTitle
-                 destructiveButtonTitle:(NSString *)destructiveButtonTitle
-                   otherButtonTitleList:(NSArray *)otherButtonTitleList
-{
++ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList {
     return [[SFActionSheetWrapper new] actionSheetWithTitle:title
                                                  completion:completion
                                           cancelButtonTitle:cancelButtonTitle
@@ -94,15 +78,13 @@
                                           otherButtonTitles:otherButtonTitleList];
 }
 
-- (void)sf_setButtonTitleColor:(UIColor *)titleColor
-{
+- (void)sf_setButtonTitleColor:(UIColor *)titleColor {
     [self sf_enumerateButtonsUsingBlock:^(UIButton *button) {
         [button setTitleColor:titleColor forState:UIControlStateNormal];
     }];
 }
 
-- (void)sf_enumerateButtonsUsingBlock:(void(^)(UIButton *button))block
-{
+- (void)sf_enumerateButtonsUsingBlock:(void(^)(UIButton *button))block {
     for (UIView *subview in [self subviews]) {
         if ([subview isKindOfClass:[UIButton class]]) {
             UIButton *button = (id)subview;

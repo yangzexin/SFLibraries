@@ -15,8 +15,7 @@
 
 @implementation UITextView (SFPlaceholder)
 
-- (void)sf_setPlaceholder:(NSString *)placeholder
-{
+- (void)sf_setPlaceholder:(NSString *)placeholder {
     UILabel *placeholderLabel = [self sf_associatedObjectWithKey:@"_placeholderLabel"];
     if (placeholderLabel == nil) {
         CGFloat placeholderLabelX = SFDeviceSystemVersion < 7.0f ? 10.0f : 5;
@@ -45,8 +44,7 @@
     }
 }
 
-- (NSString *)sf_placeholder
-{
+- (NSString *)sf_placeholder {
     UILabel *placeholderLabel = [self sf_associatedObjectWithKey:@"_placeholderLabel"];
     
     return placeholderLabel.text;

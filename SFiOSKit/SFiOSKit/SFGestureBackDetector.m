@@ -43,8 +43,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
 
 @implementation SFHorizontalGestureRecognizer
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.testDistance = 20;
@@ -52,8 +51,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
     return self;
 }
 
-- (void)touchBeganWithPoint:(CGPoint)point
-{
+- (void)touchBeganWithPoint:(CGPoint)point {
     self.beginPoint = point;
     self.enoughDistanceMoved = NO;
     self.touches = [NSMutableArray array];
@@ -61,8 +59,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
     [_touches addObject:[NSValue valueWithCGPoint:point]];
 }
 
-- (void)touchMovedWithPoint:(CGPoint)point
-{
+- (void)touchMovedWithPoint:(CGPoint)point {
     if (fabs(fabs(point.x) - fabs(_beginPoint.x)) < _testDistance) {
         [_touches addObject:[NSValue valueWithCGPoint:point]];
     } else {
@@ -70,8 +67,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
     }
 }
 
-- (void)test
-{
+- (void)test {
     if (!_triggered && _enoughDistanceMoved) {
         CGFloat maxDeltaY = 0;
         for (NSValue *pointValue in _touches) {
@@ -119,8 +115,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
 
 @implementation SFGestureBackDetector
 
-+ (instancetype)detectorWithValidDistance:(CGFloat)validDistance
-{
++ (instancetype)detectorWithValidDistance:(CGFloat)validDistance {
     SFGestureBackDetector *detector = [SFGestureBackDetector new];
     detector.validDistance = validDistance;
     detector.quickSlideMinimalTimeInterval = 0.10f;
@@ -129,20 +124,17 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
     return detector;
 }
 
-- (void)reset
-{
+- (void)reset {
     self.gestureBackPrepared = NO;
 }
 
-- (BOOL)isPrepared
-{
+- (BOOL)isPrepared {
     return _triggerTouchX != -1;
 }
 
-- (void)panGestureRecognizerDidTrigger:(UIPanGestureRecognizer *)gr offsetX:(CGFloat)offsetX
-{
+- (void)panGestureRecognizerDidTrigger:(UIPanGestureRecognizer *)gr offsetX:(CGFloat)offsetX {
     CGPoint point = [gr translationInView:gr.view];
-    if(gr.state == UIGestureRecognizerStateBegan){
+    if (gr.state == UIGestureRecognizerStateBegan) {
         CGFloat startX = [gr locationInView:gr.view].x;
         if (_validDistance == SFGestureBackDetectorAllValidDistance || (startX >= _validLeftEdge && startX <= _validLeftEdge + _validDistance)) {
             self.triggerTouchX = point.x;
@@ -163,7 +155,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         } else {
             self.triggerTouchX = -1;
         }
-    }else if(gr.state == UIGestureRecognizerStateCancelled){
+    } else if(gr.state == UIGestureRecognizerStateCancelled) {
         self.gestureGoback = NO;
         self.quickSlide = NO;
         self.velocity = 0;
@@ -171,7 +163,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         if ([_delegate respondsToSelector:@selector(gestureBackDetectorGestureDidRelease:gestureBackable:)]) {
             [_delegate gestureBackDetectorGestureDidRelease:self gestureBackable:_gestureGoback];
         }
-    }else if(gr.state == UIGestureRecognizerStateEnded){
+    } else if(gr.state == UIGestureRecognizerStateEnded) {
         if (_triggerTouchX == -1) {
             if ([_delegate respondsToSelector:@selector(gestureBackDetectorGestureDidCancel:)]) {
                 [_delegate gestureBackDetectorGestureDidCancel:self];
@@ -186,7 +178,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         if ([_delegate respondsToSelector:@selector(gestureBackDetectorGestureDidRelease:gestureBackable:)]) {
             [_delegate gestureBackDetectorGestureDidRelease:self gestureBackable:_gestureGoback];
         }
-    }else if(gr.state == UIGestureRecognizerStateChanged){
+    } else if(gr.state == UIGestureRecognizerStateChanged) {
         if (_triggerTouchX == -1) {
             return;
         }
@@ -202,7 +194,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
             }
         }
 #endif
-        if(_gestureBackPrepared){
+        if (_gestureBackPrepared) {
             if ([_delegate respondsToSelector:@selector(gestureBackDetectorGestureWillStart:)]) {
                 [_delegate gestureBackDetectorGestureWillStart:self];
             }
@@ -219,7 +211,7 @@ CGFloat SFGestureBackDetectorAllValidDistance = -1;
         self.gestureGoback = deltaX > 0 && (offsetX + slideWidth) > gr.view.frame.size.width / 3;
         self.lastTouchX = point.x;
         NSTimeInterval slideTimeInterval = [NSDate timeIntervalSinceReferenceDate] - _lastTouchMoveTime;
-        if((deltaY > 0 ? deltaY : -deltaY) < deltaX && deltaX > 50.0f && slideTimeInterval < _quickSlideMinimalTimeInterval){
+        if ((deltaY > 0 ? deltaY : -deltaY) < deltaX && deltaX > 50.0f && slideTimeInterval < _quickSlideMinimalTimeInterval) {
             self.gestureGoback = YES;
         }
     }

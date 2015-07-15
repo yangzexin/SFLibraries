@@ -10,8 +10,7 @@
 
 @implementation SFNullParameter
 
-+ (instancetype)nullValue
-{
++ (instancetype)nullValue {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

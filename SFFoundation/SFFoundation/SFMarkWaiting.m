@@ -18,29 +18,25 @@
 
 @implementation SFMarkWaiting
 
-+ (instancetype)markWaiting
-{
++ (instancetype)markWaiting {
     SFMarkWaiting *waiting = [SFMarkWaiting new];
     waiting.mark = NO;
     
     return waiting;
 }
 
-- (BOOL)shouldAddToEventLoop
-{
+- (BOOL)shouldAddToEventLoop {
     return NO;
 }
 
-- (void)markAsFinish
-{
+- (void)markAsFinish {
     self.mark = YES;
     
     [self notfiyCallbacksSync:YES];
     [self removeCallbacks];
 }
 
-- (void)wait:(void (^)())block uniqueIdentifier:(NSString *)identifier
-{
+- (void)wait:(void (^)())block uniqueIdentifier:(NSString *)identifier {
     if ([self isMarked]) {
         if (block) {
             block();
@@ -50,13 +46,11 @@
     }
 }
 
-- (void)resetMark
-{
+- (void)resetMark {
     self.mark = NO;
 }
 
-- (BOOL)isMarked
-{
+- (BOOL)isMarked {
     return _mark;
 }
 

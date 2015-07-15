@@ -12,28 +12,23 @@
 
 @implementation NSObject (SFServantSupport)
 
-- (void)sf_sendServant:(id<SFServant>)servant
-{
+- (void)sf_sendServant:(id<SFServant>)servant {
     [self sf_sendServant:servant succeeded:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded
-{
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded {
     [self sf_sendServant:servant succeeded:succeeded failed:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed
-{
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed {
     [self sf_sendServant:servant succeeded:succeeded failed:failed completed:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed
-{
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed {
     [self sf_sendServant:servant succeeded:succeeded failed:failed completed:completed identifier:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier
-{ 
+- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier { 
     [self sf_deposit:[servant sendWithCallback:^(SFFeedback *feedback) {
         if (feedback.error != nil) {
             if (failed) {
@@ -50,13 +45,11 @@
     }] identifier:identifier];
 }
 
-- (void)sf_interruptServantWithIdentifier:(NSString *)identifier
-{
+- (void)sf_interruptServantWithIdentifier:(NSString *)identifier {
     [self sf_removeDepositableWithIdentifier:identifier];
 }
 
-- (BOOL)sf_isServantExistingWithIdentifier:(NSString *)identifier
-{
+- (BOOL)sf_isServantExistingWithIdentifier:(NSString *)identifier {
     id<SFServant> servant = (id)[self sf_depositableWithIdentifier:identifier];
     
     return [servant isExecuting];

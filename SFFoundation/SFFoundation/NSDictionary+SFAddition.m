@@ -13,8 +13,7 @@
 
 @implementation NSDictionary (SFAddition)
 
-- (id)sf_dictionaryWithPath:(NSString *)path
-{
+- (id)sf_dictionaryWithPath:(NSString *)path {
     NSDictionary *dictionary = self;
     
     NSArray *paths = [path componentsSeparatedByString:@"."];
@@ -66,8 +65,7 @@
     return dictionary;
 }
 
-- (instancetype)sf_combineWithKeysAndValues:(id)firstKey, ...
-{
+- (instancetype)sf_combineWithKeysAndValues:(id)firstKey, ... {
     NSMutableDictionary *keyParamNameValueParamValue = [NSMutableDictionary dictionaryWithDictionary:self];
     
     va_list params;
@@ -96,8 +94,7 @@
     return keyParamNameValueParamValue;
 }
 
-- (NSString *)sf_JSONString
-{
+- (NSString *)sf_JSONString {
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self options:0 error:nil]
                                  encoding:NSUTF8StringEncoding];
 }
@@ -106,8 +103,7 @@
 
 @implementation NSMutableDictionary (SFAddition)
 
-- (void)sf_safeSetObject:(id)anObject forKey:(id<NSCopying>)aKey
-{
+- (void)sf_safeSetObject:(id)anObject forKey:(id<NSCopying>)aKey {
     if (anObject != nil  && aKey != nil) {
         [self setObject:anObject forKey:aKey];
     }

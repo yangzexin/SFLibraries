@@ -28,8 +28,7 @@
 
 @implementation SFSingleImagePickerViewController
 
-+ (instancetype)controllerWithTitle:(NSString *)title sourceType:(UIImagePickerControllerSourceType)sourceType
-{
++ (instancetype)controllerWithTitle:(NSString *)title sourceType:(UIImagePickerControllerSourceType)sourceType {
     SFSingleImagePickerViewController *controller = [SFSingleImagePickerViewController new];
     controller.title = title;
     controller.sourceType = sourceType;
@@ -37,8 +36,7 @@
     return controller;
 }
 
-- (UIViewController *)viewControllerForPickingImagesWithCompletion:(SFMutipleImagePickerCompletion)completion
-{
+- (UIViewController *)viewControllerForPickingImagesWithCompletion:(SFMutipleImagePickerCompletion)completion {
     self.completion = completion;
     
     self.imagePickerController = ({
@@ -52,16 +50,14 @@
     return self.imagePickerController;
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     if (self.completion) {
         self.completion(@[image], NO);
         self.completion = nil;
     }
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     if (self.completion) {
         self.completion(nil, YES);
         self.completion = nil;
@@ -85,8 +81,7 @@
 
 @implementation SFImagePickerControllerWrapper
 
-- (UIActionSheet *)pickImageByActionSheetInViewController:(UIViewController *)viewController completion:(SFMutipleImagePickerCompletion)completion
-{
+- (UIActionSheet *)pickImageByActionSheetInViewController:(UIViewController *)viewController completion:(SFMutipleImagePickerCompletion)completion {
     [viewController sf_setAssociatedObject:self key:@"_ImagePickerControllerWrapper"];
     NSMutableArray *imagePickerViewControllers = [NSMutableArray array];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && !(self.dialogExtension.sourceLimitation & SFImagePickerSourceLimitationOnlyLibrary)) {
@@ -149,8 +144,7 @@
 
 @implementation UIImagePickerController (SFAddition)
 
-+ (SFImagePickerControllerWrapper *)_defaultImagePickerControllerWrapperWithExtension:(SFImagePickerDialogExtension *)extension
-{
++ (SFImagePickerControllerWrapper *)_defaultImagePickerControllerWrapperWithExtension:(SFImagePickerDialogExtension *)extension {
     SFImagePickerControllerWrapper *imgPicker = [[SFImagePickerControllerWrapper alloc] init];
     imgPicker.dialogExtension = extension;
     imgPicker.cameraImagePickerViewController = [SFSingleImagePickerViewController controllerWithTitle:NSLocalizedString(@"Camera", nil) sourceType:UIImagePickerControllerSourceTypeCamera];
@@ -159,8 +153,7 @@
     return imgPicker;
 }
 
-+ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension completion:(SFImagePickerCompletion)completion
-{
++ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension completion:(SFImagePickerCompletion)completion {
     SFImagePickerControllerWrapper *imgPicker = [self _defaultImagePickerControllerWrapperWithExtension:extension];
     return [imgPicker pickImageByActionSheetInViewController:viewController completion:^(NSArray *images, BOOL cancelled){
         if (completion) {
@@ -169,16 +162,11 @@
     }];
 }
 
-+ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController completion:(SFImagePickerCompletion)completion
-{
++ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController completion:(SFImagePickerCompletion)completion {
     return [self sf_pickImageUsingActionSheetWithViewController:viewController extension:nil completion:completion];
 }
 
-+ (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                      extension:(SFImagePickerDialogExtension *)extension
-                               mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController
-                                                     completion:(SFMutipleImagePickerCompletion)completion
-{
++ (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController completion:(SFMutipleImagePickerCompletion)completion {
     SFImagePickerControllerWrapper *imgPicker = [self _defaultImagePickerControllerWrapperWithExtension:extension];
     imgPicker.photoImagePickerViewController = mutipleImagePickerViewController;
     

@@ -10,8 +10,7 @@
 
 @implementation NSArray (SFAddition)
 
-+ (NSArray *)sf_concatArrayObjects:(id)object, ...
-{
++ (NSArray *)sf_concatArrayObjects:(id)object, ... {
     NSMutableArray *objects = [NSMutableArray array];
     
     va_list params;

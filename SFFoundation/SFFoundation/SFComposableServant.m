@@ -14,18 +14,15 @@
 
 @implementation SFComposableServant
 
-+ (instancetype)servant
-{
++ (instancetype)servant {
     return [self servantWithFeedbackBuilder:nil];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder
-{
++ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder {
     return [self servantWithFeedbackBuilder:feedbackBuilder synchronous:NO];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous
-{
++ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous {
     SFComposableServant *servant = [SFComposableServant new];
     servant.feedbackBuilder = feedbackBuilder;
     servant.synchronous = synchronous;
@@ -33,8 +30,7 @@
     return servant;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     [super servantStartingService];
     
     if (self.synchronous) {

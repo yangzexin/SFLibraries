@@ -31,14 +31,12 @@ static NSInteger MAX_RETRY_COUNT = 2;
 
 @synthesize delegate;
 
-- (void)dealloc
-{
+- (void)dealloc {
     _mapView.delegate = nil;
     [_delayControl cancel];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.retryCount = 0;
@@ -47,15 +45,13 @@ static NSInteger MAX_RETRY_COUNT = 2;
     return self;
 }
 
-- (void)startUpdatingLocation
-{
+- (void)startUpdatingLocation {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self _startUpdatingLocation];
     });
 }
 
-- (void)_startUpdatingLocation
-{
+- (void)_startUpdatingLocation {
     if ([CLLocationManager locationServicesEnabled]) {
         if (self.mapView) {
             self.mapView.delegate = nil;
@@ -85,16 +81,14 @@ static NSInteger MAX_RETRY_COUNT = 2;
     }
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.delegate = nil;
     self.mapView.delegate = nil;
     self.mapView = nil;
     [_delayControl cancel]; self.delayControl = nil;
 }
 
-- (void)notifyError:(NSError *)error
-{
+- (void)notifyError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self.delegate respondsToSelector:@selector(locationManager:didFailWithError:)]) {
             [self.delegate locationManager:self didFailWithError:error];
@@ -103,8 +97,7 @@ static NSInteger MAX_RETRY_COUNT = 2;
 }
 
 #pragma mark - MKMapViewDelegate
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     if (userLocation.location.horizontalAccuracy > ACCURACY && self.retryCount < MAX_RETRY_COUNT) {
         ++self.retryCount;
         [self performSelector:@selector(startUpdatingLocation) withObject:nil afterDelay:2.0f];
@@ -122,8 +115,7 @@ static NSInteger MAX_RETRY_COUNT = 2;
     [_delayControl cancel]; self.delayControl = nil;
 }
 
-- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
-{
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error {
     [self notifyError:error];
     self.mapView.delegate = nil;
     self.mapView = nil;

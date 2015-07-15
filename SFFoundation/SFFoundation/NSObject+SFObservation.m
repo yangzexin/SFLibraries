@@ -15,10 +15,7 @@
 
 @implementation NSObject (SFObserve)
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
-                                                name:(NSString *)name
-                                             options:(NSKeyValueObservingOptions)options
-{
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options {
     SFPropertyObserving *observing = nil;
     if (target != nil) {
         observing = [SFPropertyObserving new];
@@ -46,8 +43,7 @@
     return observing;
 }
 
-- (NSMutableDictionary *)_keyIdentifierValuePropertyObserving
-{
+- (NSMutableDictionary *)_keyIdentifierValuePropertyObserving {
     NSMutableDictionary *keyIdentifierValuePropertyObserving = [self sf_associatedObjectWithKey:@"_keyIdentifierValuePropertyObserving"];
     if (keyIdentifierValuePropertyObserving == nil) {
         keyIdentifierValuePropertyObserving = [NSMutableDictionary dictionary];
@@ -57,17 +53,12 @@
     return keyIdentifierValuePropertyObserving;
 }
 
-- (void)sf_cancelObservingWithIdentifier:(NSString *)identifier
-{
+- (void)sf_cancelObservingWithIdentifier:(NSString *)identifier {
     SFPropertyObserving *existsObserving = [[self _keyIdentifierValuePropertyObserving] objectForKey:identifier];
     [existsObserving cancel];
 }
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
-                                                name:(NSString *)name
-                                             options:(NSKeyValueObservingOptions)options
-                                          identifier:(NSString *)identifier
-{
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options identifier:(NSString *)identifier {
     [self sf_cancelObservingWithIdentifier:identifier];
     
     SFPropertyObserving *newObserving = [self sf_observeKeyPathWithTarget:target name:name options:options];

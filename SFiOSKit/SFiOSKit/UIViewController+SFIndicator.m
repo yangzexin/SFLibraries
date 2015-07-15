@@ -19,8 +19,7 @@
 
 @implementation SFViewControllerLoadingSupport
 
-+ (instancetype)sharedSupport
-{
++ (instancetype)sharedSupport {
     static SFViewControllerLoadingSupport *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -30,8 +29,7 @@
     return instance;
 }
 
-+ (instancetype)support
-{
++ (instancetype)support {
     SFViewControllerLoadingSupport *support = [self new];
     
     return support;
@@ -41,8 +39,7 @@
 
 @implementation UIViewController (SFLoading)
 
-- (NSMutableArray *)loadingIdentifiersWithHidesMainView:(BOOL)hidesMainView
-{
+- (NSMutableArray *)loadingIdentifiersWithHidesMainView:(BOOL)hidesMainView {
     NSString *key = [NSString stringWithFormat:@"sf_loadingIdentifiers-%@", hidesMainView ? @"YES" : @"NO"];
     NSMutableArray *loadingIdentifiers = [self sf_associatedObjectWithKey:key];
     if (loadingIdentifiers == nil) {
@@ -53,13 +50,11 @@
     return loadingIdentifiers;
 }
 
-- (void)sf_setLoadingOrWaitingShowable:(BOOL)showable
-{
+- (void)sf_setLoadingOrWaitingShowable:(BOOL)showable {
     [self sf_setAssociatedObject:@(showable) key:@"sf_loadingOrWaitingShowable"];
 }
 
-- (BOOL)sf_loadingOrWaitingShowable
-{
+- (BOOL)sf_loadingOrWaitingShowable {
     NSNumber *loadingShowable = [self sf_associatedObjectWithKey:@"sf_loadingOrWaitingShowable"];
     BOOL showable = YES;
     if (loadingShowable) {
@@ -69,13 +64,11 @@
     return showable;
 }
 
-- (void)sf_setLoadingSupport:(SFViewControllerLoadingSupport *)support
-{
+- (void)sf_setLoadingSupport:(SFViewControllerLoadingSupport *)support {
     [self sf_setAssociatedObject:support key:@"sf_loadingSupport"];
 }
 
-- (SFViewControllerLoadingSupport *)sf_loadingSupport
-{
+- (SFViewControllerLoadingSupport *)sf_loadingSupport {
     SFViewControllerLoadingSupport *support = [self sf_associatedObjectWithKey:@"sf_loadingSupport"];
     if (support == nil) {
         support = [SFViewControllerLoadingSupport sharedSupport];
@@ -93,22 +86,19 @@
     return support;
 }
 
-- (void)_showLoadingToView:(UIView *)view hidesMainView:(BOOL)hidesMainView
-{
+- (void)_showLoadingToView:(UIView *)view hidesMainView:(BOOL)hidesMainView {
     NSAssert(self.sf_loadingSupport.loadingUpdate != nil, @"loadingUpdate did not implemented, adding support by this method:[[SFViewControllerLoadingSupport sharedSupport] setLoadingUpdate:^(UIView *superView, BOOL loading){"
              "}]");
     self.sf_loadingSupport.loadingUpdate(view, YES, hidesMainView);
 }
 
-- (void)_hideLoadingFromView:(UIView *)view hidesMainView:(BOOL)hidesMainView
-{
+- (void)_hideLoadingFromView:(UIView *)view hidesMainView:(BOOL)hidesMainView {
     NSAssert(self.sf_loadingSupport.loadingUpdate != nil, @"loadingUpdate did not implemented, adding support by this method:[[SFViewControllerLoadingSupport sharedSupport] setLoadingUpdate:^(UIView *superView, BOOL loading){"
              "}]");
     self.sf_loadingSupport.loadingUpdate(view, NO, hidesMainView);
 }
 
-- (void)setLoading:(BOOL)loading hidesMainView:(BOOL)hidesMainView identifier:(NSString *)identifier
-{
+- (void)setLoading:(BOOL)loading hidesMainView:(BOOL)hidesMainView identifier:(NSString *)identifier {
     if (identifier.length == 0) {
         identifier = @"Default";
     }
@@ -145,56 +135,46 @@
     }
 }
 
-- (void)sf_setWaiting:(BOOL)waiting identifier:(NSString *)identifier
-{
+- (void)sf_setWaiting:(BOOL)waiting identifier:(NSString *)identifier {
     [self setLoading:waiting hidesMainView:NO identifier:identifier];
 }
 
-- (void)sf_setLoading:(BOOL)loading identifier:(NSString *)identifier
-{
+- (void)sf_setLoading:(BOOL)loading identifier:(NSString *)identifier {
     [self setLoading:loading hidesMainView:YES identifier:identifier];
 }
 
-- (void)sf_setLoading:(BOOL)loading
-{
+- (void)sf_setLoading:(BOOL)loading {
     [self sf_setLoading:loading identifier:nil];
 }
 
-- (void)sf_setWaiting:(BOOL)waiting
-{
+- (void)sf_setWaiting:(BOOL)waiting {
     [self sf_setWaiting:waiting identifier:nil];
 }
 
-- (void)sf_dismissLoadingOrWaiting
-{
+- (void)sf_dismissLoadingOrWaiting {
     self.view.userInteractionEnabled = YES;
     [self _hideLoadingFromView:self.view hidesMainView:NO];
 }
 
-- (BOOL)sf_shouldShowLoadingOrWaiting
-{
+- (BOOL)sf_shouldShowLoadingOrWaiting {
     return YES;
 }
 
-- (void)sf_willStartLoadingOrWaiting
-{
+- (void)sf_willStartLoadingOrWaiting {
 }
 
-- (void)sf_willFinishLoadingOrWaiting
-{
+- (void)sf_willFinishLoadingOrWaiting {
 }
 
 @end
 
 @implementation UIViewController (SFCenterTips)
 
-- (void)sf_setCenterTips:(NSString *)tips
-{
+- (void)sf_setCenterTips:(NSString *)tips {
     [self sf_setCenterTips:tips toView:self.view];
 }
 
-- (void)sf_setCenterTips:(NSString *)tips toView:(UIView *)containView
-{
+- (void)sf_setCenterTips:(NSString *)tips toView:(UIView *)containView {
     UIView *tipsLabelContainerView = [self sf_associatedObjectWithKey:@"TipsLabelContainerView"];
     UILabel *tipsLabel = [self sf_associatedObjectWithKey:@"TipsLabel"];
     if (tipsLabel == nil && containView != nil) {
@@ -235,30 +215,25 @@
     [containView bringSubviewToFront:tipsLabelContainerView];
 }
 
-- (void)sf_hideCenterTips
-{
+- (void)sf_hideCenterTips {
     UIView *tipsLabelContainerView = [self sf_associatedObjectWithKey:@"TipsLabelContainerView"];
     tipsLabelContainerView.hidden = YES;
 }
 
-- (void)sf_setCenterTipsTransparent:(BOOL)centerTipsTransparent
-{
+- (void)sf_setCenterTipsTransparent:(BOOL)centerTipsTransparent {
     [self sf_setAssociatedObject:[NSNumber numberWithBool:centerTipsTransparent] key:@"centerTipsTransparent"];
 }
 
-- (BOOL)sf_centerTipsTransparent
-{
+- (BOOL)sf_centerTipsTransparent {
     NSNumber *transparent = [self sf_associatedObjectWithKey:@"centerTipsTransparent"];
     return transparent == nil ? NO : [transparent boolValue];
 }
 
-- (CGFloat)sf_centerTipsTopMargin
-{
+- (CGFloat)sf_centerTipsTopMargin {
     return [[self sf_associatedObjectWithKey:@"centerTipsTopMargin"] floatValue];
 }
 
-- (void)sf_setCenterTipsTopMargin:(CGFloat)centerTipsTopMargin
-{
+- (void)sf_setCenterTipsTopMargin:(CGFloat)centerTipsTopMargin {
     [self sf_setAssociatedObject:@(centerTipsTopMargin) key:@"centerTipsTopMargin"];
 }
 
@@ -266,33 +241,27 @@
 
 @implementation UIViewController (SFToast)
 
-- (void)toast:(NSString *)text
-{
+- (void)toast:(NSString *)text {
     [self toast:text completion:nil];
 }
 
-- (void)toast:(NSString *)text identifier:(NSString *)identifier
-{
+- (void)toast:(NSString *)text identifier:(NSString *)identifier {
     [self toast:text hideAfterSeconds:1.70f identifier:identifier];
 }
 
-- (void)toast:(NSString *)text completion:(void(^)())completion
-{
+- (void)toast:(NSString *)text completion:(void(^)())completion {
     [self toast:text hideAfterSeconds:1.70f identifier:nil completion:completion];
 }
 
-- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds
-{
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds {
     [self toast:text hideAfterSeconds:hideAfterSeconds identifier:nil];
 }
 
-- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier
-{
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier {
     [self toast:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:nil];
 }
 
-- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion
-{
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
     [SFToast toastInView:self.view text:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:completion];
 }
 

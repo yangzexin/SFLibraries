@@ -1,12 +1,12 @@
 //
-//  MMCall+Cache.m
-//  MMFoundation
+//  SFCache.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 6/9/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.
 //
 
-#import "SFAbstractCache.h"
+#import "SFCache.h"
 
 #import "NSString+SFAddition.h"
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
@@ -14,8 +14,7 @@
 #import <AppKit/AppKit.h>
 #endif
 
-NSString *SFCurrentApplicationIdentifier()
-{
+NSString *SFCurrentApplicationIdentifier() {
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
     return [[NSString stringWithFormat:@"%p", [UIApplication sharedApplication]] sf_stringByEncryptingUsingMD5];
 #elif TARGET_OS_MAC
@@ -23,7 +22,7 @@ NSString *SFCurrentApplicationIdentifier()
 #endif
 }
 
-@interface SFAbstractCache ()
+@interface SFCache ()
 
 @property (nonatomic, assign) NSTimeInterval time;
 @property (nonatomic, strong) NSData *data;
@@ -31,11 +30,10 @@ NSString *SFCurrentApplicationIdentifier()
 
 @end
 
-@implementation SFAbstractCache
+@implementation SFCache
 
-+ (instancetype)cacheWithData:(NSData *)data
-{
-    SFAbstractCache *cache = [SFAbstractCache new];
++ (instancetype)cacheWithData:(NSData *)data {
+    SFCache *cache = [SFCache new];
     cache.time = [NSDate timeIntervalSinceReferenceDate];
     cache.data = data;
     cache.applicationIdentifier = SFCurrentApplicationIdentifier();
@@ -43,8 +41,7 @@ NSString *SFCurrentApplicationIdentifier()
     return cache;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
     self.time = [aDecoder decodeDoubleForKey:@"time"];
@@ -54,8 +51,7 @@ NSString *SFCurrentApplicationIdentifier()
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeDouble:_time forKey:@"time"];
     [aCoder encodeObject:_applicationIdentifier forKey:@"appid"];
     [aCoder encodeObject:_data forKey:@"data"];

@@ -17,21 +17,18 @@
 
 @implementation SFBlockedBarButtonItem
 
-- (void)dealloc
-{
+- (void)dealloc {
     if (self.customView && _customViewTapGestureRecognizer) {
         [self.customView removeGestureRecognizer:_customViewTapGestureRecognizer];
     }
 }
 
-- (void)initialize
-{
+- (void)initialize {
     self.target = self;
     self.action = @selector(tapped);
 }
 
-- (id)initWithTitle:(NSString *)title
-{
+- (id)initWithTitle:(NSString *)title {
     self = [super initWithTitle:title style:UIBarButtonItemStyleBordered target:nil action:nil];
     
     [self initialize];
@@ -39,8 +36,7 @@
     return self;
 }
 
-- (id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem
-{
+- (id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem {
     self = [super initWithBarButtonSystemItem:systemItem target:nil action:nil];
     
     [self initialize];
@@ -48,8 +44,7 @@
     return self;
 }
 
-- (id)initWithImage:(UIImage *)image
-{
+- (id)initWithImage:(UIImage *)image {
     self = [super initWithImage:image style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self initialize];
@@ -57,8 +52,7 @@
     return self;
 }
 
-- (id)initWithCustomView:(UIView *)customView eventHandler:(void(^)())eventHandler
-{
+- (id)initWithCustomView:(UIView *)customView eventHandler:(void(^)())eventHandler {
     self = [super initWithCustomView:customView];
 
     if (eventHandler) {
@@ -70,49 +64,42 @@
     return self;
 }
 
-- (void)tapped
-{
+- (void)tapped {
     if (self.eventHandler) {
         self.eventHandler();
     }
 }
 
-- (void)customViewTapGestureRecognizer:(UITapGestureRecognizer *)gr
-{
+- (void)customViewTapGestureRecognizer:(UITapGestureRecognizer *)gr {
     [self tapped];
 }
 
-+ (id)blockedBarButtonItemWithTitle:(NSString *)title eventHandler:(void (^)())eventHandler
-{
++ (id)blockedBarButtonItemWithTitle:(NSString *)title eventHandler:(void (^)())eventHandler {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithTitle:title];
     tmp.eventHandler = eventHandler;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithImage:(UIImage *)image eventHandler:(void (^)())eventHandler
-{
++ (id)blockedBarButtonItemWithImage:(UIImage *)image eventHandler:(void (^)())eventHandler {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithImage:image];
     tmp.eventHandler = eventHandler;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem eventHandler:(void (^)())eventHandler
-{
++ (id)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem eventHandler:(void (^)())eventHandler {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithBarButtonSystemItem:systemItem];
     tmp.eventHandler = eventHandler;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView
-{
++ (id)blockedBarButtonItemWithCustomView:(UIView *)customView {
     return [[self class] blockedBarButtonItemWithCustomView:customView eventHandler:nil];
 }
 
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView eventHandler:(void (^)())eventHandler
-{
++ (id)blockedBarButtonItemWithCustomView:(UIView *)customView eventHandler:(void (^)())eventHandler {
     SFBlockedBarButtonItem *item = [[SFBlockedBarButtonItem alloc] initWithCustomView:customView eventHandler:eventHandler];
     
     return item;

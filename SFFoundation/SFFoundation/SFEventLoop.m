@@ -17,8 +17,7 @@
 
 @implementation SFEventLoop
 
-+ (instancetype)sharedLoop
-{
++ (instancetype)sharedLoop {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -28,13 +27,11 @@
     return instance;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     self.eventLoopItems = nil;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.numberOfTicksPerSecond = 24;
@@ -43,8 +40,7 @@
     return self;
 }
 
-- (void)addItem:(id<SFEventLoopItem>)item
-{
+- (void)addItem:(id<SFEventLoopItem>)item {
     [self removeItem:item];
     @synchronized(self) {
         [self.eventLoopItems addObject:item];
@@ -52,15 +48,13 @@
     }
 }
 
-- (void)removeItem:(id<SFEventLoopItem>)item
-{
+- (void)removeItem:(id<SFEventLoopItem>)item {
     @synchronized(self) {
         [self.eventLoopItems removeObject:item];
     }
 }
 
-- (void)startThreadIfNotRunning
-{
+- (void)startThreadIfNotRunning {
     @synchronized(self) {
         if (self.running == NO) {
             self.running = YES;

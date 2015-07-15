@@ -12,17 +12,9 @@ typedef void(^SFActionSheetDialogCompletion)(NSInteger buttonIndex, NSString *bu
 
 @interface UIActionSheet (SFAddition)
 
-+ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title
-                                completion:(SFActionSheetDialogCompletion)completion
-                         cancelButtonTitle:(NSString *)cancelButtonTitle
-                    destructiveButtonTitle:(NSString *)destructiveButtonTitle
-                         otherButtonTitles:(NSString *)otherButtonTitles, ...;
++ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
 
-+ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title
-                                completion:(SFActionSheetDialogCompletion)completion
-                         cancelButtonTitle:(NSString *)cancelButtonTitle
-                    destructiveButtonTitle:(NSString *)destructiveButtonTitle
-                      otherButtonTitleList:(NSArray *)otherButtonTitleList;
++ (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList;
 
 - (void)sf_setButtonTitleColor:(UIColor *)titleColor;
 

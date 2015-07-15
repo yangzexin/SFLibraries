@@ -16,15 +16,13 @@
 
 @implementation UITextField (GapBetweenKeyboard)
 
-- (UITextField *)sf_setGapBetweenKeyboard:(CGFloat)gap
-{
+- (UITextField *)sf_setGapBetweenKeyboard:(CGFloat)gap {
     [self sf_setAssociatedObject:@(gap) key:@"_gapBetweenKeyboard"];
     
     return self;
 }
 
-- (CGFloat)sf_gapBetweenKeyboard
-{
+- (CGFloat)sf_gapBetweenKeyboard {
     NSNumber *gap = [self sf_associatedObjectWithKey:@"_gapBetweenKeyboard"];
     
     return gap == nil ? .0f : gap.floatValue;
@@ -34,15 +32,13 @@
 
 @implementation UITextView (GapBetweenKeyboard)
 
-- (UITextView *)sf_setGapBetweenKeyboard:(CGFloat)gap
-{
+- (UITextView *)sf_setGapBetweenKeyboard:(CGFloat)gap {
     [self sf_setAssociatedObject:@(gap) key:@"_gapBetweenKeyboard"];
     
     return self;
 }
 
-- (CGFloat)sf_gapBetweenKeyboard
-{
+- (CGFloat)sf_gapBetweenKeyboard {
     NSNumber *gap = [self sf_associatedObjectWithKey:@"_gapBetweenKeyboard"];
     
     return gap == nil ? .0f : gap.floatValue;
@@ -67,21 +63,18 @@
 
 @implementation SFFieldGroupManager
 
-+ (instancetype)managerForRootScrollView:(UIScrollView *)rootScrollView
-{
++ (instancetype)managerForRootScrollView:(UIScrollView *)rootScrollView {
     SFFieldGroupManager *manager = [SFFieldGroupManager new];
     manager.rootScrollView = rootScrollView;
     
     return manager;
 }
 
-+ (instancetype)manager
-{
++ (instancetype)manager {
     return [self managerForRootScrollView:nil];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     _addedFields = [NSMutableArray array];
@@ -121,18 +114,15 @@
     return self;
 }
 
-- (void)removeField:(id)field
-{
+- (void)removeField:(id)field {
     [self.addedFields removeObject:field];
 }
 
-- (void)addTextField:(UITextField *)textField
-{
+- (void)addTextField:(UITextField *)textField {
     [self addTextField:textField setDelegate:NO];
 }
 
-- (void)addTextField:(UITextField *)textField setDelegate:(BOOL)setDelegate
-{
+- (void)addTextField:(UITextField *)textField setDelegate:(BOOL)setDelegate {
     [self removeField:textField];
     [self.addedFields addObject:textField];
     if (setDelegate) {
@@ -140,39 +130,33 @@
     }
 }
 
-- (void)addTextView:(UITextView *)textView
-{
+- (void)addTextView:(UITextView *)textView {
     [self removeField:textView];
     [self.addedFields addObject:textView];
 }
 
-- (NSArray *)fields
-{
+- (NSArray *)fields {
     return self.addedFields;
 }
 
-- (void)resignFirstResponder
-{
+- (void)resignFirstResponder {
     for (UITextField *field in self.fields) {
         [field resignFirstResponder];
     }
 }
 
-- (void)becomeFirstResponder
-{
+- (void)becomeFirstResponder {
     if (self.fields.count != 0) {
         UITextField *field = [self.fields objectAtIndex:0];
         [field becomeFirstResponder];
     }
 }
 
-- (BOOL)isFirstResponder
-{
+- (BOOL)isFirstResponder {
     return [self _isFirstResponderWithOutField:nil];
 }
 
-- (BOOL)_isFirstResponderWithOutField:(id *)outField
-{
+- (BOOL)_isFirstResponderWithOutField:(id *)outField {
     BOOL isFirstResponder = NO;
     for (UITextField *field in self.fields) {
         if ([field isFirstResponder]) {
@@ -188,8 +172,7 @@
     return isFirstResponder;
 }
 
-- (void)fieldWillBeginEditing:(id)field
-{
+- (void)fieldWillBeginEditing:(id)field {
     if (self.whenFieldBecameFirstResponder) {
         self.whenFieldBecameFirstResponder(field);
     }
@@ -255,13 +238,11 @@
     }];
 }
 
-- (CGFloat)_minimalGapHeightForField:(id)field
-{
+- (CGFloat)_minimalGapHeightForField:(id)field {
     return [field sf_gapBetweenKeyboard];
 }
 
-- (void)_restoreSuperViewPositionWithField:(id)field
-{
+- (void)_restoreSuperViewPositionWithField:(id)field {
     if (self.setPositionAutomatically && self.topSuperViewPositionReseted) {
         UIView *topSuperView = [[field sf_viewController] view];
         [UIView animateWithDuration:.25f animations:^{
@@ -278,8 +259,7 @@
     }
 }
 
-- (void)fieldDidEndEditing:(id)field
-{
+- (void)fieldDidEndEditing:(id)field {
     __weak typeof(self) weakSelf = self;
     [self.waitingForNotAnimating wait:^{
         __strong typeof(weakSelf) self = weakSelf;
@@ -293,8 +273,7 @@
     } uniqueIdentifier:@"QuickNext"];
 }
 
-- (void)fieldWillReturn:(id)field
-{
+- (void)fieldWillReturn:(id)field {
     NSInteger textFieldIndex = [self.addedFields indexOfObject:field];
     if (textFieldIndex != NSNotFound) {
         NSInteger nextTextFieldIndex = ++textFieldIndex;
@@ -312,15 +291,13 @@
 
 
 #pragma mark - UITextFieldDelegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     if ([_textFieldDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
         [_textFieldDelegate textFieldDidBeginEditing:textField];
     }
 }
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     BOOL shouldEnd = YES;
     if ([_textFieldDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
         shouldEnd = [_textFieldDelegate textFieldShouldEndEditing:textField];
@@ -329,8 +306,7 @@
     return shouldEnd;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     BOOL shouldChange = YES;
     if ([_textFieldDelegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
         shouldChange = [_textFieldDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
@@ -339,8 +315,7 @@
     return shouldChange;
 }
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField
-{
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
     BOOL shouldClear = YES;
     if ([_textFieldDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
         shouldClear = [_textFieldDelegate textFieldShouldClear:textField];
@@ -349,8 +324,7 @@
     return shouldClear;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     [self fieldWillBeginEditing:textField];
     
     BOOL shouldBegin = YES;
@@ -370,16 +344,14 @@
     return shouldBegin;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     [self fieldDidEndEditing:textField];
     if ([_textFieldDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
         [_textFieldDelegate textFieldDidEndEditing:textField];
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self fieldWillReturn:textField];
     
     BOOL shouldReturn = YES;

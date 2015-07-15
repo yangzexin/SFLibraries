@@ -12,8 +12,7 @@
 
 @implementation NSString (SFAddition)
 
-- (NSString *)sf_stringByURLEncoding
-{
+- (NSString *)sf_stringByURLEncoding {
     NSString *escapedString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                   NULL,
                                                                                   (CFStringRef)self,
@@ -23,8 +22,7 @@
     return escapedString;
 }
 
-- (NSData *)sf_dataByRestoringHexRepresentation
-{
+- (NSData *)sf_dataByRestoringHexRepresentation {
     NSString *theString = [[self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:nil];
     
     NSMutableData *data = [NSMutableData data];
@@ -41,13 +39,11 @@
     return data;
 }
 
-- (NSString *)sf_stringByEncryptingUsingMD5
-{
+- (NSString *)sf_stringByEncryptingUsingMD5 {
     return [[[self dataUsingEncoding:NSUTF8StringEncoding] sf_dataByEncryptingUsingMD5] sf_hexRepresentation];
 }
 
-+ (NSString *)sf_wrapNilString:(NSString *)string
-{
++ (NSString *)sf_wrapNilString:(NSString *)string {
     if (string == nil) {
         string = @"";
     }
@@ -55,8 +51,7 @@
     return string;
 }
 
-- (NSString *)sf_stringByStrippingHTMLTags
-{
+- (NSString *)sf_stringByStrippingHTMLTags {
     NSMutableString *ms = [NSMutableString string];
     NSScanner *scanner = [NSScanner scannerWithString:self];
     [scanner setCharactersToBeSkipped:nil];
@@ -91,8 +86,7 @@
     return result;
 }
 
-- (BOOL)sf_isNumberic
-{
+- (BOOL)sf_isNumberic {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     NSNumber *num = [formatter numberFromString:self];
     
@@ -103,8 +97,7 @@
 
 @implementation NSString (SFPinyin)
 
-- (NSString *)sf_firstPinyin
-{
+- (NSString *)sf_firstPinyin {
     if (self.length) {
         CFMutableStringRef string = CFStringCreateMutableCopy(NULL, 0, (CFStringRef)self);
         CFStringTransform(string, NULL, kCFStringTransformToLatin, NO);
@@ -117,8 +110,7 @@
     return @"";
 }
 
-- (NSString *)sf_pinyin
-{
+- (NSString *)sf_pinyin {
     CFMutableStringRef string = CFStringCreateMutableCopy(NULL, 0, (CFStringRef)self);
     CFStringTransform(string, NULL, kCFStringTransformToLatin, NO);
     CFStringTransform(string, NULL, kCFStringTransformStripCombiningMarks, NO);
@@ -129,8 +121,7 @@
     return pinyin;
 }
 
-- (NSString *)sf_firstPinyins
-{
+- (NSString *)sf_firstPinyins {
     CFMutableStringRef string = CFStringCreateMutableCopy(NULL, 0, (CFStringRef)self);
     CFStringTransform(string, NULL, kCFStringTransformToLatin, NO);
     CFStringTransform(string, NULL, kCFStringTransformStripCombiningMarks, NO);

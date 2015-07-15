@@ -10,13 +10,11 @@
 
 @implementation UITableViewCell (SFAddition)
 
-- (void)sf_makeFrameCompatibleWithTableView:(UITableView *)tableView
-{
+- (void)sf_makeFrameCompatibleWithTableView:(UITableView *)tableView {
     [self sf_makeFrameCompatibleWithWidth:tableView.frame.size.width];
 }
 
-- (void)sf_makeFrameCompatibleWithWidth:(CGFloat)width
-{
+- (void)sf_makeFrameCompatibleWithWidth:(CGFloat)width {
     CGRect tmpRect = self.frame;
     tmpRect.size.width = width;
     self.frame = tmpRect;
@@ -26,8 +24,7 @@
     self.contentView.frame = tmpRect;
 }
 
-- (void)sf_makeTransparent
-{
+- (void)sf_makeTransparent {
     self.backgroundColor = [UIColor clearColor];
     self.backgroundView = [UIView new];
 }

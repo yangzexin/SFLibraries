@@ -25,21 +25,18 @@
 
 @synthesize delegate;
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self cancel];
 }
 
-- (void)startUpdatingLocation
-{
+- (void)startUpdatingLocation {
     self.cancelled = NO;
     self.preciseLocationMgr = [SFPreciseLocationManager new];
     self.preciseLocationMgr.delegate = self;
     [self.preciseLocationMgr startUpdatingLocation];
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.delegate = nil;
     self.cancelled = YES;
     [_preciseLocationMgr cancel];
@@ -49,8 +46,7 @@
 }
 
 #pragma mark - private methods
-- (void)notifySucceed:(CLLocation *)location
-{
+- (void)notifySucceed:(CLLocation *)location {
     dispatch_async(dispatch_get_main_queue(), ^{
         if([self.delegate respondsToSelector:@selector(locationManager:didUpdateToLocation:)]){
             [self.delegate locationManager:self didUpdateToLocation:location];
@@ -58,8 +54,7 @@
     });
 }
 
-- (void)notifyError:(NSError *)error
-{
+- (void)notifyError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         if([self.delegate respondsToSelector:@selector(locationManager:didFailWithError:)]){
             [self.delegate locationManager:self didFailWithError:error];
@@ -68,8 +63,7 @@
 }
 
 #pragma mark - LocationManagerDelegate
-- (void)locationManager:(id)locationManager didUpdateToLocation:(CLLocation *)location
-{
+- (void)locationManager:(id)locationManager didUpdateToLocation:(CLLocation *)location {
     if (locationManager == self.preciseLocationMgr && !_cancelled) {
         self.preciseLocation = location;
         if (_mapkitLocationMgr) {
@@ -83,8 +77,7 @@
     }
 }
 
-- (void)locationManager:(id)locationManager didFailWithError:(NSError *)error
-{
+- (void)locationManager:(id)locationManager didFailWithError:(NSError *)error {
     if (locationManager == self.preciseLocationMgr) {
         [self notifyError:error];
     } else if(locationManager == self.mapkitLocationMgr) {

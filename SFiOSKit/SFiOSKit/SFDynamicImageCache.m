@@ -20,8 +20,7 @@
 
 @implementation SFDynamicImageCache
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -31,8 +30,7 @@
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.keyNameValueImageCreator = [NSMutableDictionary dictionary];
@@ -40,18 +38,15 @@
     return self;
 }
 
-- (NSString *)_wrapName:(NSString *)name
-{
+- (NSString *)_wrapName:(NSString *)name {
     return [NSString stringWithFormat:@"DynamicImage-%@", name];
 }
 
-- (void)setImageCreator:(UIImage *(^)())imageCreator name:(NSString *)name
-{
+- (void)setImageCreator:(UIImage *(^)())imageCreator name:(NSString *)name {
     [self.keyNameValueImageCreator setObject:[NSValue sf_valueWithBlock:imageCreator] forKey:[self _wrapName:name]];
 }
 
-- (UIImage *)imageNamed:(NSString *)name
-{
+- (UIImage *)imageNamed:(NSString *)name {
     name = [self _wrapName:name];
     
     UIImage *image = [[SFBundleImageCache sharedInstance] imageWithName:name];

@@ -23,9 +23,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @interface SFFeedbackWrappedServant : SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant
-      feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
-                async:(BOOL)async;
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async;
 
 @end
 
@@ -38,10 +36,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFFeedbackWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant
-      feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
-                async:(BOOL)async
-{
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async {
     self = [super initWithServant:servant];
     
     self.feedbackWrapper = feedbackWrapper;
@@ -50,8 +45,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
@@ -65,8 +59,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     }];
 }
 
-- (void)_wrapFeedback:(SFFeedback *)feedback
-{
+- (void)_wrapFeedback:(SFFeedback *)feedback {
     SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
     [self returnWithFeedback:wrappedFeedback];
 }
@@ -79,8 +72,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFSyncWrappedServant
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
@@ -112,8 +104,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFInterceptWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant interceptor:(void(^)(SFFeedback *feedback))interceptor
-{
+- (id)initWithServant:(id<SFServant>)servant interceptor:(void(^)(SFFeedback *feedback))interceptor {
     self = [super initWithServant:servant];
     
     self.interceptor = interceptor;
@@ -121,8 +112,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
@@ -147,8 +137,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFOnceWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant
-{
+- (id)initWithServant:(id<SFServant>)servant {
     self = [super initWithServant:servant];
     
     self.called = NO;
@@ -156,8 +145,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (id<SFServant>)sendWithCallback:(SFServantCallback)completion
-{
+- (id<SFServant>)sendWithCallback:(SFServantCallback)completion {
     id<SFServant> returnServant = self;
     
     @synchronized(self) {
@@ -178,8 +166,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFMainthreadCallbackWrappedServant
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __weak typeof(wself) self = wself;
@@ -207,8 +194,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFTimeoutWrappedServant
 
-- (id)initWithServant:(SFWrappableServant *)servant timeoutSeconds:(NSTimeInterval)timeoutSeconds
-{
+- (id)initWithServant:(SFWrappableServant *)servant timeoutSeconds:(NSTimeInterval)timeoutSeconds {
     self = [super initWithServant:servant];
     
     self.timeoutSeconds = timeoutSeconds;
@@ -216,8 +202,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     [super servantStartingService];
     
     __weak typeof(self) weakSelf = self;
@@ -233,8 +218,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     });
 }
 
-- (NSError *)_errorForTimeout
-{
+- (NSError *)_errorForTimeout {
     return [NSError errorWithDomain:SFWrappableServantTimeoutErrorDomain
                                code:SFWrappableServantTimeoutErrorCode
                            userInfo:@{NSLocalizedDescriptionKey : @"Send servant timed out."}];
@@ -255,8 +239,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFSequenceWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant continuing:(id<SFServant>(^)(SFFeedback *previousFeedback))continuing
-{
+- (id)initWithServant:(id<SFServant>)servant continuing:(id<SFServant>(^)(SFFeedback *previousFeedback))continuing {
     self = [super initWithServant:servant];
     
     self.continuing = continuing;
@@ -264,8 +247,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     __weak typeof(self) wself = self;
     [self.servant sendWithCallback:^(SFFeedback *feedback) {
         __strong typeof(wself) self = wself;
@@ -279,14 +261,12 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     }];
 }
 
-- (void)cancel
-{
+- (void)cancel {
     [super cancel];
     [self.continuingServant cancel];
 }
 
-- (BOOL)isExecuting
-{
+- (BOOL)isExecuting {
     return [super isExecuting] || (self.continuingServant != nil ? [self.continuingServant isExecuting] : NO);
 }
 
@@ -309,16 +289,14 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFGroupWrappedServant
 
-+ (instancetype)groupServantsWithKeyIdentifierValueServant:(NSDictionary *)keyIdentifierValueServant
-{
++ (instancetype)groupServantsWithKeyIdentifierValueServant:(NSDictionary *)keyIdentifierValueServant {
     SFGroupWrappedServant *servant = [SFGroupWrappedServant new];
     servant.keyIdentifierValueServant = keyIdentifierValueServant;
     
     return servant;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     self.keyIdentifierValueFeedback = [NSMutableDictionary dictionary];
     NSArray *allIdentifiers = [self.keyIdentifierValueServant allKeys];
     self.processingIdentifiers = [NSMutableArray arrayWithArray:allIdentifiers];
@@ -348,8 +326,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
 
 @implementation SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant
-{
+- (id)initWithServant:(id<SFServant>)servant {
     self = [super init];
     
     self.servant = servant;
@@ -357,8 +334,7 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     return self;
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     [super servantStartingService];
     if (self.servant) {
         __weak typeof(self) wself = self;
@@ -369,71 +345,58 @@ NSInteger const SFWrappableServantTimeoutErrorCode = -10000001;
     }
 }
 
-- (BOOL)isExecuting
-{
+- (BOOL)isExecuting {
     return self.servant ? [self.servant isExecuting] : [super isExecuting];
 }
 
-- (void)cancel
-{
+- (void)cancel {
     [super cancel];
     
     [self.servant cancel];
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.servant ? [self.servant shouldRemoveDepositable] : [super shouldRemoveDepositable];
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self.servant depositableWillRemove];
     [super depositableWillRemove];
 }
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper
-{
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper {
     return [self wrapFeedback:feedbackWrapper async:NO];
 }
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async
-{
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async {
     return [[SFFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:feedbackWrapper async:async];
 }
 
-- (SFWrappableServant *)sync
-{
+- (SFWrappableServant *)sync {
     return [[SFSyncWrappedServant alloc] initWithServant:self];
 }
 
-- (SFWrappableServant *)intercept:(void(^)(SFFeedback *feedback))interceptor
-{
+- (SFWrappableServant *)intercept:(void(^)(SFFeedback *feedback))interceptor {
     return [[SFInterceptWrappedServant alloc] initWithServant:self interceptor:interceptor];
 }
 
-- (SFWrappableServant *)once
-{
+- (SFWrappableServant *)once {
     return [[SFOnceWrappedServant alloc] initWithServant:self];
 }
 
-- (SFWrappableServant *)mainThreadCallback
-{
+- (SFWrappableServant *)mainThreadCallback {
     return [[SFMainthreadCallbackWrappedServant alloc] initWithServant:self];
 }
 
-- (SFWrappableServant *)timeoutWithSeconds:(NSTimeInterval)seconds
-{
+- (SFWrappableServant *)timeoutWithSeconds:(NSTimeInterval)seconds {
     return [[SFTimeoutWrappedServant alloc] initWithServant:self timeoutSeconds:seconds];
 }
 
-- (SFWrappableServant *)dependBy:(id<SFServant>(^)(SFFeedback *previousFeedback))continuing
-{
+- (SFWrappableServant *)dependBy:(id<SFServant>(^)(SFFeedback *previousFeedback))continuing {
     return [[SFSequenceWrappedServant alloc] initWithServant:self continuing:continuing];
 }
 
-+ (SFWrappableServant *)groupWithIdentifiersAndServants:(NSString *)firstKey, ... NS_REQUIRES_NIL_TERMINATION
-{
++ (SFWrappableServant *)groupWithIdentifiersAndServants:(NSString *)firstKey, ... NS_REQUIRES_NIL_TERMINATION {
     NSMutableDictionary *keyIdentifierValueServant = [NSMutableDictionary dictionary];
     
     va_list params;

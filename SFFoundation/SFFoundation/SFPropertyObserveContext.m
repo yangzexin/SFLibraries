@@ -21,15 +21,13 @@
 
 @implementation SFPropertyObserveContext
 
-- (void)dealloc
-{
+- (void)dealloc {
     if (_observing) {
         [self cancelObserve];
     }
 }
 
-- (id)initWithTarget:(id)target propertyName:(NSString *)propertyName options:(NSKeyValueObservingOptions)options usingBlock:(void(^)(id value))usingBlock
-{
+- (id)initWithTarget:(id)target propertyName:(NSString *)propertyName options:(NSKeyValueObservingOptions)options usingBlock:(void(^)(id value))usingBlock {
     self = [super init];
     
     self.target = target;
@@ -42,22 +40,19 @@
     return self;
 }
 
-- (void)startObserve
-{
+- (void)startObserve {
     if (!_observing) {
         self.observing = YES;
         [_target addObserver:self forKeyPath:_propertyName options:_options context:NULL];
     }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     id value = [change objectForKey:NSKeyValueChangeNewKey];
     _usingBlock(value == [NSNull null] ? nil : value);
 }
 
-- (void)cancelObserve
-{
+- (void)cancelObserve {
     if (_observing) {
         self.cancelled = YES;
         
@@ -69,13 +64,11 @@
     }
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return _cancelled && !_observing;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancelObserve];
 }
 

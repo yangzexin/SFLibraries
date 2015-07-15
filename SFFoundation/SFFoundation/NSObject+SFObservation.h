@@ -39,14 +39,9 @@
 
 @interface NSObject (SFObserve)
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
-                                                name:(NSString *)name
-                                             options:(NSKeyValueObservingOptions)options;
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options;
 
-- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target
-                                                name:(NSString *)name
-                                             options:(NSKeyValueObservingOptions)options
-                                          identifier:(NSString *)identifier;
+- (SFPropertyObserving *)sf_observeKeyPathWithTarget:(id)target name:(NSString *)name options:(NSKeyValueObservingOptions)options identifier:(NSString *)identifier;
 
 - (void)sf_cancelObservingWithIdentifier:(NSString *)identifier;
 

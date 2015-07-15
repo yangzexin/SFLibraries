@@ -16,8 +16,7 @@
 
 @implementation SFBundleImageCache
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -27,13 +26,11 @@
     return instance;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.keyImageNameValueImage = [NSMutableDictionary dictionary];
@@ -43,18 +40,15 @@
     return self;
 }
 
-- (void)_memoryWarningNotification:(id)noti
-{
+- (void)_memoryWarningNotification:(id)noti {
     [self.keyImageNameValueImage removeAllObjects];
 }
 
-- (void)setImage:(UIImage *)image forName:(NSString *)name
-{
+- (void)setImage:(UIImage *)image forName:(NSString *)name {
     [_keyImageNameValueImage setObject:image forKey:name];
 }
 
-- (UIImage *)imageWithName:(NSString *)name
-{
+- (UIImage *)imageWithName:(NSString *)name {
     return [_keyImageNameValueImage objectForKey:name];
 }
 

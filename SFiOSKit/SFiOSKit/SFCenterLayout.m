@@ -10,8 +10,7 @@
 
 @implementation SFCenterLayout
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     for (UIView *subview in [self subviews]) {
         CGRect tmpRect = subview.frame;

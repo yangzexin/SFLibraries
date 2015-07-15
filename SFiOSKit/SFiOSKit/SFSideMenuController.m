@@ -36,8 +36,7 @@ static CGFloat kValidPanDistance = 37;
 
 @implementation SFSideMenuController
 
-- (id)initWithMenuViewController:(UIViewController *)menuViewController contentViewController:(UIViewController *)contentViewController
-{
+- (id)initWithMenuViewController:(UIViewController *)menuViewController contentViewController:(UIViewController *)contentViewController {
     self = [super init];
     
     self.menuViewController = menuViewController;
@@ -48,8 +47,7 @@ static CGFloat kValidPanDistance = 37;
     return self;
 }
 
-- (void)loadView
-{
+- (void)loadView {
     [super loadView];
     self.backgroundImageView = ({
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -103,29 +101,25 @@ static CGFloat kValidPanDistance = 37;
     [self _updateViewState];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([self _shouldTriggerMoveStatusBar]) {
         [self _moveStatusBar];
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if ([self _shouldTriggerMoveStatusBar]) {
         [SFSideMenuController _moveStatusBarWithX:0];
     }
 }
 
-+ (void)_moveStatusBarWithX:(CGFloat)x
-{
++ (void)_moveStatusBarWithX:(CGFloat)x {
     @try {
         UIView *statusBar = [[UIApplication sharedApplication] valueForKey:[@[@"status", @"Bar"] componentsJoinedByString:@""]];
         statusBar.transform = CGAffineTransformMakeTranslation(x, 0.0f);
@@ -135,18 +129,15 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)_moveStatusBar
-{
+- (void)_moveStatusBar {
     [SFSideMenuController _moveStatusBarWithX:self.statusBarX];
 }
 
-- (BOOL)_shouldTriggerMoveStatusBar
-{
+- (BOOL)_shouldTriggerMoveStatusBar {
     return fabs(self.scaleTransformForContentViewController) == 1.0f;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     if (_menuShown) {
         return [self.menuViewController preferredStatusBarStyle];
     }
@@ -154,8 +145,7 @@ static CGFloat kValidPanDistance = 37;
     return [self.contentViewController preferredStatusBarStyle];
 }
 
-- (BOOL)prefersStatusBarHidden
-{
+- (BOOL)prefersStatusBarHidden {
     if (_menuShown) {
         return [self.menuViewController prefersStatusBarHidden];
     }
@@ -163,8 +153,7 @@ static CGFloat kValidPanDistance = 37;
     return [self.contentViewController prefersStatusBarHidden];
 }
 
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
-{
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     if (_menuShown) {
         return [self.menuViewController preferredStatusBarUpdateAnimation];
     }
@@ -172,8 +161,7 @@ static CGFloat kValidPanDistance = 37;
     return [self.contentViewController preferredStatusBarUpdateAnimation];
 }
 
-- (void)_addMenuControllerIfNeeded
-{
+- (void)_addMenuControllerIfNeeded {
     if (_menuViewController.parentViewController != self) {
         [self addChildViewController:_menuViewController];
         [self.view insertSubview:_menuViewController.view belowSubview:self.contentView];
@@ -181,15 +169,13 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)_removeMenuController
-{
+- (void)_removeMenuController {
     [_menuViewController willMoveToParentViewController:nil];
     [_menuViewController.view removeFromSuperview];
     [_menuViewController removeFromParentViewController];
 }
 
-- (void)_menuViewControllerDidShown
-{
+- (void)_menuViewControllerDidShown {
     _gestureBackDetector.validDistance = self.view.frame.size.width;
     _gestureBackDetector.validLeftEdge = [self _widthForMenuController] - 30;
     if ([self.delegate respondsToSelector:@selector(sideMenuControllerMenuViewControllerDidShown:)]) {
@@ -197,13 +183,11 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (CGFloat)_validPanDistance
-{
+- (CGFloat)_validPanDistance {
     return _leftPanDistance == 0 ? kValidPanDistance : _leftPanDistance;
 }
 
-- (void)_contentViewControllerDidShown
-{
+- (void)_contentViewControllerDidShown {
     _gestureBackDetector.validDistance = [self _validPanDistance];
     _gestureBackDetector.validLeftEdge = 0;
     if ([self.delegate respondsToSelector:@selector(sideMenuControllerContentViewControllerDidShown:)]) {
@@ -212,15 +196,13 @@ static CGFloat kValidPanDistance = 37;
     [self _removeMenuController];
 }
 
-- (void)_swipeRightGestureRecognizer:(UISwipeGestureRecognizer *)gr
-{
+- (void)_swipeRightGestureRecognizer:(UISwipeGestureRecognizer *)gr {
     if (_menuShown) {
         [self showContentViewControllerAnimated:YES completion:nil];
     }
 }
 
-- (void)_swipeLeftGestureRecognizer:(UISwipeGestureRecognizer *)gr
-{
+- (void)_swipeLeftGestureRecognizer:(UISwipeGestureRecognizer *)gr {
     if (_disableGestureShowMenu) {
         return;
     }
@@ -241,8 +223,7 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (BOOL)_shouldTriggerPanGesture
-{
+- (BOOL)_shouldTriggerPanGesture {
     UIViewController *contentViewController = self.contentViewController;
     if ([contentViewController isKindOfClass:[UINavigationController class]]) {
         contentViewController = [(id)contentViewController topViewController];
@@ -254,8 +235,7 @@ static CGFloat kValidPanDistance = 37;
     return shouldTrigger;
 }
 
-- (void)_panGestureRecognizer:(UIPanGestureRecognizer *)gr
-{
+- (void)_panGestureRecognizer:(UIPanGestureRecognizer *)gr {
     if (_disableGestureShowMenu) {
         return;
     }
@@ -264,31 +244,26 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (CGFloat)_widthForMenuController
-{
+- (CGFloat)_widthForMenuController {
     return (NSInteger)(self.view.frame.size.width * _widthPercentForMenuViewController);
 }
 
-- (void)_restoreMenuControllerPosition
-{
+- (void)_restoreMenuControllerPosition {
     CGRect tmpRect = self.view.bounds;
     tmpRect.size.width = [self _widthForMenuController];
     tmpRect.origin.x = - tmpRect.size.width;
     _menuViewController.view.frame = tmpRect;
 }
 
-- (void)_restoreContentViewControllerPosition
-{
+- (void)_restoreContentViewControllerPosition {
     _contentViewController.view.frame = _contentView.bounds;
 }
 
-+ (void)_animateWithBlock:(void(^)())block completion:(void(^)())completion
-{
++ (void)_animateWithBlock:(void(^)())block completion:(void(^)())completion {
     [self _animateWithDuration:.30 block:block completion:completion];
 }
 
-+ (void)_animateWithDuration:(double)duration block:(void(^)())block completion:(void(^)())completion
-{
++ (void)_animateWithDuration:(double)duration block:(void(^)())block completion:(void(^)())completion {
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:block completion:^(BOOL finished) {
         if (completion) {
             completion();
@@ -296,17 +271,11 @@ static CGFloat kValidPanDistance = 37;
     }];
 }
 
-- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void (^)())completion
-{
+- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void (^)())completion {
     [self _showMenuViewControllerAnimated:animated restoreViewState:YES animatesMenu:_animatesShowMenu animationDuration:.30f completion:completion];
 }
 
-- (void)_showMenuViewControllerAnimated:(BOOL)animated
-                       restoreViewState:(BOOL)restoreViewState
-                           animatesMenu:(BOOL)animatesMenu
-                      animationDuration:(NSTimeInterval)animationDuration
-                             completion:(void(^)())completion
-{
+- (void)_showMenuViewControllerAnimated:(BOOL)animated restoreViewState:(BOOL)restoreViewState animatesMenu:(BOOL)animatesMenu animationDuration:(NSTimeInterval)animationDuration completion:(void(^)())completion {
     if (_menuShown == NO) {
         self.menuShown = YES;
         [self _addMenuControllerIfNeeded];
@@ -391,21 +360,15 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)contentViewTapped:(id)gr
-{
+- (void)contentViewTapped:(id)gr {
     [self showContentViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)())completion {
     [self setContentViewController:contentViewController showImmediately:NO animated:animated completion:completion];
 }
 
-- (void)setContentViewController:(UIViewController *)contentViewController
-                 showImmediately:(BOOL)showImmediately
-                        animated:(BOOL)animated
-                      completion:(void(^)())completion
-{
+- (void)setContentViewController:(UIViewController *)contentViewController showImmediately:(BOOL)showImmediately animated:(BOOL)animated completion:(void(^)())completion {
     if (contentViewController == _contentViewController) {
         if (completion) {
             completion();
@@ -435,13 +398,11 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void (^)())completion
-{
+- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void (^)())completion {
     [self _showContentViewControllerAnimated:animated notifyTransition:YES animationDuration:.30f completion:completion];
 }
 
-- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)())completion
-{
+- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)())completion {
     self.view.userInteractionEnabled = NO;
     CAKeyframeAnimation *contentViewAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
     contentViewAnimation.values = @[@27.0f, @127.0f, @0.0f, @37.0f, @0.0f, @17.0f, @0.0f, @7.0f, @0.0f, @2.0f, @0.0f];
@@ -467,8 +428,7 @@ static CGFloat kValidPanDistance = 37;
     _menuViewController.view.backgroundColor = [UIColor clearColor];
 }
 
-- (void)_showContentViewControllerAnimated:(BOOL)animated notifyTransition:(BOOL)notifyTransition animationDuration:(NSTimeInterval)animationDuration completion:(void(^)())completion
-{
+- (void)_showContentViewControllerAnimated:(BOOL)animated notifyTransition:(BOOL)notifyTransition animationDuration:(NSTimeInterval)animationDuration completion:(void(^)())completion {
     if (_menuShown) {
         self.menuShown = NO;
         
@@ -506,8 +466,7 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)setScaleTransformForContentViewController:(float)heightRatioForCenterController
-{
+- (void)setScaleTransformForContentViewController:(float)heightRatioForCenterController {
     if (heightRatioForCenterController < 0.1) {
         heightRatioForCenterController = 0.1;
     }
@@ -517,8 +476,7 @@ static CGFloat kValidPanDistance = 37;
     _scaleTransformForContentViewController = heightRatioForCenterController;
 }
 
-- (void)setWidthPercentForMenuViewController:(float)widthPercentForMenuController
-{
+- (void)setWidthPercentForMenuViewController:(float)widthPercentForMenuController {
     if (widthPercentForMenuController < 0.1) {
         widthPercentForMenuController = 0.1;
     }
@@ -528,23 +486,20 @@ static CGFloat kValidPanDistance = 37;
     _widthPercentForMenuViewController = widthPercentForMenuController;
 }
 
-- (void)_updateViewState
-{
+- (void)_updateViewState {
     _menuViewController.view.hidden = !_menuShown;
     _contentViewController.view.userInteractionEnabled = !_menuShown;
     _contentViewTapGestureRecognizer.enabled = _menuShown;
     _swipeLeftShowContentViewControllerGestureRecognizer.enabled = _menuShown;
 }
 
-- (void)setBackgroundImage:(UIImage *)backgroundImage
-{
+- (void)setBackgroundImage:(UIImage *)backgroundImage {
     _backgroundImage = backgroundImage;
     _backgroundImageView.image = _backgroundImage;
 }
 
 #pragma mark - SFGestureBackDetector
-- (void)_gestureBackDetectorGestureDidEnd
-{
+- (void)_gestureBackDetectorGestureDidEnd {
     float percent = _contentView.frame.origin.x / [self _widthForMenuController];
     
     SFGestureBackDetectorDirection direction = _gestureBackDetector.direction;
@@ -574,18 +529,15 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)gestureBackDetectorGestureDidRelease:(SFGestureBackDetector *)gestureBackDetector gestureBackable:(BOOL)gestureBackable
-{
+- (void)gestureBackDetectorGestureDidRelease:(SFGestureBackDetector *)gestureBackDetector gestureBackable:(BOOL)gestureBackable {
     [self _gestureBackDetectorGestureDidEnd];
 }
 
-- (void)gestureBackDetectorGestureDidCancel:(SFGestureBackDetector *)gestureBackDetector
-{
+- (void)gestureBackDetectorGestureDidCancel:(SFGestureBackDetector *)gestureBackDetector {
     [self _gestureBackDetectorGestureDidEnd];
 }
 
-- (void)gestureBackDetectorGestureWillStart:(SFGestureBackDetector *)gestureBackDetector
-{
+- (void)gestureBackDetectorGestureWillStart:(SFGestureBackDetector *)gestureBackDetector {
     if (_endEditingWhenGestureWillTrigger) {
         [self.view endEditing:YES];
     }
@@ -595,8 +547,7 @@ static CGFloat kValidPanDistance = 37;
     _menuViewController.view.hidden = NO;
 }
 
-- (void)gestureBackDetectorGesture:(SFGestureBackDetector *)gestureBackDetector moveingWithDistanceDelta:(CGFloat)distanceDelta
-{
+- (void)gestureBackDetectorGesture:(SFGestureBackDetector *)gestureBackDetector moveingWithDistanceDelta:(CGFloat)distanceDelta {
     CGRect tmpRect = _contentView.frame;
     tmpRect.origin.x += distanceDelta;
     if (tmpRect.origin.x < [self _widthForMenuController] && tmpRect.origin.x >= 0) {
@@ -617,8 +568,7 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     BOOL should = YES;
     if ([self _shouldTriggerPanGesture]) {
         should = ![_gestureBackDetector isPrepared];
@@ -627,8 +577,7 @@ static CGFloat kValidPanDistance = 37;
     return should;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     CGPoint touchPoint = [touch locationInView:self.view];
     if (touchPoint.x < _gestureBackDetector.validDistance && gestureRecognizer == _panGestureRecognizer && !_disableGestureShowMenu && [self _shouldTriggerPanGesture]) {
         return YES;

@@ -14,15 +14,13 @@
 
 @implementation SFCacheControl
 
-+ (instancetype)cacheControl
-{
++ (instancetype)cacheControl {
     SFCacheControl *support = [SFCacheControl new];
     
     return support;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     if (self.cancelNotifier) {
         self.cancelNotifier();
         self.cancelNotifier = nil;

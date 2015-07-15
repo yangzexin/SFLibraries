@@ -12,36 +12,31 @@
 
 @implementation SFDeallocObserver
 
-+ (instancetype)observerWthTrigger:(void(^)())trigger
-{
++ (instancetype)observerWthTrigger:(void(^)())trigger {
     SFDeallocObserver *rd = [SFDeallocObserver new];
     rd.trigger = trigger;
     
     return rd;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     if (_trigger) {
         _trigger();
     }
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.trigger = nil;
     if (self.whenCancelled) {
         self.whenCancelled();
     }
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.trigger == nil;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancel];
 }
 

@@ -20,31 +20,27 @@
 
 @implementation SFFeedback
 
-+ (instancetype)feedbackWithValue:(id)value
-{
++ (instancetype)feedbackWithValue:(id)value {
     SFFeedback *feedback = [SFFeedback new];
     feedback.value = value;
     
     return feedback;
 }
 
-+ (instancetype)feedbackWithError:(NSError *)error
-{
++ (instancetype)feedbackWithError:(NSError *)error {
     SFFeedback *feedback = [SFFeedback new];
     feedback.error = error;
     
     return feedback;
 }
 
-- (id<SFServant>)servantTakesMe
-{
+- (id<SFServant>)servantTakesMe {
     return [SFComposableServant servantWithFeedbackBuilder:^SFFeedback *{
         return self;
     } synchronous:YES];
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     if (self.error) {
         return [NSString stringWithFormat:@"<%@> error: %@", NSStringFromClass([self class]), self.error];
     } else {
@@ -56,15 +52,13 @@
 
 @implementation SFServant
 
-- (void)dealloc
-{
+- (void)dealloc {
 #ifdef DEBUG
 //    NSLog(@"%@ dealloc", self);
 #endif
 }
 
-- (id<SFServant>)sendWithCallback:(SFServantCallback)callback
-{
+- (id<SFServant>)sendWithCallback:(SFServantCallback)callback {
     @synchronized(self) {
         self.callback = callback;
         
@@ -78,8 +72,7 @@
     return self;
 }
 
-- (void)returnWithFeedback:(SFFeedback *)feedback
-{
+- (void)returnWithFeedback:(SFFeedback *)feedback {
     @synchronized(self) {
         CFRetain(((__bridge CFTypeRef)self));
         if (![self isCancelled]) {
@@ -98,8 +91,7 @@
     }
 }
 
-- (void)cancel
-{
+- (void)cancel {
     @synchronized(self) {
         self.cancelled = YES;
         self.executing = NO;
@@ -109,28 +101,23 @@
     }
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.finished && ![self isExecuting];
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     if (!self.finished && !self.cancelled) {
         [self cancel];
     }
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
 }
 
-- (void)servantDidSucceedWithValue:(id)value
-{
+- (void)servantDidSucceedWithValue:(id)value {
 }
 
-- (void)servantDidFailWithError:(NSError *)error
-{
+- (void)servantDidFailWithError:(NSError *)error {
 }
 
 @end

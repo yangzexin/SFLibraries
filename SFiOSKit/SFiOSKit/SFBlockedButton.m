@@ -16,8 +16,7 @@
 
 @implementation SFBlockedButton
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self initialize];
@@ -25,15 +24,13 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     
     [self initialize];
 }
 
-- (void)initialize
-{
+- (void)initialize {
     [self addTarget:self action:@selector(tapped) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *backgroundImage = nil;
@@ -81,25 +78,21 @@
     }
 }
 
-- (void)tapped
-{
+- (void)tapped {
     if (_tapHandler) {
         _tapHandler();
     }
 }
 
-+ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler
-{
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler {
     return [self blockedButtonWithTapHandler:tapHandler frame:CGRectNull addToSuperview:nil];
 }
 
-+ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame
-{
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame {
     return [self blockedButtonWithTapHandler:tapHandler frame:frame addToSuperview:nil];
 }
 
-+ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame addToSuperview:(UIView *)superview
-{
++ (instancetype)blockedButtonWithTapHandler:(void(^)())tapHandler frame:(CGRect)frame addToSuperview:(UIView *)superview {
     SFBlockedButton *button = [SFBlockedButton new];
     button.tapHandler = tapHandler;
     

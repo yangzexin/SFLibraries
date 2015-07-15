@@ -44,8 +44,7 @@
 
 @implementation SFRepositoryAnalyzerDefault
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     _depositables = [NSMutableArray new];
@@ -53,18 +52,15 @@
     return self;
 }
 
-- (void)repositoryDidAddDepositable:(id<SFDepositable>)depositable
-{
+- (void)repositoryDidAddDepositable:(id<SFDepositable>)depositable {
     [_depositables addObject:depositable];
 }
 
-- (void)repositoryDidRemoveDepositable:(id<SFDepositable>)depositable
-{
+- (void)repositoryDidRemoveDepositable:(id<SFDepositable>)depositable {
     [_depositables removeObject:depositable];
 }
 
-- (NSArray *)removableDepositables
-{
+- (NSArray *)removableDepositables {
     NSArray *analyzingObjects = [NSArray arrayWithArray:_depositables];
     NSMutableArray *removableObjects = [NSMutableArray array];
     for (id<SFDepositable> object in analyzingObjects) {
@@ -89,14 +85,12 @@
 
 @implementation SFDepositableRepository
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self _releaseAllObjects];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.depositables = [NSMutableArray array];
@@ -110,13 +104,11 @@
     return self;
 }
 
-- (void)_applicationDidReceiveMemoryWarningNotification:(NSNotification *)note
-{
+- (void)_applicationDidReceiveMemoryWarningNotification:(NSNotification *)note {
     [self tryCleanRecyclableDepositables];
 }
 
-- (void)addDepositable:(id<SFDepositable>)depositable
-{
+- (void)addDepositable:(id<SFDepositable>)depositable {
     @synchronized(self) {
         if (depositable) {
             [_depositables addObject:depositable];
@@ -128,8 +120,7 @@
     }
 }
 
-- (void)removeDepositable:(id<SFDepositable>)depositable
-{
+- (void)removeDepositable:(id<SFDepositable>)depositable {
     if (depositable) {
         @synchronized(self) {
             [depositable depositableWillRemove];
@@ -139,13 +130,11 @@
     }
 }
 
-- (NSString *)_wrapIdentifier:(id)identifier
-{
+- (NSString *)_wrapIdentifier:(id)identifier {
     return [NSString stringWithFormat:@"%@", identifier];
 }
 
-- (void)addDepositable:(id<SFDepositable>)depositable identifier:(id)identifier
-{
+- (void)addDepositable:(id<SFDepositable>)depositable identifier:(id)identifier {
     [self addDepositable:depositable];
     if (identifier) {
         [self removeDepositableWithIdentifier:identifier];
@@ -154,8 +143,7 @@
     }
 }
 
-- (void)removeDepositableWithIdentifier:(id)identifier
-{
+- (void)removeDepositableWithIdentifier:(id)identifier {
     if (identifier) {
         NSString *wrappedIdentifier = [self _wrapIdentifier:identifier];
         id<SFDepositable> existsObject = nil;
@@ -169,25 +157,21 @@
     }
 }
 
-- (id<SFDepositable>)depositableWithIdentifier:(id)identifier
-{
+- (id<SFDepositable>)depositableWithIdentifier:(id)identifier {
     return [_keyIdentifierValueDepositable objectForKey:[self _wrapIdentifier:identifier]];
 }
 
-- (void)_objectDidRemove:(id)object
-{
+- (void)_objectDidRemove:(id)object {
     [_analyzer repositoryDidRemoveDepositable:object];
 }
 
-- (void)tryCleanRecyclableDepositables
-{
+- (void)tryCleanRecyclableDepositables {
     @synchronized(self) {
         [self _analyze];
     }
 }
 
-- (void)_analyze
-{
+- (void)_analyze {
     NSArray *removableObjects = [_analyzer removableDepositables];
     for (id<SFDepositable> object in removableObjects) {
         [object depositableWillRemove];
@@ -196,8 +180,7 @@
     }
 }
 
-- (void)_releaseAllObjects
-{
+- (void)_releaseAllObjects {
     for (id<SFDepositable> obj in _depositables) {
         [obj depositableWillRemove];
         [self _objectDidRemove:obj];
@@ -205,13 +188,11 @@
     [_depositables removeAllObjects];
 }
 
-+ (instancetype)depositableRepository
-{
++ (instancetype)depositableRepository {
     return [[self class] depositableRepositoryWithAnalyzer:nil];
 }
 
-+ (instancetype)depositableRepositoryWithAnalyzer:(id<SFDepositableRepositoryAnalyzer>)analyzer
-{
++ (instancetype)depositableRepositoryWithAnalyzer:(id<SFDepositableRepositoryAnalyzer>)analyzer {
     SFDepositableRepository *repository = [SFDepositableRepository new];
     if (analyzer != nil) {
         repository.analyzer = analyzer;
@@ -226,8 +207,7 @@ static NSString *const SFDepositableRepositoryKey = @"kObjectRepositoryKey";
 
 @implementation NSObject (SFDepositable)
 
-- (SFDepositableRepository *)_depositableRepository
-{
+- (SFDepositableRepository *)_depositableRepository {
     SFDepositableRepository *obj = [self sf_associatedObjectWithKey:SFDepositableRepositoryKey];
     if (obj == nil) {
         obj = [SFDepositableRepository depositableRepository];
@@ -237,37 +217,31 @@ static NSString *const SFDepositableRepositoryKey = @"kObjectRepositoryKey";
     return obj;
 }
 
-- (id)sf_deposit:(id<SFDepositable>)depositable
-{
+- (id)sf_deposit:(id<SFDepositable>)depositable {
     [[self _depositableRepository] addDepositable:depositable];
     
     return depositable;
 }
 
-- (void)sf_removeDepositable:(id<SFDepositable>)depositable
-{
+- (void)sf_removeDepositable:(id<SFDepositable>)depositable {
     [[self _depositableRepository] removeDepositable:depositable];
 }
 
-- (id)sf_deposit:(id<SFDepositable>)depositable identifier:(NSString *)identifier
-{
+- (id)sf_deposit:(id<SFDepositable>)depositable identifier:(NSString *)identifier {
     [[self _depositableRepository] addDepositable:depositable identifier:identifier];
     
     return depositable;
 }
 
-- (id<SFDepositable>)sf_depositableWithIdentifier:(NSString *)identifier
-{
+- (id<SFDepositable>)sf_depositableWithIdentifier:(NSString *)identifier {
     return [[self _depositableRepository] depositableWithIdentifier:identifier];
 }
 
-- (void)sf_removeDepositableWithIdentifier:(NSString *)identifier
-{
+- (void)sf_removeDepositableWithIdentifier:(NSString *)identifier {
     [[self _depositableRepository] removeDepositableWithIdentifier:identifier];
 }
 
-- (void)sf_tryCleanRecyclableDepositables
-{
+- (void)sf_tryCleanRecyclableDepositables {
     [[self _depositableRepository] tryCleanRecyclableDepositables];
 }
 

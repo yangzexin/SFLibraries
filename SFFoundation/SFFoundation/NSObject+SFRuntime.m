@@ -16,23 +16,19 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
 
 @implementation NSObject (SFRuntime)
 
-+ (NSArray *)sf_objcProperties
-{
++ (NSArray *)sf_objcProperties {
     return [SFObjcProperty objcPropertiesOfClass:[self class]];
 }
 
-+ (NSArray *)sf_objcPropertiesStopAtNSObject
-{
++ (NSArray *)sf_objcPropertiesStopAtNSObject {
     return [SFObjcProperty objcPropertiesOfClass:[self class] stopClass:[NSObject class]];
 }
 
-+ (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass
-{
++ (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass {
     return [SFObjcProperty objcPropertiesOfClass:[self class] searchingSuperClass:searchingSuperClass];
 }
 
-+ (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass exceptPropertyNames:(NSArray *)exceptPropertyNames
-{
++ (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass exceptPropertyNames:(NSArray *)exceptPropertyNames {
     NSArray *objcProperties = [self sf_objcPropertiesWithSearchingSuperClass:NO];
     NSMutableArray *filteredObjcProperties = [NSMutableArray array];
     [objcProperties enumerateObjectsUsingBlock:^(SFObjcProperty *obj, NSUInteger idx, BOOL *stop) {
@@ -44,13 +40,11 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     return filteredObjcProperties;
 }
 
-+ (NSArray *)sf_objcPropertiesWithStepController:(BOOL(^)(Class tmpClass, BOOL *stop))stepController
-{
++ (NSArray *)sf_objcPropertiesWithStepController:(BOOL(^)(Class tmpClass, BOOL *stop))stepController {
     return [SFObjcProperty objcPropertiesOfClass:[self class] stepController:stepController];
 }
 
-- (void)sf_copyPropertyValuesFromObject:(id)object specificObjcProperties:(NSArray *)specificObjcProperties exceptPropertyNames:(NSArray *)exceptPropertyNames
-{
+- (void)sf_copyPropertyValuesFromObject:(id)object specificObjcProperties:(NSArray *)specificObjcProperties exceptPropertyNames:(NSArray *)exceptPropertyNames {
     NSArray *properties = specificObjcProperties;
     if (properties == nil) {
         properties = [SFObjcProperty objcPropertiesOfClass:[self class] searchingSuperClass:NO];
@@ -62,18 +56,15 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     }
 }
 
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger
-{
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger {
     return [self sf_addDeallocObserver:trigger identifier:nil];
 }
 
-- (void)sf_removeDeallocObserver:(SFDeallocObserver *)observer
-{
+- (void)sf_removeDeallocObserver:(SFDeallocObserver *)observer {
     [self sf_removeDeallocObserverByIdentifier:[observer sf_associatedObjectWithKey:@"_identifier"]];
 }
 
-- (NSMutableDictionary *)_keyIdentifierValueDeallocObserver
-{
+- (NSMutableDictionary *)_keyIdentifierValueDeallocObserver {
     NSMutableDictionary *keyIdentifierValueDeallocObserver = objc_getAssociatedObject(self, SFKeyIdentifierDeallocObserver);
     @synchronized(self) {
         if (keyIdentifierValueDeallocObserver == nil) {
@@ -85,8 +76,7 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     return keyIdentifierValueDeallocObserver;
 }
 
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier
-{
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier {
     SFDeallocObserver *observer = nil;
     @synchronized(self) {
         if (identifier == nil) {
@@ -101,8 +91,7 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     return observer;
 }
 
-- (void)sf_removeDeallocObserverByIdentifier:(NSString *)identifier
-{
+- (void)sf_removeDeallocObserverByIdentifier:(NSString *)identifier {
     if (identifier) {
         @synchronized(self) {
             NSMutableDictionary *keyIdentifierValueDeallocObserver = [self _keyIdentifierValueDeallocObserver];
@@ -113,20 +102,17 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     }
 }
 
-- (void)sf_depositNotificationObserver:(id)observer
-{
+- (void)sf_depositNotificationObserver:(id)observer {
     [self sf_depositNotificationObserver:observer identifier:nil];
 }
 
-- (void)sf_depositNotificationObserver:(id)observer identifier:(NSString *)identifier
-{
+- (void)sf_depositNotificationObserver:(id)observer identifier:(NSString *)identifier {
     [self sf_addDeallocObserver:^{
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     } identifier:identifier];
 }
 
-- (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier
-{
+- (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier {
     [self sf_removeDeallocObserverByIdentifier:identifier];
 }
 

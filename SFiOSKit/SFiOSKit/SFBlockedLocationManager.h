@@ -16,7 +16,6 @@
 @property (nonatomic, strong) id<SFLocationManager> locationManager;
 @property (nonatomic, copy) void(^completion)(CLLocation *, NSError *);
 
-+ (instancetype)locationManagerWithLocationManager:(id<SFLocationManager>)manager
-                                        completion:(void(^)(CLLocation *location, NSError *error))completion;
++ (instancetype)locationManager:(id<SFLocationManager>)manager completion:(void(^)(CLLocation *location, NSError *error))completion;
 
 @end

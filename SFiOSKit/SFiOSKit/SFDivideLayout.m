@@ -11,8 +11,7 @@
 
 @implementation SFDivideLayout
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     NSInteger numberOfSubviews = 0;
     NSMutableArray *visibleViews = [NSMutableArray array];
@@ -37,14 +36,12 @@
     }
 }
 
-- (void)setVertical:(BOOL)vertical
-{
+- (void)setVertical:(BOOL)vertical {
     _vertical = vertical;
     [self setNeedsLayout];
 }
 
-- (void)setLightBorderSpacing:(BOOL)lightBorderSpacing
-{
+- (void)setLightBorderSpacing:(BOOL)lightBorderSpacing {
     _lightBorderSpacing = lightBorderSpacing;
     _spacing = SFLightLineWidth;
 }

@@ -17,8 +17,7 @@
 
 @implementation SFPropertyObserving
 
-- (instancetype)change:(void (^)(id))change
-{
+- (instancetype)change:(void (^)(id))change {
     if (!_observing) {
         self.observing = YES;
         self.changeBlock = change;
@@ -30,8 +29,7 @@
     return self;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     _cancelHandler();
 }
 

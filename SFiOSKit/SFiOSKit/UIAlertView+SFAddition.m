@@ -22,17 +22,11 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation SFAlertViewWrapper
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-           completion:(SFAlertViewCompletion)completion
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-    otherButtonTitles:(NSArray *)otherButtonTitles
-{
+- (void)showWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles {
     CFRetain((__bridge CFTypeRef)self);
     self.completion = completion;
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
@@ -52,8 +46,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
                                                object:nil];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (self.completion) {
         self.completion(buttonIndex, [alertView buttonTitleAtIndex:buttonIndex]);
     }
@@ -63,8 +56,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     });
 }
 
-- (void)closePresentingAlertNotification:(NSNotification *)n
-{
+- (void)closePresentingAlertNotification:(NSNotification *)n {
     NSNumber *animated = [n.userInfo objectForKey:SFClosePresentingAlertViewOptionsAnimationStateKey];
     [self.alertView dismissWithClickedButtonIndex:0 animated:[animated boolValue]];
     [self alertView:self.alertView clickedButtonAtIndex:0];
@@ -86,19 +78,11 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation SFAlertViewInputWrapper
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)showWithTitle:(NSString *)title
-              message:(NSString *)message
-      secureTextEntry:(BOOL)secureTextEntry
-      clearButtonMode:(UITextFieldViewMode)clearButtonMode
-    cancelButtonTitle:(NSString *)cancelButtonTitle
-   approveButtonTitle:(NSString *)approveButtonTitle
-           completion:(void(^)(NSString *input, BOOL cancelled))completion
-{
+- (void)showWithTitle:(NSString *)title message:(NSString *)message secureTextEntry:(BOOL)secureTextEntry clearButtonMode:(UITextFieldViewMode)clearButtonMode cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion {
     CFRetain((__bridge CFTypeRef)self);
     self.completion = completion;
     self.alertView = [[UIAlertView alloc] initWithTitle:title
@@ -134,14 +118,12 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     [textField becomeFirstResponder];
 }
 
-- (UITextField *)inputTextField
-{
+- (UITextField *)inputTextField {
     return self.useCustomTextField ? self.addedTextField : [self.alertView textFieldAtIndex:0];
 }
 
 #pragma mark - events
-- (void)statusBarOrientationDidChangeNotification:(NSNotification *)noti
-{
+- (void)statusBarOrientationDidChangeNotification:(NSNotification *)noti {
     CGRect tmpRect = self.addedTextField.frame;
     tmpRect.origin.y = [self yPositionForCustomTextField];
     [UIView animateWithDuration:0.25f animations:^{
@@ -149,14 +131,12 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     }];
 }
 
-- (CGFloat)yPositionForCustomTextField
-{
+- (CGFloat)yPositionForCustomTextField {
     return UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) ? kInputFieldLandscapeY : kInputFieldPortraitY;
 }
 
 #pragma mark - UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *text = nil;
     if (self.useCustomTextField) {
         UITextField *textField = (id)[alertView viewWithTag:1001];
@@ -176,19 +156,13 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation UIAlertView (SFAddition_quickAlert)
 
-+ (void)sf_dismissPresentingDialogAnimated:(BOOL)animated
-{
++ (void)sf_dismissPresentingDialogAnimated:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] postNotificationName:SFClosePresentingAlertViewNotification
                                                         object:nil
                                                       userInfo:@{SFClosePresentingAlertViewOptionsAnimationStateKey : [NSNumber numberWithBool:animated]}];
 }
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title
-                        message:(NSString *)message
-                     completion:(SFAlertViewCompletion)completion
-              cancelButtonTitle:(NSString *)cancelButtonTitle
-              otherButtonTitles:(NSString *)otherButtonTitles, ...
-{
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
     NSMutableArray *titleList = [NSMutableArray array];
     va_list params;
     va_start(params, otherButtonTitles);
@@ -200,20 +174,14 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     return [self sf_alertWithTitle:title message:message completion:completion cancelButtonTitle:cancelButtonTitle otherButtonTitleList:titleList];
 }
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title
-                        message:(NSString *)message
-                     completion:(SFAlertViewCompletion)completion
-              cancelButtonTitle:(NSString *)cancelButtonTitle
-           otherButtonTitleList:(NSArray *)otherButtonTitleList
-{
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList {
     SFAlertViewWrapper *alertDialog = [[SFAlertViewWrapper alloc] init];
     [alertDialog showWithTitle:title message:message completion:completion cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitleList];
     
     return alertDialog.alertView;
 }
 
-+ (id)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion
-{
++ (id)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion {
     return [self sf_alertWithTitle:title message:message completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (completion) {
             completion();
@@ -221,8 +189,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     } cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
 }
 
-+ (id)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion
-{
++ (id)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion {
     return [self sf_alertWithTitle:@"" message:message completion:completion];
 }
 
@@ -230,13 +197,11 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation UIAlertView (SFAddition_confirmDialog)
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve
-{
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve {
     [self sf_confirmWithTitle:title message:message approve:approve cancel:nil];
 }
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel
-{
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel {
     [self sf_alertWithTitle:title message:message completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (buttonIndex == 0) {
             if (approve) {
@@ -256,12 +221,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation UIAlertView (SFAddition_inputDialog)
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title
-                        message:(NSString *)message
-              cancelButtonTitle:(NSString *)cancelButtonTitle
-             approveButtonTitle:(NSString *)approveButtonTitle
-                     completion:(void(^)(NSString *input, BOOL cancelled))completion
-{
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion {
     return [self sf_inputWithTitle:title
                         message:message
                 secureTextEntry:NO
@@ -270,13 +230,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
                      completion:completion];
 }
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title
-                        message:(NSString *)message
-                secureTextEntry:(BOOL)secureTextEntry
-              cancelButtonTitle:(NSString *)cancelButtonTitle
-             approveButtonTitle:(NSString *)approveButtonTitle
-                     completion:(void(^)(NSString *input, BOOL cancelled))completion
-{
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message secureTextEntry:(BOOL)secureTextEntry cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion {
     SFAlertViewInputWrapper *inputDialog = [SFAlertViewInputWrapper new];
     [inputDialog showWithTitle:title
                        message:message
@@ -293,8 +247,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 
 @implementation UIAlertView (SFAddition)
 
-- (UILabel *)sf_messageLabel
-{
+- (UILabel *)sf_messageLabel {
     UILabel *messageLabel = nil;
     for (UIView *view in [self subviews]) {
         if ([view isKindOfClass:[UILabel class]]) {
@@ -309,8 +262,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     return messageLabel;
 }
 
-- (UILabel *)sf_titleLabel
-{
+- (UILabel *)sf_titleLabel {
     UILabel *titleLabel = nil;
     for (UIView *view in [self subviews]) {
         if ([view isKindOfClass:[UILabel class]]) {

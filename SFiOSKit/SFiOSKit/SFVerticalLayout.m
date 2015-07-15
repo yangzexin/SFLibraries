@@ -20,8 +20,7 @@
 
 @implementation SFVerticalLayout
 
-- (void)initialize
-{
+- (void)initialize {
     [super initialize];
     
     self.views = [NSMutableArray array];
@@ -49,24 +48,20 @@
     }];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     [self.tableView reloadData];
 }
 
-- (void)setBounces:(BOOL)bounces
-{
+- (void)setBounces:(BOOL)bounces {
     self.tableView.bounces = bounces;
 }
 
-- (BOOL)bounces
-{
+- (BOOL)bounces {
     return self.tableView.bounces;
 }
 
-- (void)addView:(UIView *)view animated:(BOOL)animated
-{
+- (void)addView:(UIView *)view animated:(BOOL)animated {
     if (self.views == nil) {
         self.views = [NSMutableArray array];
     }
@@ -81,8 +76,7 @@
     }
 }
 
-- (void)insertView:(UIView *)view atIndex:(NSInteger)index animated:(BOOL)animated
-{
+- (void)insertView:(UIView *)view atIndex:(NSInteger)index animated:(BOOL)animated {
     if (self.views == nil) {
         self.views = [NSMutableArray array];
     }
@@ -97,8 +91,7 @@
     }
 }
 
-- (void)reloadView:(UIView *)view animated:(BOOL)animated
-{
+- (void)reloadView:(UIView *)view animated:(BOOL)animated {
     NSUInteger index = [self.views indexOfObject:view];
     if (index != NSNotFound) {
         [self.tableView beginUpdates];
@@ -108,13 +101,11 @@
     }
 }
 
-- (BOOL)isViewExists:(UIView *)view
-{
+- (BOOL)isViewExists:(UIView *)view {
     return self.views.count !=0 && [self.views indexOfObject:view] != NSNotFound;
 }
 
-- (void)removeView:(UIView *)view animated:(BOOL)animated
-{
+- (void)removeView:(UIView *)view animated:(BOOL)animated {
     NSUInteger index = NSNotFound;
     if (self.views.count != 0 && (index = [self.views indexOfObject:view]) != NSNotFound) {
         [self.views removeObject:view];
@@ -129,20 +120,17 @@
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     UIView *view = [self.views objectAtIndex:indexPath.row];
     
     return view.frame.size.height;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.views.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identfiier = @"__id__view";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identfiier];
     if (cell == nil) {

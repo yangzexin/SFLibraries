@@ -18,8 +18,7 @@
 
 @implementation SFCollapsableLabel
 
-- (void)initialize
-{
+- (void)initialize {
     [super initialize];
     self.label = ({
         UILabel *label = [UILabel new];
@@ -32,21 +31,18 @@
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizer:)]];
 }
 
-- (void)_tapGestureRecognizer:(UIGestureRecognizer *)gr
-{
+- (void)_tapGestureRecognizer:(UIGestureRecognizer *)gr {
     self.collapsed = !_collapsed;
     [self _notifyStateChange];
 }
 
-- (void)_notifyStateChange
-{
+- (void)_notifyStateChange {
     if (_collapseStateDidChange) {
         _collapseStateDidChange();
     }
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     BOOL stateChange = NO;
     
@@ -87,31 +83,26 @@
     }
 }
 
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString *)text {
     _label.text = text;
     [self setNeedsLayout];
 }
 
-- (NSString *)text
-{
+- (NSString *)text {
     return _label.text;
 }
 
-- (void)setNumberOfVisibleLines:(NSInteger)numberOfVisibleLines
-{
+- (void)setNumberOfVisibleLines:(NSInteger)numberOfVisibleLines {
     _numberOfVisibleLines = numberOfVisibleLines;
     [self setNeedsLayout];
 }
 
-- (void)setCollapsed:(BOOL)collapsed
-{
+- (void)setCollapsed:(BOOL)collapsed {
     _collapsed = collapsed;
     [self setNeedsLayout];
 }
 
-- (void)setExpandIndicatorView:(UIView *)expandIndicatorView
-{
+- (void)setExpandIndicatorView:(UIView *)expandIndicatorView {
     if (_expandIndicatorView) {
         [_expandIndicatorView removeFromSuperview];
     }
@@ -120,8 +111,7 @@
     [self setNeedsLayout];
 }
 
-- (void)fitToSuitableHeight
-{
+- (void)fitToSuitableHeight {
     [self layoutSubviews];
     CGRect tmpRect = self.frame;
     tmpRect.size.height = (NSInteger)_label.frame.size.height + (_collapsed ? _expandIndicatorView.frame.size.height : 0);

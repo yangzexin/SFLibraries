@@ -21,15 +21,13 @@
 
 @implementation SFDragShowDetector
 
-+ (instancetype)detectorWithTriggerHandler:(void(^)(BOOL show))triggerHandler
-{
++ (instancetype)detectorWithTriggerHandler:(void(^)(BOOL show))triggerHandler {
     SFDragShowDetector *detector = [SFDragShowDetector new];
     detector.whenTrigger = triggerHandler;
     return detector;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.showing = YES;
@@ -37,21 +35,18 @@
     return self;
 }
 
-- (void)_notifyTriggerWithShow:(BOOL)show
-{
+- (void)_notifyTriggerWithShow:(BOOL)show {
     self.showing = show;
     if (self.whenTrigger) {
         self.whenTrigger(show);
     }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.beginDragY = scrollView.contentOffset.y;
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     if (velocity.y < -0.72f) {
         [self _notifyTriggerWithShow:YES];
     } else if (velocity.y > 0.0f) {
@@ -61,8 +56,7 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat topEdge = SFDeviceSystemVersion < 7.0f ? 0.0f : -SFStatusBarHeight;
     if (self.triggerOnTop && scrollView.contentOffset.y <= topEdge) {
         [self _notifyTriggerWithShow:YES];
@@ -78,8 +72,7 @@
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 }
 
 @end

@@ -10,8 +10,7 @@
 
 @implementation NSDate (SFAddition)
 
-- (NSDateComponents *)sf_componentsUsingCurrentCalendar
-{
+- (NSDateComponents *)sf_componentsUsingCurrentCalendar {
     NSCalendar *calender = [NSCalendar currentCalendar];
     return [calender components:NSYearCalendarUnit
             | NSMonthCalendarUnit
@@ -31,18 +30,15 @@
             | NSTimeZoneCalendarUnit fromDate:self];
 }
 
-- (NSInteger)sf_numberOfDayIntervalsByComparingWithDate:(NSDate *)date
-{
+- (NSInteger)sf_numberOfDayIntervalsByComparingWithDate:(NSDate *)date {
     return [self sf_numberOfDayIntervalsByComparingWithDate:date usingZeroHourDate:NO];
 }
 
-- (NSInteger)sf_numberOfDayIntervalsWithDate:(NSDate *)date
-{
+- (NSInteger)sf_numberOfDayIntervalsWithDate:(NSDate *)date {
     return [self sf_numberOfDayIntervalsWithDate:date usingZeroHourDate:NO];
 }
 
-- (NSDate *)sf_zeroHourDate
-{
+- (NSDate *)sf_zeroHourDate {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     NSString *dateString = [dateFormatter stringFromDate:self];
@@ -51,8 +47,7 @@
     return beginningOfDate;
 }
 
-- (NSInteger)sf_numberOfDayIntervalsByComparingWithDate:(NSDate *)date usingZeroHourDate:(BOOL)usingZeroHourDate
-{
+- (NSInteger)sf_numberOfDayIntervalsByComparingWithDate:(NSDate *)date usingZeroHourDate:(BOOL)usingZeroHourDate {
     NSDate *date1 = self;
     NSDate *date2 = date;
     if (usingZeroHourDate) {
@@ -68,8 +63,7 @@
     return numberOfDays;
 }
 
-- (NSInteger)sf_numberOfDayIntervalsWithDate:(NSDate *)date usingZeroHourDate:(BOOL)usingZeroHourDate
-{
+- (NSInteger)sf_numberOfDayIntervalsWithDate:(NSDate *)date usingZeroHourDate:(BOOL)usingZeroHourDate {
     NSInteger numberOfDays = [self sf_numberOfDayIntervalsByComparingWithDate:date usingZeroHourDate:usingZeroHourDate];
     if (numberOfDays < 0) {
         numberOfDays = 0 - numberOfDays;
@@ -78,13 +72,11 @@
     return numberOfDays;
 }
 
-- (NSDate *)sf_dateByAddingNumberOfDays:(NSInteger)numberOfDays
-{
+- (NSDate *)sf_dateByAddingNumberOfDays:(NSInteger)numberOfDays {
     return [self dateByAddingTimeInterval:numberOfDays * 86400];
 }
 
-- (NSDate *)sf_monthBeginDate
-{
+- (NSDate *)sf_monthBeginDate {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"yyyy-MM"];
     
@@ -95,13 +87,11 @@
 
 @implementation NSDate (SFDateString)
 
-- (NSString *)sf_yyyyMMddHHmmss_timeString
-{
+- (NSString *)sf_yyyyMMddHHmmss_timeString {
     return [self sf_timeStringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
-- (NSString *)sf_timeStringWithFormat:(NSString *)format
-{
+- (NSString *)sf_timeStringWithFormat:(NSString *)format {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:format];
     

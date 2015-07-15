@@ -19,8 +19,7 @@
 
 @implementation SFCircleProgressView
 
-- (void)initialize
-{
+- (void)initialize {
     [super initialize];
     self.backgroundColor = [UIColor clearColor];
     
@@ -28,8 +27,7 @@
     self.animationDuration = 0.50f;
 }
 
-- (CAShapeLayer *)_circleLayerWithAninmated:(BOOL)animated fromAngle:(CGFloat)fromAngle endAngle:(CGFloat)endAngle strokeColor:(UIColor *)strokeColor strokeLineWidth:(CGFloat)strokeLineWidth
-{
+- (CAShapeLayer *)_circleLayerWithAninmated:(BOOL)animated fromAngle:(CGFloat)fromAngle endAngle:(CGFloat)endAngle strokeColor:(UIColor *)strokeColor strokeLineWidth:(CGFloat)strokeLineWidth {
     int radius = (self.frame.size.width - strokeLineWidth) / 2;
     CAShapeLayer *circle = [CAShapeLayer layer];
     circle.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
@@ -57,8 +55,7 @@
     return circle;
 }
 
-- (CAShapeLayer *)_createForgroundLayerWithAnimated:(BOOL)animated
-{
+- (CAShapeLayer *)_createForgroundLayerWithAnimated:(BOOL)animated {
     return [self _circleLayerWithAninmated:animated
                                  fromAngle:1.5 * M_PI
                                   endAngle:[self _endAngleForPercent:_percent]
@@ -66,8 +63,7 @@
                            strokeLineWidth:_strokeLineWidth];
 }
 
-- (CAShapeLayer *)_createBackgroundLayer
-{
+- (CAShapeLayer *)_createBackgroundLayer {
     return [self _circleLayerWithAninmated:NO
                                  fromAngle:1.5 * M_PI
                                   endAngle:[self _endAngleForPercent:1.0]
@@ -75,15 +71,13 @@
                            strokeLineWidth:_strokeLineWidth];
 }
 
-- (CGFloat)_endAngleForPercent:(CGFloat)percent
-{
+- (CGFloat)_endAngleForPercent:(CGFloat)percent {
     CGFloat endAngle = percent == 1.0f ? (-M_PI * 0.5) : (1.50f * M_PI - ((int)(percent * 100) % 100 / 25.0f) * (0.50 * M_PI));
     
     return endAngle;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     [_backgroundLayer removeFromSuperlayer];
     self.backgroundLayer = [self _createBackgroundLayer];
@@ -95,13 +89,11 @@
     self.animating = NO;
 }
 
-- (void)setPercent:(float)percent
-{
+- (void)setPercent:(float)percent {
     [self setPercent:percent animated:NO];
 }
 
-- (void)setPercent:(float)percent animated:(BOOL)animated
-{
+- (void)setPercent:(float)percent animated:(BOOL)animated {
     if (percent < 0) {
         percent = 0;
     }
@@ -113,26 +105,22 @@
     [self setNeedsLayout];
 }
 
-- (void)setCircleBackgroundColor:(UIColor *)circleBackgroundColor
-{
+- (void)setCircleBackgroundColor:(UIColor *)circleBackgroundColor {
     _circleBackgroundColor = circleBackgroundColor;
     [self setNeedsLayout];
 }
 
-- (void)setCircleForegroundColor:(UIColor *)circleForegroundColor
-{
+- (void)setCircleForegroundColor:(UIColor *)circleForegroundColor {
     _circleForegroundColor = circleForegroundColor;
     [self setNeedsLayout];
 }
 
-- (void)setCircleFillColor:(UIColor *)circleFillColor
-{
+- (void)setCircleFillColor:(UIColor *)circleFillColor {
     _circleFillColor = circleFillColor;
     [self setNeedsLayout];
 }
 
-- (void)setStrokeLineWidth:(CGFloat)strokeLineWidth
-{
+- (void)setStrokeLineWidth:(CGFloat)strokeLineWidth {
     _strokeLineWidth = strokeLineWidth;
     [self setNeedsLayout];
 }

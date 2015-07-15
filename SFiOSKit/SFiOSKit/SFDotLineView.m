@@ -10,8 +10,7 @@
 
 @implementation SFDotLineView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self _setDefaults];
@@ -19,15 +18,13 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor clearColor];
     [self _setDefaults];
 }
 
-- (void)_setDefaults
-{
+- (void)_setDefaults {
     if (self.lineHeight == 0.0f) {
         self.lineHeight = 1.0f;
     }
@@ -39,8 +36,7 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
     CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);

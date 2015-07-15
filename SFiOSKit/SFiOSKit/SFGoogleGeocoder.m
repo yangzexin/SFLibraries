@@ -7,6 +7,7 @@
 //
 
 #import "SFGoogleGeocoder.h"
+
 #import "SFLocationDescription.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -14,21 +15,18 @@
 
 @synthesize delegate;
 
-- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude
-{
+- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude {
     NSString *urlString = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/xml?latlng=%f,%f&sensor=false&language=zh-CN&components=route", latitude, longitude];
     [NSThread detachNewThreadSelector:@selector(run:) toTarget:self withObject:urlString];
 }
 
-- (void)run:(NSString *)urlString
-{
+- (void)run:(NSString *)urlString {
     @autoreleasepool {
         [self requestWithString:urlString];
     }
 }
 
-- (void)requestWithString:(NSString *)URLString
-{
+- (void)requestWithString:(NSString *)URLString {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     NSHTTPURLResponse *response = nil;
     NSError *eror = nil;
@@ -75,8 +73,7 @@
     }
 }
 
-- (NSString *)getContentWithTagName:(NSString *)tagName xmlString:(NSString *)xmlString
-{
+- (NSString *)getContentWithTagName:(NSString *)tagName xmlString:(NSString *)xmlString {
     NSString *prefix = [NSString stringWithFormat:@"<%@>", tagName];
     NSString *suffix = [NSString stringWithFormat:@"</%@>", tagName];
     NSRange range = [xmlString rangeOfString:prefix];
@@ -95,8 +92,7 @@
     return nil;
 }
 
-- (NSArray *)getContentListWithTagName:(NSString *)tagName xmlString:(NSString *)xmlString
-{
+- (NSArray *)getContentListWithTagName:(NSString *)tagName xmlString:(NSString *)xmlString {
     NSMutableArray *contentList = [NSMutableArray array];
     
     NSString *prefix = [NSString stringWithFormat:@"<%@>", tagName];
@@ -118,13 +114,11 @@
     return contentList;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.delegate = nil;
 }
 
-- (void)notifySuccessWithCountry:(NSString *)country locality:(NSString *)locality address:(NSString *)address
-{
+- (void)notifySuccessWithCountry:(NSString *)country locality:(NSString *)locality address:(NSString *)address {
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self.delegate respondsToSelector:@selector(geocoder:didRecieveLocality:)]) {
             SFLocationDescription *desc = [[SFLocationDescription alloc] init];
@@ -136,8 +130,7 @@
     });
 }
 
-- (void)notifyFailWithError:(NSError *)error
-{
+- (void)notifyFailWithError:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([self.delegate respondsToSelector:@selector(geocoder:didError:)]) {
             [self.delegate geocoder:self didError:error];

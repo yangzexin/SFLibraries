@@ -10,8 +10,7 @@
 
 @implementation UIWebView (SFAddition)
 
-- (CGPoint)sf_pageScrollOffset
-{
+- (CGPoint)sf_pageScrollOffset {
     CGPoint point;
     point.x = [[self stringByEvaluatingJavaScriptFromString:@"window.pageXOffset"] floatValue];
     point.y = [[self stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"] floatValue];
@@ -19,8 +18,7 @@
     return point;
 }
 
-- (CGSize)sf_windowSize
-{
+- (CGSize)sf_windowSize {
     CGSize size;
     size.width = [[self stringByEvaluatingJavaScriptFromString:@"window.innerWidth"] floatValue];
     size.height = [[self stringByEvaluatingJavaScriptFromString:@"window.innerHeight"] floatValue];
@@ -28,8 +26,7 @@
     return size;
 }
 
-- (NSString *)sf_loadJavascriptWithFileName:(NSString *)fileName;
-{
+- (NSString *)sf_loadJavascriptWithFileName:(NSString *)fileName; {
     NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
     NSString *jsPath = [bundlePath stringByAppendingPathComponent:fileName];
     NSString *jsCode = [NSString stringWithContentsOfFile:jsPath encoding:NSASCIIStringEncoding error:nil];
@@ -37,8 +34,7 @@
     return jsCode;
 }
 
-- (void)replaceLinkHref
-{
+- (void)replaceLinkHref {
     NSString *js =
     @"function replaceTag(targetTag){\
         var allLinks = document.getElementsByTagName(targetTag);\
@@ -62,13 +58,11 @@
     [self stringByEvaluatingJavaScriptFromString:method];
 }
 
-- (void)sf_disableWebViewContextMenu
-{
+- (void)sf_disableWebViewContextMenu {
     [self stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none';"];
 }
 
-- (NSString *)sf_linkSrcAtPoint:(CGPoint)point
-{
+- (NSString *)sf_linkSrcAtPoint:(CGPoint)point {
     NSString *jsCode =
     @"function MyAppGetLinkSRCAtPoint(x,y) {\n\
         var tags = '';\n\
@@ -104,8 +98,7 @@
     return result;
 }
 
-- (NSString *)sf_ALinkAtPoint:(CGPoint)point
-{
+- (NSString *)sf_ALinkAtPoint:(CGPoint)point {
     NSString *URLString = nil;
     NSString *src = [self sf_linkSrcAtPoint:point];
     NSString *href = [self sf_linkHrefAtPoint:point];
@@ -120,8 +113,7 @@
     return URLString;
 }
 
-- (NSString *)sf_linkHrefAtPoint:(CGPoint)point
-{
+- (NSString *)sf_linkHrefAtPoint:(CGPoint)point {
     NSString *js =
     @"function MyAppGetLinkHREFAtPoint(x,y) {\n\
         var tags = \"\";\n\
@@ -157,8 +149,7 @@
     return result;
 }
 
-- (NSString *)sf_HTMLElementsAtPoint:(CGPoint)point
-{
+- (NSString *)sf_HTMLElementsAtPoint:(CGPoint)point {
     NSString *js =
     @"function MyAppGetHTMLElementsAtPoint(x,y) {\n\
         var tags = '';\n\
@@ -191,8 +182,7 @@
     return [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"MyAppGetHTMLElementsAtPoint(%f, %f)", point.x, point.y]];
 }
 
-- (NSString *)pageTitle
-{
+- (NSString *)pageTitle {
     NSString *jsCode = @"document.title";
     NSString *title = [self stringByEvaluatingJavaScriptFromString:jsCode];
     if([[[self.request URL] absoluteString] isEqualToString:@"about:blank"]){
@@ -202,8 +192,7 @@
     return title;
 }
 
-- (void)sf_loadWithURLString:(NSString *)address
-{
+- (void)sf_loadWithURLString:(NSString *)address {
     if ([self isLoading]) {
         [self stopLoading];
     }
@@ -211,24 +200,21 @@
     [self loadRequest:req];
 }
 
-- (NSString *)sf_selectedText
-{
+- (NSString *)sf_selectedText {
     NSString *js = @"document.getSelection().toString()";
     NSString *selectedText = [self stringByEvaluatingJavaScriptFromString:js];
     
     return selectedText;
 }
 
-- (NSInteger)sf_selectedTextStartOffset
-{
+- (NSInteger)sf_selectedTextStartOffset {
     NSString *js = @"document.getSelection().getRangeAt(0).startOffset";
     NSString *startOffset = [self stringByEvaluatingJavaScriptFromString:js];
     
     return [startOffset integerValue];
 }
 
-- (void)sf_removeShadow
-{
+- (void)sf_removeShadow {
     self.backgroundColor = [UIColor clearColor];
     for(UIView *subview in [self subviews]){
         if([subview isKindOfClass:[UIScrollView class]]){
@@ -245,8 +231,7 @@
     }
 }
 
-- (UIScrollView *)sf_scrollView
-{
+- (UIScrollView *)sf_scrollView {
     if([self respondsToSelector:@selector(scrollView)]){
         return self.scrollView;
     }else{

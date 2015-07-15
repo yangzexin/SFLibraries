@@ -18,8 +18,7 @@
 
 @implementation SFPropertyProcessor
 
-+ (instancetype)propertyProcessorWithClass:(Class)clss propertyName:(NSString *)propertyName processing:(SFPropertyProcessing)processing
-{
++ (instancetype)propertyProcessorWithClass:(Class)clss propertyName:(NSString *)propertyName processing:(SFPropertyProcessing)processing {
     SFPropertyProcessor *processor = [SFPropertyProcessor new];
     processor.clss = clss;
     processor.propertyProcessing = processing;

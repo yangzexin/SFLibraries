@@ -10,8 +10,7 @@
 
 @implementation UISearchBar (SFAddition)
 
-- (UITextField *)sf_searchTextField
-{
+- (UITextField *)sf_searchTextField {
     UITextField *searchField = nil;
     if ([UIDevice currentDevice].systemVersion.floatValue < 7.0f) {
         for (UIView *subview in self.subviews) {

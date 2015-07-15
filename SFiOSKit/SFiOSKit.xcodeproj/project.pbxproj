@@ -14,7 +14,7 @@
 		3E19D6621831F7250048A788 /* UIWebView+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19D6611831F7250048A788 /* UIWebView+SFAddition.m */; };
 		3E19D6661831FA1D0048A788 /* UIMenuController+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E19D6651831FA1D0048A788 /* UIMenuController+SFAddition.m */; };
 		3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */; };
-		3E2331331AA14BC30072CB8D /* SFAbstractCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2331301AA14BC30072CB8D /* SFAbstractCache.m */; };
+		3E2331331AA14BC30072CB8D /* SFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2331301AA14BC30072CB8D /* SFCache.m */; };
 		3E2331341AA14BC30072CB8D /* SFCacheControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2331321AA14BC30072CB8D /* SFCacheControl.m */; };
 		3E2EC0271A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC0261A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.m */; };
 		3E2EC03A1A8DDBB500A81F76 /* UIImage+SFBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2EC0391A8DDBB500A81F76 /* UIImage+SFBundle.m */; };
@@ -116,8 +116,8 @@
 		3E19D6651831FA1D0048A788 /* UIMenuController+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+SFAddition.m"; sourceTree = "<group>"; };
 		3E1EA6C31A1F39E400D1FC12 /* UIDevice+SFUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+SFUDID.h"; sourceTree = "<group>"; };
 		3E1EA6C41A1F39E400D1FC12 /* UIDevice+SFUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SFUDID.m"; sourceTree = "<group>"; };
-		3E23312F1AA14BC30072CB8D /* SFAbstractCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAbstractCache.h; sourceTree = "<group>"; };
-		3E2331301AA14BC30072CB8D /* SFAbstractCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAbstractCache.m; sourceTree = "<group>"; };
+		3E23312F1AA14BC30072CB8D /* SFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCache.h; sourceTree = "<group>"; };
+		3E2331301AA14BC30072CB8D /* SFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCache.m; sourceTree = "<group>"; };
 		3E2331311AA14BC30072CB8D /* SFCacheControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCacheControl.h; sourceTree = "<group>"; };
 		3E2331321AA14BC30072CB8D /* SFCacheControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCacheControl.m; sourceTree = "<group>"; };
 		3E2EC0251A8DAC9C00A81F76 /* UIViewController+SFTransparentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SFTransparentViewController.h"; sourceTree = "<group>"; };
@@ -260,8 +260,8 @@
 		3E23312D1AA14BBC0072CB8D /* cache */ = {
 			isa = PBXGroup;
 			children = (
-				3E23312F1AA14BC30072CB8D /* SFAbstractCache.h */,
-				3E2331301AA14BC30072CB8D /* SFAbstractCache.m */,
+				3E23312F1AA14BC30072CB8D /* SFCache.h */,
+				3E2331301AA14BC30072CB8D /* SFCache.m */,
 				3E2331311AA14BC30072CB8D /* SFCacheControl.h */,
 				3E2331321AA14BC30072CB8D /* SFCacheControl.m */,
 			);
@@ -664,7 +664,7 @@
 				3ED2CF5B19206EF70008529A /* SFBlockedGeocoder.m in Sources */,
 				3E19D6621831F7250048A788 /* UIWebView+SFAddition.m in Sources */,
 				3E1EA6C51A1F39E400D1FC12 /* UIDevice+SFUDID.m in Sources */,
-				3E2331331AA14BC30072CB8D /* SFAbstractCache.m in Sources */,
+				3E2331331AA14BC30072CB8D /* SFCache.m in Sources */,
 				3EDC6059183C5919005B82D2 /* SFDotLineView.m in Sources */,
 				3E5735911837A2D200566F33 /* UIColor+SFAddition.m in Sources */,
 			);

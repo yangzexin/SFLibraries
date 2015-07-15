@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class SFAbstractCache;
+@class SFCache;
 
 typedef NSString *(^SFCacheControlCacheKeyBuilder)();
 
-typedef BOOL (^SFCacheControlCacheValidator)(SFAbstractCache *cache);
+typedef BOOL (^SFCacheControlCacheValidator)(SFCache *cache);
 
 typedef void(^SFCacheControlCacheFinishUpdate)(id object);
 

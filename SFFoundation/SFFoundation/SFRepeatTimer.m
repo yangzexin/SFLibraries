@@ -16,8 +16,7 @@
 
 @implementation SFRepeatTimer
 
-- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick
-{
+- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick {
     self = [super init];
     
     _timeInterval = timeInterval;
@@ -26,29 +25,25 @@
     return self;
 }
 
-- (void)start
-{
+- (void)start {
     [self _tick];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(_tick) userInfo:nil repeats:YES];
     });
 }
 
-- (void)_tick
-{
+- (void)_tick {
     if (_tick) {
         _tick();
     }
 }
 
-- (void)stop
-{
+- (void)stop {
     [_timer invalidate];
     self.tick = nil;
 }
 
-+ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick
-{
++ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick {
     SFRepeatTimer *timer = [[SFRepeatTimer alloc] initWithTimeInterval:timeInterval tick:tick];
     [timer start];
     
@@ -56,13 +51,11 @@
 }
 
 #pragma mark - SFProviderPoolable
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self stop];
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return [_timer isValid] == NO;
 }
 

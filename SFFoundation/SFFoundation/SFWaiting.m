@@ -19,8 +19,7 @@
 
 @implementation WaitingCallbackWrapper
 
-+ (instancetype)wrapperWithCallback:(void(^)())callback identifier:(NSString *)identifier
-{
++ (instancetype)wrapperWithCallback:(void(^)())callback identifier:(NSString *)identifier {
     WaitingCallbackWrapper *wrapper = [WaitingCallbackWrapper new];
     wrapper.callback = callback;
     wrapper.uniqueIdentifier = identifier;
@@ -32,21 +31,18 @@
 
 @implementation SFWaiting
 
-+ (instancetype)waitWithCondition:(BOOL(^)())condition
-{
++ (instancetype)waitWithCondition:(BOOL(^)())condition {
     SFWaiting *queue = [self new];
     queue.condition = condition;
     
     return queue;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self cancelAll];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.name = [NSString stringWithFormat:@"%p", self];
@@ -55,23 +51,19 @@
     return self;
 }
 
-- (NSString *)_randomUniqueIdentifierWthBlock:(id)block
-{
+- (NSString *)_randomUniqueIdentifierWthBlock:(id)block {
     return [NSString stringWithFormat:@"%f%p@%d", [NSDate timeIntervalSinceReferenceDate], block, arc4random() % 100];
 }
 
-- (NSString *)generateRandomUniqueIdentifier
-{
+- (NSString *)generateRandomUniqueIdentifier {
     return [NSString stringWithFormat:@"%f@%d", [NSDate timeIntervalSinceReferenceDate], arc4random() % 10000];
 }
 
-- (void)wait:(void(^)())block
-{
+- (void)wait:(void(^)())block {
     [self wait:block uniqueIdentifier:nil];
 }
 
-- (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier
-{
+- (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier {
     @synchronized(self) {
         if (identifier == nil) {
             identifier = [self _randomUniqueIdentifierWthBlock:block];
@@ -85,8 +77,7 @@
     }
 }
 
-- (void)removeCallbackWithIdentifier:(NSString *)identifier
-{
+- (void)removeCallbackWithIdentifier:(NSString *)identifier {
     @synchronized(self) {
         WaitingCallbackWrapper *wrapper = nil;
         NSArray *callbacks = [NSArray arrayWithArray:self.callbacks];
@@ -102,8 +93,7 @@
     }
 }
 
-- (void)notfiyCallbacksSync:(BOOL)sync
-{
+- (void)notfiyCallbacksSync:(BOOL)sync {
     @synchronized(self) {
         NSArray *callbacks = [NSArray arrayWithArray:self.callbacks];
         if (sync) {
@@ -120,15 +110,13 @@
     }
 }
 
-- (void)removeCallbacks
-{
+- (void)removeCallbacks {
     @synchronized(self){
         [self.callbacks removeAllObjects];
     }
 }
 
-- (void)startCheckCondition
-{
+- (void)startCheckCondition {
     @synchronized(self) {
         if (!self.running) {
             self.running = YES;
@@ -137,13 +125,11 @@
     }
 }
 
-- (void)cancelByUniqueIdentifier:(NSString *)identifier
-{
+- (void)cancelByUniqueIdentifier:(NSString *)identifier {
     [self removeCallbackWithIdentifier:identifier];
 }
 
-- (void)cancelAll
-{
+- (void)cancelAll {
     @synchronized(self) {
         [[SFEventLoop sharedLoop] removeItem:self];
         self.running = NO;
@@ -151,24 +137,20 @@
     }
 }
 
-- (BOOL)shouldAddToEventLoop
-{
+- (BOOL)shouldAddToEventLoop {
     return YES;
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@-%@: isRunning:%@", NSStringFromClass([self class]), self.name, self.running ? @"YES" : @"NO"];
 }
 
-- (BOOL)checkCondition
-{
+- (BOOL)checkCondition {
     return self.condition();
 }
 
 #pragma mark - SFEventLoopItem
-- (void)tick
-{
+- (void)tick {
     @synchronized(self) {
         if (self.running && [self checkCondition]) {
             [self notfiyCallbacksSync:NO];
@@ -179,13 +161,11 @@
 }
 
 #pragma mark - SFRepositionSupportedObject
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.running == NO;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancelAll];
 }
 

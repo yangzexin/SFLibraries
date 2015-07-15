@@ -16,8 +16,7 @@
 
 @implementation SFUpdatableParameter
 
-+ (instancetype)parameterWithValue:(id(^)())block
-{
++ (instancetype)parameterWithValue:(id(^)())block {
     SFUpdatableParameter *wrapper = [SFUpdatableParameter new];
     wrapper.value = block;
     

@@ -12,8 +12,7 @@
 
 @implementation SFKeychainAccess
 
-+ (NSMutableDictionary *)_searchDictionaryWithIdentifier:(NSString *)identifier
-{
++ (NSMutableDictionary *)_searchDictionaryWithIdentifier:(NSString *)identifier {
     NSMutableDictionary *searchDictionary = [[NSMutableDictionary alloc] init];
     
     [searchDictionary setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
@@ -41,8 +40,7 @@
     return result;
 }
 
-+ (BOOL)setString:(NSString *)string forKey:(NSString *)key
-{
++ (BOOL)setString:(NSString *)string forKey:(NSString *)key {
     if (string.length == 0) {
         return NO;
     }
@@ -73,16 +71,14 @@
     return NO;
 }
 
-+ (NSString *)stringForKey:(NSString *)key
-{
++ (NSString *)stringForKey:(NSString *)key {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSData *data = [self _searchKeychainCopyMatching:[NSString stringWithFormat:@"%@_%@", bundleIdentifier, key]];
     
     return data == nil ? nil : [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-+ (void)removeStringForKey:(NSString *)key
-{
++ (void)removeStringForKey:(NSString *)key {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSMutableDictionary *searchDictionary = [self _searchDictionaryWithIdentifier:[NSString stringWithFormat:@"%@_%@", bundleIdentifier, key]];
     SecItemDelete((__bridge CFDictionaryRef)searchDictionary);

@@ -10,8 +10,7 @@
 
 @implementation SFCombinationEnd
 
-+ (instancetype)end
-{
++ (instancetype)end {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

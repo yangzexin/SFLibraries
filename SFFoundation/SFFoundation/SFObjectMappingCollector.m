@@ -26,8 +26,7 @@
 
 @implementation SFClassWrapper
 
-+ (instancetype)wrapperWithClass:(Class)clss
-{
++ (instancetype)wrapperWithClass:(Class)clss {
     SFClassWrapper *wrapper = [SFClassWrapper new];
     wrapper.clss = clss;
     
@@ -48,8 +47,7 @@
 
 @implementation SFUnhandledSubObjectMappingContext
 
-+ (instancetype)contextWithObjectMapping:(id<SFObjectMapping>)objectMapping propertyName:(NSString *)propertyName className:(NSString *)className
-{
++ (instancetype)contextWithObjectMapping:(id<SFObjectMapping>)objectMapping propertyName:(NSString *)propertyName className:(NSString *)className {
     SFUnhandledSubObjectMappingContext *context = [SFUnhandledSubObjectMappingContext new];
     context.targetObjectMapping = objectMapping;
     context.propertyName = propertyName;
@@ -62,8 +60,7 @@
 
 @implementation SFObjectMappingCollector
 
-- (id<SFObjectMapping>)objectMappingForClass:(Class)clss
-{
+- (id<SFObjectMapping>)objectMappingForClass:(Class)clss {
     NSMutableDictionary *keyClassNameValueObjectMapping = [NSMutableDictionary dictionary];
     NSMutableArray *unhandledClassWrappers = [NSMutableArray arrayWithObject:[SFClassWrapper wrapperWithClass:clss]];
     NSMutableArray *handledClassWrappers = [NSMutableArray array];
@@ -119,8 +116,7 @@
     return rootObjectMapping;
 }
 
-- (id<SFObjectMapping>)_readMappingWithClass:(Class)clss outUnhandledSubObjectMappingContexts:(NSArray **)outUnhandledSubObjectMappingContexts
-{
+- (id<SFObjectMapping>)_readMappingWithClass:(Class)clss outUnhandledSubObjectMappingContexts:(NSArray **)outUnhandledSubObjectMappingContexts {
     id<SFObjectMapping> mapping = nil;
     NSMutableArray *unhandledSubObjectMappingContexts = [NSMutableArray array];
     NSAssert(_delegate != nil, @"delegate can't be nil");

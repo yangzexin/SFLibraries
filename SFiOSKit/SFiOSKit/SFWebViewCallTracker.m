@@ -31,8 +31,7 @@
 
 @implementation SFWebViewProtocolObserver
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.contexts = [NSMutableArray array];
@@ -40,18 +39,15 @@
     return self;
 }
 
-- (void)disconnect
-{
+- (void)disconnect {
     self.connected = NO;
 }
 
-- (void)connect
-{
+- (void)connect {
     self.connected = YES;
 }
 
-- (SFCancellable *)observeMethod:(NSString *)method handler:(void(^)(NSString *method, NSDictionary *parameters, SFWebViewProtocolNotifier notifier))handler
-{
+- (SFCancellable *)observeMethod:(NSString *)method handler:(void(^)(NSString *method, NSDictionary *parameters, SFWebViewProtocolNotifier notifier))handler {
     SFWebViewProtocolObserverContext *context = [SFWebViewProtocolObserverContext new];
     context.method = method;
     context.handler = handler;
@@ -67,8 +63,7 @@
     }];
 }
 
-- (BOOL)processURL:(NSURL *)url javascriptExecutor:(SFWebViewJavascriptExecutor)javascriptExecutor
-{
+- (BOOL)processURL:(NSURL *)url javascriptExecutor:(SFWebViewJavascriptExecutor)javascriptExecutor {
     NSString *query = [url query];
     
     NSString *resourceSpecifier = url.resourceSpecifier;
@@ -121,8 +116,7 @@
     return processed;
 }
 
-NSString *_SFCommonCallbackValueFilter(NSString *value)
-{
+NSString *_SFCommonCallbackValueFilter(NSString *value) {
     value = [value stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
     value = [value stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     
@@ -139,8 +133,7 @@ NSString *_SFCommonCallbackValueFilter(NSString *value)
 
 @implementation SFWebViewCallTracker
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -150,8 +143,7 @@ NSString *_SFCommonCallbackValueFilter(NSString *value)
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.observers = [NSMutableArray array];
@@ -159,8 +151,7 @@ NSString *_SFCommonCallbackValueFilter(NSString *value)
     return self;
 }
 
-- (BOOL)isURLTrackable:(NSURL *)url javascriptExecutor:(SFWebViewJavascriptExecutor)javascriptExecutor
-{
+- (BOOL)isURLTrackable:(NSURL *)url javascriptExecutor:(SFWebViewJavascriptExecutor)javascriptExecutor {
     NSString *scheme = [[url scheme] lowercaseString];
     
     BOOL processed = NO;
@@ -177,8 +168,7 @@ NSString *_SFCommonCallbackValueFilter(NSString *value)
     return processed;
 }
 
-- (SFWebViewProtocolObserver *)addObserverForProtocol:(NSString *)protocol
-{
+- (SFWebViewProtocolObserver *)addObserverForProtocol:(NSString *)protocol {
     SFWebViewProtocolObserver *observer = [SFWebViewProtocolObserver new];
     observer.protocol = [protocol lowercaseString];
     [observer connect];
@@ -188,8 +178,7 @@ NSString *_SFCommonCallbackValueFilter(NSString *value)
     return observer;
 }
 
-- (void)removeObserver:(SFWebViewProtocolObserver *)observer
-{
+- (void)removeObserver:(SFWebViewProtocolObserver *)observer {
     [self.observers removeObject:observer];
 }
 

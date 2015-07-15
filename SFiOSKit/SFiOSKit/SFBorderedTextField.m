@@ -12,8 +12,7 @@
 
 @implementation SFBorderedTextField
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     [self initialize];
@@ -21,13 +20,11 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [self initialize];
 }
 
-- (void)initialize
-{
+- (void)initialize {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
     imageView.image = [[UIImage sf_roundImageWithOptions:({
         SFRoundImageOptions *options = [SFRoundImageOptions options];
@@ -43,18 +40,15 @@
     [self addSubview:imageView];
 }
 
-- (CGRect)editingRectForBounds:(CGRect)bounds
-{
+- (CGRect)editingRectForBounds:(CGRect)bounds {
     return CGRectMake(5, 0, bounds.size.width - (self.clearButtonMode == UITextFieldViewModeAlways || self.clearButtonMode == UITextFieldViewModeWhileEditing ? [self clearButtonRectForBounds:bounds].size.width : 0) - 5.0f, bounds.size.height);
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds
-{
+- (CGRect)textRectForBounds:(CGRect)bounds {
     return CGRectMake(5, 0, bounds.size.width - (self.clearButtonMode == UITextFieldViewModeAlways || self.clearButtonMode == UITextFieldViewModeUnlessEditing ? [self clearButtonRectForBounds:bounds].size.width : 0) - 10.0f, bounds.size.height);
 }
 
-- (CGRect)placeholderRectForBounds:(CGRect)bounds
-{
+- (CGRect)placeholderRectForBounds:(CGRect)bounds {
     return [self textRectForBounds:bounds];
 }
 

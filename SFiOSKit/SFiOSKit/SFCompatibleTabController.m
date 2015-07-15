@@ -10,8 +10,7 @@
 
 @implementation SFCompatibleTabController
 
-- (void)resetViewControllers
-{
+- (void)resetViewControllers {
     if(self.viewControllers.count != 0){
         [self.viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UIViewController *viewController = obj;
@@ -30,8 +29,7 @@
     }
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex
-{
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
     BOOL wantToReset = selectedIndex != _selectedIndex;
     _selectedIndex = selectedIndex;
     if (wantToReset == YES) {
@@ -39,18 +37,15 @@
     }
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
-{
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated {
     [self setSelectedIndex:selectedIndex];
 }
 
-- (UIViewController *)selectedViewController
-{
+- (UIViewController *)selectedViewController {
     return [_viewControllers objectAtIndex:_selectedIndex];
 }
 
-- (void)setViewControllers:(NSArray *)viewControllers
-{
+- (void)setViewControllers:(NSArray *)viewControllers {
     if ([_viewControllers count] != 0) {
         [_viewControllers enumerateObjectsUsingBlock:^(UIViewController *obj, NSUInteger idx, BOOL *stop) {
             [obj willMoveToParentViewController:nil];

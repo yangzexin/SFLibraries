@@ -8,16 +8,14 @@
 
 #import "SFiOSKit.h"
 
-id SFWrapNil(id object)
-{
+id SFWrapNil(id object) {
     if (object == nil) {
         object = [NSNull null];
     }
     return object;
 }
 
-id SFRestoreNil(id object)
-{
+id SFRestoreNil(id object) {
     id originalObject = object;
     if (object == [NSNull null]) {
         originalObject = nil;
@@ -25,7 +23,6 @@ id SFRestoreNil(id object)
     return originalObject;
 }
 
-NSString *SFWrapNilString(NSString *s)
-{
+NSString *SFWrapNilString(NSString *s) {
     return s == nil ? @"" : s;
 }

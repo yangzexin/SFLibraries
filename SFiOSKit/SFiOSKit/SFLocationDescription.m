@@ -10,8 +10,7 @@
 
 @implementation SFLocationDescription
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@, %@, %@, %f, %f", _country, _locality, _address, _coordinate.latitude, _coordinate.longitude];
 }
 

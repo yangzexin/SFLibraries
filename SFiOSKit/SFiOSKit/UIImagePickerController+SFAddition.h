@@ -38,13 +38,8 @@ typedef NS_OPTIONS(NSUInteger, SFImagePickerSourceLimitation) {
 
 + (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController completion:(SFImagePickerCompletion)completion;
 
-+ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                        extension:(SFImagePickerDialogExtension *)extension
-                                                       completion:(SFImagePickerCompletion)completion;
++ (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension completion:(SFImagePickerCompletion)completion;
 
-+ (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController
-                                                         extension:(SFImagePickerDialogExtension *)extension
-                                  mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController
-                                                        completion:(SFMutipleImagePickerCompletion)completion;
++ (UIActionSheet *)sf_pickImagesUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension mutipleImagePickerViewController:(id<SFMutipleImagePickerViewController>)mutipleImagePickerViewController completion:(SFMutipleImagePickerCompletion)completion;
 
 @end

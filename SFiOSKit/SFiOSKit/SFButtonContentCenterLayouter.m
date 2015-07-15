@@ -12,8 +12,7 @@
 
 @implementation SFButtonContentCenterLayouter
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     if ([[self subviews] count] != 0) {
         UIButton *button = [[self subviews] lastObject];

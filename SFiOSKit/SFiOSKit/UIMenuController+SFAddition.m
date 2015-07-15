@@ -10,8 +10,7 @@
 
 @implementation UIMenuController (SFAddition)
 
-- (void)sf_addMenuItemIfNotExistsWithTitle:(NSString *)title action:(SEL)action
-{
+- (void)sf_addMenuItemIfNotExistsWithTitle:(NSString *)title action:(SEL)action {
     NSArray *menuItems = [[UIMenuController sharedMenuController] menuItems];
     BOOL menuItemExists = NO;
     for (UIMenuItem *menuItem in menuItems) {

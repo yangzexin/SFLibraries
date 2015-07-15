@@ -16,14 +16,12 @@
 
 @implementation SFPageIndicator
 
-- (void)initialize
-{
+- (void)initialize {
     [super initialize];
     self.spacing = 5.0f;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat indicatorsWidth = [self _widthForAllIndicators];
     CGFloat x = (self.frame.size.width - indicatorsWidth) / 2;
@@ -38,8 +36,7 @@
     }
 }
 
-- (CGFloat)_widthForAllIndicators
-{
+- (CGFloat)_widthForAllIndicators {
     CGFloat width = 0;
     width += (_numberOfPages - 1) * _indicatorImage.size.width;
     width += _currentIndicatorImage.size.width;
@@ -48,16 +45,14 @@
     return width;
 }
 
-- (UIImageView *)imageViewForIndicatorWithIndex:(NSInteger)index
-{
+- (UIImageView *)imageViewForIndicatorWithIndex:(NSInteger)index {
     UIImage *image = index == _currentPageIndex ? _currentIndicatorImage : _indicatorImage;
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
     
     return imageView;
 }
 
-- (void)setNumberOfPages:(NSInteger)numberOfPages
-{
+- (void)setNumberOfPages:(NSInteger)numberOfPages {
     _numberOfPages = numberOfPages;
     for (UIView *view in self.imageViews) {
         [view removeFromSuperview];
@@ -72,8 +67,7 @@
     [self setNeedsLayout];
 }
 
-- (void)setCurrentPageIndex:(NSInteger)currentPageIndex
-{
+- (void)setCurrentPageIndex:(NSInteger)currentPageIndex {
     _currentPageIndex = currentPageIndex;
     [self setNeedsLayout];
 }

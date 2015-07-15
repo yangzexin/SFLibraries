@@ -39,8 +39,7 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
 
 @implementation UIViewController (SFTransparentViewController)
 
-+ (SFTransparentViewControllerAnimation *)_defaultPresentingAnimation
-{
++ (SFTransparentViewControllerAnimation *)_defaultPresentingAnimation {
     SFTransparentViewControllerAnimation *animation = [SFTransparentViewControllerAnimation new];
     
     [animation setAnimationWillBegin:^(SFTransparentViewControllerAnimationContext *context) {
@@ -59,8 +58,7 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
     return animation;
 }
 
-+ (SFTransparentViewControllerAnimation *)_defaultDismissingAnimation
-{
++ (SFTransparentViewControllerAnimation *)_defaultDismissingAnimation {
     SFTransparentViewControllerAnimation *animation = [SFTransparentViewControllerAnimation new];
     
     [animation setAnimationWillBegin:^(SFTransparentViewControllerAnimationContext *context) {
@@ -78,47 +76,39 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
     return animation;
 }
 
-- (void)sf_setTransparentViewControllerDelegate:(id<SFTransparentViewControllerDelegate>)delegate
-{
+- (void)sf_setTransparentViewControllerDelegate:(id<SFTransparentViewControllerDelegate>)delegate {
     [self sf_setAssociatedObject:[NSValue sf_valueWithWeakObject:delegate] key:@"transparentViewControllerDelegate"];
 }
 
-- (id<SFTransparentViewControllerDelegate>)sf_transparentViewControllerDelegate
-{
+- (id<SFTransparentViewControllerDelegate>)sf_transparentViewControllerDelegate {
     NSValue *value = [self sf_associatedObjectWithKey:@"transparentViewControllerDelegate"];
     
     return [value sf_weakObject];
 }
 
-- (void)sf_setTransparentViewControllerPresentingAnimation:(SFTransparentViewControllerAnimation *)presentingAnimation
-{
+- (void)sf_setTransparentViewControllerPresentingAnimation:(SFTransparentViewControllerAnimation *)presentingAnimation {
     [self sf_setAssociatedObject:presentingAnimation key:kTransparentViewControllerPresentingAnimationKey];
 }
 
-- (SFTransparentViewControllerAnimation *)sf_transparentViewControllerPresentingAnimation
-{
+- (SFTransparentViewControllerAnimation *)sf_transparentViewControllerPresentingAnimation {
     return [self sf_associatedObjectWithKey:kTransparentViewControllerPresentingAnimationKey];
 }
 
-- (void)sf_setTransparentViewControllerDismissingAnimation:(SFTransparentViewControllerAnimation *)dismissingAnimation
-{
+- (void)sf_setTransparentViewControllerDismissingAnimation:(SFTransparentViewControllerAnimation *)dismissingAnimation {
     [self sf_setAssociatedObject:dismissingAnimation key:kTransparentViewControllerDismissingAnimationKey];
 }
 
-- (SFTransparentViewControllerAnimation *)sf_transparentViewControllerDismissingAnimation
-{
+- (SFTransparentViewControllerAnimation *)sf_transparentViewControllerDismissingAnimation {
     return [self sf_associatedObjectWithKey:kTransparentViewControllerDismissingAnimationKey];
 }
 
-- (UIViewController *)sf_presentingTransparentViewController
-{
+- (UIViewController *)sf_presentingTransparentViewController {
     NSValue *weakObjectWrapper = [self sf_associatedObjectWithKey:kTransparentViewControllerKey];
     UIViewController *existsViewController = [weakObjectWrapper sf_weakObject];
     return existsViewController;
 }
 
-- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)())completion {
     if (presentingTransparentViewController == nil) {
         NSLog(@"Warning:%@", @"viewController can't be nil");
         return;
@@ -182,13 +172,11 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
     });
 }
 
-- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController animated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController animated:(BOOL)animated completion:(void(^)())completion {
     [self sf_presentTransparentViewController:presentingTransparentViewController transparent:YES animated:animated completion:completion];
 }
 
-- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)())completion {
     UIViewController *presentingTransparentViewController = [self sf_presentingTransparentViewController];
     UIViewController *parentTransparentViewController = self;
     if (presentingTransparentViewController == nil) {

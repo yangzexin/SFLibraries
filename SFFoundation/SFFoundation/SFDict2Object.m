@@ -10,8 +10,7 @@
 #import "SFRuntimeUtils.h"
 #import "SFObjectMapping.h"
 
-id SFDictToObject(Class clss, id dict)
-{
+id SFDictToObject(Class clss, id dict) {
     id result = nil;
     
     id<SFDict2Object> dict2Obj = [SFDict2Object dict2ObjectWithObjectMapping:[SFObjectMapping objectMappingWithClass:clss]];
@@ -26,8 +25,7 @@ id SFDictToObject(Class clss, id dict)
 
 @implementation SFDict2Object
 
-static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate)
-{
+static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate) {
     id object = givenObject;
     
     if ([dictionary isKindOfClass:[NSDictionary class]]) {
@@ -100,8 +98,7 @@ static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SF
     return object;
 }
 
-static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate)
-{
+static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate) {
     NSMutableArray *objects = nil;
     if ([dictionaries isKindOfClass:[NSArray class]]) {
         objects = [NSMutableArray array];
@@ -116,21 +113,18 @@ static id SFDict2ObjectGetObjects(NSArray *dictionaries, id<SFObjectMapping> obj
     return objects;
 }
 
-+ (instancetype)dict2ObjectWithObjectMapping:(id<SFObjectMapping>)objectMapping
-{
++ (instancetype)dict2ObjectWithObjectMapping:(id<SFObjectMapping>)objectMapping {
     SFDict2Object *dict2obj = [SFDict2Object new];
     dict2obj.objectMapping = objectMapping;
     
     return dict2obj;
 }
 
-- (id)objectFromDictionary:(NSDictionary *)dictionary
-{
+- (id)objectFromDictionary:(NSDictionary *)dictionary {
     return SFDict2ObjectGetObject(self.givenObject, dictionary, _objectMapping, _delegate);
 }
 
-- (id)objectsFromDictionaries:(NSArray *)dictionaries
-{
+- (id)objectsFromDictionaries:(NSArray *)dictionaries {
     return SFDict2ObjectGetObjects(dictionaries, _objectMapping, _delegate);
 }
 

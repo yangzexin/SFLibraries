@@ -18,16 +18,14 @@
 
 @implementation SFCancellable
 
-+ (instancetype)cancellableWithWhenCancel:(void(^)())block
-{
++ (instancetype)cancellableWithWhenCancel:(void(^)())block {
     SFCancellable *eventCancellable = [SFCancellable new];
     eventCancellable.block = block;
     
     return eventCancellable;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     if (!_cancelled) {
         if (_block) {
             _block();
@@ -37,13 +35,11 @@
     }
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return _cancelled;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancel];
 }
 

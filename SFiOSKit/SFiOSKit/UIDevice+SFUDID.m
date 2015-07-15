@@ -20,8 +20,7 @@
 
 @implementation UIDevice (SFUDID)
 
-- (NSString *)_macAddress
-{
+- (NSString *)_macAddress {
     int                 mib[6];
     size_t              len;
     char                *buf;
@@ -65,19 +64,16 @@
     return outstring;
 }
 
-- (NSString *)_sf_UDIDFromFile
-{
+- (NSString *)_sf_UDIDFromFile {
     return [[NSUserDefaults standardUserDefaults] safe_stringForKey:@"sf_udid"];
 }
 
-- (void)_sf_saveUDIDToLocalFile:(NSString *)udid
-{
+- (void)_sf_saveUDIDToLocalFile:(NSString *)udid {
     [[NSUserDefaults standardUserDefaults] safe_setString:udid forKey:@"sf_udid"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSString *)sf_UDID
-{
+- (NSString *)sf_UDID {
     NSString *UDIDString = nil;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
         UDIDString = [[self _macAddress] sf_stringByEncryptingUsingMD5];
@@ -92,8 +88,7 @@
     return UDIDString;
 }
 
-- (NSString *)sf_UDID_inKeychain
-{
+- (NSString *)sf_UDID_inKeychain {
     NSString *UDIDString = nil;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f) {
         UDIDString = [[self _macAddress] sf_stringByEncryptingUsingMD5];

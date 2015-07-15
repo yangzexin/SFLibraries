@@ -14,8 +14,7 @@
 
 @implementation SFRuntimeUtils
 
-+ (BOOL)isClass:(Class)clss replacableByClass:(Class)byClass
-{
++ (BOOL)isClass:(Class)clss replacableByClass:(Class)byClass {
     BOOL b = NO;
     Class tmpSuperClass = byClass;
     while (tmpSuperClass) {
@@ -33,8 +32,7 @@
 @end
 
 #if TARGET_OS_IPHONE
-CGRect CGRectWithString(NSString *str)
-{
+CGRect CGRectWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     CGRect tmpRect;
     if (vl.count == 4) {
@@ -47,8 +45,7 @@ CGRect CGRectWithString(NSString *str)
     return tmpRect;
 }
 
-CGSize CGSizeWithString(NSString *str)
-{
+CGSize CGSizeWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     CGSize tmpSize;
     if (vl.count == 2) {
@@ -59,8 +56,7 @@ CGSize CGSizeWithString(NSString *str)
     return tmpSize;
 }
 
-CGPoint CGPointWithString(NSString *str)
-{
+CGPoint CGPointWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     CGPoint tmpPoint;
     if (vl.count == 2) {
@@ -71,8 +67,7 @@ CGPoint CGPointWithString(NSString *str)
     return tmpPoint;
 }
 
-NSRange NSRangeWithString(NSString *str)
-{
+NSRange NSRangeWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     NSRange tmpRange;
     if (vl.count == 2) {
@@ -83,8 +78,7 @@ NSRange NSRangeWithString(NSString *str)
     return tmpRange;
 }
 
-UIEdgeInsets UIEdgeInsetsWithString(NSString *str)
-{
+UIEdgeInsets UIEdgeInsetsWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     UIEdgeInsets insets;
     if (vl.count == 4) {
@@ -97,8 +91,7 @@ UIEdgeInsets UIEdgeInsetsWithString(NSString *str)
     return insets;
 }
 
-UIOffset UIOffsetWithString(NSString *str)
-{
+UIOffset UIOffsetWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     UIOffset offset;
     if (vl.count == 2) {
@@ -109,8 +102,7 @@ UIOffset UIOffsetWithString(NSString *str)
     return offset;
 }
 
-CATransform3D CATransform3DWithString(NSString *str)
-{
+CATransform3D CATransform3DWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     CATransform3D t3d;
     if (vl.count == 16) {
@@ -135,8 +127,7 @@ CATransform3D CATransform3DWithString(NSString *str)
     return t3d;
 }
 
-CGAffineTransform CGAffineTransformWithString(NSString *str)
-{
+CGAffineTransform CGAffineTransformWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
     CGAffineTransform t;
     if (vl.count == 6) {
@@ -152,8 +143,7 @@ CGAffineTransform CGAffineTransformWithString(NSString *str)
 }
 #endif
 
-NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstParameter, ...)
-{
+NSString *SFObjectMessageSend(id object, NSString *methodName, NSString *firstParameter, ...) {
     if (firstParameter && [methodName characterAtIndex:methodName.length - 1] != ':') {
         NSMutableString *tmpMethodName = [NSMutableString stringWithString:methodName];
         [tmpMethodName appendString:@":"];

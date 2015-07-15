@@ -23,8 +23,7 @@
 @synthesize timeInterval;
 @synthesize performed;
 
-- (instancetype)initWithInterval:(NSTimeInterval)pTimeInterval completion:(void(^)())pCompletion
-{
+- (instancetype)initWithInterval:(NSTimeInterval)pTimeInterval completion:(void(^)())pCompletion {
     self = [super init];
     
     self.timeInterval = pTimeInterval;
@@ -33,14 +32,12 @@
     return self;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.cancelled = YES;
     self.completion = nil;
 }
 
-- (void)delayDidFinish
-{
+- (void)delayDidFinish {
     self.performed = YES;
     if (!_cancelled && self.completion) {
         self.completion();
@@ -48,8 +45,7 @@
     }
 }
 
-- (instancetype)start
-{
+- (instancetype)start {
     self.performed = NO;
     self.cancelled = NO;
     double delayInSeconds = timeInterval;
@@ -61,18 +57,15 @@
     return self;
 }
 
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.performed;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancel];
 }
 
-+ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion
-{
++ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion {
     SFDelayControl *delayControl = [[SFDelayControl alloc] initWithInterval:timeInterval completion:completion];
     
     return [delayControl start];

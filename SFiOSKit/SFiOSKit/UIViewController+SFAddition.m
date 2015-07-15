@@ -10,8 +10,7 @@
 
 @implementation UIViewController (SFAddition)
 
-- (NSMutableArray *)sf_viewControllersPopToMe
-{
+- (NSMutableArray *)sf_viewControllersPopToMe {
     NSMutableArray *existsViewControllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     NSMutableArray *viewControllers = [NSMutableArray array];
     for (UIViewController *viewController in existsViewControllers) {
@@ -24,8 +23,7 @@
     return viewControllers;
 }
 
-- (UIViewController *)_topModalViewController
-{
+- (UIViewController *)_topModalViewController {
     UIViewController *srcController = self;
     while (srcController.presentedViewController != nil) {
         srcController = srcController.presentedViewController;
@@ -34,13 +32,11 @@
     return srcController;
 }
 
-- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion {
     [[self _topModalViewController] presentViewController:viewController animated:animated completion:completion];
 }
 
-- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)())completion {
     [[self _topModalViewController] dismissViewControllerAnimated:animated completion:completion];
 }
 

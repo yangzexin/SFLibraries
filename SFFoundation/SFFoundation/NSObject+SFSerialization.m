@@ -16,23 +16,19 @@
 
 @implementation NSObject (SFSerialization)
 
-- (id)sf_dictionary
-{
+- (id)sf_dictionary {
     return [self sf_dictionaryWithSpecificObjcProperties:nil];
 }
 
-- (id)sf_dictionaryUntilNSObject
-{
+- (id)sf_dictionaryUntilNSObject {
     return [self sf_dictionaryWithSpecificObjcProperties:[[self class] sf_objcPropertiesStopAtNSObject]];
 }
 
-- (id)sf_dictionaryWithSpecificObjcProperties:(NSArray *)specificObjcProperties
-{
+- (id)sf_dictionaryWithSpecificObjcProperties:(NSArray *)specificObjcProperties {
     return [self sf_dictionaryWithSpecificObjcProperties:specificObjcProperties NSNumberForPlainType:NO];
 }
 
-- (id)sf_dictionaryWithSpecificObjcProperties:(NSArray *)specificObjcProperties NSNumberForPlainType:(BOOL)NSNumberForPlainType
-{
+- (id)sf_dictionaryWithSpecificObjcProperties:(NSArray *)specificObjcProperties NSNumberForPlainType:(BOOL)NSNumberForPlainType {
     id dict = nil;
     
     if ([self isKindOfClass:[NSArray class]]) {
@@ -44,23 +40,19 @@
     return dict;
 }
 
-+ (id)sf_objectFromDictionary:(id)dictionary
-{
++ (id)sf_objectFromDictionary:(id)dictionary {
     return [self sf_objectFromDictionary:dictionary mapping:nil];
 }
 
-+ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping
-{
++ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping {
     return [self sf_objectFromDictionary:dictionary mapping:mapping propertyProcessors:nil];
 }
 
-+ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors
-{
++ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors {
     return [self sf_objectFromDictionary:dictionary mapping:mapping propertyProcessors:propertyProcessors givenObject:nil];
 }
 
-+ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors givenObject:(id)givenObject
-{
++ (id)sf_objectFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors givenObject:(id)givenObject {
     if (dictionary == nil) {
         return nil;
     }
@@ -85,18 +77,15 @@
     return object;
 }
 
-- (id)sf_setPropertyValuesFromDictionary:(id)dictionary
-{
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary {
     return [self sf_setPropertyValuesFromDictionary:dictionary mapping:nil];
 }
 
-- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping
-{
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping {
     return [self sf_setPropertyValuesFromDictionary:dictionary mapping:mapping propertyProcessors:nil];
 }
 
-- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors
-{
+- (id)sf_setPropertyValuesFromDictionary:(id)dictionary mapping:(id)mapping propertyProcessors:(NSArray *)propertyProcessors {
     return [[self class] sf_objectFromDictionary:dictionary mapping:mapping propertyProcessors:propertyProcessors givenObject:self];
 }
 

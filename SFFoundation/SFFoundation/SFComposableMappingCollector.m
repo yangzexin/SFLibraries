@@ -12,8 +12,7 @@
 #import "SFPropertyProcessor.h"
 #import "SFRuntimeUtils.h"
 
-SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
-{
+SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...) {
     SFPropertyMapping *concatedMapping = [SFPropertyMapping new];
     
     va_list params;
@@ -37,8 +36,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 @implementation SFPropertyMappingSingleClass
 
-- (id)initWithClass:(Class)clss
-{
+- (id)initWithClass:(Class)clss {
     self = [super init];
     
     self.clss = clss;
@@ -49,13 +47,11 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return self;
 }
 
-- (void)addPropertyMappingKeyWithPropertyName:(NSString *)propertyName keyName:(NSString *)keyName
-{
+- (void)addPropertyMappingKeyWithPropertyName:(NSString *)propertyName keyName:(NSString *)keyName {
     [_keyPropertyNameValueKeyMapping setObject:keyName forKey:propertyName];
 }
 
-- (void)addPropertyMappingClassWithPropertyName:(NSString *)propertyName clss:(Class)clss
-{
+- (void)addPropertyMappingClassWithPropertyName:(NSString *)propertyName clss:(Class)clss {
     [_keyPropertyNameValueClass setObject:clss forKey:propertyName];
 }
 
@@ -69,8 +65,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 @implementation SFPropertyMapping
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.propertyMappingSingleClasses = [NSMutableArray array];
@@ -78,13 +73,11 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return self;
 }
 
-- (void)addPropertyMappingSingleClass:(SFPropertyMappingSingleClass *)single
-{
+- (void)addPropertyMappingSingleClass:(SFPropertyMappingSingleClass *)single {
     [self.propertyMappingSingleClasses addObject:single];
 }
 
-- (instancetype)append:(SFPropertyMapping *)propertyMapping
-{
+- (instancetype)append:(SFPropertyMapping *)propertyMapping {
     [self.propertyMappingSingleClasses addObjectsFromArray:propertyMapping.propertyMappingSingleClasses];
     
     return self;
@@ -108,13 +101,11 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
 
 @implementation SFComposableMappingCollector
 
-+ (instancetype)collector
-{
++ (instancetype)collector {
     return [self collectorWithMapping:nil];
 }
 
-+ (instancetype)collectorWithMapping:(id)mapping
-{
++ (instancetype)collectorWithMapping:(id)mapping {
     SFComposableMappingCollector *collector = [self new];
     if (mapping) {
         [collector addMapping:mapping];
@@ -123,8 +114,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return collector;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.keyClassNameValueCollectorContext = [NSMutableDictionary dictionary];
@@ -133,8 +123,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return self;
 }
 
-- (void)addMapping:(SFPropertyMapping *)mapping
-{
+- (void)addMapping:(SFPropertyMapping *)mapping {
     for (SFPropertyMappingSingleClass *singleMapping in mapping.propertyMappingSingleClasses) {
         SFObjectMappingCollectorContext *context = [SFObjectMappingCollectorContext new];
         context.keyPropertyNameValueKeyMapping = singleMapping.keyPropertyNameValueKeyMapping;
@@ -144,8 +133,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     }
 }
 
-- (void)addPropertyProcessors:(NSArray *)propertyProcessors
-{
+- (void)addPropertyProcessors:(NSArray *)propertyProcessors {
     if (_keyClassNameValuePropertyProcessors == nil) {
         self.keyClassNameValuePropertyProcessors = [NSMutableDictionary dictionary];
     }
@@ -165,8 +153,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     }
 }
 
-- (id<SFObjectMapping>)objectMappingForClass:(Class)clss
-{
+- (id<SFObjectMapping>)objectMappingForClass:(Class)clss {
     SFObjectMappingCollector *collector = [SFObjectMappingCollector new];
     collector.delegate = self;
     id<SFObjectMapping> objectMapping = [collector objectMappingForClass:clss];
@@ -178,8 +165,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return objectMapping;
 }
 
-- (NSArray *)allCollectorContextClasses
-{
+- (NSArray *)allCollectorContextClasses {
     if (_allCollectorContextClasses == nil) {
         NSMutableArray *allCollectorContextClasses = [NSMutableArray array];
         for (NSString *className in [self.keyClassNameValueCollectorContext allKeys]) {
@@ -200,8 +186,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return _allCollectorContextClasses;
 }
 
-- (NSArray *)allPropertyProcessorsClasses
-{
+- (NSArray *)allPropertyProcessorsClasses {
     if (_allPropertyProcessorsClasses == nil) {
         NSMutableArray *allPropertyProcessorsClasses = [NSMutableArray array];
         for (NSString *className in [self.keyClassNameValuePropertyProcessors allKeys]) {
@@ -222,8 +207,7 @@ SFPropertyMapping * SFConcatPropertyMappings(SFPropertyMapping *mapping, ...)
     return _allPropertyProcessorsClasses;
 }
 
-- (SFObjectMappingCollectorContext *)collectorContextForClass:(Class)clss
-{
+- (SFObjectMappingCollectorContext *)collectorContextForClass:(Class)clss {
     SFObjectMappingCollectorContext *context = nil;
     if (_inheritanceEnabled) {
         context = [SFObjectMappingCollectorContext new];

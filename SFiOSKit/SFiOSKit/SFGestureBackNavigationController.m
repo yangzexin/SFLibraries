@@ -37,8 +37,7 @@
 
 @implementation SFGestureImageCache
 
-+ (instancetype)sharedMemoryCache
-{
++ (instancetype)sharedMemoryCache {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -47,8 +46,7 @@
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.keyIdentifierValueImage = [NSMutableDictionary dictionary];
@@ -57,15 +55,13 @@
     return self;
 }
 
-- (void)setImage:(UIImage *)image identifier:(NSString *)identifier
-{
+- (void)setImage:(UIImage *)image identifier:(NSString *)identifier {
     [self.keyIdentifierValueImage setObject:image forKey:identifier];
     [self.identifiers addObject:identifier];
     [self shrinkCaches];
 }
 
-- (void)shrinkCaches
-{
+- (void)shrinkCaches {
     if(self.identifiers.count > 10){
         NSString *identifier = [self.identifiers objectAtIndex:0];
         [self.keyIdentifierValueImage removeObjectForKey:identifier];
@@ -73,8 +69,7 @@
     }
 }
 
-- (UIImage *)imageForIdentifier:(NSString *)identifier
-{
+- (UIImage *)imageForIdentifier:(NSString *)identifier {
     return [self.keyIdentifierValueImage objectForKey:identifier];
 }
 
@@ -106,8 +101,7 @@
 
 @implementation SFGestureBackPreparerInfo
 
-- (void)writeToCache
-{
+- (void)writeToCache {
     if(self.useCacheImage){
         [[SFGestureImageCache sharedMemoryCache] setImage:self.capturedImage identifier:[self wrappedIdentifier]];
     }
@@ -118,13 +112,11 @@
     }
 }
 
-+ (void)clearCache
-{
++ (void)clearCache {
     [[NSFileManager defaultManager] removeItemAtPath:[self cachePath] error:nil];
 }
 
-+ (NSString *)cachePath
-{
++ (NSString *)cachePath {
     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
     NSString *cachePath = [cachesPath stringByAppendingPathComponent:@"SFGestureBackPreparer_Snapshots"];
     if([[NSFileManager defaultManager] fileExistsAtPath:cachePath] == NO){
@@ -133,13 +125,11 @@
     return cachePath;
 }
 
-- (NSString *)wrappedIdentifier
-{
+- (NSString *)wrappedIdentifier {
     return [self.identifier sf_stringByEncryptingUsingMD5];
 }
 
-- (void)readCapturedImageUsingIdentifier
-{
+- (void)readCapturedImageUsingIdentifier {
     UIImage *cachedImage = nil;
     NSString *identifier = [self wrappedIdentifier];
     if(self.useCacheImage){
@@ -156,8 +146,7 @@
     }
 }
 
-+ (instancetype)gestureBackPreparerInfoWithIdentifier:(NSString *)identifier
-{
++ (instancetype)gestureBackPreparerInfoWithIdentifier:(NSString *)identifier {
     SFGestureBackPreparerInfo *info = [SFGestureBackPreparerInfo new];
     info.useCacheImage = NO;
     info.identifier = identifier;
@@ -169,8 +158,7 @@
 
 @implementation SFGestureBackPreparer
 
-+ (instancetype)sharedInstance
-{
++ (instancetype)sharedInstance {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -180,8 +168,7 @@
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.keyWritingPreparerInfoIndentifierValueImage = [NSMutableDictionary dictionary];
@@ -189,8 +176,7 @@
     return self;
 }
 
-- (void)prepareViewController:(UIViewController *)viewController identifier:(NSString *)identifier
-{
+- (void)prepareViewController:(UIViewController *)viewController identifier:(NSString *)identifier {
     SFGestureBackPreparerInfo *info = [SFGestureBackPreparerInfo new];
     info.useCacheImage = NO;
     info.identifier = identifier;
@@ -231,13 +217,11 @@ static CGFloat const kPreviousViewShowWidth = 150;
 
 @implementation SFGestureBackNavigationController
 
-- (void)dealloc
-{
+- (void)dealloc {
     _panGestureRecognizer.delegate = nil; [_panGestureRecognizer removeTarget:self action:@selector(panGestureRecognizer:)];
 }
 
-- (void)viewDidLoad
-{ 
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     if (SFDeviceSystemVersion < 7.0f || kUseSystemGestureBack == NO) {
@@ -263,8 +247,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     }];
 }
 
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if(!_disableGestureBack && self.viewControllers.count != 0){
         UIViewController *viewController = [self.viewControllers lastObject];
         [[[self class] sharedGestureBackPreparer] prepareViewController:viewController identifier:[self identifierForObject:viewController]];
@@ -272,8 +255,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     [super pushViewController:viewController animated:animated];
 }
 
-- (UIViewController *)popViewControllerAnimated:(BOOL)animated
-{
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     UIViewController *vc = [super popViewControllerAnimated:animated];
     if(!_disableGestureBack && _preparerInfo){
         [self cleanAnimationViews];
@@ -282,16 +264,14 @@ static CGFloat const kPreviousViewShowWidth = 150;
     return vc;
 }
 
-- (UIView *)createTopViewWithFrame:(CGRect)frame
-{
+- (UIView *)createTopViewWithFrame:(CGRect)frame {
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:frame];
     imgView.image = [self.view sf_toImage];
     
     return imgView;
 }
 
-- (UIView *)createBottomViewWithFrame:(CGRect)frame
-{
+- (UIView *)createBottomViewWithFrame:(CGRect)frame {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:_preparerInfo.capturedImage];
     imageView.backgroundColor = [UIColor blackColor];
     imageView.frame = CGRectMake(frame.origin.x, frame.origin.y, imageView.image.size.width, imageView.image.size.height);
@@ -305,8 +285,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     return imageView;
 }
 
-- (UIImage *)_shadowImage
-{
+- (UIImage *)_shadowImage {
     static UIImage *shadowImage = nil;
     if (shadowImage == nil) {
         shadowImage = [UIImage sf_shadowImageWithColor:[UIColor blackColor] radius:5 opacity:0.30 size:CGSizeMake(5, 20)];
@@ -317,8 +296,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     return shadowImage;
 }
 
-- (void)prepareAnimationViews
-{
+- (void)prepareAnimationViews {
     if(_animationView){
         [_animationView removeFromSuperview];
     }
@@ -350,8 +328,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     }
 }
 
-- (void)cleanAnimationViews
-{
+- (void)cleanAnimationViews {
     [_animationView removeFromSuperview];
     self.animationView = nil;
     [_shadowView removeFromSuperview];
@@ -367,13 +344,11 @@ static CGFloat const kPreviousViewShowWidth = 150;
     }
 }
 
-- (NSString *)identifierForObject:(id)object
-{
+- (NSString *)identifierForObject:(id)object {
     return [NSString stringWithFormat:@"screenshot-%p", object];
 }
 
-- (BOOL)canPerformGestureBack
-{
+- (BOOL)canPerformGestureBack {
     if(!_disableGestureBack && self.viewControllers.count > 1){
         UIViewController *lastVC = [self.viewControllers lastObject];
         if([lastVC respondsToSelector:@selector(shouldTriggerGestureBack)]){
@@ -393,19 +368,16 @@ static CGFloat const kPreviousViewShowWidth = 150;
     return NO;
 }
 
-- (void)setLeftPanDistance:(CGFloat)leftPanDistance
-{
+- (void)setLeftPanDistance:(CGFloat)leftPanDistance {
     _leftPanDistance = leftPanDistance;
     _gestureBackDetector.validDistance = leftPanDistance;
 }
 
-- (void)setDisableGestureBack:(BOOL)disableGestureBack
-{
+- (void)setDisableGestureBack:(BOOL)disableGestureBack {
     _disableGestureBack = disableGestureBack;
 }
 
-- (void)performBackWithGestureBackable:(BOOL)gestureBackable
-{
+- (void)performBackWithGestureBackable:(BOOL)gestureBackable {
     CGRect desFrame = _currentViewControllerView.frame;
     BOOL restore = NO;
     UIViewController *lastViewController = [self.viewControllers lastObject];
@@ -447,13 +419,11 @@ static CGFloat const kPreviousViewShowWidth = 150;
      }];
 }
 
-- (void)panGestureRecognizer:(UIPanGestureRecognizer *)gr
-{
+- (void)panGestureRecognizer:(UIPanGestureRecognizer *)gr {
     [_gestureBackDetector panGestureRecognizerDidTrigger:gr offsetX:_currentViewControllerView.frame.origin.x];
 }
 
-- (void)_currentViewControllerViewFrameDidChanged
-{
+- (void)_currentViewControllerViewFrameDidChanged {
     CGRect tmpRect = _shadowView.frame;
     tmpRect.origin.x = _currentViewControllerView.frame.origin.x - _shadowView.frame.size.width;
     _shadowView.frame = tmpRect;
@@ -463,8 +433,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     _animationView.frame = tmpRect;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     BOOL should = YES;
     if (self.viewControllers.count != 1) {
         should = ![_gestureBackDetector isPrepared];
@@ -473,32 +442,27 @@ static CGFloat const kPreviousViewShowWidth = 150;
     return should;
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return [self canPerformGestureBack] && [touch locationInView:self.view].x < _gestureBackDetector.validDistance;
 }
 
 #pragma mark - SFGestureBackDetectorDelegate
-- (void)gestureBackDetectorGestureDidRelease:(SFGestureBackDetector *)gestureBackDetector gestureBackable:(BOOL)gestureBackable
-{
+- (void)gestureBackDetectorGestureDidRelease:(SFGestureBackDetector *)gestureBackDetector gestureBackable:(BOOL)gestureBackable {
     [self performBackWithGestureBackable:gestureBackable || (gestureBackDetector.quickSlide && gestureBackDetector.direction == SFGestureBackDetectorDirectionRight)];
 }
 
-- (void)gestureBackDetectorGestureDidCancel:(SFGestureBackDetector *)gestureBackDetector
-{
+- (void)gestureBackDetectorGestureDidCancel:(SFGestureBackDetector *)gestureBackDetector {
     self.preparerInfo = nil;
 }
 
-- (void)gestureBackDetectorGestureWillStart:(SFGestureBackDetector *)gestureBackDetector
-{
+- (void)gestureBackDetectorGestureWillStart:(SFGestureBackDetector *)gestureBackDetector {
     if (_endEditingWhenGestureWillTrigger) {
         [self.view endEditing:YES];
     }
     [self prepareAnimationViews];
 }
 
-- (void)gestureBackDetectorGesture:(SFGestureBackDetector *)gestureBackDetector moveingWithDistanceDelta:(CGFloat)distanceDelta
-{
+- (void)gestureBackDetectorGesture:(SFGestureBackDetector *)gestureBackDetector moveingWithDistanceDelta:(CGFloat)distanceDelta {
     CGRect tmpRect = _currentViewControllerView.frame;
     tmpRect.origin.x += distanceDelta;
     if(tmpRect.origin.x >= 0){
@@ -511,8 +475,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
 }
 
 #pragma mark - Class methods
-+ (id<SFGestureBackPreparer>)sharedGestureBackPreparer
-{
++ (id<SFGestureBackPreparer>)sharedGestureBackPreparer {
     return [SFGestureBackPreparer sharedInstance];
 }
 

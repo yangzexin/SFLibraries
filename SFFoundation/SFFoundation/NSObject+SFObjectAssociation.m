@@ -14,8 +14,7 @@ static const char *SFObjectDictionary = "SFObjectDictionary";
 
 @implementation NSObject (SFObjectAssociation)
 
-- (NSMutableDictionary *)shared_ObjectDictionary
-{
+- (NSMutableDictionary *)shared_ObjectDictionary {
     NSMutableDictionary *objectDictionary = objc_getAssociatedObject(self, SFObjectDictionary);
     if (objectDictionary == nil) {
         objectDictionary = [NSMutableDictionary dictionary];
@@ -25,13 +24,11 @@ static const char *SFObjectDictionary = "SFObjectDictionary";
     return objectDictionary;
 }
 
-- (id)sf_associatedObjectWithKey:(NSString *)key
-{
+- (id)sf_associatedObjectWithKey:(NSString *)key {
     return [[self shared_ObjectDictionary] objectForKey:key];
 }
 
-- (void)sf_setAssociatedObject:(id)object key:(NSString *)key
-{
+- (void)sf_setAssociatedObject:(id)object key:(NSString *)key {
     if (object == nil) {
         [[self shared_ObjectDictionary] removeObjectForKey:key];
     } else {
@@ -39,13 +36,11 @@ static const char *SFObjectDictionary = "SFObjectDictionary";
     }
 }
 
-- (void)sf_removeAssociatedObjectWithKey:(NSString *)key
-{
+- (void)sf_removeAssociatedObjectWithKey:(NSString *)key {
     [self sf_setAssociatedObject:nil key:key];
 }
 
-- (NSDictionary *)sf_associatedObjects
-{
+- (NSDictionary *)sf_associatedObjects {
     return [[self shared_ObjectDictionary] copy];
 }
 

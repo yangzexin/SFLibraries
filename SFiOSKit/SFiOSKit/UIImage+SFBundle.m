@@ -12,8 +12,7 @@
 
 @implementation UIImage (SFBundle)
 
-+ (instancetype)sf_imageNamed:(NSString *)name bundle:(NSBundle *)bundle
-{
++ (instancetype)sf_imageNamed:(NSString *)name bundle:(NSBundle *)bundle {
     NSString *imageNameWithoutExtension = [name stringByDeletingPathExtension];
     NSString *extension = [name pathExtension];
     

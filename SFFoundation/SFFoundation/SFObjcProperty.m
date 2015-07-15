@@ -27,8 +27,7 @@
 @synthesize setterMethodName;
 @synthesize getterMethodName;
 
-- (void)dealloc
-{
+- (void)dealloc {
     [name release];
     [className release];
     [setterMethodName release];
@@ -37,8 +36,7 @@
     [super dealloc];
 }
 
-- (id)initWithObjc_property_t:(objc_property_t)property
-{
+- (id)initWithObjc_property_t:(objc_property_t)property {
     self = [super init];
     
     self.objc_property = property;
@@ -46,8 +44,7 @@
     return self;
 }
 
-int str_indexOfChar(const char *str, char ch, int fromIndex)
-{
+int str_indexOfChar(const char *str, char ch, int fromIndex) {
     const char *tmpPointer = str;
     
     int skips = 0;
@@ -72,8 +69,7 @@ int str_indexOfChar(const char *str, char ch, int fromIndex)
     return finded != 0 ? (index + fromIndex) : -1;
 }
 
-void str_sub(const char *originalString, int beginIndex, int endIndex, char *outString)
-{
+void str_sub(const char *originalString, int beginIndex, int endIndex, char *outString) {
     int index = beginIndex;
     while (index < endIndex) {
         *(outString + index - beginIndex) = *(originalString + index);
@@ -82,8 +78,7 @@ void str_sub(const char *originalString, int beginIndex, int endIndex, char *out
     *(outString + index - beginIndex) = '\0';
 }
 
-SFObjcPropertyType typeOfDesc(const char *desc)
-{
+SFObjcPropertyType typeOfDesc(const char *desc) {
     if (*desc == 'T' && strlen(desc) > 1) {
         const unsigned char ctype = *(desc + 1);
         switch (ctype) {
@@ -143,8 +138,7 @@ SFObjcPropertyType typeOfDesc(const char *desc)
     return SFObjcPropertyTypeUnknown;
 }
 
-SFObjcPropertyAccessType accessTypeOfDesc(const char *desc)
-{
+SFObjcPropertyAccessType accessTypeOfDesc(const char *desc) {
     SFObjcPropertyAccessType tmp_accessType = SFObjcPropertyAccessTypeReadOnly;
     if (strlen(desc) == 1) {
         tmp_accessType = *(desc) == 'R' ? SFObjcPropertyAccessTypeReadOnly : SFObjcPropertyAccessTypeReadWrite;;
@@ -153,8 +147,7 @@ SFObjcPropertyAccessType accessTypeOfDesc(const char *desc)
     return tmp_accessType;
 }
 
-NSString *classNameOfDesc(const char *desc)
-{
+NSString *classNameOfDesc(const char *desc) {
     NSString *className = nil;
     int desc_len = (int)strlen(desc);
     if (desc_len > 4) {
@@ -170,8 +163,7 @@ NSString *classNameOfDesc(const char *desc)
     return className;
 }
 
-- (void)setObjc_property:(objc_property_t)property
-{
+- (void)setObjc_property:(objc_property_t)property {
     if (name) {
         [name release]; name = nil;
     }
@@ -285,40 +277,33 @@ NSString *classNameOfDesc(const char *desc)
     }
 }
 
-- (void)setWithString:(NSString *)value targetObject:(id<NSObject>)obj
-{
+- (void)setWithString:(NSString *)value targetObject:(id<NSObject>)obj {
     SFObjectMessageSend(obj, setterMethodName, value, nil);
 }
 
-- (NSString *)getStringFromTargetObject:(id)obj
-{
+- (NSString *)getStringFromTargetObject:(id)obj {
     id value = [obj valueForKey:name];
     
     return value == nil ? @"" : [NSString stringWithFormat:@"%@", value];
 }
 
-- (NSString *)propertyAttributes
-{
+- (NSString *)propertyAttributes {
     return [NSString stringWithCString:property_getAttributes(objc_property) encoding:NSASCIIStringEncoding];
 }
 
-- (Class)propertyClass
-{
+- (Class)propertyClass {
     return NSClassFromString(className);
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"SFObjcProperty<%@ : %@>", self.className, self.name];
 }
 
-+ (NSArray *)objcPropertiesOfClass:(Class)clss
-{
++ (NSArray *)objcPropertiesOfClass:(Class)clss {
     return [self objcPropertiesOfClass:clss searchingSuperClass:YES];
 }
 
-+ (NSArray *)objcPropertiesOfClass:(Class)clss searchingSuperClass:(BOOL)searchingSuperClass
-{
++ (NSArray *)objcPropertiesOfClass:(Class)clss searchingSuperClass:(BOOL)searchingSuperClass {
     return [self objcPropertiesOfClass:clss stepController:^BOOL(Class tmpClass, BOOL *stop) {
         if (searchingSuperClass == NO && tmpClass != clss) {
             *stop = YES;
@@ -329,8 +314,7 @@ NSString *classNameOfDesc(const char *desc)
     }];
 }
 
-+ (NSArray *)objcPropertiesOfClass:(Class)clss searchingUntilClass:(Class)untilClass
-{
++ (NSArray *)objcPropertiesOfClass:(Class)clss searchingUntilClass:(Class)untilClass {
     __block BOOL stoped = NO;
     return [self objcPropertiesOfClass:clss stepController:^BOOL(Class tmpClass, BOOL *stop) {
         if (stoped) {
@@ -344,8 +328,7 @@ NSString *classNameOfDesc(const char *desc)
     }];
 }
 
-+ (NSArray *)objcPropertiesOfClass:(Class)clss stopClass:(Class)stopClass
-{
++ (NSArray *)objcPropertiesOfClass:(Class)clss stopClass:(Class)stopClass {
     return [SFObjcProperty objcPropertiesOfClass:clss stepController:^BOOL(__unsafe_unretained Class tmpClass, BOOL *stop) {
         if (tmpClass == stopClass) {
             *stop = YES;
@@ -356,8 +339,7 @@ NSString *classNameOfDesc(const char *desc)
     }];
 }
 
-+ (SFObjcProperty *)objcPropertyWithPropertyName:(NSString *)propertyName targetClass:(Class)targetClass
-{
++ (SFObjcProperty *)objcPropertyWithPropertyName:(NSString *)propertyName targetClass:(Class)targetClass {
     SFObjcProperty *targetProperty = nil;
     while (targetClass) {
         unsigned int count = 0;
@@ -382,8 +364,7 @@ NSString *classNameOfDesc(const char *desc)
     return targetProperty;
 }
 
-+ (SFObjcProperty *)objcPropertyWithoutSearchingNSObjectWithPropertyName:(NSString *)propertyName targetClass:(Class)targetClass
-{
++ (SFObjcProperty *)objcPropertyWithoutSearchingNSObjectWithPropertyName:(NSString *)propertyName targetClass:(Class)targetClass {
     SFObjcProperty *targetProperty = nil;
     while (targetClass) {
         unsigned int count = 0;
@@ -411,8 +392,7 @@ NSString *classNameOfDesc(const char *desc)
     return targetProperty;
 }
 
-+ (NSArray *)objcPropertiesOfClass:(Class)clss stepController:(BOOL(^)(Class tmpClass, BOOL *stop))stepController
-{
++ (NSArray *)objcPropertiesOfClass:(Class)clss stepController:(BOOL(^)(Class tmpClass, BOOL *stop))stepController {
     NSMutableArray *list = [NSMutableArray array];
     
     Class tmpClass = clss;

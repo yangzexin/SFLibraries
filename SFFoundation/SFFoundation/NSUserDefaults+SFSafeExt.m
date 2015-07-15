@@ -13,13 +13,11 @@
 
 @implementation NSUserDefaults (SFSafeExt)
 
-- (void)safe_removeObjectForKey:(NSString *)key
-{
+- (void)safe_removeObjectForKey:(NSString *)key {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[key sf_stringByEncryptingUsingMD5]];
 }
 
-- (void)safe_setData:(NSData *)data forKey:(NSString *)key
-{
+- (void)safe_setData:(NSData *)data forKey:(NSString *)key {
     if (data.length != 0) {
         [[NSUserDefaults standardUserDefaults] setObject:[data sf_dataByExchangingByteHigh4ToLow4] forKey:[key sf_stringByEncryptingUsingMD5]];
     } else {
@@ -27,13 +25,11 @@
     }
 }
 
-- (NSData *)safe_dataForKey:(NSString *)key
-{
+- (NSData *)safe_dataForKey:(NSString *)key {
     return [[[NSUserDefaults standardUserDefaults] dataForKey:[key sf_stringByEncryptingUsingMD5]] sf_dataByExchangingByteHigh4ToLow4];
 }
 
-- (void)safe_setString:(NSString *)string forKey:(NSString *)key
-{
+- (void)safe_setString:(NSString *)string forKey:(NSString *)key {
     if (string.length != 0) {
         [[NSUserDefaults standardUserDefaults] safe_setData:[string dataUsingEncoding:NSUTF8StringEncoding] forKey:key];
     } else {
@@ -41,8 +37,7 @@
     }
 }
 
-- (NSString *)safe_stringForKey:(NSString *)key
-{
+- (NSString *)safe_stringForKey:(NSString *)key {
     NSString *string = nil;
     
     NSData *data = [self safe_dataForKey:key];

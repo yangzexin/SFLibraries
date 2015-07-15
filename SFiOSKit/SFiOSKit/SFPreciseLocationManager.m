@@ -18,21 +18,18 @@
 
 @synthesize delegate;
 
-- (void)dealloc
-{
+- (void)dealloc {
     self.delegate = nil;
     _locationManager.delegate = nil;;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     return self;
 }
 
-- (void)startUpdatingLocation
-{
+- (void)startUpdatingLocation {
     if (self.locationManager) {
         [self.locationManager stopUpdatingLocation];
         self.locationManager.delegate = nil;
@@ -57,8 +54,7 @@
     });
 }
 
-- (void)cancel
-{
+- (void)cancel {
     self.delegate = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.locationManager stopUpdatingLocation];
@@ -67,16 +63,14 @@
     });
 }
 
-- (void)notifyError:(NSError *)error
-{
+- (void)notifyError:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(locationManager:didFailWithError:)]) {
         [self.delegate locationManager:self didFailWithError:error];
     }
 }
 
 #pragma mark - CLLocationManagerDelegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSTimeInterval timeInterval = fabs([newLocation.timestamp timeIntervalSinceNow]);
     if (timeInterval < 10) {
         if ([self.delegate respondsToSelector:@selector(locationManager:didUpdateToLocation:)]) {
@@ -88,8 +82,7 @@
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     [self notifyError:error];
 }
 

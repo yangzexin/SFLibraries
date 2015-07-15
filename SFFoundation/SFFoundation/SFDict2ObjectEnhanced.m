@@ -17,8 +17,7 @@
 
 @implementation SFDict2ObjectEnhanced
 
-+ (instancetype)dict2ObjectEnhancedWithClass:(Class)clss objectMappingCollector:(id<SFObjectMappingCollector>)objectMappingCollector
-{
++ (instancetype)dict2ObjectEnhancedWithClass:(Class)clss objectMappingCollector:(id<SFObjectMappingCollector>)objectMappingCollector {
     SFDict2ObjectEnhanced *enhanced = [SFDict2ObjectEnhanced new];
     enhanced.dict2Object = [SFDict2Object dict2ObjectWithObjectMapping:[objectMappingCollector objectMappingForClass:clss]];
     enhanced.dict2Object.delegate = enhanced;
@@ -27,34 +26,28 @@
     return enhanced;
 }
 
-- (void)setGivenObject:(id)givenObject
-{
+- (void)setGivenObject:(id)givenObject {
     self.dict2Object.givenObject = givenObject;
 }
 
-- (id)givenObject
-{
+- (id)givenObject {
     return self.dict2Object.givenObject;
 }
 
-- (id)objectsFromDictionaries:(NSArray *)dictionaries
-{
+- (id)objectsFromDictionaries:(NSArray *)dictionaries {
     return [self.dict2Object objectsFromDictionaries:dictionaries];
 }
 
-- (id)objectFromDictionary:(NSDictionary *)dictionary
-{
+- (id)objectFromDictionary:(NSDictionary *)dictionary {
     return [self.dict2Object objectFromDictionary:dictionary];
 }
 
 #pragma mark - SFDict2ObjectDelegate
-- (id<SFObjectMapping>)objectMappingForUnrecognizedClass:(Class)clss
-{
+- (id<SFObjectMapping>)objectMappingForUnrecognizedClass:(Class)clss {
     return [_objectMappingCollector objectMappingForClass:clss];
 }
 
-- (void)unhandlableKey:(NSString *)key value:(id)value objcProperty:(SFObjcProperty *)objcProperty processingObject:(id)processingObject
-{
+- (void)unhandlableKey:(NSString *)key value:(id)value objcProperty:(SFObjcProperty *)objcProperty processingObject:(id)processingObject {
     if (objcProperty.type == SFObjcPropertyTypeObject && _unhandlablePropertyHandler) {
         _unhandlablePropertyHandler(objcProperty, processingObject, value);
     }

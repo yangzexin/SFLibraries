@@ -12,13 +12,11 @@
 
 @implementation UILabel (SFAddition)
 
-- (CGFloat)sf_fitHeightByTextUsingCurrentFontWithMaxNumOfLines:(NSInteger)maxNumOfLines
-{
+- (CGFloat)sf_fitHeightByTextUsingCurrentFontWithMaxNumOfLines:(NSInteger)maxNumOfLines {
     return [self sf_fitHeightByTextUsingCurrentFontWithMaxHeight:self.font.lineHeight * maxNumOfLines];
 }
 
-- (CGFloat)sf_fitHeightByTextUsingCurrentFontWithMaxHeight:(CGFloat)maxHeight
-{
+- (CGFloat)sf_fitHeightByTextUsingCurrentFontWithMaxHeight:(CGFloat)maxHeight {
     CGRect tmpRect = self.frame;
     tmpRect.size.height = [self.text sf_sizeWithFont:self.font constrainedToSize:CGSizeMake(self.frame.size.width, maxHeight <= 0 ? MAXFLOAT : maxHeight)].height;
     self.frame = tmpRect;

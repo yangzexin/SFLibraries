@@ -26,44 +26,38 @@
 
 @implementation SFDatePickerDialogOptions
 
-+ (instancetype)dialogOptionsWithTitle:(NSString *)title
-{
++ (instancetype)dialogOptionsWithTitle:(NSString *)title {
     SFDatePickerDialogOptions *options = [SFDatePickerDialogOptions new];
     options._title = title;
     
     return options;
 }
 
-- (instancetype)setTitle:(NSString *)title
-{
+- (instancetype)setTitle:(NSString *)title {
     self._title = title;
     
     return self;
 }
 
-- (instancetype)setDate:(NSDate *)date
-{
+- (instancetype)setDate:(NSDate *)date {
     self._date = date;
     
     return self;
 }
 
-- (instancetype)setMiniumDate:(NSDate *)miniumDate
-{
+- (instancetype)setMiniumDate:(NSDate *)miniumDate {
     self._miniumDate = miniumDate;
     
     return self;
 }
 
-- (instancetype)setMaximumDate:(NSDate *)maximumDate
-{
+- (instancetype)setMaximumDate:(NSDate *)maximumDate {
     self._maximumDate = maximumDate;
     
     return self;
 }
 
-- (instancetype)setMode:(UIDatePickerMode)mode
-{
+- (instancetype)setMode:(UIDatePickerMode)mode {
     self._mode = mode;
     
     return self;
@@ -73,10 +67,7 @@
 
 @implementation UIDatePicker (SFAddition)
 
-+ (void)sf_pickInViewController:(UIViewController *)viewController
-                        options:(SFDatePickerDialogOptions *)options
-                     completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion
-{
++ (void)sf_pickInViewController:(UIViewController *)viewController options:(SFDatePickerDialogOptions *)options completion:(void(^)(NSDate *selecteDate, BOOL cancelled))completion {
     UIView *container = [[UIView alloc] initWithFrame:viewController.view.bounds];
     container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [viewController.view addSubview:container];

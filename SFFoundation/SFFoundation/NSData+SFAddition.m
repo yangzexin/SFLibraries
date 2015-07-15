@@ -10,13 +10,11 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
-char _SFCustomHexCharForByte(unsigned char c, const char *customHexList)
-{
+char _SFCustomHexCharForByte(unsigned char c, const char *customHexList) {
     return *(customHexList + c);
 }
 
-unsigned char _SFByteForCustomHexChar(char c, const char *customHexList)
-{
+unsigned char _SFByteForCustomHexChar(char c, const char *customHexList) {
     size_t len = strlen(customHexList);
     for(int i = 0; i < len; ++i){
         if(c == *(customHexList + i)){
@@ -27,8 +25,7 @@ unsigned char _SFByteForCustomHexChar(char c, const char *customHexList)
     return 0;
 }
 
-NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList)
-{
+NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList) {
     unsigned char *bytes = malloc(sizeof(unsigned char) * [data length]);
     [data getBytes:bytes length:data.length];
     
@@ -51,8 +48,7 @@ NSString *SFHexStringByEncodingData(NSData *data, const char *customHexList)
     return str;
 }
 
-NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
-{
+NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList) {
     if([string isEqualToString:@""]){
         return nil;
     }
@@ -82,8 +78,7 @@ NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
 
 @implementation NSData (SFAddition)
 
-- (NSString *)sf_hexRepresentation
-{
+- (NSString *)sf_hexRepresentation {
     const unsigned char *bytes = (unsigned char *)[self bytes];
     NSMutableString *hexString = [NSMutableString string];
     for (NSInteger i = 0; i < [self length]; ++i) {
@@ -93,16 +88,14 @@ NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
     return [NSString stringWithFormat:@"%@", hexString];
 }
 
-- (NSData *)sf_dataByEncryptingUsingMD5
-{
+- (NSData *)sf_dataByEncryptingUsingMD5 {
     unsigned char result[16];
     CC_MD5(self.bytes, (CC_LONG)self.length, result);
     
     return [NSData dataWithBytes:result length:16];
 }
 
-- (NSData *)sf_dataByExchangingByteHigh4ToLow4
-{
+- (NSData *)sf_dataByExchangingByteHigh4ToLow4 {
     const unsigned char *bytes = (unsigned char *)[self bytes];
     unsigned char *resultBytes = malloc(sizeof(unsigned char) * [self length]);
     
@@ -118,13 +111,11 @@ NSData *SFDataByDecodingHexString(NSString *string, const char *customHexList)
     return data;
 }
 
-- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation key:(NSString *)key
-{
+- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation key:(NSString *)key {
     return [self sf_dataByPerformingDESOperation:operation options:kCCOptionPKCS7Padding | kCCOptionECBMode key:key];
 }
 
-- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation options:(CCOptions)options key:(NSString *)key
-{
+- (NSData *)sf_dataByPerformingDESOperation:(CCOperation)operation options:(CCOptions)options key:(NSString *)key {
     NSUInteger dataLength = [self length];
     size_t bufferSize = dataLength + kCCBlockSizeDES;
     void *buffer = malloc(bufferSize);

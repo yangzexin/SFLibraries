@@ -17,13 +17,11 @@
 
 @implementation UILabel (SFCLICalculatableExt)
 
-- (CGFloat)widthForCLI
-{
+- (CGFloat)widthForCLI {
     return [self.text sf_sizeWithFont:self.font].width;
 }
 
-- (CGFloat)heightForCLI
-{
+- (CGFloat)heightForCLI {
     return [self.text sf_sizeWithFont:self.font].height;
 }
 
@@ -31,43 +29,35 @@
 
 @implementation UIView (SFCardLayoutItem_MaxSize)
 
-- (void)setCLIMaxWidth:(CGFloat)maxWidth
-{
+- (void)setCLIMaxWidth:(CGFloat)maxWidth{
     [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxWidth] key:@"CLI_maxWidth"];
 }
 
-- (CGFloat)CLIMaxWidth
-{
+- (CGFloat)CLIMaxWidth {
     return [[self sf_associatedObjectWithKey:@"CLI_maxWidth"] floatValue];
 }
 
-- (void)setCLIMaxWidthPercent:(float)percent
-{
+- (void)setCLIMaxWidthPercent:(float)percent {
     [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"CLI_maxWidthPercent"];
 }
 
-- (CGFloat)CLIMaxWidthPercent
-{
+- (CGFloat)CLIMaxWidthPercent {
     return [[self sf_associatedObjectWithKey:@"CLI_maxWidthPercent"] floatValue];
 }
 
-- (void)setCLIMaxHeight:(CGFloat)maxHeight
-{
+- (void)setCLIMaxHeight:(CGFloat)maxHeight {
     [self sf_setAssociatedObject:[NSNumber numberWithFloat:maxHeight] key:@"CLI_maxHeight"];
 }
 
-- (CGFloat)CLIMaxHeight
-{
+- (CGFloat)CLIMaxHeight {
     return [[self sf_associatedObjectWithKey:@"CLI_maxHeight"] floatValue];
 }
 
-- (void)setCLIMaxHeightPercent:(float)percent
-{
+- (void)setCLIMaxHeightPercent:(float)percent {
     [self sf_setAssociatedObject:[NSNumber numberWithFloat:percent] key:@"CLI_maxHeightPercent"];
 }
 
-- (CGFloat)CLIMaxHeightPercent
-{
+- (CGFloat)CLIMaxHeightPercent {
     return [[self sf_associatedObjectWithKey:@"CLI_maxHeightPercent"] floatValue];
 }
 
@@ -75,13 +65,11 @@
 
 @implementation SFCardLayout
 
-- (void)addSubview:(UIView *)view
-{
+- (void)addSubview:(UIView *)view {
     [super addSubview:view];
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     if (self.vertical == NO) {
@@ -213,8 +201,7 @@
     }
 }
 
-- (void)setSpacing:(CGFloat)spacing
-{
+- (void)setSpacing:(CGFloat)spacing {
     _spacing = spacing;
     [self setNeedsLayout];
 }

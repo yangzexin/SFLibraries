@@ -20,8 +20,7 @@
 
 @synthesize delegate;
 
-+ (instancetype)geocoderWithGeocoder:(id<SFGeocoder>)geocoder completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion
-{
++ (instancetype)geocoderWithGeocoder:(id<SFGeocoder>)geocoder completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion {
     SFBlockedGeocoder *blockGeocoder = [SFBlockedGeocoder new];
     blockGeocoder.geocoders = @[geocoder];
     blockGeocoder.completion = completion;
@@ -29,8 +28,7 @@
     return blockGeocoder;
 }
 
-+ (instancetype)geocoderWithGeocoders:(NSArray *)geocoders completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion
-{
++ (instancetype)geocoderWithGeocoders:(NSArray *)geocoders completion:(void(^)(SFLocationDescription *locationDescription, NSError *error))completion {
     SFBlockedGeocoder *blockGeocoder = [SFBlockedGeocoder new];
     blockGeocoder.geocoders = geocoders;
     blockGeocoder.completion = completion;
@@ -38,8 +36,7 @@
     return blockGeocoder;
 }
 
-- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude
-{
+- (void)geocodeWithLatitude:(double)latitude longitude:(double)longitude {
     for (id<SFGeocoder> geocoder in _geocoders) {
         [geocoder cancel];
         
@@ -49,8 +46,7 @@
     self.geocoding = YES;
 }
 
-- (void)cancel
-{
+- (void)cancel {
     for (id<SFGeocoder> geocoder in _geocoders) {
         [geocoder cancel];
         [geocoder setDelegate:nil];
@@ -60,8 +56,7 @@
     self.geocoding = NO;
 }
 
-- (void)_notifyCompletionWithLocationDescription:(SFLocationDescription *)info error:(NSError *)error
-{
+- (void)_notifyCompletionWithLocationDescription:(SFLocationDescription *)info error:(NSError *)error {
     if (_completion) {
         _completion(info, error);
         self.completion = nil;
@@ -74,24 +69,20 @@
 }
 
 #pragma mark - SFGeocoderDelegate
-- (void)geocoder:(id)geocoder didRecieveLocality:(SFLocationDescription *)info
-{
+- (void)geocoder:(id)geocoder didRecieveLocality:(SFLocationDescription *)info {
     [self _notifyCompletionWithLocationDescription:info error:nil];
 }
 
-- (void)geocoder:(id)geocoder didError:(NSError *)error
-{
+- (void)geocoder:(id)geocoder didError:(NSError *)error {
     [self _notifyCompletionWithLocationDescription:nil error:error];
 }
 
 #pragma mark - SFRepositionSupportedObject
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return self.geocoding == NO;
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [self cancel];
 }
 

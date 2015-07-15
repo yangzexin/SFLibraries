@@ -10,8 +10,7 @@
 
 @implementation SFIBCompatibleView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self initialize];
@@ -19,14 +18,12 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     [self initialize];
 }
 
-- (void)initialize
-{
+- (void)initialize {
     
 }
 

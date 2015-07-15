@@ -1,6 +1,6 @@
 //
-//  MMCache.h
-//  MMFoundation
+//  SFCache.h
+//  SFiOSKit
 //
 //  Created by yangzexin on 6/9/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.
@@ -10,7 +10,7 @@
 
 OBJC_EXPORT NSString *SFCurrentApplicationIdentifier();
 
-@interface SFAbstractCache : NSObject <NSCoding>
+@interface SFCache : NSObject <NSCoding>
 
 // 缓存上次更新时间
 @property (nonatomic, assign, readonly) NSTimeInterval time;

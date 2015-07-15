@@ -12,8 +12,7 @@
 
 @implementation NSString (SFiOSAddition)
 
-- (CGSize)sf_sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)constrainedToSize
-{
+- (CGSize)sf_sizeWithFont:(UIFont *)font constrainedToSize:(CGSize)constrainedToSize {
     CGSize size = CGSizeZero;
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f) {
         NSDictionary *attributes = @{NSFontAttributeName : font};
@@ -35,8 +34,7 @@
     return size;
 }
 
-- (CGSize)sf_sizeWithFont:(UIFont *)font
-{
+- (CGSize)sf_sizeWithFont:(UIFont *)font {
     CGSize size = CGSizeZero;
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f) {
         NSDictionary *attributes = @{NSFontAttributeName : font};
@@ -55,8 +53,7 @@
     return size;
 }
 
-- (UIFont *)sf_fontByFitingWithViewSize:(CGSize)viewSize fromFont:(UIFont *)fromFont stepFontDelta:(CGFloat)stepFontDelta
-{
+- (UIFont *)sf_fontByFitingWithViewSize:(CGSize)viewSize fromFont:(UIFont *)fromFont stepFontDelta:(CGFloat)stepFontDelta {
     UIFont *font = fromFont;
     NSString *string = self;
     CGSize size = CGSizeMake(viewSize.width, MAXFLOAT);
@@ -68,8 +65,7 @@
     return font;
 }
 
-- (UIImage *)sf_imageWithFont:(UIFont *)font textColor:(UIColor *)textColor
-{
+- (UIImage *)sf_imageWithFont:(UIFont *)font textColor:(UIColor *)textColor {
     CGSize textSize = [self sf_sizeWithFont:font];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
     label.backgroundColor = [UIColor clearColor];

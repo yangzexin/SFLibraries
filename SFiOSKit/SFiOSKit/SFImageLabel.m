@@ -36,23 +36,20 @@ NSString *SFImageLabelDefaultImageRightMatchingText = @"}";
 
 @implementation SFImageLabelTextDefaultDataDetector
 
-+ (instancetype)defaultDataDetectorWithDataDetector:(NSDataDetector *)dataDetector
-{
++ (instancetype)defaultDataDetectorWithDataDetector:(NSDataDetector *)dataDetector {
     SFImageLabelTextDefaultDataDetector *defaultDataDetector = [SFImageLabelTextDefaultDataDetector new];
     defaultDataDetector.dataDetector = dataDetector;
     
     return defaultDataDetector;
 }
 
-- (void)imageLabelText:(SFImageLabelText *)imageLabelText enumerateMatchesInString:(NSString *)text usingBlock:(void(^)(NSRange range, NSTextCheckingType type))usingBlock
-{
+- (void)imageLabelText:(SFImageLabelText *)imageLabelText enumerateMatchesInString:(NSString *)text usingBlock:(void(^)(NSRange range, NSTextCheckingType type))usingBlock {
     [self.dataDetector enumerateMatchesInString:text options:0 range:NSMakeRange(0, text.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
         usingBlock(result.range, result.resultType);
     }];
 }
 
-- (NSAttributedString *)imageLabelText:(SFImageLabelText *)imageLabelText attributedStringForString:(NSString *)string type:(NSTextCheckingType)type highlighted:(BOOL)highlighted
-{
+- (NSAttributedString *)imageLabelText:(SFImageLabelText *)imageLabelText attributedStringForString:(NSString *)string type:(NSTextCheckingType)type highlighted:(BOOL)highlighted {
     NSDictionary *dataStringAttrs = highlighted ? self.highlightedTextAttributes : self.textAttributes;
     
     return [[NSAttributedString alloc] initWithString:string attributes:dataStringAttrs];
@@ -81,16 +78,11 @@ NSString *SFImageLabelDefaultImageRightMatchingText = @"}";
 
 @implementation SFImageLabelText
 
-+ (instancetype)textFromString:(NSString *)string
-               constraitsWidth:(CGFloat)constraitsWidth
-{
++ (instancetype)textFromString:(NSString *)string constraitsWidth:(CGFloat)constraitsWidth {
     return [self textFromString:string constraitsWidth:constraitsWidth imageSizeCalculator:nil];
 }
 
-+ (instancetype)textFromString:(NSString *)string
-               constraitsWidth:(CGFloat)constraitsWidth
-           imageSizeCalculator:(CGSize(^)(NSString *imageName))imageSizeCalculator
-{
++ (instancetype)textFromString:(NSString *)string constraitsWidth:(CGFloat)constraitsWidth imageSizeCalculator:(CGSize(^)(NSString *imageName))imageSizeCalculator {
     SFImageLabelText *text = [SFImageLabelText new];
     text.string = [[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f ? [NSString stringWithFormat:@"%@ ", string] : string;
     text.constraitsWidth = constraitsWidth;
@@ -104,8 +96,7 @@ NSString *SFImageLabelDefaultImageRightMatchingText = @"}";
     return text;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeInteger:_font.pointSize forKey:@"font"];
     [aCoder encodeFloat:_constraitsWidth forKey:@"constraitsWidth"];
     [aCoder encodeObject:_textColor forKey:@"textColor"];
@@ -120,8 +111,7 @@ NSString *SFImageLabelDefaultImageRightMatchingText = @"}";
     [aCoder encodeObject:_keyDetectedDataStringValueType forKey:@"keyDetectedDataStringValueType"];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     
     _font = [UIFont systemFontOfSize:[aDecoder decodeIntegerForKey:@"font"]];
@@ -140,27 +130,22 @@ NSString *SFImageLabelDefaultImageRightMatchingText = @"}";
     return self;
 }
 
-static CGFloat SFImageLabelAscentCallback(void *ref)
-{
+static CGFloat SFImageLabelAscentCallback(void *ref) {
     return [(__bridge SFImageAttribute *)ref height];
 }
 
-static CGFloat SFImageLabelWidthCallback(void *ref)
-{
+static CGFloat SFImageLabelWidthCallback(void *ref) {
     return [(__bridge SFImageAttribute *)ref width];
 }
 
-static void SFImageLabelDeallocCallback(void *ref)
-{
+static void SFImageLabelDeallocCallback(void *ref) {
 }
 
-static CGFloat SFImageLabelDescentCallback(void *ref)
-{
+static CGFloat SFImageLabelDescentCallback(void *ref) {
     return 0;
 }
 
-- (instancetype)build
-{
+- (instancetype)build {
     NSString *text = _string;
     
     self.imageAttributes = [NSMutableArray array];
@@ -257,8 +242,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return self;
 }
 
-- (NSAttributedString *)_attributedStringForText:(NSString *)text defaultAttrs:(NSDictionary *)defaultAttrs numberOfExistsAttributedStrings:(NSInteger)numberOfExistsAttributedStrings
-{
+- (NSAttributedString *)_attributedStringForText:(NSString *)text defaultAttrs:(NSDictionary *)defaultAttrs numberOfExistsAttributedStrings:(NSInteger)numberOfExistsAttributedStrings {
     __block NSInteger tmpNumberOfExistsAttributedStrings = numberOfExistsAttributedStrings;
     
     NSAttributedString *attrString = nil;
@@ -302,13 +286,11 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return attrString;
 }
 
-- (CGSize)size
-{
+- (CGSize)size {
     return CGSizeMake(_width, _height);
 }
 
-- (SFImageLabelText *)textByAppendingText:(SFImageLabelText *)text
-{
+- (SFImageLabelText *)textByAppendingText:(SFImageLabelText *)text {
     if (_attributedString == nil || text.attributedString == nil) {
         return nil;
     }
@@ -328,8 +310,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return resultText;
 }
 
-- (NSDictionary *)currentTextAttributes
-{
+- (NSDictionary *)currentTextAttributes {
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)_font.fontName, _font.pointSize, NULL);
     NSDictionary *defaultTextAttrs = @{(id)kCTForegroundColorAttributeName : (__bridge id)_textColor.CGColor , (id)kCTFontAttributeName : (__bridge id)fontRef};
     CFRelease(fontRef);
@@ -348,22 +329,19 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
 
 @implementation SFImageLabel
 
-- (void)dealloc
-{
+- (void)dealloc {
     if (_drawnFrame) {
         CFRelease(_drawnFrame);
     }
 }
 
-- (id)init
-{
+- (id)init {
     self = [self initWithFrame:CGRectZero];
     
     return self;
 }
 
-- (void)initialize
-{
+- (void)initialize {
     self.backgroundColor = [UIColor clearColor];
     self.highlightedTextBackgroundColor = [UIColor colorWithRed:0 green:0 blue:1.0f alpha:.20f];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizerTrigger:)];
@@ -376,8 +354,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     [self addGestureRecognizer:self.tapGestureRecognizer];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     
     [self initialize];
@@ -385,8 +362,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     [self initialize];
@@ -394,8 +370,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return self;
 }
 
-- (void)setText:(SFImageLabelText *)text
-{
+- (void)setText:(SFImageLabelText *)text {
     _text = text;
     
     self.text.selectedDetectedDataStringRange = NSMakeRange(NSNotFound, 0);
@@ -403,8 +378,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     [self setNeedsDisplay];
 }
 
-- (NSRange)_selectedDetectedDataStringWithLocation:(CGPoint)location
-{
+- (NSRange)_selectedDetectedDataStringWithLocation:(CGPoint)location {
     NSRange stringRange = NSMakeRange(NSNotFound, 0);
     
     location.y = self.text.size.height - location.y;
@@ -460,8 +434,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return stringRange;
 }
 
-- (void)_tapGestureRecognizerTrigger:(UITapGestureRecognizer *)gestureRecognizer
-{
+- (void)_tapGestureRecognizerTrigger:(UITapGestureRecognizer *)gestureRecognizer {
     CGPoint location = [gestureRecognizer locationInView:self];
     
     if (self.detectedDataStringInteractable) {
@@ -475,8 +448,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     }
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     if (self.detectedDataStringInteractable) {
         UITouch *touch = [touches anyObject];
@@ -491,8 +463,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     }
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
     if (self.detectedDataStringInteractable) {
         UITouch *touch = [touches anyObject];
@@ -502,8 +473,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     if (self.detectedDataStringInteractable) {
         UITouch *touch = [touches anyObject];
@@ -513,15 +483,13 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     }
 }
 
-- (void)_touchesEndWithLocation:(CGPoint)location cancelled:(BOOL)cancelled
-{
+- (void)_touchesEndWithLocation:(CGPoint)location cancelled:(BOOL)cancelled {
     self.text.selectedDetectedDataStringRange = NSMakeRange(NSNotFound, 0);
     [self.text build];
     [self setNeedsDisplay];
 }
 
-- (void)setDrawnFrame:(CTFrameRef)drawnFrame
-{
+- (void)setDrawnFrame:(CTFrameRef)drawnFrame {
     if (_drawnFrame != drawnFrame) {
         if (_drawnFrame) {
             CFRelease(_drawnFrame);
@@ -532,8 +500,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     if (_text == nil) {
         return;
@@ -716,8 +683,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     CFRelease(frame);
 }
 
-- (NSInteger)numberOfLines
-{
+- (NSInteger)numberOfLines {
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_text.attributedString);
     
     CGSize size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
@@ -743,8 +709,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
     return numberOfLines;
 }
 
-- (CGFloat)heightOfTextWithNumberOfVisibleLines:(NSInteger)numberOfVisibleLines
-{
+- (CGFloat)heightOfTextWithNumberOfVisibleLines:(NSInteger)numberOfVisibleLines {
     CGFloat height = 0;
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)_text.attributedString);
@@ -781,8 +746,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref)
 }
 
 #pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     BOOL shouldReceiveTouch = NO;
     if (self.detectedDataStringInteractable) {
         CGPoint location = [touch locationInView:self];

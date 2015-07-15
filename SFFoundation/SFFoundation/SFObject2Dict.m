@@ -13,25 +13,21 @@
 
 @implementation SFObject2Dict
 
-+ (instancetype)object2Dict
-{
++ (instancetype)object2Dict {
     SFObject2Dict *obj2Dict = [SFObject2Dict new];
     
     return obj2Dict;
 }
 
-NSDictionary *SFObject2Dictionary(id object)
-{
+NSDictionary *SFObject2Dictionary(id object) {
     return SFObject2DictionaryWithObjcProperties(object, nil, NO);
 }
 
-NSDictionary *SFObject2DictionaryWithObjcProperties(id object, NSArray *objcProperties, BOOL NSNumberForPlainType)
-{
+NSDictionary *SFObject2DictionaryWithObjcProperties(id object, NSArray *objcProperties, BOOL NSNumberForPlainType) {
     return _SFObject2DictionaryWithObjcProperties(object, objcProperties, nil, NSNumberForPlainType);
 }
 
-NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcProperties, NSMutableArray *searchedObjects, BOOL NSNumberForPlainType)
-{
+NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcProperties, NSMutableArray *searchedObjects, BOOL NSNumberForPlainType) {
     if (object == nil) {
         return nil;
     }
@@ -101,13 +97,11 @@ NSDictionary *_SFObject2DictionaryWithObjcProperties(id object, NSArray *objcPro
     return dictionary;
 }
 
-NSArray *SFObjects2Dictionaries(NSArray *objects)
-{
+NSArray *SFObjects2Dictionaries(NSArray *objects) {
     return SFObjects2DictionariesWithObjcProperties(objects, nil, NO);
 }
 
-NSArray *SFObjects2DictionariesWithObjcProperties(NSArray *objects, NSArray *objcProperties, BOOL NSNumberForPlainType)
-{
+NSArray *SFObjects2DictionariesWithObjcProperties(NSArray *objects, NSArray *objcProperties, BOOL NSNumberForPlainType) {
     NSMutableArray *dictionaries = [NSMutableArray array];
     for (id object in objects) {
         [dictionaries addObject:SFObject2DictionaryWithObjcProperties(object, objcProperties, NSNumberForPlainType)];
@@ -116,13 +110,11 @@ NSArray *SFObjects2DictionariesWithObjcProperties(NSArray *objects, NSArray *obj
     return dictionaries;
 }
 
-- (NSDictionary *)dictionaryWithObject:(id)object
-{
+- (NSDictionary *)dictionaryWithObject:(id)object {
     return SFObject2Dictionary(object);
 }
 
-+ (NSDictionary *)dictionaryWithObject:(id)object
-{
++ (NSDictionary *)dictionaryWithObject:(id)object {
     return SFObject2Dictionary(object);
 }
 

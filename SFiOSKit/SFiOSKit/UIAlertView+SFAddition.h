@@ -14,17 +14,9 @@ typedef void(^SFAlertViewCompletion)(NSInteger buttonIndex, NSString *buttonTitl
 
 + (void)sf_dismissPresentingDialogAnimated:(BOOL)animated;
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title
-                           message:(NSString *)message
-                        completion:(SFAlertViewCompletion)completion
-                 cancelButtonTitle:(NSString *)cancelButtonTitle
-                 otherButtonTitles:(NSString *)otherButtonTitles, ...;
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title
-                           message:(NSString *)message
-                        completion:(SFAlertViewCompletion)completion
-                 cancelButtonTitle:(NSString *)cancelButtonTitle
-              otherButtonTitleList:(NSArray *)otherButtonTitleList;
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList;
 
 + (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion;
 
@@ -41,18 +33,9 @@ typedef void(^SFAlertViewCompletion)(NSInteger buttonIndex, NSString *buttonTitl
 
 @interface UIAlertView (SFAddition_inputDialog)
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title
-                           message:(NSString *)message
-                 cancelButtonTitle:(NSString *)cancelButtonTitle
-                approveButtonTitle:(NSString *)approveButtonTitle
-                        completion:(void(^)(NSString *input, BOOL cancelled))completion;
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion;
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title
-                           message:(NSString *)message
-                   secureTextEntry:(BOOL)secureTextEntry
-                 cancelButtonTitle:(NSString *)cancelButtonTitle
-                approveButtonTitle:(NSString *)approveButtonTitle
-                        completion:(void(^)(NSString *input, BOOL cancelled))completion;
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message secureTextEntry:(BOOL)secureTextEntry cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion;
 
 @end
 

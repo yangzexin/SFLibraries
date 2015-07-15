@@ -29,8 +29,7 @@
     return self;
 }
 
-- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)())completion
-{
+- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)())completion{
     if (_running) {
         return;
     }
@@ -50,19 +49,16 @@
     }];
 }
 
-- (void)stop
-{
+- (void)stop {
     [self.timer stop];
 }
 
 #pragma mark - SFRepositionSupportedObject
-- (BOOL)shouldRemoveDepositable
-{
+- (BOOL)shouldRemoveDepositable {
     return [_timer shouldRemoveDepositable];
 }
 
-- (void)depositableWillRemove
-{
+- (void)depositableWillRemove {
     [_timer depositableWillRemove];
 }
 

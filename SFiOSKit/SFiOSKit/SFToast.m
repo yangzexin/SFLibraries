@@ -23,8 +23,7 @@
 
 @implementation SFToastView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
@@ -46,8 +45,7 @@
     return self;
 }
 
-- (void)animateShowWithCompletion:(void(^)())completion
-{
+- (void)animateShowWithCompletion:(void(^)())completion {
     self.backgroundView.alpha = 0.0f;
     self.textLabel.alpha = 0.0f;
     [UIView animateWithDuration:0.25f animations:^{
@@ -60,8 +58,7 @@
     }];
 }
 
-- (void)animateHideWithCompletion:(void(^)())completion
-{
+- (void)animateHideWithCompletion:(void(^)())completion {
     self.backgroundView.alpha = 0.72f;
     self.textLabel.alpha = 1.0f;
     [UIView animateWithDuration:0.25f animations:^{
@@ -74,14 +71,12 @@
     }];
 }
 
-- (void)setTextLabelEdgeInsets:(UIEdgeInsets)textLabelEdgeInsets
-{
+- (void)setTextLabelEdgeInsets:(UIEdgeInsets)textLabelEdgeInsets {
     _textLabelEdgeInsets = textLabelEdgeInsets;
     [self setNeedsLayout];
 }
 
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString *)text {
     self.textLabel.text = text;
     CGSize size = [text sf_sizeWithFont:self.textLabel.font];
     if (size.width > self.maxSize.width) {
@@ -110,8 +105,7 @@
 
 @implementation SFToastManager
 
-+ (id)sharedManager
-{
++ (id)sharedManager {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -121,8 +115,7 @@
     return instance;
 }
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     _keyIdentifierValueView = [NSMutableDictionary dictionary];
@@ -130,16 +123,14 @@
     return self;
 }
 
-- (void)addView:(UIView *)view identifier:(NSString *)identifier
-{
+- (void)addView:(UIView *)view identifier:(NSString *)identifier {
     [self removeViewWithIdentifier:identifier];
     if (view) {
         [self.keyIdentifierValueView setObject:view forKey:identifier];
     }
 }
 
-- (void)removeViewWithIdentifier:(NSString *)identifier
-{
+- (void)removeViewWithIdentifier:(NSString *)identifier {
     if (identifier) {
         UIView *view = [self.keyIdentifierValueView objectForKey:identifier];
         view.hidden = YES;
@@ -150,18 +141,15 @@
 
 @implementation SFToast
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier
-{
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier {
     [self toastInView:view text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:nil];
 }
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion
-{
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
     [self toastInView:view text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
 }
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds autoPositionForKeyboard:(BOOL)autoPositionForKeyboard identifier:(NSString *)identifier completion:(void(^)())completion
-{
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds autoPositionForKeyboard:(BOOL)autoPositionForKeyboard identifier:(NSString *)identifier completion:(void(^)())completion {
     if (![[SFKeyboardStateListener sharedListener] isListening]) {
         [[SFKeyboardStateListener sharedListener] startListening];
     }
@@ -216,23 +204,19 @@
     }];
 }
 
-+ (void)hideToastInView:(UIView *)view identifier:(NSString *)identifier
-{
++ (void)hideToastInView:(UIView *)view identifier:(NSString *)identifier {
     [[SFToastManager sharedManager] removeViewWithIdentifier:identifier];
 }
 
-+ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier
-{
++ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier {
     [self toastWithText:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:nil];
 }
 
-+ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion
-{
++ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
     [self toastInView:[[UIApplication sharedApplication] keyWindow] text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
 }
 
-+ (void)dismissWithIdentifier:(NSString *)identifier
-{
++ (void)dismissWithIdentifier:(NSString *)identifier {
     [[SFToastManager sharedManager] removeViewWithIdentifier:identifier];
 }
 

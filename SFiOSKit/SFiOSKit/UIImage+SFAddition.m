@@ -14,8 +14,7 @@
 
 @implementation SFRoundImageOptions
 
-+ (instancetype)options
-{
++ (instancetype)options {
     SFRoundImageOptions *options = [self new];
     
     return options;
@@ -25,13 +24,11 @@
 
 @implementation UIImage (SFAddition)
 
-+ (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size
-{
++ (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size {
     return [self sf_imageWithColor:color size:size opaque:NO];
 }
 
-+ (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size opaque:(BOOL)opaque
-{
++ (UIImage *)sf_imageWithColor:(UIColor *)color size:(CGSize)size opaque:(BOOL)opaque {
     float width = size.width;
     float height = size.height;
     
@@ -48,8 +45,7 @@
     return img;
 }
 
-+ (UIImage *)sf_roundImageWithOptions:(SFRoundImageOptions *)options
-{
++ (UIImage *)sf_roundImageWithOptions:(SFRoundImageOptions *)options {
     return [self sf_roundImageWithBackgroundColor:options.backgroundColor
                                       borderColor:options.borderColor
                                              size:options.size
@@ -59,14 +55,7 @@
                                       lightBorder:options.lightBorder];
 }
 
-+ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor
-                                  borderColor:(UIColor *)borderColor
-                                         size:(CGSize)size
-                                 cornerRadius:(CGFloat)cornerRadius
-                                hideTopCorner:(BOOL)hideTopCorner
-                             hideBottomCorner:(BOOL)hideBottomCorner
-                                  lightBorder:(BOOL)lightBorder
-{
++ (UIImage *)sf_roundImageWithBackgroundColor:(UIColor *)backgroundColor borderColor:(UIColor *)borderColor size:(CGSize)size cornerRadius:(CGFloat)cornerRadius hideTopCorner:(BOOL)hideTopCorner hideBottomCorner:(BOOL)hideBottomCorner lightBorder:(BOOL)lightBorder {
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     
     CGFloat borderWidth = lightBorder && [UIScreen mainScreen].scale > 1.0f ? 0.50f : 1.0f;
@@ -128,8 +117,7 @@
     return image;
 }
 
-+ (UIImage *)sf_circleImageWithSize:(CGSize)size color:(UIColor *)color
-{
++ (UIImage *)sf_circleImageWithSize:(CGSize)size color:(UIColor *)color {
     UIImage *image = nil;
     CGFloat scale = [UIScreen mainScreen].scale;
     UIGraphicsBeginImageContextWithOptions(size, NO, scale);
@@ -148,8 +136,7 @@
     return image;
 }
 
-+ (UIImage *)sf_shadowImageWithColor:(UIColor *)color radius:(CGFloat)radius opacity:(CGFloat)opacity size:(CGSize)size
-{
++ (UIImage *)sf_shadowImageWithColor:(UIColor *)color radius:(CGFloat)radius opacity:(CGFloat)opacity size:(CGSize)size {
     UIImage *image = nil;
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width + radius * 2, 10)];
@@ -173,8 +160,7 @@
     return image;
 }
 
-- (UIImage *)sf_imageByCroppingWithInsets:(UIEdgeInsets)insets
-{
+- (UIImage *)sf_imageByCroppingWithInsets:(UIEdgeInsets)insets {
     UIImage *croppedImage = nil;
     CGSize croppedImageSize = self.size;
     croppedImageSize.height -= insets.top + insets.bottom;
@@ -187,8 +173,7 @@
     return croppedImage;
 }
 
-- (UIImage *)sf_imageByPaddingWithInsets:(UIEdgeInsets)insets
-{
+- (UIImage *)sf_imageByPaddingWithInsets:(UIEdgeInsets)insets {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, insets.left + insets.right + self.size.width, insets.top + insets.bottom + self.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:self];
     imageView.frame = CGRectMake(insets.left, insets.top, self.size.width, self.size.height);
@@ -198,8 +183,7 @@
     return [view sf_toImageLegacy];
 }
 
-- (UIImage *)sf_imageWithLeftCapWidth:(NSInteger)leftCapWidth width:(CGFloat)width
-{
+- (UIImage *)sf_imageWithLeftCapWidth:(NSInteger)leftCapWidth width:(CGFloat)width {
     UIImage *image = nil;
     
     UIImage *drawImage = [self stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:0];
@@ -210,18 +194,15 @@
     return image;
 }
 
-- (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor
-{
+- (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor {
     return [self sf_imageWithTintColor:tintColor blendMode:kCGBlendModeDestinationIn];
 }
 
-- (UIImage *)sf_imageWithGradientTintColor:(UIColor *)tintColor
-{
+- (UIImage *)sf_imageWithGradientTintColor:(UIColor *)tintColor {
     return [self sf_imageWithTintColor:tintColor blendMode:kCGBlendModeOverlay];
 }
 
-- (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor blendMode:(CGBlendMode)blendMode
-{
+- (UIImage *)sf_imageWithTintColor:(UIColor *)tintColor blendMode:(CGBlendMode)blendMode {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0f);
     [tintColor setFill];
     CGRect bounds = CGRectMake(0, 0, self.size.width, self.size.height);
@@ -235,13 +216,11 @@
     return tintedImage;
 }
 
-- (UIImage *)sf_imageByResizingWithSize:(CGSize)size fill:(BOOL)fill
-{
+- (UIImage *)sf_imageByResizingWithSize:(CGSize)size fill:(BOOL)fill {
     return [self sf_imageByResizingWithSize:size contentMode:fill ? UIViewContentModeScaleToFill : UIViewContentModeScaleAspectFill];
 }
 
-- (UIImage *)sf_imageByResizingWithSize:(CGSize)size contentMode:(UIViewContentMode)contentMode
-{
+- (UIImage *)sf_imageByResizingWithSize:(CGSize)size contentMode:(UIViewContentMode)contentMode {
     UIImage *image = self;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];

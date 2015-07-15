@@ -39,15 +39,13 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
 
 @implementation SFDownloadImageOperation
 
-- (void)dealloc
-{
+- (void)dealloc {
 //#ifdef DEBUG
 //    NSLog(@"%@ <%@> dealloc", NSStringFromClass([self class]), self.url);
 //#endif
 }
 
-- (id)initWithURL:(NSURL *)url
-{
+- (id)initWithURL:(NSURL *)url {
     self = [super init];
     
     self.url = url;
@@ -56,8 +54,7 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
     return self;
 }
 
-- (void)main
-{
+- (void)main {
     NSError *error = nil;
     NSString *fileName = [self.url.absoluteString sf_stringByEncryptingUsingMD5];
     NSString *filePath = [SFDownloadImageFolderPath() stringByAppendingPathComponent:fileName];
@@ -119,13 +116,11 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
     });
 }
 
-- (void)addCallback:(void(^)(UIImage *image, NSError *error))completion
-{
+- (void)addCallback:(void(^)(UIImage *image, NSError *error))completion {
     [self.callbacks addObject:[NSValue sf_valueWithBlock:completion]];
 }
 
-- (void)removeCallback:(void(^)(UIImage *image, NSError *error))completion
-{
+- (void)removeCallback:(void(^)(UIImage *image, NSError *error))completion {
     id targetBlock = (id)completion;
     NSArray *callbacks = [self.callbacks copy];
     for (NSValue *callback in callbacks) {
@@ -138,8 +133,7 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
 
 @end
 
-static NSString *SFDownloadImageFolderPath()
-{
+static NSString *SFDownloadImageFolderPath() {
     NSString *folderPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"SFDownloadImage"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:folderPath isDirectory:nil]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -148,8 +142,7 @@ static NSString *SFDownloadImageFolderPath()
     return folderPath;
 }
 
-static NSOperationQueue *SFSharedDownloadImageQueue()
-{
+static NSOperationQueue *SFSharedDownloadImageQueue() {
     static NSOperationQueue *queue = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -160,8 +153,7 @@ static NSOperationQueue *SFSharedDownloadImageQueue()
     return queue;
 }
 
-static NSMutableDictionary *SFKeyURLValueOperation()
-{
+static NSMutableDictionary *SFKeyURLValueOperation() {
     static NSMutableDictionary *keyURLValueOperation = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -171,8 +163,7 @@ static NSMutableDictionary *SFKeyURLValueOperation()
     return keyURLValueOperation;
 }
 
-static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error))
-{
+static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error)) {
     NSMutableDictionary *keyURLValueOperation = SFKeyURLValueOperation();
     @synchronized (keyURLValueOperation) {
         SFDownloadImageOperation *operation = [keyURLValueOperation objectForKey:url];
@@ -197,13 +188,11 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
 
 @implementation UIView (SFDownloadImage)
 
-- (void)sf_downloadImageWithURL:(NSURL *)url completion:(void(^)(UIImage *image, NSError *error))completion
-{
+- (void)sf_downloadImageWithURL:(NSURL *)url completion:(void(^)(UIImage *image, NSError *error))completion {
     [self sf_downloadImageWithURL:url maxPixelSize:.0f completion:completion];
 }
 
-- (void)sf_downloadImageWithURL:(NSURL *)url maxPixelSize:(CGFloat)maxPixelSize completion:(void(^)(UIImage *image, NSError *error))completion
-{
+- (void)sf_downloadImageWithURL:(NSURL *)url maxPixelSize:(CGFloat)maxPixelSize completion:(void(^)(UIImage *image, NSError *error))completion {
     maxPixelSize *= [UIScreen mainScreen].scale;
     
     void(^previousCompletion)(UIImage *image, NSError *error) = [[self sf_associatedObjectWithKey:@"_SFPreviousCompletion"] sf_block];

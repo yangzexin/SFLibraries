@@ -20,16 +20,14 @@
 
 @implementation NSValue (SFWeakObject)
 
-+ (instancetype)sf_valueWithWeakObject:(id)object
-{
++ (instancetype)sf_valueWithWeakObject:(id)object {
     _WeakObjectWrapper *wrapper = [_WeakObjectWrapper new];
     wrapper.object = object;
     
     return wrapper;
 }
 
-- (id)sf_weakObject
-{
+- (id)sf_weakObject {
     id object = nil;
     if ([self isKindOfClass:[_WeakObjectWrapper class]]) {
         _WeakObjectWrapper *wrapper = (_WeakObjectWrapper *)self;

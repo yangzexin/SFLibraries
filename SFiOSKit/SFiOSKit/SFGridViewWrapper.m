@@ -20,20 +20,17 @@
 
 @implementation SFGridViewWrapper
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (id)init
-{
+- (id)init {
     self = [self initWithNumberOfColumns:4];
     
     return self;
 }
 
-- (id)initWithNumberOfColumns:(NSInteger)columns
-{
+- (id)initWithNumberOfColumns:(NSInteger)columns {
     self = [super init];
     
     self.forceSquare = YES;
@@ -47,16 +44,14 @@
     return self;
 }
 
-- (void)updateIdentifier
-{
+- (void)updateIdentifier {
     static NSString *identifierForLandscapeScreen = @"landscape";
     static NSString *identifierForPortrait = @"portrait";
     self.identifier = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation) ? identifierForLandscapeScreen : identifierForPortrait;
     self.identifier = [NSString stringWithFormat:@"%@%@", self, self.identifier];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([self.delegate respondsToSelector:@selector(numberOfItemsInGridViewWrapper:)]) {
         NSInteger numberOfIcons = [self.delegate numberOfItemsInGridViewWrapper:self];
         if (_iconWidth == 0) {
@@ -79,8 +74,7 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.identifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.identifier];
@@ -125,8 +119,7 @@
 }
 
 #pragma mark - events
-- (void)deviceOrientationDidChangeNotification:(NSNotification *)n
-{
+- (void)deviceOrientationDidChangeNotification:(NSNotification *)n {
     if ([UIDevice currentDevice].orientation != UIDeviceOrientationPortraitUpsideDown) {
         [self updateIdentifier];
     }

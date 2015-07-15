@@ -27,8 +27,7 @@
 
 @implementation SFSwitchTabController
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     
     self.selectedIndex = -1;
@@ -36,8 +35,7 @@
     return self;
 }
 
-- (void)loadView
-{
+- (void)loadView {
     [super loadView];
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scrollView.pagingEnabled = YES;
@@ -62,8 +60,7 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (!self.firstAppeared) {
         self.firstAppeared = YES;
@@ -76,13 +73,11 @@
     }
 }
 
-- (UIViewController *)selectedViewController
-{
+- (UIViewController *)selectedViewController {
     return [_viewControllers objectAtIndex:_selectedIndex];
 }
 
-- (void)setViewControllers:(NSArray *)viewControllers
-{
+- (void)setViewControllers:(NSArray *)viewControllers {
     if ([_viewControllers count] != 0) {
         [_viewControllers enumerateObjectsUsingBlock:^(UIViewController *obj, NSUInteger idx, BOOL *stop) {
             [obj willMoveToParentViewController:nil];
@@ -99,18 +94,15 @@
     [self scrollViewDidScroll:_scrollView];
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex
-{
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
     [self setSelectedIndex:selectedIndex animated:NO];
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
-{
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated {
     [self setSelectedIndex:selectedIndex animated:animated completion:nil];
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)())completion
-{
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)())completion {
     if (selectedIndex != _selectedIndex) {
         if (!animated) {
             _selectedIndex = selectedIndex;
@@ -122,8 +114,7 @@
     }
 }
 
-- (UIViewController *)_addChildViewControllerIfNeededWithIndex:(NSInteger)index outAdded:(BOOL *)outAdded
-{
+- (UIViewController *)_addChildViewControllerIfNeededWithIndex:(NSInteger)index outAdded:(BOOL *)outAdded {
     UIViewController *nextViewController = nil;
     if (index < _viewControllers.count) {
         UIViewController *viewController = [_viewControllers objectAtIndex:index];
@@ -144,25 +135,21 @@
     return nextViewController;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     self.scrollAnimationCompletion = nil;
     
     self.scrollViewDragging = YES;
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     self.scrollViewDragging = NO;
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self _scrollViewDidStatic];
 }
 
-- (void)_scrollViewDidStatic
-{
+- (void)_scrollViewDidStatic {
     NSInteger scrollViewControllerIndex = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
     if (scrollViewControllerIndex != _selectedIndex) {
         if (_nextDisplayViewController) {
@@ -203,8 +190,7 @@
     self.nextDisplayViewController = nil;
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [self _scrollViewDidStatic];
     if (self.scrollAnimationCompletion) {
         self.scrollAnimationCompletion();
@@ -212,8 +198,7 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat x = scrollView.contentOffset.x;
     BOOL toRight = x - _scrollViewLastContentOffsetX > 0;
     self.scrollViewLastContentOffsetX = x;

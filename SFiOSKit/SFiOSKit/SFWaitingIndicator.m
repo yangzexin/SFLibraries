@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSObject+SFObjectAssociation.h"
 
-typedef enum{
+typedef enum {
     SFWaitingIndicatorPositionTop,
     SFWaitingIndicatorPositionLeft,
     SFWaitingIndicatorPositionRight,
@@ -33,8 +33,7 @@ typedef enum{
 
 @implementation WaitingView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     self.blockView = [[UIView alloc] init];
@@ -65,8 +64,7 @@ typedef enum{
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     CGFloat containerViewWidth = 72.0f;
     CGFloat containerViewHeight = 72.0f;
@@ -91,8 +89,7 @@ typedef enum{
 
 @implementation SFWaitingIndicator
 
-+ (NSMutableDictionary *)viewDictionary
-{
++ (NSMutableDictionary *)viewDictionary {
     static NSMutableDictionary *dict = nil;
     @synchronized(self.class){
         if(dict == nil){
@@ -103,13 +100,11 @@ typedef enum{
     return dict;
 }
 
-+ (void)showWaiting:(BOOL)waiting inView:(UIView *)view
-{
++ (void)showWaiting:(BOOL)waiting inView:(UIView *)view {
     [self showWaiting:waiting inView:view identifier:@""];
 }
 
-+ (void)showWaiting:(BOOL)waiting inView:(UIView *)view identifier:(NSString *)identifier
-{
++ (void)showWaiting:(BOOL)waiting inView:(UIView *)view identifier:(NSString *)identifier {
     if(!view) {
         return;
     }
@@ -163,18 +158,15 @@ typedef enum{
     }
 }
 
-+ (void)showLoading:(BOOL)loading inView:(UIView *)view
-{
++ (void)showLoading:(BOOL)loading inView:(UIView *)view {
     [self showLoading:loading inView:view transparentBackground:NO];
 }
 
-+ (void)showLoading:(BOOL)loading inView:(UIView *)view transparentBackground:(BOOL)transparentBackground
-{
++ (void)showLoading:(BOOL)loading inView:(UIView *)view transparentBackground:(BOOL)transparentBackground {
     [self showLoading:loading inView:view transparentBackground:transparentBackground identifier:@""];
 }
 
-+ (void)showLoading:(BOOL)loading inView:(UIView *)view transparentBackground:(BOOL)transparentBackground identifier:(NSString *)identifier
-{
++ (void)showLoading:(BOOL)loading inView:(UIView *)view transparentBackground:(BOOL)transparentBackground identifier:(NSString *)identifier {
     if(!view) {
         return;
     }

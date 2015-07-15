@@ -21,8 +21,7 @@
 
 @implementation SFGuidePlayer
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
@@ -33,8 +32,7 @@
     return self;
 }
 
-- (void)playInViewController:(UIViewController *)viewController
-{
+- (void)playInViewController:(UIViewController *)viewController {
     UIView *targetView = nil;
     if (viewController.navigationController) {
         targetView = viewController.navigationController.view;
@@ -99,13 +97,11 @@
     }
 }
 
-- (NSArray *)_guideImages
-{
+- (NSArray *)_guideImages {
     return SFIs3Dot5InchScreen ? self.picturesFor35 : self.picturesFor40;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     NSArray *guideImages = [self _guideImages];
     _scrollView.contentSize = CGSizeMake(guideImages.count * _scrollView.frame.size.width, _scrollView.frame.size.height);
@@ -116,13 +112,11 @@
     }];
 }
 
-- (void)finishPlayWithAnimated:(BOOL)animated
-{
+- (void)finishPlayWithAnimated:(BOOL)animated {
     [self _stopPlayWithAnimated:animated fadeAnimation:YES];
 }
 
-- (void)_stopPlayWithAnimated:(BOOL)animated fadeAnimation:(BOOL)fadeAnimation
-{
+- (void)_stopPlayWithAnimated:(BOOL)animated fadeAnimation:(BOOL)fadeAnimation {
     void(^animationCompletion)() = ^{
         [self removeFromSuperview];
         if (_guideDidPlayFinish) {
@@ -159,8 +153,7 @@
     }];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (_stoping) {
         return;
     }

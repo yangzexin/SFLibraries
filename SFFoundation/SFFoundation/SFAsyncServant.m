@@ -16,8 +16,7 @@
 
 @implementation SFAsyncServant
 
-+ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)())whenCancelled
-{
++ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)())whenCancelled {
     SFAsyncServant *servant = [self new];
     servant.execution = execution;
     servant.whenCancelled = whenCancelled;
@@ -25,13 +24,11 @@
     return servant;
 }
 
-+ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution
-{
++ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution {
     return [self servantWithAsyncExecution:execution whenCancelled:nil];
 }
 
-- (void)servantStartingService
-{
+- (void)servantStartingService {
     [super servantStartingService];
     __weak typeof(self) weakSelf = self;
     self.execution(^(SFFeedback *callReturn){
@@ -40,8 +37,7 @@
     });
 }
 
-- (void)cancel
-{
+- (void)cancel {
     [super cancel];
     if (self.whenCancelled) {
         self.whenCancelled();
