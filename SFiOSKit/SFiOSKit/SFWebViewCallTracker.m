@@ -8,6 +8,9 @@
 
 #import "SFWebViewCallTracker.h"
 
+#define SFWebViewProtocolCallbackMethodKey  @"_callback_func"
+#define SFWebViewProtocolUserDataKey        @"_user_data"
+
 @interface SFWebViewProtocolObserverContext : NSObject
 
 @property (nonatomic, copy) NSString *method;

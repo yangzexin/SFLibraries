@@ -10,9 +10,6 @@
 
 #import "SFCancellable.h"
 
-#define SFWebViewProtocolCallbackMethodKey  @"_callback_func"
-#define SFWebViewProtocolUserDataKey        @"_user_data"
-
 typedef void(^SFWebViewProtocolNotifier)(NSString *result);
 
 @interface SFWebViewProtocolObserver : NSObject

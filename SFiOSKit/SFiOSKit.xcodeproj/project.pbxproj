@@ -53,7 +53,7 @@
 		3ED2CF5919206EF70008529A /* SFLocationDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5419206EF70008529A /* SFLocationDescription.m */; };
 		3ED2CF5B19206EF70008529A /* SFBlockedGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5819206EF70008529A /* SFBlockedGeocoder.m */; };
 		3ED59DBD1828D33A002531DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59DBC1828D33A002531DD /* Foundation.framework */; };
-		3ED59DC21828D33A002531DD /* SFiOSKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3ED59DC11828D33A002531DD /* SFiOSKit.h */; };
+		3ED59DC21828D33A002531DD /* SFiOSKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 3ED59DC11828D33A002531DD /* SFiOSKit.h */; };
 		3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59DC31828D33A002531DD /* SFiOSKit.m */; };
 		3ED853BA1AC548B90033A123 /* SFWebViewCallTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */; };
 		3EDC6019183B5370005B82D2 /* SFIBCompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC6018183B5370005B82D2 /* SFIBCompatibleView.m */; };
@@ -89,14 +89,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3ED59DB71828D33A002531DD /* CopyFiles */ = {
+		3ED59DB71828D33A002531DD /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				3ED59DC21828D33A002531DD /* SFiOSKit.h in CopyFiles */,
+				3ED59DC21828D33A002531DD /* SFiOSKit.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -146,6 +147,7 @@
 		3E46275F18654BFD009092B0 /* UITableViewCell+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+SFAddition.m"; sourceTree = "<group>"; };
 		3E4A454C1829BB0300488987 /* SFFieldGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFFieldGroupManager.h; sourceTree = "<group>"; };
 		3E4A454D1829BB0300488987 /* SFFieldGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFFieldGroupManager.m; sourceTree = "<group>"; };
+		3E55EEE91B65CB740089E398 /* SFWebViewCallTracker.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SFWebViewCallTracker.js; sourceTree = "<group>"; };
 		3E57358F1837A2D200566F33 /* UIColor+SFAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SFAddition.h"; sourceTree = "<group>"; };
 		3E5735901837A2D200566F33 /* UIColor+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SFAddition.m"; sourceTree = "<group>"; };
 		3E607A4118B312D4009AE98C /* SFAnimationDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAnimationDelegateProxy.h; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				3E337DF41A44298800B5EDA7 /* SFKeychainAccess.m */,
 				3ED853B81AC548B90033A123 /* SFWebViewCallTracker.h */,
 				3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */,
+				3E55EEE91B65CB740089E398 /* SFWebViewCallTracker.js */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -541,7 +544,7 @@
 			buildPhases = (
 				3ED59DB51828D33A002531DD /* Sources */,
 				3ED59DB61828D33A002531DD /* Frameworks */,
-				3ED59DB71828D33A002531DD /* CopyFiles */,
+				3ED59DB71828D33A002531DD /* Copy Files */,
 			);
 			buildRules = (
 			);
