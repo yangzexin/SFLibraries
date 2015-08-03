@@ -82,24 +82,25 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
     
     CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)[NSURL fileURLWithPath:targetImageFilePath], NULL);
     if (imageSource) {
-        NSDictionary *options = NULL;
-        if (wantsScale) {
-            options = @{(id)kCGImageSourceCreateThumbnailWithTransform : (id)kCFBooleanFalse
-                        , (id)kCGImageSourceCreateThumbnailFromImageIfAbsent : (id)kCFBooleanTrue
-                        , (id)kCGImageSourceThumbnailMaxPixelSize : (id)[NSNumber numberWithFloat:self.maxPixelSize]
-                        };
-        }
-        
-        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, (__bridge CFDictionaryRef)options);
-        image = [UIImage imageWithCGImage:imageRef];
-        
         if (wantsScale && !thumbnailExists) {
+            NSDictionary *options = @{(id)kCGImageSourceCreateThumbnailWithTransform : (id)kCFBooleanFalse
+                                      , (id)kCGImageSourceCreateThumbnailFromImageIfAbsent : (id)kCFBooleanTrue
+                                      , (id)kCGImageSourceThumbnailMaxPixelSize : (id)[NSNumber numberWithFloat:self.maxPixelSize]
+                                      };
+            
+            CGImageRef imageRef = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, (__bridge CFDictionaryRef)options);
+            image = [UIImage imageWithCGImage:imageRef];
+            CGImageRelease(imageRef);
+            
             NSData *imageData = UIImagePNGRepresentation(image);
             [imageData writeToFile:thumbnailFilePath atomically:YES];
             imageData = nil;
+        } else {
+            CGImageRef imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
+            image = [UIImage imageWithCGImage:imageRef];
+            CGImageRelease(imageRef);
         }
         
-        CGImageRelease(imageRef);
         CFRelease(imageSource);
     } else {
         error = [NSError errorWithDomain:NSStringFromClass([self class]) code:-8001 userInfo:@{NSLocalizedDescriptionKey : @"imageSource is NULL"}];
