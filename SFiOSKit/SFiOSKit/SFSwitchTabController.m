@@ -178,7 +178,7 @@
             [_delegate switchTabController:self didSwitchToIndex:_selectedIndex];
         }
     } else {
-        if (_nextDisplayViewController) {
+        if (_nextDisplayViewController && self.nextDisplayViewController != self.selectedViewController) {
             [self.selectedViewController beginAppearanceTransition:YES animated:NO];
             [self.nextDisplayViewController beginAppearanceTransition:NO animated:NO];
             
@@ -219,6 +219,7 @@
         if (!outAdded) {
             [self.nextDisplayViewController beginAppearanceTransition:YES animated:self.scrollViewAnimating];
         }
+        
         [self.selectedViewController beginAppearanceTransition:NO animated:self.scrollViewAnimating];
         
         if ([_delegate respondsToSelector:@selector(switchTabController:willSwitchToIndex:)]) {
