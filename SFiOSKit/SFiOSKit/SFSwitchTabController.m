@@ -74,6 +74,9 @@
 }
 
 - (UIViewController *)selectedViewController {
+    if (_selectedIndex == -1) {
+        return nil;
+    }
     return [_viewControllers objectAtIndex:_selectedIndex];
 }
 
