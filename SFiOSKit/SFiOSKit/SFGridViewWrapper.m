@@ -80,6 +80,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:self.identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.contentView.multipleTouchEnabled = NO;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundView = [UIView new];
         
         CGFloat spacingWidth = 0;
         if (!self.forceSquare && _numberOfColumns > 1) {

@@ -31,6 +31,7 @@
 #import "NSString+SFiOSAddition.h"
 #import "UIActionSheet+SFAddition.h"
 #import "UIAlertView+SFAddition.h"
+#import "UIButton+SFAddition.h"
 #import "UIColor+SFAddition.h"
 #import "UIDatePicker+SFAddition.h"
 #import "UIDevice+SFUDID.h"

@@ -8,7 +8,7 @@
 
 #import "SFButtonContentCenterLayouter.h"
 
-#import "NSString+SFiOSAddition.h"
+#import "UIButton+SFAddition.h"
 
 @implementation SFButtonContentCenterLayouter
 
@@ -16,12 +16,7 @@
     [super layoutSubviews];
     if ([[self subviews] count] != 0) {
         UIButton *button = [[self subviews] lastObject];
-        if ([button isKindOfClass:[UIButton class]]) {
-            CGSize imageSize = [button imageForState:UIControlStateNormal].size;
-            CGSize titleSize = [[button currentTitle] sf_sizeWithFont:button.titleLabel.font];
-            button.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + self.spacing), 0.0, 0.0, -titleSize.width);
-            button.titleEdgeInsets = UIEdgeInsetsMake(0.0, -imageSize.width, -(imageSize.height + self.spacing), 0.0);
-        }
+        [button sf_adjustContentCenterWithSpacing:self.spacing];
     }
 }
 
