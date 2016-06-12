@@ -77,6 +77,7 @@
     if (_selectedIndex == -1) {
         return nil;
     }
+    
     return [_viewControllers objectAtIndex:_selectedIndex];
 }
 
@@ -95,6 +96,14 @@
     _scrollView.contentSize = CGSizeMake(self.view.frame.size.width * _viewControllers.count, self.view.frame.size.height);
     
     [self scrollViewDidScroll:_scrollView];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [self.selectedViewController preferredStatusBarStyle];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return [self.selectedViewController prefersStatusBarHidden];
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {

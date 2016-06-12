@@ -9,7 +9,7 @@
 #import "UIImagePickerController+SFAddition.h"
 
 #import "NSObject+SFObjectAssociation.h"
-#import "UIAlertView+SFAddition.h"
+
 #import "UIActionSheet+SFAddition.h"
 
 @implementation SFImagePickerDialogExtension
