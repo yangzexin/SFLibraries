@@ -46,7 +46,7 @@
      SFMappingPropertyToKey(propertyName, keyString)
      SFEndPropertyMapping
  
- Using marco:SFPropertyMappingGroup to generate mapping groups
+ Using marco:SFConcatPropertyMapping to generate mapping groups
  Example:
      SFConcatPropertyMapping(
      SFBeginPropertyMappingWithClass(ClassName)
