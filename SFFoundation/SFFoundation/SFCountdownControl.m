@@ -1,6 +1,6 @@
 //
-//  MMCountdownControl.m
-//  MMFoundation
+//  SFCountdownControl.m
+//  SFFoundation
 //
 //  Created by yangzexin on 12/23/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

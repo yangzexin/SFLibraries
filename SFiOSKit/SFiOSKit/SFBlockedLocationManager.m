@@ -1,6 +1,6 @@
 //
-//  MMBlockedLocationManager.m
-//  MMiOSKit
+//  SFBlockedLocationManager.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 5/12/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

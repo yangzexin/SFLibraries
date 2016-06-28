@@ -1,6 +1,6 @@
 //
-//  MMObject2Dict.m
-//  SimpleFramework
+//  SFObject2Dict.m
+//  SFFoundation
 //
 //  Created by yangzexin on 10/27/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

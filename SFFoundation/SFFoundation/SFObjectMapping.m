@@ -1,8 +1,8 @@
 //
-//  MMObjectMapping.m
-//  SimpleFramework
+//  SFObjectMapping.m
+//  SFFoundation
 //
-//  Created by RMBP on 8/29/13.
+//  Created by yangzexin on 8/29/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 

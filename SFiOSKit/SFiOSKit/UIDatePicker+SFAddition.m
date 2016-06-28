@@ -1,6 +1,6 @@
 //
 //  UIDatePicker+SFAddition.m
-//  MMiOSKit
+//  SFiOSKit
 //
 //  Created by yangzexin on 5/4/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

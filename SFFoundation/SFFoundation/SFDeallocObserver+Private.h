@@ -1,6 +1,6 @@
 //
-//  MMDeallocObserver+Private.h
-//  MMFoundation
+//  SFDeallocObserver+Private.h
+//  SFFoundation
 //
 //  Created by yangzexin on 5/23/15.
 //  Copyright (c) 2015 yangzexin. All rights reserved.

@@ -1,5 +1,5 @@
 //
-//  NSString+Substring.m
+//  NSString+SFJavaLikeStringHandle.m
 //  Queries
 //
 //  Created by yangzexin on 11/2/12.

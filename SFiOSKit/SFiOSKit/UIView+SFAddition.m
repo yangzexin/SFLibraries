@@ -1,6 +1,6 @@
 //
 //  UIView+SFAddition.m
-//  SimpleFramework
+//  SFiOSKit
 //
 //  Created by yangzexin on 13-7-31.
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.

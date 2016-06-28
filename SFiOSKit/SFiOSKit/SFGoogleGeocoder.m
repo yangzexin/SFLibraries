@@ -1,6 +1,6 @@
 //
-//  GoogleGecoder.m
-//  MMiOSKit
+//  SFGoogleGeocoder.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-9-27.
 //  Copyright (c) 2012年 yangzexin. All rights reserved.

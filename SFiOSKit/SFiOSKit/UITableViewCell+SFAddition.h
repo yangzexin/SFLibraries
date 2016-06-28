@@ -1,6 +1,6 @@
 //
 //  UITableViewCell+SFAddition.h
-//  MMiOSKit
+//  SFiOSKit
 //
 //  Created by yangzexin on 12/21/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

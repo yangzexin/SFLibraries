@@ -1,9 +1,9 @@
 //
-//  DelayControl.h
-// 
+//  SFDelayControl.h
+//  SFFoundation
 //
 //  Created by yangzexin on 12-11-28.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 yangzexin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

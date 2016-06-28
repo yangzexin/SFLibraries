@@ -1,6 +1,6 @@
 //
 //  NSDictionary+SFAddition.h
-//  MMFoundation
+//  SFFoundation
 //
 //  Created by yangzexin on 11/7/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

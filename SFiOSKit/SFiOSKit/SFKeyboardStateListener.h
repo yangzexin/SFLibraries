@@ -1,6 +1,6 @@
 //
-//  KeyboardState.h
-//  Badminton
+//  SFKeyboardStateListener.h
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-3-16.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.

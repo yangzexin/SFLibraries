@@ -1,6 +1,6 @@
 //
-//  MMCompatibleTabController.m
-//  SimpleFramework
+//  SFCompatibleTabController.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 10/7/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

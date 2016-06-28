@@ -1,6 +1,6 @@
 //
-//  MMDict2Object.m
-//  MMFoundation
+//  SFDict2Object.m
+//  SFFoundation
 //
 //  Created by yangzexin on 7/24/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

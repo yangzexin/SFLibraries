@@ -1,6 +1,6 @@
 //
 //  UILabel+SFAddition.h
-//  SimpleFramework
+//  SFiOSKit
 //
 //  Created by yangzexin on 13-7-29.
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.

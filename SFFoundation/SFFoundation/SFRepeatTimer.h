@@ -1,6 +1,6 @@
 //
-//  MMTimer.h
-//  
+//  SFRepeatTimer.h
+//  SFFoundation
 //
 //  Created by yangzexin on 10/18/13.
 //  Copyright (c) 2013 __MyCompany__. All rights reserved.

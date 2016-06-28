@@ -1,6 +1,6 @@
 //
-//  SVBlockedGestureView.m
-//  SimpleFramework
+//  SFBlockedButton.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 13-5-17.
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.

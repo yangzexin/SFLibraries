@@ -1,6 +1,6 @@
 //
-//  MMSideMenuController.m
-//  MMiOSKit
+//  SFSideMenuController.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 11/13/13.
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.

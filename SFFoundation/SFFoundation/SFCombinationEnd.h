@@ -1,6 +1,6 @@
 //
-//  MMCombinationEnd.h
-//  MMFoundation
+//  SFCombinationEnd.h
+//  SFFoundation
 //
 //  Created by yangzexin on 8/5/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

@@ -1,5 +1,5 @@
 //
-//  UITextField+NotEmpty.h
+//  UITextField+SFNotEmpty.h
 //  SFiOSKit
 //
 //  Created by yangzexin on 5/25/15.

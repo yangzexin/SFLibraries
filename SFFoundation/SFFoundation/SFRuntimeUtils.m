@@ -1,6 +1,6 @@
 //
-//  RuntimeUtils.m
-//  RuntimeUtils
+//  SFRuntimeUtils.m
+//  SFFoundation
 //
 //  Created by yangzexin on 12-10-17.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.

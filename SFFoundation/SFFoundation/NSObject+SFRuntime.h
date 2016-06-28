@@ -1,6 +1,6 @@
 //
 //  NSObject+SFRuntime.h
-//  MMFoundation
+//  SFFoundation
 //
 //  Created by yangzexin on 7/30/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.
@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "SFDeallocObserver.h"
-
-OBJC_EXPORT id SFWrapNil(id object);
-OBJC_EXPORT id SFRestoreNil(id object);
-
-OBJC_EXPORT NSString *SFWrapNilString(NSString *s);
 
 @interface NSObject (SFRuntime)
 

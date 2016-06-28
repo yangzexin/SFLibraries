@@ -1,6 +1,6 @@
 //
-//  MMFieldGroupManager.h
-//  MMiOSKit
+//  SFFieldGroupManager.h
+//  SFiOSKit
 //
 //  Created by yangzexin on 11/6/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

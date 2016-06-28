@@ -1,6 +1,6 @@
 //
-//  ExtremeGeocoder.m
-// 
+//  SFExtremeGeocoder.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-10-11.
 //

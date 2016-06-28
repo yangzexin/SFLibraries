@@ -1,6 +1,6 @@
 //
-//  MMWaiting.h
-//  
+//  SFWaiting.h
+//  SFFoundation
 //
 //  Created by yangzexin on 8/27/13.
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.

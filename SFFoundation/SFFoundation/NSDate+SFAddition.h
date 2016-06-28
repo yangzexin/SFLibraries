@@ -1,6 +1,6 @@
 //
 //  NSDate+SFAddition.h
-//  SimpleFramework
+//  SFFoundation
 //
 //  Created by yangzexin on 13-8-2.
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.

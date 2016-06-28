@@ -1,6 +1,6 @@
 //
-//  MMCollapseManager.m
-//  MMiOSKit
+//  SFCollapseManager.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 3/11/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

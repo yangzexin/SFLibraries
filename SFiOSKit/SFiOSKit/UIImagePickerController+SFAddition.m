@@ -1,6 +1,6 @@
 //
 //  UIImagePickerController+SFAddition.m
-//  SimpleFramework
+//  SFiOSKit
 //
 //  Created by yangzexin on 10/31/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

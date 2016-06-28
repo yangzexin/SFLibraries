@@ -1,6 +1,6 @@
 //
-//  NSValue+WeakObjectWrapper.h
-//  MMFoundation
+//  NSValue+SFWeakObject.h
+//  SFFoundation
 //
 //  Created by yangzexin on 4/10/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

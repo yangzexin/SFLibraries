@@ -1,5 +1,5 @@
 //
-//  MethodSwizzling.h
+//  NSObject+SFMethodSwizzling.h
 //  SFFoundation
 //
 //  Created by yangzexin on 6/6/15.

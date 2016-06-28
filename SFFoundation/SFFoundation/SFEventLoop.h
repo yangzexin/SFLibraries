@@ -1,6 +1,6 @@
 //
-//  MMEventLoop.h
-//  EventLoop
+//  SFEventLoop.h
+//  SFFoundation
 //
 //  Created by yangzexin on 9/16/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

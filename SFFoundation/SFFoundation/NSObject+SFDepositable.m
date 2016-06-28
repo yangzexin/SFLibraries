@@ -1,6 +1,6 @@
 //
-//  NSObject+SFObjectRepository.m
-//  MMFoundation
+//  NSObject+SFDepositable.m
+//  SFFoundation
 //
 //  Created by yangzexin on 7/30/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

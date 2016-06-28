@@ -1,6 +1,6 @@
 //
-//  MMBundleImageCache.h
-//  MMiOSKit
+//  SFBundleImageCache.h
+//  SfiOSKit
 //
 //  Created by yangzexin on 2/13/15.
 //  Copyright (c) 2015 yangzexin. All rights reserved.

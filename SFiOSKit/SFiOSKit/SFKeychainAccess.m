@@ -1,6 +1,6 @@
 //
-//  MMKeychainAccess.m
-//  MMiOSKit
+//  SFKeychainAccess.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 12/19/14.
 //  Copyright (c) 2014 yangzexin. All rights reserved.

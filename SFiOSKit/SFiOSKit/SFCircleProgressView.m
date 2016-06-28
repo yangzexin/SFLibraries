@@ -1,6 +1,6 @@
 //
-//  MMCircleProgressView.m
-//  MMiOSKit
+//  SFCircleProgressView.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 12/15/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  MMDict2ObjectEnhanced.m
-//  MMiOSKit
+//  SFDict2ObjectEnhanced.m
+//  SFFoundation
 //
 //  Created by yangzexin on 11/25/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

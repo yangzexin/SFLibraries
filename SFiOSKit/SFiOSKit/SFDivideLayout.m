@@ -1,6 +1,6 @@
 //
-//  MMDivideLayoutView.m
-//  MMiOSKit
+//  SFDivideLayoutView.m
+//  SFiOSKit
 //
 //  Created by yangzexin on 12/30/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

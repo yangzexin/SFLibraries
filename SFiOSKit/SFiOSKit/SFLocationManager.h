@@ -1,6 +1,6 @@
 //
-//  LocationManager.h
-//  GoogleMapLocation
+//  SFLocationManager.h
+//  SFiOSKit
 //
 //  Created by yangzexin on 12-7-19.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.

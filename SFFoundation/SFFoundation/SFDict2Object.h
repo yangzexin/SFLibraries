@@ -1,6 +1,6 @@
 //
-//  MMDict2Object.h
-//  MMFoundation
+//  SFDict2Object.h
+//  SFFoundation
 //
 //  Created by yangzexin on 8/28/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.

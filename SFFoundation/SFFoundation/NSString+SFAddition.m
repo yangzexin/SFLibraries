@@ -1,6 +1,6 @@
 //
 //  NSString+SFAddition.m
-//  SimpleFramework
+//  SFFoundation
 //
 //  Created by yangzexin on 13-8-9.
 //  Copyright (c) 2013年 __MyCompanyName__. All rights reserved.
@@ -9,6 +9,10 @@
 #import "NSString+SFAddition.h"
 
 #import "NSData+SFAddition.h"
+
+NSString *SFWrapNilString(NSString *s) {
+    return s == nil ? @"" : s;
+}
 
 @implementation NSString (SFAddition)
 
