@@ -8,8 +8,9 @@
 
 #import "SFVerticalLayout.h"
 
+#import <SFFoundation/SFFoundation.h>
+
 #import "UITableViewCell+SFAddition.h"
-#import "NSObject+SFObservation.h"
 
 @interface SFVerticalLayout () <UITableViewDelegate, UITableViewDataSource>
 

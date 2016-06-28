@@ -13,9 +13,8 @@
 #include <net/if.h>
 #include <net/if_dl.h>
 
-#import "NSString+SFAddition.h"
-#import "NSData+SFAddition.h"
-#import "NSUserDefaults+SFSafeExt.h"
+#import <SFFoundation/SFFoundation.h>
+
 #import "SFKeychainAccess.h"
 
 @implementation UIDevice (SFUDID)

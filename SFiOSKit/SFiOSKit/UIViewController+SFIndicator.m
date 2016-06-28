@@ -8,7 +8,8 @@
 
 #import "UIViewController+SFIndicator.h"
 
-#import "NSObject+SFObjectAssociation.h"
+#import <SFFoundation/SFFoundation.h>
+
 #import "UIColor+SFAddition.h"
 #import "SFToast.h"
 #import "SFWaitingIndicator.h"

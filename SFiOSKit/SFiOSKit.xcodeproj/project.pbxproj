@@ -55,7 +55,6 @@
 		3ED2CF5B19206EF70008529A /* SFBlockedGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED2CF5819206EF70008529A /* SFBlockedGeocoder.m */; };
 		3ED59DBD1828D33A002531DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED59DBC1828D33A002531DD /* Foundation.framework */; };
 		3ED59DC21828D33A002531DD /* SFiOSKit.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 3ED59DC11828D33A002531DD /* SFiOSKit.h */; };
-		3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED59DC31828D33A002531DD /* SFiOSKit.m */; };
 		3ED853BA1AC548B90033A123 /* SFWebViewCallTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */; };
 		3EDC6019183B5370005B82D2 /* SFIBCompatibleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC6018183B5370005B82D2 /* SFIBCompatibleView.m */; };
 		3EDC6059183C5919005B82D2 /* SFDotLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC6058183C5919005B82D2 /* SFDotLineView.m */; };
@@ -203,7 +202,6 @@
 		3ED59DBC1828D33A002531DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3ED59DC01828D33A002531DD /* SFiOSKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFiOSKit-Prefix.pch"; sourceTree = "<group>"; };
 		3ED59DC11828D33A002531DD /* SFiOSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFiOSKit.h; sourceTree = "<group>"; };
-		3ED59DC31828D33A002531DD /* SFiOSKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFiOSKit.m; sourceTree = "<group>"; };
 		3ED853B81AC548B90033A123 /* SFWebViewCallTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFWebViewCallTracker.h; sourceTree = "<group>"; };
 		3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFWebViewCallTracker.m; sourceTree = "<group>"; };
 		3EDC6017183B5370005B82D2 /* SFIBCompatibleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFIBCompatibleView.h; sourceTree = "<group>"; };
@@ -364,9 +362,7 @@
 			children = (
 				3EF61F671828D4510057A6FE /* Utils */,
 				3EF61F241828D3E50057A6FE /* UI */,
-				3EF77C381855C57400B95134 /* SFiOSKitConstants.h */,
 				3ED59DC11828D33A002531DD /* SFiOSKit.h */,
-				3ED59DC31828D33A002531DD /* SFiOSKit.m */,
 				3ED59DBF1828D33A002531DD /* Supporting Files */,
 			);
 			path = SFiOSKit;
@@ -536,6 +532,7 @@
 				3ED853B81AC548B90033A123 /* SFWebViewCallTracker.h */,
 				3ED853B91AC548B90033A123 /* SFWebViewCallTracker.m */,
 				3E55EEE91B65CB740089E398 /* SFWebViewCallTracker.js */,
+				3EF77C381855C57400B95134 /* SFiOSKitConstants.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -660,7 +657,6 @@
 				3ED2CF5019206EE20008529A /* SFAppleGeocoder.m in Sources */,
 				3EF61F341828D40D0057A6FE /* UIActionSheet+SFAddition.m in Sources */,
 				3E2331341AA14BC30072CB8D /* SFCacheControl.m in Sources */,
-				3ED59DC41828D33A002531DD /* SFiOSKit.m in Sources */,
 				3E337E821A480D7700B5EDA7 /* SFButtonContentCenterLayouter.m in Sources */,
 				3ED2CF5119206EE20008529A /* SFExtremeGeocoder.m in Sources */,
 				3EF61F371828D40D0057A6FE /* UIImagePickerController+SFAddition.m in Sources */,
@@ -742,7 +738,7 @@
 				GCC_PREFIX_HEADER = "SFiOSKit/SFiOSKit-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../SFFoundation/SFFoundation,
+					../SFFoundation,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = NO;
@@ -762,7 +758,7 @@
 				GCC_PREFIX_HEADER = "SFiOSKit/SFiOSKit-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					../SFFoundation/SFFoundation,
+					../SFFoundation,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";

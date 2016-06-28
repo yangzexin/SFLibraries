@@ -8,7 +8,7 @@
 
 #import "SFCache.h"
 
-#import "NSString+SFAddition.h"
+#import <SFFoundation/SFFoundation.h>
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
 #elif TARGET_OS_MAC
 #import <AppKit/AppKit.h>

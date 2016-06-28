@@ -1,91 +1,86 @@
 //
-//  MMiOSKit.h
-//  MMiOSKit
+//  SFiOSKit.h
+//  SFiOSKit
 //
 //  Created by yangzexin on 11/5/13.
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 
-#import "SFiOSKitConstants.h"
+#import <SFiOSKit/SFiOSKitConstants.h>
 
-#import "SFCache.h"
-#import "SFCacheControl.h"
+#import <SFiOSKit/SFCache.h>
+#import <SFiOSKit/SFCacheControl.h>
 
-#import "SFGeocoder.h"
-#import "SFAppleGeocoder.h"
-#import "SFExtremeGeocoder.h"
-#import "SFGoogleGeocoder.h"
-#import "SFLocationManager.h"
-#import "SFAccurateLocationManager.h"
-#import "SFMapkitLocationManager.h"
-#import "SFPreciseLocationManager.h"
-#import "SFLocationDescription.h"
-#import "SFBlockedGeocoder.h"
-#import "SFBlockedLocationManager.h"
+#import <SFiOSKit/SFGeocoder.h>
+#import <SFiOSKit/SFAppleGeocoder.h>
+#import <SFiOSKit/SFExtremeGeocoder.h>
+#import <SFiOSKit/SFGoogleGeocoder.h>
+#import <SFiOSKit/SFLocationManager.h>
+#import <SFiOSKit/SFAccurateLocationManager.h>
+#import <SFiOSKit/SFMapkitLocationManager.h>
+#import <SFiOSKit/SFPreciseLocationManager.h>
+#import <SFiOSKit/SFLocationDescription.h>
+#import <SFiOSKit/SFBlockedGeocoder.h>
+#import <SFiOSKit/SFBlockedLocationManager.h>
 
-#import "SFBundleImageCache.h"
-#import "SFDynamicImageCache.h"
-#import "SFKeychainAccess.h"
-#import "SFWebViewCallTracker.h"
+#import <SFiOSKit/SFBundleImageCache.h>
+#import <SFiOSKit/SFDynamicImageCache.h>
+#import <SFiOSKit/SFKeychainAccess.h>
+#import <SFiOSKit/SFWebViewCallTracker.h>
 
-#import "NSString+SFiOSAddition.h"
-#import "UIActionSheet+SFAddition.h"
-#import "UIAlertView+SFAddition.h"
-#import "UIButton+SFAddition.h"
-#import "UIColor+SFAddition.h"
-#import "UIDatePicker+SFAddition.h"
-#import "UIDevice+SFUDID.h"
-#import "UIImage+SFAddition.h"
-#import "UIImage+SFBundle.h"
-#import "UIImagePickerController+SFAddition.h"
-#import "UILabel+SFAddition.h"
-#import "UIMenuController+SFAddition.h"
-#import "UISearchBar+SFAddition.h"
-#import "UITableViewCell+SFAddition.h"
-#import "UITextField+SFNotEmpty.h"
-#import "UITextView+SFPlaceholder.h"
-#import "UIView+SFAddition.h"
-#import "UIView+SFDownloadImage.h"
-#import "UIViewController+SFAddition.h"
-#import "UIViewController+SFIndicator.h"
-#import "UIViewController+SFTransparentViewController.h"
-#import "UIWebView+SFAddition.h"
+#import <SFiOSKit/NSString+SFiOSAddition.h>
+#import <SFiOSKit/UIActionSheet+SFAddition.h>
+#import <SFiOSKit/UIAlertView+SFAddition.h>
+#import <SFiOSKit/UIButton+SFAddition.h>
+#import <SFiOSKit/UIColor+SFAddition.h>
+#import <SFiOSKit/UIDatePicker+SFAddition.h>
+#import <SFiOSKit/UIDevice+SFUDID.h>
+#import <SFiOSKit/UIImage+SFAddition.h>
+#import <SFiOSKit/UIImage+SFBundle.h>
+#import <SFiOSKit/UIImagePickerController+SFAddition.h>
+#import <SFiOSKit/UILabel+SFAddition.h>
+#import <SFiOSKit/UIMenuController+SFAddition.h>
+#import <SFiOSKit/UISearchBar+SFAddition.h>
+#import <SFiOSKit/UITableViewCell+SFAddition.h>
+#import <SFiOSKit/UITextField+SFNotEmpty.h>
+#import <SFiOSKit/UITextView+SFPlaceholder.h>
+#import <SFiOSKit/UIView+SFAddition.h>
+#import <SFiOSKit/UIView+SFDownloadImage.h>
+#import <SFiOSKit/UIViewController+SFAddition.h>
+#import <SFiOSKit/UIViewController+SFIndicator.h>
+#import <SFiOSKit/UIViewController+SFTransparentViewController.h>
+#import <SFiOSKit/UIWebView+SFAddition.h>
 
-#import "SFBlockedBarButtonItem.h"
-#import "SFBlockedButton.h"
-#import "SFBorderedTextField.h"
-#import "SFCircleProgressView.h"
-#import "SFCollapsableLabel.h"
-#import "SFDotLineView.h"
-#import "SFGridViewWrapper.h"
-#import "SFGuidePlayer.h"
-#import "SFIBCompatibleView.h"
-#import "SFImageLabel.h"
-#import "SFLineView.h"
-#import "SFPageIndicator.h"
-#import "SFTrangleView.h"
+#import <SFiOSKit/SFBlockedBarButtonItem.h>
+#import <SFiOSKit/SFBlockedButton.h>
+#import <SFiOSKit/SFBorderedTextField.h>
+#import <SFiOSKit/SFCircleProgressView.h>
+#import <SFiOSKit/SFCollapsableLabel.h>
+#import <SFiOSKit/SFDotLineView.h>
+#import <SFiOSKit/SFGridViewWrapper.h>
+#import <SFiOSKit/SFGuidePlayer.h>
+#import <SFiOSKit/SFIBCompatibleView.h>
+#import <SFiOSKit/SFImageLabel.h>
+#import <SFiOSKit/SFLineView.h>
+#import <SFiOSKit/SFPageIndicator.h>
+#import <SFiOSKit/SFTrangleView.h>
 
-#import "SFButtonContentCenterLayouter.h"
-#import "SFCardLayout.h"
-#import "SFDivideLayout.h"
-#import "SFCenterLayout.h"
-#import "SFVerticalLayout.h"
+#import <SFiOSKit/SFButtonContentCenterLayouter.h>
+#import <SFiOSKit/SFCardLayout.h>
+#import <SFiOSKit/SFDivideLayout.h>
+#import <SFiOSKit/SFCenterLayout.h>
+#import <SFiOSKit/SFVerticalLayout.h>
 
-#import "SFCompatibleTabController.h"
-#import "SFGestureBackNavigationController.h"
-#import "SFSideMenuController.h"
-#import "SFSwitchTabController.h"
+#import <SFiOSKit/SFCompatibleTabController.h>
+#import <SFiOSKit/SFGestureBackNavigationController.h>
+#import <SFiOSKit/SFSideMenuController.h>
+#import <SFiOSKit/SFSwitchTabController.h>
 
-#import "SFWaitingIndicator.h"
-#import "SFToast.h"
-#import "SFFieldGroupManager.h"
-#import "SFDragShowDetector.h"
-#import "SFCollapsableLabel.h"
-#import "SFAnimationDelegateProxy.h"
-#import "SFCollapseManager.h"
-#import "SFKeyboardStateListener.h"
-
-OBJC_EXPORT id SFWrapNil(id object);
-OBJC_EXPORT id SFRestoreNil(id object);
-
-OBJC_EXPORT NSString *SFWrapNilString(NSString *s);
+#import <SFiOSKit/SFWaitingIndicator.h>
+#import <SFiOSKit/SFToast.h>
+#import <SFiOSKit/SFFieldGroupManager.h>
+#import <SFiOSKit/SFDragShowDetector.h>
+#import <SFiOSKit/SFCollapsableLabel.h>
+#import <SFiOSKit/SFAnimationDelegateProxy.h>
+#import <SFiOSKit/SFCollapseManager.h>
+#import <SFiOSKit/SFKeyboardStateListener.h>

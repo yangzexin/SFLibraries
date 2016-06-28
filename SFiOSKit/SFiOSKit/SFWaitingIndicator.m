@@ -8,7 +8,7 @@
 
 #import "SFWaitingIndicator.h"
 #import <QuartzCore/QuartzCore.h>
-#import "NSObject+SFObjectAssociation.h"
+#import <SFFoundation/SFFoundation.h>
 
 typedef enum {
     SFWaitingIndicatorPositionTop,

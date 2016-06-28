@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SFFoundation/SFFoundation.h>
 
 #import "SFGeocoder.h"
-#import "SFDepositable.h"
 
 @interface SFBlockedGeocoder : NSObject <SFDepositable, SFGeocoder>
 

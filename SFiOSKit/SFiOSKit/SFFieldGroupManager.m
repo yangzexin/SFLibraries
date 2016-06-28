@@ -8,11 +8,9 @@
 
 #import "SFFieldGroupManager.h"
 
-#import "SFWaiting.h"
-#import "SFMarkWaiting.h"
+#import <SFFoundation/SFFoundation.h>
+
 #import "UIView+SFAddition.h"
-#import "NSObject+SFRuntime.h"
-#import "NSObject+SFObjectAssociation.h"
 
 @implementation UITextField (GapBetweenKeyboard)
 

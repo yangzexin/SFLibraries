@@ -8,8 +8,9 @@
 
 #import "SFCardLayout.h"
 
+#import <SFFoundation/SFFoundation.h>
+
 #import "NSString+SFiOSAddition.h"
-#import "NSObject+SFObjectAssociation.h"
 
 @interface UILabel (SFCLICalculatableExt) <SFCLICalculatable>
 

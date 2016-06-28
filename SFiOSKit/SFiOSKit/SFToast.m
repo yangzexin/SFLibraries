@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 
+#import <SFFoundation/SFFoundation.h>
+
 #import "SFToast.h"
 
 #import "NSString+SFiOSAddition.h"
-#import "NSObject+SFRuntime.h"
 #import "SFKeyboardStateListener.h"
 
 @interface SFToastView : UIView

@@ -8,12 +8,12 @@
 
 #import "SFGestureBackNavigationController.h"
 
+#import <SFFoundation/SFFoundation.h>
+
 #import "UIView+SFAddition.h"
-#import "NSString+SFAddition.h"
 #import "UIImage+SFAddition.h"
 #import "SFiOSKitConstants.h"
 #import "SFGestureBackDetector.h"
-#import "NSObject+SFObservation.h"
 
 @protocol SFGestureImageCache <NSObject>
 

@@ -33,7 +33,6 @@
 		3E97D93118F3A9A400D7E0A8 /* NSOperation+SFDepositable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E97D93018F3A9A400D7E0A8 /* NSOperation+SFDepositable.m */; };
 		3EBA2281182B39AB003B768C /* NSDictionary+SFAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */; };
 		3EC67D651828D10000B6190E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC67D641828D10000B6190E /* Foundation.framework */; };
-		3EC67D6A1828D10000B6190E /* SFFoundation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EC67D691828D10000B6190E /* SFFoundation.h */; };
 		3ECF2F6E19888199000E75C0 /* NSObject+SFDepositable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F6D19888199000E75C0 /* NSObject+SFDepositable.m */; };
 		3ECF2F7119888208000E75C0 /* NSObject+SFObjectAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F7019888208000E75C0 /* NSObject+SFObjectAssociation.m */; };
 		3ECF2F7419888255000E75C0 /* NSObject+SFSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECF2F7319888255000E75C0 /* NSObject+SFSerialization.m */; };
@@ -62,7 +61,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				3EC67D6A1828D10000B6190E /* SFFoundation.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +108,8 @@
 		3E473BA1193057650022BF23 /* SFCancellable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCancellable.m; sourceTree = "<group>"; };
 		3E473BA3193058F10022BF23 /* SFDeallocObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDeallocObserver.h; sourceTree = "<group>"; };
 		3E473BA4193058F10022BF23 /* SFDeallocObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDeallocObserver.m; sourceTree = "<group>"; };
+		3E50D9B11D22B79A00266435 /* SFFoundation-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFFoundation-Prefix.pch"; sourceTree = "<group>"; };
+		3E50D9B21D22B7A300266435 /* SFFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFFoundation.h; sourceTree = "<group>"; };
 		3E86B91C1B1065D80089BAC3 /* SFDeallocObserver+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFDeallocObserver+Private.h"; sourceTree = "<group>"; };
 		3E8795DD1A086AE80063DEEC /* NSValue+SFBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+SFBlock.h"; sourceTree = "<group>"; };
 		3E8795DE1A086AE80063DEEC /* NSValue+SFBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+SFBlock.m"; sourceTree = "<group>"; };
@@ -124,8 +124,6 @@
 		3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SFAddition.m"; sourceTree = "<group>"; };
 		3EC67D611828D10000B6190E /* libSFFoundation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSFFoundation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EC67D641828D10000B6190E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3EC67D681828D10000B6190E /* SFFoundation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SFFoundation-Prefix.pch"; sourceTree = "<group>"; };
-		3EC67D691828D10000B6190E /* SFFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFFoundation.h; sourceTree = "<group>"; };
 		3ECF2F6C19888199000E75C0 /* NSObject+SFDepositable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFDepositable.h"; sourceTree = "<group>"; };
 		3ECF2F6D19888199000E75C0 /* NSObject+SFDepositable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFDepositable.m"; sourceTree = "<group>"; };
 		3ECF2F6F19888208000E75C0 /* NSObject+SFObjectAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFObjectAssociation.h"; sourceTree = "<group>"; };
@@ -336,11 +334,11 @@
 		3EC67D661828D10000B6190E /* SFFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				3E50D9B21D22B7A300266435 /* SFFoundation.h */,
 				3EF61EEA1828D20E0057A6FE /* Extension */,
 				3E2EC0111A8D8B0E00A81F76 /* PropertyObserver */,
 				3E2EC0101A8D8AF800A81F76 /* runtime */,
 				3E415C111856EA5400335EFE /* Utils */,
-				3EC67D691828D10000B6190E /* SFFoundation.h */,
 				3EC67D671828D10000B6190E /* Supporting Files */,
 			);
 			path = SFFoundation;
@@ -349,7 +347,7 @@
 		3EC67D671828D10000B6190E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3EC67D681828D10000B6190E /* SFFoundation-Prefix.pch */,
+				3E50D9B11D22B79A00266435 /* SFFoundation-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

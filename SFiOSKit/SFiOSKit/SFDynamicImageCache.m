@@ -8,7 +8,7 @@
 
 #import "SFDynamicImageCache.h"
 
-#import "NSValue+SFBlock.h"
+#import <SFFoundation/SFFoundation.h>
 
 #import "SFBundleImageCache.h"
 

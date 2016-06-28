@@ -8,8 +8,8 @@
 
 #import "UITextView+SFPlaceholder.h"
 
-#import "NSObject+SFObjectAssociation.h"
-#import "NSObject+SFRuntime.h"
+#import <SFFoundation/SFFoundation.h>
+
 #import "UILabel+SFAddition.h"
 #import "SFiOSKitConstants.h"
 

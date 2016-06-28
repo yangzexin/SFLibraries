@@ -8,7 +8,7 @@
 
 #import "UIImagePickerController+SFAddition.h"
 
-#import "NSObject+SFObjectAssociation.h"
+#import <SFFoundation/SFFoundation.h>
 
 #import "UIActionSheet+SFAddition.h"
 

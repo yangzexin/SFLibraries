@@ -9,8 +9,7 @@
 #import "SFMapkitLocationManager.h"
 
 #import <MapKit/MapKit.h>
-
-#import "SFDelayControl.h"
+#import <SFFoundation/SFFoundation.h>
 
 static float ACCURACY = 100.0f;
 static NSInteger MAX_RETRY_COUNT = 2;

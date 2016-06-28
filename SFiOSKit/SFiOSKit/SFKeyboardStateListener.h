@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SFCancellable.h"
+#import <SFFoundation/SFFoundation.h>
 
 OBJC_EXPORT NSString *const SFKeyboardHeightDidChangeNotification;
 

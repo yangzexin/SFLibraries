@@ -8,9 +8,9 @@
 
 #import "UIViewController+SFTransparentViewController.h"
 
+#import <SFFoundation/SFFoundation.h>
+
 #import "SFiOSKitConstants.h"
-#import "NSValue+SFWeakObject.h"
-#import "NSObject+SFObjectAssociation.h"
 
 static NSString *kTransparentViewControllerKey = @"kTransparentViewControllerKey";
 static NSString *kTransparentParentViewControllerKey = @"kTransparentParentViewControllerKey";

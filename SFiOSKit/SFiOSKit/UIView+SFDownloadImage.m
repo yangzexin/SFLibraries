@@ -10,9 +10,7 @@
 
 #import <ImageIO/ImageIO.h>
 
-#import "NSObject+SFObjectAssociation.h"
-#import "NSValue+SFBlock.h"
-#import "NSString+SFAddition.h"
+#import <SFFoundation/SFFoundation.h>
 
 static NSOperationQueue *SFSharedDownloadImageQueue();
 static NSString *SFDownloadImageFolderPath();

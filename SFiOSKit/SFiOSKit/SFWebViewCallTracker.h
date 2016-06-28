@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "SFCancellable.h"
+#import <SFFoundation/SFFoundation.h>
 
 typedef void(^SFWebViewProtocolNotifier)(NSString *result);
 

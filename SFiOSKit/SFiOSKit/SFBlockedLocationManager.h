@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SFFoundation/SFFoundation.h>
 
 #import "SFLocationManager.h"
-#import "SFDepositable.h"
 
 @interface SFBlockedLocationManager : NSObject <SFDepositable, SFLocationManager>
 

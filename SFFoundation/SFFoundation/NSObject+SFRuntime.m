@@ -12,6 +12,25 @@
 #import "SFDeallocObserver+Private.h"
 #import "NSObject+SFObjectAssociation.h"
 
+id SFWrapNil(id object) {
+    if (object == nil) {
+        object = [NSNull null];
+    }
+    return object;
+}
+
+id SFRestoreNil(id object) {
+    id originalObject = object;
+    if (object == [NSNull null]) {
+        originalObject = nil;
+    }
+    return originalObject;
+}
+
+NSString *SFWrapNilString(NSString *s) {
+    return s == nil ? @"" : s;
+}
+
 static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObserver";
 
 @implementation NSObject (SFRuntime)
