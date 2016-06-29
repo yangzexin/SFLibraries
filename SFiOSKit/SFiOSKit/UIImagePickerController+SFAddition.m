@@ -115,7 +115,6 @@
     };
     
     if (imagePickerViewControllers.count == 1 && _dialogExtension.additionalButtonTitles.count == 0) {
-        actionSheet = [[UIActionSheet alloc] init];
         pickerViewControllerSelected([imagePickerViewControllers lastObject]);
     } else {
         actionSheet = [UIActionSheet sf_actionSheetWithTitle:_dialogExtension.title == nil ? NSLocalizedString(@"Select Picture", nil) : _dialogExtension.title completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
@@ -155,6 +154,7 @@
 
 + (UIActionSheet *)sf_pickImageUsingActionSheetWithViewController:(UIViewController *)viewController extension:(SFImagePickerDialogExtension *)extension completion:(SFImagePickerCompletion)completion {
     SFImagePickerControllerWrapper *imgPicker = [self _defaultImagePickerControllerWrapperWithExtension:extension];
+    
     return [imgPicker pickImageByActionSheetInViewController:viewController completion:^(NSArray *images, BOOL cancelled){
         if (completion) {
             completion(images.count == 0 ? nil : images[0], cancelled);
