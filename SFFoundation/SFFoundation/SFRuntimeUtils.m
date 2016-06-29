@@ -34,7 +34,7 @@
 #if TARGET_OS_IPHONE
 CGRect CGRectWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    CGRect tmpRect;
+    CGRect tmpRect = CGRectZero;
     if (vl.count == 4) {
         tmpRect.origin.x = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         tmpRect.origin.y = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -47,7 +47,7 @@ CGRect CGRectWithString(NSString *str) {
 
 CGSize CGSizeWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    CGSize tmpSize;
+    CGSize tmpSize = CGSizeZero;
     if (vl.count == 2) {
         tmpSize.width = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         tmpSize.height = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -58,7 +58,7 @@ CGSize CGSizeWithString(NSString *str) {
 
 CGPoint CGPointWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    CGPoint tmpPoint;
+    CGPoint tmpPoint = CGPointZero;
     if (vl.count == 2) {
         tmpPoint.x = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         tmpPoint.y = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -69,7 +69,7 @@ CGPoint CGPointWithString(NSString *str) {
 
 NSRange NSRangeWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    NSRange tmpRange;
+    NSRange tmpRange = NSMakeRange(0, NSNotFound);
     if (vl.count == 2) {
         tmpRange.location = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] intValue];
         tmpRange.length = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] intValue];
@@ -80,7 +80,7 @@ NSRange NSRangeWithString(NSString *str) {
 
 UIEdgeInsets UIEdgeInsetsWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    UIEdgeInsets insets;
+    UIEdgeInsets insets = UIEdgeInsetsZero;
     if (vl.count == 4) {
         insets.top = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         insets.left = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -93,7 +93,7 @@ UIEdgeInsets UIEdgeInsetsWithString(NSString *str) {
 
 UIOffset UIOffsetWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    UIOffset offset;
+    UIOffset offset = UIOffsetZero;
     if (vl.count == 2) {
         offset.horizontal = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         offset.vertical = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -104,7 +104,7 @@ UIOffset UIOffsetWithString(NSString *str) {
 
 CATransform3D CATransform3DWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    CATransform3D t3d;
+    CATransform3D t3d = CATransform3DIdentity;
     if (vl.count == 16) {
         t3d.m11 = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         t3d.m12 = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
@@ -129,7 +129,7 @@ CATransform3D CATransform3DWithString(NSString *str) {
 
 CGAffineTransform CGAffineTransformWithString(NSString *str) {
     NSArray *vl = [str componentsSeparatedByString:@","];
-    CGAffineTransform t;
+    CGAffineTransform t = CGAffineTransformIdentity;
     if (vl.count == 6) {
         t.a = [[vl[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];
         t.b = [[vl[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] floatValue];

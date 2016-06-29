@@ -27,7 +27,7 @@ NSString *SFWrapNilString(NSString *s) {
 }
 
 - (NSData *)sf_dataByRestoringHexRepresentation {
-    NSString *theString = [[self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:nil];
+    NSString *theString = [[self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
     
     NSMutableData *data = [NSMutableData data];
     for (NSInteger idx = 0; idx + 2 <= theString.length; idx += 2) {
