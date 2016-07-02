@@ -9,21 +9,7 @@ Pod::Spec.new do |spec|
   spec.homepage                 = "https://github.com/yangzexin/SFLibraries"
   spec.source                   = { :git => "#{spec.homepage}.git", :tag => "#{spec.version}" }
   spec.requires_arc             = true
-  spec.header_dir = 'SFFoundation'
-  spec.header_mappings_dir = 'SFFoundation'
-  spec.xcconfig = {
-    'HEADER_SEARCH_PATHS' => 'SFFoundation'
-  }
-
-  spec.subspec "MRC" do |sp|
-    sp.source_files = "SFFoundation/SFFoundation/SFObjcProperty.{h,m}", "SFFoundation/SFFoundation/SFRuntimeUtils.{h,m}"
-    sp.requires_arc = false
-  end
-
-  spec.subspec "ARC" do |sp|
-    sp.dependency 'SFiOSKit/MRC'
-    sp.source_files = "SFFoundation/SFFoundation/*.{h,m}","SFiOSKit/SFiOSKit/*.{h,m}"
-    sp.exclude_files = "SFFoundation/SFFoundation/SFObjcProperty.{h,m}", "SFFoundation/SFFoundation/SFRuntimeUtils.{h,m}"
-    sp.requires_arc = true
-  end
+  spec.source_files = "SFiOSKit/SFiOSKit/*.{h,m}"
+  
+  spec.dependency "SFFoundation"
 end
