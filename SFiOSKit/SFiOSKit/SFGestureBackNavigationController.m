@@ -236,7 +236,10 @@ static CGFloat const kPreviousViewShowWidth = 150;
             self.interactivePopGestureRecognizer.delegate = nil;
         }
     } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
         self.interactivePopGestureRecognizer.enabled = YES;
+#pragma clang diagnostic pop
         self.interactivePopGestureRecognizer.delegate = self;
     }
     
