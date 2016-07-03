@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, copy) SFMutipleImagePickerCompletion completion;
 @property (nonatomic, assign) UIImagePickerControllerSourceType sourceType;
+@property (nonatomic, assign) BOOL allowsEditing;
 
 @property (nonatomic, copy) NSString *title;
 
@@ -28,10 +29,13 @@
 
 @implementation SFSingleImagePickerViewController
 
-+ (instancetype)controllerWithTitle:(NSString *)title sourceType:(UIImagePickerControllerSourceType)sourceType {
++ (instancetype)controllerWithTitle:(NSString *)title
+                         sourceType:(UIImagePickerControllerSourceType)sourceType
+                      allowsEditing:(BOOL)allowsEditing {
     SFSingleImagePickerViewController *controller = [SFSingleImagePickerViewController new];
     controller.title = title;
     controller.sourceType = sourceType;
+    controller.allowsEditing = allowsEditing;
     
     return controller;
 }
@@ -43,7 +47,7 @@
         UIImagePickerController *controller = [UIImagePickerController new];
         controller.sourceType = self.sourceType;
         controller.delegate = self;
-        controller.allowsEditing = YES;
+        controller.allowsEditing = NO;
         controller;
     });
     
@@ -146,8 +150,8 @@
 + (SFImagePickerControllerWrapper *)_defaultImagePickerControllerWrapperWithExtension:(SFImagePickerDialogExtension *)extension {
     SFImagePickerControllerWrapper *imgPicker = [[SFImagePickerControllerWrapper alloc] init];
     imgPicker.dialogExtension = extension;
-    imgPicker.cameraImagePickerViewController = [SFSingleImagePickerViewController controllerWithTitle:NSLocalizedString(@"Camera", nil) sourceType:UIImagePickerControllerSourceTypeCamera];
-    imgPicker.photoImagePickerViewController = [SFSingleImagePickerViewController controllerWithTitle:NSLocalizedString(@"Photo Library", nil) sourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    imgPicker.cameraImagePickerViewController = [SFSingleImagePickerViewController controllerWithTitle:NSLocalizedString(@"Camera", nil) sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:extension.allowsEditing];
+    imgPicker.photoImagePickerViewController = [SFSingleImagePickerViewController controllerWithTitle:NSLocalizedString(@"Photo Library", nil) sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:extension.allowsEditing];
     
     return imgPicker;
 }

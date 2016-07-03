@@ -11,10 +11,10 @@
 typedef void(^SFImagePickerCompletion)(UIImage *selectedImage, BOOL cancelled);
 typedef void(^SFMutipleImagePickerCompletion)(NSArray *selectedImages, BOOL cancelled);
 
-typedef NS_OPTIONS(NSUInteger, SFImagePickerSourceLimitation) {
+typedef NS_ENUM(NSUInteger, SFImagePickerSourceLimitation) {
     SFImagePickerSourceLimitationNone = 0,
-    SFImagePickerSourceLimitationOnlyLibrary = 1 << 0,
-    SFImagePickerSourceLimitationOnlyCamera = 1 << 1,
+    SFImagePickerSourceLimitationOnlyLibrary,
+    SFImagePickerSourceLimitationOnlyCamera,
 };
 
 @interface SFImagePickerDialogExtension : NSObject
@@ -23,6 +23,7 @@ typedef NS_OPTIONS(NSUInteger, SFImagePickerSourceLimitation) {
 @property (nonatomic, strong) NSArray *additionalButtonTitles;
 @property (nonatomic, copy) void(^additionalButtonTapped)(NSString *buttonTitle);
 @property (nonatomic, assign) SFImagePickerSourceLimitation sourceLimitation;
+@property (nonatomic, assign) BOOL allowsEditing;
 
 @end
 
