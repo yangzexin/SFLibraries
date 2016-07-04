@@ -50,7 +50,10 @@ static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SF
                     subObject = SFDict2ObjectGetObject(nil, subDictionary, subObjectMapping, delegate);
                 }
                 
-                if (subObject && [SFRuntimeUtils isClass:[objcProperty propertyClass] replacableByClass:[subObject class]]) {
+                Class objcPropertyClass = [objcProperty propertyClass];
+                if (subObject
+                    && ([SFRuntimeUtils isClass:objcPropertyClass replacableByClass:[subObject class]]
+                        || (objcProperty.type == SFObjcPropertyTypeObject && objcPropertyClass == Nil))) {
                     [object setValue:subObject forKey:property];
                 }
             } else {
