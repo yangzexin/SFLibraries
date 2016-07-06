@@ -136,7 +136,7 @@
         strongBackgroundView.backgroundColor = [UIColor sf_colorWithRed:0 green:0 blue:0 alpha:0];
     };
     
-    [backgroundView setTapHandler:^{
+    [backgroundView setTap:^{
         [UIView animateWithDuration:0.25f animations:closeAnimation completion:^(BOOL finished) {
             if (completion) {
                 completion(nil, YES);
@@ -145,7 +145,7 @@
         }];
     }];
     
-    toolbar.items = @[[SFBlockedBarButtonItem blockedBarButtonItemWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace eventHandler:nil], [SFBlockedBarButtonItem blockedBarButtonItemWithBarButtonSystemItem:UIBarButtonSystemItemDone eventHandler:^{
+    toolbar.items = @[[SFBlockedBarButtonItem blockedBarButtonItemWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace tap:nil], [SFBlockedBarButtonItem blockedBarButtonItemWithBarButtonSystemItem:UIBarButtonSystemItemDone tap:^{
         [UIView animateWithDuration:0.25f animations:closeAnimation completion:^(BOOL finished) {
             if (completion) {
                 completion(weakDatePicker.date, NO);

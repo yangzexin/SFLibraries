@@ -10,7 +10,7 @@
 
 @interface SFBlockedBarButtonItem ()
 
-@property (nonatomic, copy) void(^eventHandler)();
+@property (nonatomic, copy) void(^tap)();
 @property (nonatomic, strong) UITapGestureRecognizer *customViewTapGestureRecognizer;
 
 @end
@@ -52,21 +52,21 @@
     return self;
 }
 
-- (id)initWithCustomView:(UIView *)customView eventHandler:(void(^)())eventHandler {
+- (id)initWithCustomView:(UIView *)customView tap:(void(^)())tap {
     self = [super initWithCustomView:customView];
 
-    if (eventHandler) {
+    if (tap) {
         self.customViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(customViewTapGestureRecognizer:)];
         [customView addGestureRecognizer:self.customViewTapGestureRecognizer];
     }
-    self.eventHandler = eventHandler;
+    self.tap = tap;
     
     return self;
 }
 
 - (void)tapped {
-    if (self.eventHandler) {
-        self.eventHandler();
+    if (self.tap) {
+        self.tap();
     }
 }
 
@@ -74,33 +74,33 @@
     [self tapped];
 }
 
-+ (id)blockedBarButtonItemWithTitle:(NSString *)title eventHandler:(void (^)())eventHandler {
++ (instancetype)blockedBarButtonItemWithTitle:(NSString *)title tap:(void (^)())tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithTitle:title];
-    tmp.eventHandler = eventHandler;
+    tmp.tap = tap;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithImage:(UIImage *)image eventHandler:(void (^)())eventHandler {
++ (instancetype)blockedBarButtonItemWithImage:(UIImage *)image tap:(void (^)())tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithImage:image];
-    tmp.eventHandler = eventHandler;
+    tmp.tap = tap;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem eventHandler:(void (^)())eventHandler {
++ (instancetype)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem tap:(void (^)())tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithBarButtonSystemItem:systemItem];
-    tmp.eventHandler = eventHandler;
+    tmp.tap = tap;
     
     return tmp;
 }
 
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView {
-    return [[self class] blockedBarButtonItemWithCustomView:customView eventHandler:nil];
++ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView {
+    return [[self class] blockedBarButtonItemWithCustomView:customView tap:nil];
 }
 
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView eventHandler:(void (^)())eventHandler {
-    SFBlockedBarButtonItem *item = [[SFBlockedBarButtonItem alloc] initWithCustomView:customView eventHandler:eventHandler];
++ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView tap:(void (^)())tap {
+    SFBlockedBarButtonItem *item = [[SFBlockedBarButtonItem alloc] initWithCustomView:customView tap:tap];
     
     return item;
 }

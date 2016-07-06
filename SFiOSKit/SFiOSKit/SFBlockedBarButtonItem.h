@@ -10,10 +10,10 @@
 
 @interface SFBlockedBarButtonItem : UIBarButtonItem
 
-+ (id)blockedBarButtonItemWithTitle:(NSString *)title eventHandler:(void(^)())eventHandler;
-+ (id)blockedBarButtonItemWithImage:(UIImage *)image eventHandler:(void (^)())eventHandler;
-+ (id)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem eventHandler:(void (^)())eventHandler;
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView;
-+ (id)blockedBarButtonItemWithCustomView:(UIView *)customView eventHandler:(void (^)())eventHandler;
++ (instancetype)blockedBarButtonItemWithTitle:(NSString *)title tap:(void(^)())tap;
++ (instancetype)blockedBarButtonItemWithImage:(UIImage *)image tap:(void (^)())tap;
++ (instancetype)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem tap:(void (^)())tap;
++ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView;
++ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView tap:(void (^)())tap;
 
 @end
