@@ -10,26 +10,33 @@
 
 #import "SFServant.h"
 
-typedef void(^SFServantSucceeded)(id value);
+typedef void(^SFServantSuccess)(id value);
 
-typedef void(^SFServantFailed)(NSError *error);
+typedef void(^SFServantError)(NSError *error);
 
-typedef void(^SFServantCompleted)();
+typedef void(^SFServantFinish)();
 
 @interface NSObject (SFServantSupport)
 
 - (void)sf_sendServant:(id<SFServant>)servant;
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded;
+- (void)sf_sendServant:(id<SFServant>)servant success:(SFServantSuccess)success;
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed;
+- (void)sf_sendServant:(id<SFServant>)servant success:(SFServantSuccess)success error:(SFServantError)error;
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed;
+- (void)sf_sendServant:(id<SFServant>)servant
+               success:(SFServantSuccess)success
+                 error:(SFServantError)error
+                finish:(SFServantFinish)finish;
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier;
+- (void)sf_sendServant:(id<SFServant>)servant
+               success:(SFServantSuccess)success
+                 error:(SFServantError)error
+                finish:(SFServantFinish)finish
+            identifier:(NSString *)identifier;
 
-- (void)sf_interruptServantWithIdentifier:(NSString *)identifier;
+- (void)sf_cancelServantWithIdentifier:(NSString *)identifier;
 
-- (BOOL)sf_isServantExistingWithIdentifier:(NSString *)identifier;
+- (BOOL)sf_isServantExecutingWithIdentifier:(NSString *)identifier;
 
 @end

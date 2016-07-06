@@ -11,8 +11,6 @@
 #import "SFObjectMapping.h"
 #import "SFObjcProperty.h"
 
-OBJC_EXPORT id SFDictToObject(Class clss, id dict);
-
 @protocol SFDict2Object <NSObject>
 
 - (id)objectFromDictionary:(NSDictionary *)dictionary;

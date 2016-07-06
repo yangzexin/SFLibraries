@@ -109,8 +109,9 @@
 }
 
 - (void)addDepositable:(id<SFDepositable>)depositable {
-    @synchronized(self) {
-        if (depositable) {
+    
+    if (depositable) {
+        @synchronized(self) {
             [_depositables addObject:depositable];
             if ([depositable respondsToSelector:@selector(depositableDidAdd)]) {
                 [depositable depositableDidAdd];

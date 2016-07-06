@@ -10,19 +10,6 @@
 #import "SFRuntimeUtils.h"
 #import "SFObjectMapping.h"
 
-id SFDictToObject(Class clss, id dict) {
-    id result = nil;
-    
-    id<SFDict2Object> dict2Obj = [SFDict2Object dict2ObjectWithObjectMapping:[SFObjectMapping objectMappingWithClass:clss]];
-    if ([dict isKindOfClass:[NSArray class]]) {
-        result = [dict2Obj objectsFromDictionaries:dict];
-    } else {
-        result = [dict2Obj objectFromDictionary:dict];
-    }
-    
-    return result;
-}
-
 @implementation SFDict2Object
 
 static id SFDict2ObjectGetObject(id givenObject, NSDictionary *dictionary, id<SFObjectMapping> objectMapping, id<SFDict2ObjectDelegate> delegate) {

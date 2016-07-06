@@ -366,6 +366,8 @@
 				3EF61EF01828D21D0057A6FE /* NSDate+SFAddition.m */,
 				3EBA227F182B39AB003B768C /* NSDictionary+SFAddition.h */,
 				3EBA2280182B39AB003B768C /* NSDictionary+SFAddition.m */,
+				3EE29F3E1D22BB2800C714B6 /* NSObject+SFAddition.h */,
+				3EE29F3F1D22BB2800C714B6 /* NSObject+SFAddition.m */,
 				3E3D111E1B3B84C300A0F356 /* NSObject+SFMethodSwizzling.h */,
 				3E3D111F1B3B84C300A0F356 /* NSObject+SFMethodSwizzling.m */,
 				3EF61EF51828D21D0057A6FE /* NSString+SFAddition.h */,
@@ -380,8 +382,6 @@
 				3E0B788418F67A3900593B64 /* NSValue+SFWeakObject.m */,
 				3EFF91461990DF97007A62ED /* SFCombinationEnd.h */,
 				3EFF91471990DF97007A62ED /* SFCombinationEnd.m */,
-				3EE29F3E1D22BB2800C714B6 /* NSObject+SFAddition.h */,
-				3EE29F3F1D22BB2800C714B6 /* NSObject+SFAddition.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";

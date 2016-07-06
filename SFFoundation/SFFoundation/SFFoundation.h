@@ -25,6 +25,7 @@
 #import <SFFoundation/NSData+SFAddition.h>
 #import <SFFoundation/NSDate+SFAddition.h>
 #import <SFFoundation/NSDictionary+SFAddition.h>
+#import <SFFoundation/NSObject+SFAddition.h>
 #import <SFFoundation/NSObject+SFMethodSwizzling.h>
 #import <SFFoundation/NSObject+SFObjectAssociation.h>
 #import <SFFoundation/NSObject+SFDepositable.h>

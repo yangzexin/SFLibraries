@@ -13,43 +13,50 @@
 @implementation NSObject (SFServantSupport)
 
 - (void)sf_sendServant:(id<SFServant>)servant {
-    [self sf_sendServant:servant succeeded:nil];
+    [self sf_sendServant:servant success:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded {
-    [self sf_sendServant:servant succeeded:succeeded failed:nil];
+- (void)sf_sendServant:(id<SFServant>)servant success:(SFServantSuccess)success {
+    [self sf_sendServant:servant success:success error:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed {
-    [self sf_sendServant:servant succeeded:succeeded failed:failed completed:nil];
+- (void)sf_sendServant:(id<SFServant>)servant success:(SFServantSuccess)success error:(SFServantError)error {
+    [self sf_sendServant:servant success:success error:error finish:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed {
-    [self sf_sendServant:servant succeeded:succeeded failed:failed completed:completed identifier:nil];
+- (void)sf_sendServant:(id<SFServant>)servant
+               success:(SFServantSuccess)success
+                 error:(SFServantError)error
+            finish:(SFServantFinish)finish {
+    [self sf_sendServant:servant success:success error:error finish:finish identifier:nil];
 }
 
-- (void)sf_sendServant:(id<SFServant>)servant succeeded:(SFServantSucceeded)succeeded failed:(SFServantFailed)failed completed:(SFServantCompleted)completed identifier:(NSString *)identifier { 
+- (void)sf_sendServant:(id<SFServant>)servant
+               success:(SFServantSuccess)success
+                 error:(SFServantError)error
+                finish:(SFServantFinish)finish
+            identifier:(NSString *)identifier {
     [self sf_deposit:[servant sendWithCallback:^(SFFeedback *feedback) {
         if (feedback.error != nil) {
-            if (failed) {
-                failed(feedback.error);
+            if (error) {
+                error(feedback.error);
             }
         } else {
-            if (succeeded) {
-                succeeded(feedback.value);
+            if (success) {
+                success(feedback.value);
             }
         }
-        if (completed) {
-            completed();
+        if (finish) {
+            finish();
         }
     }] identifier:identifier];
 }
 
-- (void)sf_interruptServantWithIdentifier:(NSString *)identifier {
+- (void)sf_cancelServantWithIdentifier:(NSString *)identifier {
     [self sf_removeDepositableWithIdentifier:identifier];
 }
 
-- (BOOL)sf_isServantExistingWithIdentifier:(NSString *)identifier {
+- (BOOL)sf_isServantExecutingWithIdentifier:(NSString *)identifier {
     id<SFServant> servant = (id)[self sf_depositableWithIdentifier:identifier];
     
     return [servant isExecuting];

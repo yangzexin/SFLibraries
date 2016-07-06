@@ -12,6 +12,7 @@ id SFWrapNil(id object) {
     if (object == nil) {
         object = [NSNull null];
     }
+    
     return object;
 }
 
@@ -20,6 +21,7 @@ id SFRestoreNil(id object) {
     if (object == [NSNull null]) {
         originalObject = nil;
     }
+    
     return originalObject;
 }
 
