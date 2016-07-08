@@ -21,9 +21,10 @@
 
 @implementation SFDragShowDetector
 
-+ (instancetype)detectorWithTriggerHandler:(void(^)(BOOL show))triggerHandler {
++ (instancetype)detectorWithTrigger:(void(^)(BOOL show))trigger {
     SFDragShowDetector *detector = [SFDragShowDetector new];
-    detector.whenTrigger = triggerHandler;
+    detector.trigger = trigger;
+    
     return detector;
 }
 
@@ -37,8 +38,8 @@
 
 - (void)_notifyTriggerWithShow:(BOOL)show {
     self.showing = show;
-    if (self.whenTrigger) {
-        self.whenTrigger(show);
+    if (self.trigger) {
+        self.trigger(show);
     }
 }
 

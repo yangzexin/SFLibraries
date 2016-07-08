@@ -15,9 +15,9 @@
 
 @property (nonatomic, assign, readonly) BOOL showing;
 
-@property (nonatomic, copy) void(^whenTrigger)(BOOL show);
+@property (nonatomic, copy) void(^trigger)(BOOL show);
 
-+ (instancetype)detectorWithTriggerHandler:(void(^)(BOOL show))triggerHandler;
++ (instancetype)detectorWithTrigger:(void(^)(BOOL show))trigger;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset;
