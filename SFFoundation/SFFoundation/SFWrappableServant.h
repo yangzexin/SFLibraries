@@ -20,9 +20,9 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 /**
  returns new feedback for wrapping
  */
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper;
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper;
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async;
+- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper async:(BOOL)async;
 
 /**
  Force executing synchronous
@@ -30,9 +30,9 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 - (SFWrappableServant *)sync;
 
 /**
- Intercept feedback
+ Observe feedback
  */
-- (SFWrappableServant *)intercept:(void(^)(SFFeedback *feedback))interceptor;
+- (SFWrappableServant *)observeWithObserver:(void(^)(SFFeedback *last))observer;
 
 /**
  Once limitation
@@ -40,9 +40,9 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 - (SFWrappableServant *)once;
 
 /**
- Callback will be dispatch on Mainthread
+ Feedback will be dispatch on Mainthread
  */
-- (SFWrappableServant *)mainThreadCallback;
+- (SFWrappableServant *)mainThreadFeedback;
 
 /**
  If timeout trigger, feedback will be return with error
@@ -50,14 +50,30 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 - (SFWrappableServant *)timeoutWithSeconds:(NSTimeInterval)seconds;
 
 /**
- The Servant return by continuing is depending on this Servant
+ The Servant return by nextServantGenerator is depending on this Servant
  */
-- (SFWrappableServant *)dependBy:(id<SFServant>(^)(SFFeedback *previousFeedback))continuing;
+- (SFWrappableServant *)nextWithServantGenerator:(id<SFServant>(^)(SFFeedback *feedback))nextServantGenerator;
 
 /**
  Group Servants, when all Servants finish, feedbacks return as a dictionary(key=identifier, value=Feedback)
  , grouped Servants will never returns error
  */
 + (SFWrappableServant *)groupWithIdentifiersAndServants:(NSString *)firstIdentifier, ... NS_REQUIRES_NIL_TERMINATION;
+
+@end
+
+OBJC_EXPORT SFWrappableServant *SFChainedServant(id<SFServant> servant);
+
+@interface SFWrappableServant (Chained)
+
+- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest)))wrapFeedback;
+
+- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest), BOOL async))wrapFeedbackAsync;
+
+- (SFWrappableServant *(^)(void(^observer)(SFFeedback *last)))observe;
+
+- (SFWrappableServant *(^)(id<SFServant>(^nextServantGenerator)(SFFeedback *feedback)))next;
+
+- (SFWrappableServant *(^)(NSTimeInterval seconds))timeout;
 
 @end
