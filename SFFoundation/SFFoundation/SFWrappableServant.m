@@ -8,8 +8,6 @@
 
 #import "SFWrappableServant.h"
 
-#import "NSObject+SFDepositable.h"
-
 #import "SFServant+Private.h"
 
 NSString *const SFWrappableServantTimeoutErrorDomain = @"SFWrappableServantTimeoutErrorDomain";

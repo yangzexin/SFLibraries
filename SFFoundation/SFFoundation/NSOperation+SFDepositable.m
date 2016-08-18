@@ -38,7 +38,7 @@
 }
 
 - (id)sf_depositOperation:(NSOperation *)operation startImmediately:(BOOL)startImmediately identifier:(NSString *)identifier {
-    [self sf_deposit:operation identifier:identifier];
+    [self sf_deposit:operation identifier:[NSString stringWithFormat:@"NSOperation-%@", identifier]];
     if (startImmediately) {
         [operation start];
     }

@@ -49,15 +49,19 @@
         if (finish) {
             finish();
         }
-    }] identifier:identifier];
+    }] identifier:[self _wrapIdentifier:identifier]];
+}
+
+- (NSString *)_wrapIdentifier:(NSString *)identifier {
+    return [NSString stringWithFormat:@"SFServant-%@", identifier];
 }
 
 - (void)sf_cancelServantWithIdentifier:(NSString *)identifier {
-    [self sf_removeDepositableWithIdentifier:identifier];
+    [self sf_removeDepositableWithIdentifier:[self _wrapIdentifier:identifier]];
 }
 
 - (BOOL)sf_isServantExecutingWithIdentifier:(NSString *)identifier {
-    id<SFServant> servant = (id)[self sf_depositableWithIdentifier:identifier];
+    id<SFServant> servant = (id)[self sf_depositableWithIdentifier:[self _wrapIdentifier:identifier]];
     
     return [servant isExecuting];
 }
