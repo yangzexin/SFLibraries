@@ -81,6 +81,8 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     @synchronized(self) {
         if (identifier == nil) {
             identifier = [NSString stringWithFormat:@"%f", [NSDate timeIntervalSinceReferenceDate]];
+        } else {
+            [self sf_removeDeallocObserverByIdentifier:identifier];
         }
         
         observer = [SFDeallocObserver observerWthTrigger:trigger];
@@ -102,18 +104,37 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     }
 }
 
+- (NSString *)_wrapNotificationObserverIdentifier:(NSString *)identifier {
+    return identifier == nil ? nil : [NSString stringWithFormat:@"NotificationObserver-%@", identifier];
+}
+
 - (void)sf_depositNotificationObserver:(id)observer {
     [self sf_depositNotificationObserver:observer identifier:nil];
 }
 
 - (void)sf_depositNotificationObserver:(id)observer identifier:(NSString *)identifier {
+    NSString *wrappedIdentifier = [self _wrapNotificationObserverIdentifier:identifier];
+    if (identifier) {
+        [self sf_removeDepositedNotificationObserverByIdentifier:identifier];
+        
+        [self sf_setAssociatedObject:observer key:wrappedIdentifier];
+    }
+    
     [self sf_addDeallocObserver:^{
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
-    } identifier:identifier];
+    } identifier:wrappedIdentifier];
 }
 
 - (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier {
-    [self sf_removeDeallocObserverByIdentifier:identifier];
+    if (identifier) {
+        NSString *wrappedIdentifier = [self _wrapNotificationObserverIdentifier:identifier];
+        id existsObserver = [self sf_associatedObjectWithKey:wrappedIdentifier];
+        if (existsObserver != nil) {
+            [[NSNotificationCenter defaultCenter] removeObserver:existsObserver];
+        }
+        
+        [self sf_removeDeallocObserverByIdentifier:wrappedIdentifier];
+    }
 }
 
 @end
