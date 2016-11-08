@@ -29,7 +29,7 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
 }
 
 + (NSArray *)sf_objcPropertiesWithSearchingSuperClass:(BOOL)searchingSuperClass exceptPropertyNames:(NSArray *)exceptPropertyNames {
-    NSArray *objcProperties = [self sf_objcPropertiesWithSearchingSuperClass:NO];
+    NSArray *objcProperties = [self sf_objcPropertiesWithSearchingSuperClass:searchingSuperClass];
     NSMutableArray *filteredObjcProperties = [NSMutableArray array];
     [objcProperties enumerateObjectsUsingBlock:^(SFObjcProperty *obj, NSUInteger idx, BOOL *stop) {
         if ([exceptPropertyNames indexOfObject:obj.name] == NSNotFound) {
