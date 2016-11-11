@@ -18,11 +18,11 @@
     return [self servantWithFeedbackBuilder:nil];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder {
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder {
     return [self servantWithFeedbackBuilder:feedbackBuilder synchronous:NO];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous {
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous {
     SFComposableServant *servant = [SFComposableServant new];
     servant.feedbackBuilder = feedbackBuilder;
     servant.synchronous = synchronous;
@@ -34,11 +34,11 @@
     [super servantStartingService];
     
     if (self.synchronous) {
-        SFFeedback *callReturn = self.feedbackBuilder();
+        SFServantFeedback *callReturn = self.feedbackBuilder();
         [self returnWithFeedback:callReturn];
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            SFFeedback *callReturn = self.feedbackBuilder();
+            SFServantFeedback *callReturn = self.feedbackBuilder();
             if (![self isCancelled]) {
                 [self returnWithFeedback:callReturn];
             }

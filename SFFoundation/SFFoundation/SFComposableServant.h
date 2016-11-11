@@ -13,10 +13,10 @@
 @interface SFComposableServant : SFServant
 
 @property (nonatomic, assign) BOOL synchronous;
-@property (nonatomic, copy) SFFeedback *(^feedbackBuilder)();
+@property (nonatomic, copy) SFServantFeedback *(^feedbackBuilder)();
 
 + (instancetype)servant;
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder;
-+ (instancetype)servantWithFeedbackBuilder:(SFFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous;
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder;
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous;
 
 @end

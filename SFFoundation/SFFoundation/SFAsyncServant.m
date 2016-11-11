@@ -31,7 +31,7 @@
 - (void)servantStartingService {
     [super servantStartingService];
     __weak typeof(self) weakSelf = self;
-    self.execution(^(SFFeedback *callReturn){
+    self.execution(^(SFServantFeedback *callReturn){
         __strong typeof(weakSelf) self = weakSelf;
         [self returnWithFeedback:callReturn];
     });

@@ -36,7 +36,7 @@
                  error:(SFServantError)error
                 finish:(SFServantFinish)finish
             identifier:(NSString *)identifier {
-    [self sf_deposit:[servant sendWithCallback:^(SFFeedback *feedback) {
+    [self sf_deposit:[servant sendWithCallback:^(SFServantFeedback *feedback) {
         if (feedback.error != nil) {
             if (error) {
                 error(feedback.error);

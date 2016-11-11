@@ -11,31 +11,31 @@
 #import "SFServant+Private.h"
 #import "SFComposableServant.h"
 
-@interface SFFeedback ()
+@interface SFServantFeedback ()
 
 @property (nonatomic, strong) id value;
 @property (nonatomic, strong) NSError *error;
 
 @end
 
-@implementation SFFeedback
+@implementation SFServantFeedback
 
 + (instancetype)feedbackWithValue:(id)value {
-    SFFeedback *feedback = [SFFeedback new];
+    SFServantFeedback *feedback = [SFServantFeedback new];
     feedback.value = value;
     
     return feedback;
 }
 
 + (instancetype)feedbackWithError:(NSError *)error {
-    SFFeedback *feedback = [SFFeedback new];
+    SFServantFeedback *feedback = [SFServantFeedback new];
     feedback.error = error;
     
     return feedback;
 }
 
 - (id<SFServant>)servantTakesMe {
-    return [SFComposableServant servantWithFeedbackBuilder:^SFFeedback *{
+    return [SFComposableServant servantWithFeedbackBuilder:^SFServantFeedback *{
         return self;
     } synchronous:YES];
 }
@@ -72,7 +72,7 @@
     return self;
 }
 
-- (void)returnWithFeedback:(SFFeedback *)feedback {
+- (void)returnWithFeedback:(SFServantFeedback *)feedback {
     @synchronized(self) {
         CFRetain(((__bridge CFTypeRef)self));
         if (![self isCancelled]) {

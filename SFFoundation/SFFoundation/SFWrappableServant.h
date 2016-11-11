@@ -20,9 +20,9 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 /**
  returns new feedback for wrapping
  */
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper;
+- (SFWrappableServant *)wrapFeedback:(SFServantFeedback *(^)(SFServantFeedback *latest))wrapper;
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper async:(BOOL)async;
+- (SFWrappableServant *)wrapFeedback:(SFServantFeedback *(^)(SFServantFeedback *latest))wrapper async:(BOOL)async;
 
 /**
  Force executing synchronous
@@ -32,7 +32,7 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 /**
  Observe feedback
  */
-- (SFWrappableServant *)observeWithObserver:(void(^)(SFFeedback *last))observer;
+- (SFWrappableServant *)observeWithObserver:(void(^)(SFServantFeedback *last))observer;
 
 /**
  Once limitation
@@ -52,7 +52,7 @@ OBJC_EXPORT NSInteger const SFWrappableServantTimeoutErrorCode;
 /**
  The Servant return by nextServantGenerator is depending on this Servant
  */
-- (SFWrappableServant *)nextWithServantGenerator:(id<SFServant>(^)(SFFeedback *feedback))nextServantGenerator;
+- (SFWrappableServant *)nextWithServantGenerator:(id<SFServant>(^)(SFServantFeedback *feedback))nextServantGenerator;
 
 /**
  Group Servants, when all Servants finish, feedbacks return as a dictionary(key=identifier, value=Feedback)
@@ -66,13 +66,13 @@ OBJC_EXPORT SFWrappableServant *SFChainedServant(id<SFServant> servant);
 
 @interface SFWrappableServant (Chained)
 
-- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest)))wrapFeedback;
+- (SFWrappableServant *(^)(SFServantFeedback *(^wrapper)(SFServantFeedback *latest)))wrapFeedback;
 
-- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest), BOOL async))wrapFeedbackAsync;
+- (SFWrappableServant *(^)(SFServantFeedback *(^wrapper)(SFServantFeedback *latest), BOOL async))wrapFeedbackAsync;
 
-- (SFWrappableServant *(^)(void(^observer)(SFFeedback *last)))observe;
+- (SFWrappableServant *(^)(void(^observer)(SFServantFeedback *last)))observe;
 
-- (SFWrappableServant *(^)(id<SFServant>(^nextServantGenerator)(SFFeedback *feedback)))next;
+- (SFWrappableServant *(^)(id<SFServant>(^nextServantGenerator)(SFServantFeedback *feedback)))next;
 
 - (SFWrappableServant *(^)(NSTimeInterval seconds))timeout;
 

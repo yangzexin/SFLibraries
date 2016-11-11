@@ -10,7 +10,7 @@
 
 #import "SFServant.h"
 
-typedef void(^SFAsyncServantNotifier)(SFFeedback *feedback);
+typedef void(^SFAsyncServantNotifier)(SFServantFeedback *feedback);
 
 @interface SFAsyncServant : SFServant
 

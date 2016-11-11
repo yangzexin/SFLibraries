@@ -23,22 +23,22 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 @end
 
-@interface SFFeedbackWrappedServant : SFWrappableServant
+@interface SFServantFeedbackWrappedServant : SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async;
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFServantFeedback *(^)(SFServantFeedback *feedback))feedbackWrapper async:(BOOL)async;
 
 @end
 
-@interface SFFeedbackWrappedServant ()
+@interface SFServantFeedbackWrappedServant ()
 
-@property (nonatomic, copy) SFFeedback *(^feedbackWrapper)(SFFeedback *feedback);
+@property (nonatomic, copy) SFServantFeedback *(^feedbackWrapper)(SFServantFeedback *feedback);
 @property (nonatomic, assign) BOOL async;
 
 @end
 
-@implementation SFFeedbackWrappedServant
+@implementation SFServantFeedbackWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFFeedback *(^)(SFFeedback *feedback))feedbackWrapper async:(BOOL)async {
+- (id)initWithServant:(id<SFServant>)servant feedbackWrapper:(SFServantFeedback *(^)(SFServantFeedback *feedback))feedbackWrapper async:(BOOL)async {
     self = [super initWithServant:servant];
     
     self.feedbackWrapper = feedbackWrapper;
@@ -49,7 +49,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 - (void)servantStartingService {
     __weak typeof(self) wself = self;
-    [self.servant sendWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self.async) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -61,8 +61,8 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
     }];
 }
 
-- (void)_wrapFeedback:(SFFeedback *)feedback {
-    SFFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
+- (void)_wrapFeedback:(SFServantFeedback *)feedback {
+    SFServantFeedback *wrappedFeedback = self.feedbackWrapper(feedback);
     [self returnWithFeedback:wrappedFeedback];
 }
 
@@ -79,8 +79,8 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     
-    __block SFFeedback *_feedback = nil;
-    [self.servant sendWithCallback:^(SFFeedback *feedback) {
+    __block SFServantFeedback *_feedback = nil;
+    [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
         _feedback = feedback;
         dispatch_semaphore_signal(sema);
     }];
@@ -94,19 +94,19 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 @interface SFObserveWrappedServant : SFWrappableServant
 
-- (id)initWithServant:(id<SFServant>)servant observer:(void(^)(SFFeedback *feedback))observer;
+- (id)initWithServant:(id<SFServant>)servant observer:(void(^)(SFServantFeedback *feedback))observer;
 
 @end
 
 @interface SFObserveWrappedServant ()
 
-@property (nonatomic, copy) void(^observer)(SFFeedback *feedback);
+@property (nonatomic, copy) void(^observer)(SFServantFeedback *feedback);
 
 @end
 
 @implementation SFObserveWrappedServant
 
-- (id)initWithServant:(id<SFServant>)servant observer:(void(^)(SFFeedback *feedback))observer {
+- (id)initWithServant:(id<SFServant>)servant observer:(void(^)(SFServantFeedback *feedback))observer {
     self = [super initWithServant:servant];
     
     self.observer = observer;
@@ -116,7 +116,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 - (void)servantStartingService {
     __weak typeof(self) wself = self;
-    [self.servant sendWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             self.observer(feedback);
@@ -171,7 +171,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 - (void)servantStartingService {
     __weak typeof(self) wself = self;
-    [self.servant sendWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
         __weak typeof(wself) self = wself;
         if ([NSThread isMainThread]) {
             [self returnWithFeedback:feedback];
@@ -215,7 +215,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
             SFWrappableServant *wrappedServant = self.servant;
             if (!wrappedServant.finished) {
                 [wrappedServant cancel];
-                [self returnWithFeedback:[SFFeedback feedbackWithError:[self _errorForTimeout]]];
+                [self returnWithFeedback:[SFServantFeedback feedbackWithError:[self _errorForTimeout]]];
             }
         }
     });
@@ -235,7 +235,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 @interface SFSequenceWrappedServant ()
 
-@property (nonatomic, copy) id<SFServant>(^nextServantGenerator)(SFFeedback *feedback);
+@property (nonatomic, copy) id<SFServant>(^nextServantGenerator)(SFServantFeedback *feedback);
 @property (nonatomic, strong) id<SFServant> nextServant;
 
 @end
@@ -243,7 +243,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 @implementation SFSequenceWrappedServant
 
 - (id)initWithServant:(id<SFServant>)servant
- nextServantGenerator:(id<SFServant>(^)(SFFeedback *previousFeedback))nextServantGenerator {
+ nextServantGenerator:(id<SFServant>(^)(SFServantFeedback *previousFeedback))nextServantGenerator {
     self = [super initWithServant:servant];
     
     self.nextServantGenerator = nextServantGenerator;
@@ -253,11 +253,11 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 - (void)servantStartingService {
     __weak typeof(self) wself = self;
-    [self.servant sendWithCallback:^(SFFeedback *feedback) {
+    [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
         __strong typeof(wself) self = wself;
         if (self) {
             self.nextServant = self.nextServantGenerator(feedback);
-            [self.nextServant sendWithCallback:^(SFFeedback *feedback) {
+            [self.nextServant sendWithCallback:^(SFServantFeedback *feedback) {
                 __strong typeof(wself) self = wself;
                 [self returnWithFeedback:feedback];
             }];
@@ -311,14 +311,14 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
         @synchronized(self.processingIdentifiers) {
             [self.processingIdentifiers removeObject:identifier];
             if (self.processingIdentifiers.count == 0) {
-                [self returnWithFeedback:[SFFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
+                [self returnWithFeedback:[SFServantFeedback feedbackWithValue:self.keyIdentifierValueFeedback]];
             }
         }
     };
     
     for (NSString *identifier in allIdentifiers) {
         id<SFServant> servant = [self.keyIdentifierValueServant objectForKey:identifier];
-        [servant sendWithCallback:^(SFFeedback *feedback) {
+        [servant sendWithCallback:^(SFServantFeedback *feedback) {
             __strong typeof(weakSelf) self = weakSelf;
             [self.keyIdentifierValueFeedback setObject:feedback == nil ? [NSNull null] : feedback forKey:identifier];
             sendFeedback(identifier);
@@ -342,7 +342,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
     [super servantStartingService];
     if (self.servant) {
         __weak typeof(self) wself = self;
-        [self.servant sendWithCallback:^(SFFeedback *feedback) {
+        [self.servant sendWithCallback:^(SFServantFeedback *feedback) {
             __strong typeof(wself) self = wself;
             [self returnWithFeedback:feedback];
         }];
@@ -368,19 +368,19 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
     [super depositableWillRemove];
 }
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper {
+- (SFWrappableServant *)wrapFeedback:(SFServantFeedback *(^)(SFServantFeedback *latest))wrapper {
     return [self wrapFeedback:wrapper async:NO];
 }
 
-- (SFWrappableServant *)wrapFeedback:(SFFeedback *(^)(SFFeedback *latest))wrapper async:(BOOL)async {
-    return [[SFFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:wrapper async:async];
+- (SFWrappableServant *)wrapFeedback:(SFServantFeedback *(^)(SFServantFeedback *latest))wrapper async:(BOOL)async {
+    return [[SFServantFeedbackWrappedServant alloc] initWithServant:self feedbackWrapper:wrapper async:async];
 }
 
 - (SFWrappableServant *)sync {
     return [[SFSyncWrappedServant alloc] initWithServant:self];
 }
 
-- (SFWrappableServant *)observeWithObserver:(void(^)(SFFeedback *last))observer {
+- (SFWrappableServant *)observeWithObserver:(void(^)(SFServantFeedback *last))observer {
     return [[SFObserveWrappedServant alloc] initWithServant:self observer:observer];
 }
 
@@ -396,7 +396,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
     return [[SFTimeoutWrappedServant alloc] initWithServant:self timeoutSeconds:seconds];
 }
 
-- (SFWrappableServant *)nextWithServantGenerator:(id<SFServant>(^)(SFFeedback *feedback))nextServantGenerator {
+- (SFWrappableServant *)nextWithServantGenerator:(id<SFServant>(^)(SFServantFeedback *feedback))nextServantGenerator {
     return [[SFSequenceWrappedServant alloc] initWithServant:self nextServantGenerator:nextServantGenerator];
 }
 
@@ -426,26 +426,26 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 
 @implementation SFWrappableServant (Chained)
 
-- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest)))wrapFeedback {
-    return ^SFWrappableServant *(SFFeedback *(^feedbackWrapper)(SFFeedback *previousFeedback)) {
+- (SFWrappableServant *(^)(SFServantFeedback *(^wrapper)(SFServantFeedback *latest)))wrapFeedback {
+    return ^SFWrappableServant *(SFServantFeedback *(^feedbackWrapper)(SFServantFeedback *previousFeedback)) {
         return [self wrapFeedback:feedbackWrapper];
     };
 }
 
-- (SFWrappableServant *(^)(SFFeedback *(^wrapper)(SFFeedback *latest), BOOL async))wrapFeedbackAsync {
-    return ^SFWrappableServant *(SFFeedback *(^feedbackWrapper)(SFFeedback *previousFeedback), BOOL async) {
+- (SFWrappableServant *(^)(SFServantFeedback *(^wrapper)(SFServantFeedback *latest), BOOL async))wrapFeedbackAsync {
+    return ^SFWrappableServant *(SFServantFeedback *(^feedbackWrapper)(SFServantFeedback *previousFeedback), BOOL async) {
         return [self wrapFeedback:feedbackWrapper async:async];
     };
 }
 
-- (SFWrappableServant *(^)(void(^observer)(SFFeedback *last)))observe {
-    return ^SFWrappableServant *(void(^observer)(SFFeedback *feedback)) {
+- (SFWrappableServant *(^)(void(^observer)(SFServantFeedback *last)))observe {
+    return ^SFWrappableServant *(void(^observer)(SFServantFeedback *feedback)) {
         return [self observeWithObserver:observer];
     };
 }
 
-- (SFWrappableServant *(^)(id<SFServant>(^nextServantGenerator)(SFFeedback *feedback)))next {
-    return ^SFWrappableServant *(id<SFServant>(^nextServantGenerator)(SFFeedback *feedback)) {
+- (SFWrappableServant *(^)(id<SFServant>(^nextServantGenerator)(SFServantFeedback *feedback)))next {
+    return ^SFWrappableServant *(id<SFServant>(^nextServantGenerator)(SFServantFeedback *feedback)) {
         return [self nextWithServantGenerator:nextServantGenerator];
     };
 }

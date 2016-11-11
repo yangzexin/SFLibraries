@@ -12,7 +12,13 @@
 
 @protocol SFServant;
 
-@interface SFFeedback : NSObject
+#ifndef SFFeedback
+
+#define SFFeedback SFServantFeedback
+
+#endif
+
+@interface SFServantFeedback : NSObject
 
 @property (nonatomic, strong, readonly) id value;
 @property (nonatomic, strong, readonly) NSError *error;
@@ -24,7 +30,7 @@
 
 @end
 
-typedef void(^SFServantCallback)(SFFeedback *callReturn);
+typedef void(^SFServantCallback)(SFServantFeedback *feedback);
 
 @protocol SFServant <SFDepositable>
 
@@ -41,7 +47,7 @@ typedef void(^SFServantCallback)(SFFeedback *callReturn);
 /**
  Manual return feedback
  */
-- (void)returnWithFeedback:(SFFeedback *)feedback;
+- (void)returnWithFeedback:(SFServantFeedback *)feedback;
 
 #pragma mark - Servant life cycle
 /**
