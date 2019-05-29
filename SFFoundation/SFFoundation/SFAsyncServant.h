@@ -14,9 +14,9 @@ typedef void(^SFAsyncServantNotifier)(SFServantFeedback *feedback);
 
 @interface SFAsyncServant : SFServant
 
-@property (nonatomic, copy) void(^whenCancelled)();
+@property (nonatomic, copy) void(^whenCancelled)(void);
 
 + (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution;
-+ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)())whenCancelled;
++ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)(void))whenCancelled;
 
 @end

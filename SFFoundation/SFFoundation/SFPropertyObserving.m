@@ -11,7 +11,7 @@
 @interface SFPropertyObserving ()
 
 @property (nonatomic, assign) BOOL observing;
-@property (nonatomic, copy) void(^changeBlock)();
+@property (nonatomic, copy) void(^changeBlock)(id);
 
 @end
 

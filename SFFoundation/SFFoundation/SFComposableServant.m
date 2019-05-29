@@ -18,11 +18,11 @@
     return [self servantWithFeedbackBuilder:nil];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder {
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)(void))feedbackBuilder {
     return [self servantWithFeedbackBuilder:feedbackBuilder synchronous:NO];
 }
 
-+ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)())feedbackBuilder synchronous:(BOOL)synchronous {
++ (instancetype)servantWithFeedbackBuilder:(SFServantFeedback *(^)(void))feedbackBuilder synchronous:(BOOL)synchronous {
     SFComposableServant *servant = [SFComposableServant new];
     servant.feedbackBuilder = feedbackBuilder;
     servant.synchronous = synchronous;

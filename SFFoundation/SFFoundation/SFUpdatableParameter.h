@@ -10,8 +10,8 @@
 
 @interface SFUpdatableParameter : NSObject
 
-@property (nonatomic, copy, readonly) id(^value)();
+@property (nonatomic, copy, readonly) id(^value)(void);
 
-+ (instancetype)parameterWithValue:(id(^)())block;
++ (instancetype)parameterWithValue:(id(^)(void))block;
 
 @end

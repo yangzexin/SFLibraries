@@ -10,7 +10,7 @@
 
 @interface SFWaiting () <SFEventLoopItem>
 
-@property (nonatomic, copy) BOOL(^condition)();
+@property (nonatomic, copy) BOOL(^condition)(void);
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, strong) NSMutableArray *callbacks;
 

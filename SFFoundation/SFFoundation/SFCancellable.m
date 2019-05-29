@@ -12,13 +12,13 @@
 
 @property (nonatomic, assign) BOOL cancelled;
 
-@property (nonatomic, copy) void(^block)();
+@property (nonatomic, copy) void(^block)(void);
 
 @end
 
 @implementation SFCancellable
 
-+ (instancetype)cancellableWithWhenCancel:(void(^)())block {
++ (instancetype)cancellableWithWhenCancel:(void(^)(void))block {
     SFCancellable *eventCancellable = [SFCancellable new];
     eventCancellable.block = block;
     

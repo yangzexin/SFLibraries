@@ -12,7 +12,7 @@
 
 @interface SFCancellable : NSObject <SFDepositable>
 
-+ (instancetype)cancellableWithWhenCancel:(void(^)())block;
++ (instancetype)cancellableWithWhenCancel:(void(^)(void))block;
 
 - (void)cancel;
 

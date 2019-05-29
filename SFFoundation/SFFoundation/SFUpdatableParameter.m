@@ -10,13 +10,13 @@
 
 @interface SFUpdatableParameter ()
 
-@property (nonatomic, copy) id(^value)();
+@property (nonatomic, copy) id(^value)(void);
 
 @end
 
 @implementation SFUpdatableParameter
 
-+ (instancetype)parameterWithValue:(id(^)())block {
++ (instancetype)parameterWithValue:(id(^)(void))block {
     SFUpdatableParameter *wrapper = [SFUpdatableParameter new];
     wrapper.value = block;
     

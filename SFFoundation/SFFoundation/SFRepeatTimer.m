@@ -16,7 +16,7 @@
 
 @implementation SFRepeatTimer
 
-- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick {
+- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)(void))tick {
     self = [super init];
     
     _timeInterval = timeInterval;
@@ -28,7 +28,7 @@
 - (void)start {
     [self _tick];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:_timeInterval target:self selector:@selector(_tick) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timeInterval target:self selector:@selector(_tick) userInfo:nil repeats:YES];
     });
 }
 
@@ -43,7 +43,7 @@
     self.tick = nil;
 }
 
-+ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick {
++ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)(void))tick {
     SFRepeatTimer *timer = [[SFRepeatTimer alloc] initWithTimeInterval:timeInterval tick:tick];
     [timer start];
     

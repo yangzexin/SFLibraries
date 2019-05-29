@@ -14,7 +14,7 @@ typedef void(^SFServantSuccess)(id value);
 
 typedef void(^SFServantError)(NSError *error);
 
-typedef void(^SFServantFinish)();
+typedef void(^SFServantFinish)(void);
 
 @interface NSObject (SFServantSupport)
 

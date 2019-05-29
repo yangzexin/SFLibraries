@@ -13,12 +13,12 @@
 @interface SFRepeatTimer : NSObject <SFDepositable>
 
 @property (nonatomic, assign) NSTimeInterval timeInterval;
-@property (nonatomic, copy) void(^tick)();
+@property (nonatomic, copy) void(^tick)(void);
 
-- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick;
+- (id)initWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)(void))tick;
 - (void)start;
 - (void)stop;
 
-+ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)())tick;
++ (instancetype)timerStartWithTimeInterval:(NSTimeInterval)timeInterval tick:(void(^)(void))tick;
 
 @end

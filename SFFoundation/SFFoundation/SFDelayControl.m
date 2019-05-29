@@ -10,7 +10,7 @@
 
 @interface SFDelayControl ()
 
-@property (nonatomic, copy) void(^completion)();
+@property (nonatomic, copy) void(^completion)(void);
 @property (nonatomic, assign) NSTimeInterval timeInterval;
 @property (nonatomic, assign) BOOL performed;
 @property (nonatomic, assign) BOOL cancelled;
@@ -23,7 +23,7 @@
 @synthesize timeInterval;
 @synthesize performed;
 
-- (instancetype)initWithInterval:(NSTimeInterval)pTimeInterval completion:(void(^)())pCompletion {
+- (instancetype)initWithInterval:(NSTimeInterval)pTimeInterval completion:(void(^)(void))pCompletion {
     self = [super init];
     
     self.timeInterval = pTimeInterval;
@@ -65,7 +65,7 @@
     [self cancel];
 }
 
-+ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion {
++ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)(void))completion {
     SFDelayControl *delayControl = [[SFDelayControl alloc] initWithInterval:timeInterval completion:completion];
     
     return [delayControl start];

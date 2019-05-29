@@ -36,7 +36,7 @@
     [self removeCallbacks];
 }
 
-- (void)wait:(void (^)())block uniqueIdentifier:(NSString *)identifier {
+- (void)wait:(void (^)(void))block uniqueIdentifier:(NSString *)identifier {
     if ([self isMarked]) {
         if (block) {
             block();

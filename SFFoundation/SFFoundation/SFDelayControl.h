@@ -12,10 +12,10 @@
 
 @interface SFDelayControl : NSObject <SFDepositable>
 
-- (instancetype)initWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion;
+- (instancetype)initWithInterval:(NSTimeInterval)timeInterval completion:(void(^)(void))completion;
 - (instancetype)start;
 - (void)cancel;
 
-+ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)())completion;
++ (instancetype)delayWithInterval:(NSTimeInterval)timeInterval completion:(void(^)(void))completion;
 
 @end

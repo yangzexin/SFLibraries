@@ -12,14 +12,14 @@
 
 @interface WaitingCallbackWrapper : NSObject
 
-@property (nonatomic, copy) void(^callback)();
+@property (nonatomic, copy) void(^callback)(void);
 @property (nonatomic, copy) NSString *uniqueIdentifier;
 
 @end
 
 @implementation WaitingCallbackWrapper
 
-+ (instancetype)wrapperWithCallback:(void(^)())callback identifier:(NSString *)identifier {
++ (instancetype)wrapperWithCallback:(void(^)(void))callback identifier:(NSString *)identifier {
     WaitingCallbackWrapper *wrapper = [WaitingCallbackWrapper new];
     wrapper.callback = callback;
     wrapper.uniqueIdentifier = identifier;
@@ -31,7 +31,7 @@
 
 @implementation SFWaiting
 
-+ (instancetype)waitWithCondition:(BOOL(^)())condition {
++ (instancetype)waitWithCondition:(BOOL(^)(void))condition {
     SFWaiting *queue = [self new];
     queue.condition = condition;
     
@@ -59,11 +59,11 @@
     return [NSString stringWithFormat:@"%f@%d", [NSDate timeIntervalSinceReferenceDate], arc4random() % 10000];
 }
 
-- (void)wait:(void(^)())block {
+- (void)wait:(void(^)(void))block {
     [self wait:block uniqueIdentifier:nil];
 }
 
-- (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier {
+- (void)wait:(void(^)(void))block uniqueIdentifier:(NSString *)identifier {
     @synchronized(self) {
         if (identifier == nil) {
             identifier = [self _randomUniqueIdentifierWthBlock:block];

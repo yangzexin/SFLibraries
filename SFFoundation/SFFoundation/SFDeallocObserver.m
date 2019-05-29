@@ -12,7 +12,7 @@
 
 @implementation SFDeallocObserver
 
-+ (instancetype)observerWthTrigger:(void(^)())trigger {
++ (instancetype)observerWthTrigger:(void(^)(void))trigger {
     SFDeallocObserver *rd = [SFDeallocObserver new];
     rd.trigger = trigger;
     

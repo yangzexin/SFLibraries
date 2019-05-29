@@ -35,11 +35,11 @@
 /**
  trigger  - the block will be invoked when object will be dealloc
  */
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger;
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)(void))trigger;
 
 - (void)sf_removeDeallocObserver:(SFDeallocObserver *)observer;
 
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier;
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)(void))trigger identifier:(NSString *)identifier;
 
 - (void)sf_removeDeallocObserverByIdentifier:(NSString *)identifier;
 

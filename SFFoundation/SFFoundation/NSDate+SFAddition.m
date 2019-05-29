@@ -12,22 +12,23 @@
 
 - (NSDateComponents *)sf_componentsUsingCurrentCalendar {
     NSCalendar *calender = [NSCalendar currentCalendar];
-    return [calender components:NSYearCalendarUnit
-            | NSMonthCalendarUnit
-            | NSDayCalendarUnit
-            | NSHourCalendarUnit
-            | NSMinuteCalendarUnit
-            | NSSecondCalendarUnit
-            | NSWeekCalendarUnit
-            | NSEraCalendarUnit
-            | NSWeekdayCalendarUnit
-            | NSWeekdayOrdinalCalendarUnit
-            | NSQuarterCalendarUnit
-            | NSWeekOfMonthCalendarUnit
-            | NSWeekOfYearCalendarUnit
-            | NSYearForWeekOfYearCalendarUnit
-            | NSCalendarCalendarUnit
-            | NSTimeZoneCalendarUnit fromDate:self];
+    return [calender components:NSCalendarUnitYear
+            | NSCalendarUnitMonth
+            | NSCalendarUnitDay
+            | NSCalendarUnitHour
+            | NSCalendarUnitMinute
+            | NSCalendarUnitSecond
+            | NSCalendarUnitWeekOfYear
+            | NSCalendarUnitEra
+            | NSCalendarUnitWeekday
+            | NSCalendarUnitWeekdayOrdinal
+            | NSCalendarUnitQuarter
+            | NSCalendarUnitWeekOfMonth
+            | NSCalendarUnitWeekOfYear
+            | NSCalendarUnitYearForWeekOfYear
+            | NSCalendarUnitCalendar
+            | NSCalendarUnitTimeZone
+                       fromDate:self];
 }
 
 - (NSInteger)sf_numberOfDayIntervalsByComparingWithDate:(NSDate *)date {

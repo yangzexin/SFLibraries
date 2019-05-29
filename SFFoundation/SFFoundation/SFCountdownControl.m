@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)())completion{
+- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)(void))completion{
     if (_running) {
         return;
     }

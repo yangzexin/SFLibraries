@@ -10,10 +10,10 @@
 
 @interface SFDeallocObserver ()
 
-@property (nonatomic, copy) void(^trigger)();
+@property (nonatomic, copy) void(^trigger)(void);
 
-@property (nonatomic, copy) void(^whenCancelled)();
+@property (nonatomic, copy) void(^whenCancelled)(void);
 
-+ (instancetype)observerWthTrigger:(void(^)())trigger;
++ (instancetype)observerWthTrigger:(void(^)(void))trigger;
 
 @end

@@ -10,10 +10,10 @@
 
 @interface SFPropertyObserving : NSObject
 
-@property (nonatomic, copy, readonly) void(^changeBlock)();
+@property (nonatomic, copy, readonly) void(^changeBlock)(id);
 
-@property (nonatomic, copy) void(^observeStarted)();
-@property (nonatomic, copy) void(^cancelHandler)();
+@property (nonatomic, copy) void(^observeStarted)(void);
+@property (nonatomic, copy) void(^cancelHandler)(void);
 
 - (instancetype)change:(void(^)(id value))change;
 - (void)cancel;

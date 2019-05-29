@@ -18,12 +18,12 @@
 
 @property (nonatomic, copy) NSString *name;
 
-+ (instancetype)waitWithCondition:(BOOL(^)())condition;
++ (instancetype)waitWithCondition:(BOOL(^)(void))condition;
 
 - (NSString *)generateRandomUniqueIdentifier;
 
-- (void)wait:(void(^)())block;
-- (void)wait:(void(^)())block uniqueIdentifier:(NSString *)identifier;
+- (void)wait:(void(^)(void))block;
+- (void)wait:(void(^)(void))block uniqueIdentifier:(NSString *)identifier;
 - (void)cancelByUniqueIdentifier:(NSString *)identifier;
 - (void)cancelAll;
 

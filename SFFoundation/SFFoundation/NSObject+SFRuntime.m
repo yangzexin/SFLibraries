@@ -56,7 +56,7 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     }
 }
 
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger {
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)(void))trigger {
     return [self sf_addDeallocObserver:trigger identifier:nil];
 }
 
@@ -76,7 +76,7 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
     return keyIdentifierValueDeallocObserver;
 }
 
-- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)())trigger identifier:(NSString *)identifier {
+- (SFDeallocObserver *)sf_addDeallocObserver:(void(^)(void))trigger identifier:(NSString *)identifier {
     SFDeallocObserver *observer = nil;
     @synchronized(self) {
         if (identifier == nil) {

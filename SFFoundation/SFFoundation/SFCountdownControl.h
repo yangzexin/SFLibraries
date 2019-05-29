@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) NSTimeInterval deltaTimeInterval;
 
-- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)())completion;
+- (void)startCountdownWithTimeInterval:(NSTimeInterval)timeInterval countBlock:(void(^)(NSTimeInterval countdown))countBlock completion:(void(^)(void))completion;
 - (void)stop;
 
 @end

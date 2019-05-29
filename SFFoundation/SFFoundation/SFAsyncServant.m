@@ -16,7 +16,7 @@
 
 @implementation SFAsyncServant
 
-+ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)())whenCancelled {
++ (instancetype)servantWithAsyncExecution:(void(^)(SFAsyncServantNotifier notifier))execution whenCancelled:(void(^)(void))whenCancelled {
     SFAsyncServant *servant = [self new];
     servant.execution = execution;
     servant.whenCancelled = whenCancelled;
