@@ -55,3 +55,5 @@
 - (void)sf_removeDepositedNotificationObserverByIdentifier:(NSString *)identifier;
 
 @end
+
+OBJC_EXPORT id SFDefer(void(^trigger)(void));

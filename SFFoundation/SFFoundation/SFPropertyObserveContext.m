@@ -10,7 +10,7 @@
 
 @interface SFPropertyObserveContext ()
 
-@property (nonatomic, assign) id target;
+@property (nonatomic, weak) id target;
 @property (nonatomic, copy) NSString *propertyName;
 @property (nonatomic, assign) NSKeyValueObservingOptions options;
 @property (nonatomic, copy) void(^usingBlock)(id value);

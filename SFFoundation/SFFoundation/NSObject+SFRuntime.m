@@ -139,3 +139,9 @@ static const char *SFKeyIdentifierDeallocObserver = "SFKeyIdentifierDeallocObser
 
 @end
 
+id SFDefer(void(^trigger)(void)) {
+    NSObject *obj = [NSObject new];
+    [obj sf_addDeallocObserver:trigger];
+    
+    return obj;
+}
