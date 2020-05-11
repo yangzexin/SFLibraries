@@ -119,7 +119,7 @@
     __weak typeof(datePicker) weakDatePicker = datePicker;
     __weak typeof(backgroundView) weakBackgroundView = backgroundView;
     __weak typeof(toolbar) weakToolbar = toolbar;
-    void(^closeAnimation)() = ^{
+    void(^closeAnimation)(void) = ^{
         __strong typeof(weakContainer) strongContainer = weakContainer;
         __strong typeof(weakToolbar) strongToolbar = weakToolbar;
         __strong typeof(weakDatePicker) strongDatePicker = weakDatePicker;

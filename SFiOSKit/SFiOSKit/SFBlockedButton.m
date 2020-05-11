@@ -84,15 +84,15 @@
     }
 }
 
-+ (instancetype)blockedButtonWithTap:(void(^)())tap {
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap {
     return [self blockedButtonWithTap:tap frame:CGRectNull addToSuperview:nil];
 }
 
-+ (instancetype)blockedButtonWithTap:(void(^)())tap frame:(CGRect)frame {
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap frame:(CGRect)frame {
     return [self blockedButtonWithTap:tap frame:frame addToSuperview:nil];
 }
 
-+ (instancetype)blockedButtonWithTap:(void(^)())tap frame:(CGRect)frame addToSuperview:(UIView *)superview {
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap frame:(CGRect)frame addToSuperview:(UIView *)superview {
     SFBlockedButton *button = [SFBlockedButton new];
     button.tap = tap;
     

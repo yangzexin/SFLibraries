@@ -44,7 +44,7 @@
 @property (nonatomic, assign) UIReturnKeyType doneReturnKeyType;
 
 @property (nonatomic, copy) void(^whenFieldBecameFirstResponder)(id field);
-@property (nonatomic, copy) void(^whenReturnDone)();
+@property (nonatomic, copy) void(^whenReturnDone)(void);
 
 @property (nonatomic, readonly) NSArray *fields;
 

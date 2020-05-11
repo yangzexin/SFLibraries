@@ -14,7 +14,7 @@
 
 @implementation SFAnimationDelegateProxy
 
-+ (instancetype)proxyWithDidStart:(void(^)())didStart didFinish:(void(^)(BOOL))didFinish {
++ (instancetype)proxyWithDidStart:(void(^)(void))didStart didFinish:(void(^)(BOOL))didFinish {
     SFAnimationDelegateProxy *proxy = [SFAnimationDelegateProxy new];
     proxy.didFinish = didFinish;
     proxy.didStart = didStart;

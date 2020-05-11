@@ -46,12 +46,12 @@
 
 - (id)initWithMenuViewController:(UIViewController *)menuViewController contentViewController:(UIViewController *)contentViewController;
 
-- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)())completion;
-- (void)setContentViewController:(UIViewController *)contentViewController showImmediately:(BOOL)showImmediately animated:(BOOL)animated completion:(void(^)())completion;
+- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)setContentViewController:(UIViewController *)contentViewController showImmediately:(BOOL)showImmediately animated:(BOOL)animated completion:(void(^)(void))completion;
 
-- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void(^)())completion;
-- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void(^)())completion;
+- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
-- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)())completion;
+- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)(void))completion;
 
 @end

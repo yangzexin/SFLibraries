@@ -63,7 +63,7 @@
         _viewControllers = viewControllers;
         [_viewControllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UIViewController *viewController = obj;
-            if (idx == _selectedIndex) {
+            if (idx == self->_selectedIndex) {
                 [self addChildViewController:viewController];
                 [self.view addSubview:viewController.view];
                 [viewController didMoveToParentViewController:self];

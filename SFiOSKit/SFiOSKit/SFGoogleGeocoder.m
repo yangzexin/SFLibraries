@@ -11,6 +11,8 @@
 #import "SFLocationDescription.h"
 #import <CoreLocation/CoreLocation.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation SFGoogleGeocoder
 
 @synthesize delegate;
@@ -139,3 +141,4 @@
 }
 
 @end
+#pragma clang diagnostic pop

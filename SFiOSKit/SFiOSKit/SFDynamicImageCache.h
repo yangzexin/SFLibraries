@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)setImageCreator:(UIImage *(^)())imageCreator name:(NSString *)name;
+- (void)setImageCreator:(UIImage *(^)(void))imageCreator name:(NSString *)name;
 - (UIImage *)imageNamed:(NSString *)name;
 
 @end

@@ -33,6 +33,6 @@
 - (UIViewController *)selectedViewController;
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
-- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)())completion;
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end

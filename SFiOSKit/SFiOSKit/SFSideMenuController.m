@@ -259,11 +259,11 @@ static CGFloat kValidPanDistance = 37;
     _contentViewController.view.frame = _contentView.bounds;
 }
 
-+ (void)_animateWithBlock:(void(^)())block completion:(void(^)())completion {
++ (void)_animateWithBlock:(void(^)(void))block completion:(void(^)(void))completion {
     [self _animateWithDuration:.30 block:block completion:completion];
 }
 
-+ (void)_animateWithDuration:(double)duration block:(void(^)())block completion:(void(^)())completion {
++ (void)_animateWithDuration:(double)duration block:(void(^)(void))block completion:(void(^)(void))completion {
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:block completion:^(BOOL finished) {
         if (completion) {
             completion();
@@ -271,11 +271,11 @@ static CGFloat kValidPanDistance = 37;
     }];
 }
 
-- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void (^)())completion {
+- (void)showMenuViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion {
     [self _showMenuViewControllerAnimated:animated restoreViewState:YES animatesMenu:_animatesShowMenu animationDuration:.30f completion:completion];
 }
 
-- (void)_showMenuViewControllerAnimated:(BOOL)animated restoreViewState:(BOOL)restoreViewState animatesMenu:(BOOL)animatesMenu animationDuration:(NSTimeInterval)animationDuration completion:(void(^)())completion {
+- (void)_showMenuViewControllerAnimated:(BOOL)animated restoreViewState:(BOOL)restoreViewState animatesMenu:(BOOL)animatesMenu animationDuration:(NSTimeInterval)animationDuration completion:(void(^)(void))completion {
     if (_menuShown == NO) {
         self.menuShown = YES;
         [self _addMenuControllerIfNeeded];
@@ -291,36 +291,36 @@ static CGFloat kValidPanDistance = 37;
         
         BOOL parallex = self.parallexAnimation;
         
-        void(^animationForMenu)() = ^{
-            CGRect tmpRect = _menuViewController.view.frame;
+        void(^animationForMenu)(void) = ^{
+            CGRect tmpRect = self->_menuViewController.view.frame;
             tmpRect.origin.x = 0;
-            _menuViewController.view.frame = tmpRect;
-            _menuViewController.view.alpha = animatesMenu ? 0.80f : 1.0f;
+            self->_menuViewController.view.frame = tmpRect;
+            self->_menuViewController.view.alpha = animatesMenu ? 0.80f : 1.0f;
         };
         
-        void(^animationForContent)() = ^{
+        void(^animationForContent)(void) = ^{
             
             if ([self _shouldTriggerMoveStatusBar]) {
                 self.statusBarX = [self _widthForMenuController];
                 [self _moveStatusBar];
             }
             
-            CGRect tmpRect = _menuViewController.view.frame;
+            CGRect tmpRect = self->_menuViewController.view.frame;
             
-            _contentView.transform = CGAffineTransformMakeScale(_scaleTransformForContentViewController, _scaleTransformForContentViewController);
-            tmpRect = _contentView.frame;
+            self->_contentView.transform = CGAffineTransformMakeScale(self->_scaleTransformForContentViewController, self->_scaleTransformForContentViewController);
+            tmpRect = self->_contentView.frame;
             tmpRect.origin.x = [self _widthForMenuController];
-            _contentView.frame = tmpRect;
+            self->_contentView.frame = tmpRect;
         };
         
-        void(^animationBlock)() = ^{
+        void(^animationBlock)(void) = ^{
             if (!parallex || !animated) {
                 animationForMenu();
             }
             animationForContent();
         };
-        void(^animationCompletion)() = ^{
-            [_contentViewController endAppearanceTransition];
+        void(^animationCompletion)(void) = ^{
+            [self->_contentViewController endAppearanceTransition];
             if (completion) {
                 completion();
             }
@@ -330,7 +330,7 @@ static CGFloat kValidPanDistance = 37;
             [[self class] _animateWithDuration:animationDuration block:animationBlock completion:^{
                 if (animatesMenu && !parallex) {
                     [UIView animateWithDuration:0.07f animations:^{
-                        _menuViewController.view.alpha = 1.0f;
+                        self->_menuViewController.view.alpha = 1.0f;
                     }];
                 }
                 
@@ -344,7 +344,7 @@ static CGFloat kValidPanDistance = 37;
                 [SFSideMenuController _animateWithDuration:.10f block:animationForMenu completion:^{
                     if (animatesMenu) {
                         [UIView animateWithDuration:0.07f animations:^{
-                            _menuViewController.view.alpha = 1.0f;
+                            self->_menuViewController.view.alpha = 1.0f;
                         }];
                     }
                     
@@ -364,11 +364,11 @@ static CGFloat kValidPanDistance = 37;
     [self showContentViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)())completion {
+- (void)setContentViewController:(UIViewController *)contentViewController animated:(BOOL)animated completion:(void(^)(void))completion {
     [self setContentViewController:contentViewController showImmediately:NO animated:animated completion:completion];
 }
 
-- (void)setContentViewController:(UIViewController *)contentViewController showImmediately:(BOOL)showImmediately animated:(BOOL)animated completion:(void(^)())completion {
+- (void)setContentViewController:(UIViewController *)contentViewController showImmediately:(BOOL)showImmediately animated:(BOOL)animated completion:(void(^)(void))completion {
     if (contentViewController == _contentViewController) {
         if (completion) {
             completion();
@@ -398,11 +398,11 @@ static CGFloat kValidPanDistance = 37;
     }
 }
 
-- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void (^)())completion {
+- (void)showContentViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion {
     [self _showContentViewControllerAnimated:animated notifyTransition:YES animationDuration:.30f completion:completion];
 }
 
-- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)())completion {
+- (void)tantantanWithMenuVisibleWidth:(CGFloat)menuVisibleWidth completion:(void(^)(void))completion {
     self.view.userInteractionEnabled = NO;
     CAKeyframeAnimation *contentViewAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
     contentViewAnimation.values = @[@27.0f, @127.0f, @0.0f, @37.0f, @0.0f, @17.0f, @0.0f, @7.0f, @0.0f, @2.0f, @0.0f];
@@ -428,7 +428,7 @@ static CGFloat kValidPanDistance = 37;
     _menuViewController.view.backgroundColor = [UIColor clearColor];
 }
 
-- (void)_showContentViewControllerAnimated:(BOOL)animated notifyTransition:(BOOL)notifyTransition animationDuration:(NSTimeInterval)animationDuration completion:(void(^)())completion {
+- (void)_showContentViewControllerAnimated:(BOOL)animated notifyTransition:(BOOL)notifyTransition animationDuration:(NSTimeInterval)animationDuration completion:(void(^)(void))completion {
     if (_menuShown) {
         self.menuShown = NO;
         
@@ -436,10 +436,10 @@ static CGFloat kValidPanDistance = 37;
             [_contentViewController beginAppearanceTransition:YES animated:animated];
         }
         
-        void(^animationBlock)() = ^{
+        void(^animationBlock)(void) = ^{
             [self _restoreMenuControllerPosition];
-            _contentView.transform = CGAffineTransformIdentity;
-            _contentView.frame = self.view.bounds;
+            self->_contentView.transform = CGAffineTransformIdentity;
+            self->_contentView.frame = self.view.bounds;
             
             if ([self _shouldTriggerMoveStatusBar]) {
                 self.statusBarX = 0;
@@ -447,13 +447,13 @@ static CGFloat kValidPanDistance = 37;
             }
         };
         
-        void(^animationCompletion)() = ^{
+        void(^animationCompletion)(void) = ^{
             [self _updateViewState];
             if (completion) {
                 completion();
             }
             if (notifyTransition) {
-                [_contentViewController endAppearanceTransition];
+                [self->_contentViewController endAppearanceTransition];
             }
             [self _contentViewControllerDidShown];
         };

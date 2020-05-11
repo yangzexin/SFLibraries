@@ -10,7 +10,7 @@
 
 @interface SFBlockedButton : UIButton
 
-@property (nonatomic, copy) void(^tap)();
+@property (nonatomic, copy) void(^tap)(void);
 
 @property (nonatomic, assign) BOOL round;
 @property (nonatomic, assign) CGFloat roundSize;
@@ -20,8 +20,8 @@
 
 - (void)initialize;
 
-+ (instancetype)blockedButtonWithTap:(void(^)())tap;
-+ (instancetype)blockedButtonWithTap:(void(^)())tap frame:(CGRect)frame;
-+ (instancetype)blockedButtonWithTap:(void(^)())tap frame:(CGRect)frame addToSuperview:(UIView *)superview;
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap;
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap frame:(CGRect)frame;
++ (instancetype)blockedButtonWithTap:(void(^)(void))tap frame:(CGRect)frame addToSuperview:(UIView *)superview;
 
 @end

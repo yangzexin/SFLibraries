@@ -14,7 +14,7 @@
 #import <AppKit/AppKit.h>
 #endif
 
-NSString *SFCurrentApplicationIdentifier() {
+NSString *SFCurrentApplicationIdentifier(void) {
 #ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
     return [[NSString stringWithFormat:@"%p", [UIApplication sharedApplication]] sf_stringByEncryptingUsingMD5];
 #elif TARGET_OS_MAC

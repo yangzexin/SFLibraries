@@ -48,6 +48,8 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
                                                object:nil];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (self.completion) {
         self.completion(buttonIndex, [alertView buttonTitleAtIndex:buttonIndex]);
@@ -57,6 +59,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
         CFRelease((__bridge CFTypeRef)(self));
     });
 }
+#pragma clang diagnostic pop
 
 - (void)closePresentingAlertNotification:(NSNotification *)n {
     NSNumber *animated = [n.userInfo objectForKey:SFClosePresentingAlertViewOptionsAnimationStateKey];
@@ -138,6 +141,8 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 }
 
 #pragma mark - UIAlertViewDelegate
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *text = nil;
     if (self.useCustomTextField) {
@@ -153,9 +158,12 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
         CFRelease((__bridge CFTypeRef)(self));
     });
 }
+#pragma clang diagnostic pop
 
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation UIAlertView (SFAddition_quickAlert)
 
 + (void)sf_dismissPresentingDialogAnimated:(BOOL)animated {
@@ -183,7 +191,7 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     return alertDialog.alertView;
 }
 
-+ (id)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion {
++ (id)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)(void))completion {
     return [self sf_alertWithTitle:title message:message completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (completion) {
             completion();
@@ -191,19 +199,22 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
     } cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
 }
 
-+ (id)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion {
++ (id)sf_alertWithMessage:(NSString *)message completion:(void (^)(void))completion {
     return [self sf_alertWithTitle:@"" message:message completion:completion];
 }
 
 @end
+#pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation UIAlertView (SFAddition_confirmDialog)
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve {
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)(void))approve {
     [self sf_confirmWithTitle:title message:message approve:approve cancel:nil];
 }
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel {
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)(void))approve cancel:(void(^)(void))cancel {
     [self sf_alertWithTitle:title message:message completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if (buttonIndex == 0) {
             if (approve) {
@@ -220,7 +231,10 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 }
 
 @end
+#pragma clang diagnostic pop
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation UIAlertView (SFAddition_inputDialog)
 
 + (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion {
@@ -280,4 +294,5 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 }
 
 @end
+#pragma clang diagnostic pop
 #pragma clang diagnostic pop

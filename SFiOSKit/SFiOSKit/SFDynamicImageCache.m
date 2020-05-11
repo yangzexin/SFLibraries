@@ -42,7 +42,7 @@
     return [NSString stringWithFormat:@"DynamicImage-%@", name];
 }
 
-- (void)setImageCreator:(UIImage *(^)())imageCreator name:(NSString *)name {
+- (void)setImageCreator:(UIImage *(^)(void))imageCreator name:(NSString *)name {
     [self.keyNameValueImageCreator setObject:[NSValue sf_valueWithBlock:imageCreator] forKey:[self _wrapName:name]];
 }
 
@@ -53,7 +53,7 @@
     if (image == nil) {
         NSValue *blockValue = [self.keyNameValueImageCreator objectForKey:name];
         if (blockValue) {
-            UIImage *(^imageCreator)() = (UIImage *(^)())[blockValue sf_block];
+            UIImage *(^imageCreator)(void) = (UIImage *(^)(void))[blockValue sf_block];
             image = imageCreator();
             
             if (image) {

@@ -16,7 +16,7 @@
 
 @end
 
-typedef void(^SFTransparentViewControllerAnimationCompletionCallback)();
+typedef void(^SFTransparentViewControllerAnimationCompletionCallback)(void);
 
 @interface SFTransparentViewControllerAnimation : NSObject
 
@@ -49,9 +49,9 @@ typedef void(^SFTransparentViewControllerAnimationCompletionCallback)();
 
 - (UIViewController *)sf_presentingTransparentViewController;
 
-- (void)sf_presentTransparentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion;
-- (void)sf_presentTransparentViewController:(UIViewController *)viewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)())completion;
+- (void)sf_presentTransparentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)sf_presentTransparentViewController:(UIViewController *)viewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)(void))completion;
 
-- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)())completion;
+- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end

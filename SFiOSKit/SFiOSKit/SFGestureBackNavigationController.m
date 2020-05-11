@@ -190,7 +190,7 @@
     [_keyWritingPreparerInfoIndentifierValueImage setObject:info.capturedImage forKey:identifier];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [info writeToCache];
-        [_keyWritingPreparerInfoIndentifierValueImage removeObjectForKey:identifier];
+        [self->_keyWritingPreparerInfoIndentifierValueImage removeObjectForKey:identifier];
     });
 }
 
@@ -397,19 +397,19 @@ static CGFloat const kPreviousViewShowWidth = 150;
                         options:gestureBackable && !restore ? UIViewAnimationOptionCurveEaseOut : UIViewAnimationOptionCurveEaseIn
                      animations:^
      {
-         _currentViewControllerView.frame = desFrame;
+         self->_currentViewControllerView.frame = desFrame;
          if(gestureBackable && !restore){
-             _currentViewControllerView.alpha = 1.0f;
-             _previousViewControllerView.frame = _originalPreviousViewControllerViewFrame;
+             self->_currentViewControllerView.alpha = 1.0f;
+             self->_previousViewControllerView.frame = self->_originalPreviousViewControllerViewFrame;
              [self _currentViewControllerViewFrameDidChanged];
          }
          maskView.alpha = desMaskAlpha;
      } completion:^(BOOL finished) {
          if(gestureBackable){
-             CGRect tmpRect = _currentViewControllerView.frame;
+             CGRect tmpRect = self->_currentViewControllerView.frame;
              tmpRect.origin.x = 0;
-             _currentViewControllerView.frame = tmpRect;
-             _currentViewControllerView.alpha = 1.0f;
+             self->_currentViewControllerView.frame = tmpRect;
+             self->_currentViewControllerView.alpha = 1.0f;
              [self _currentViewControllerViewFrameDidChanged];
              if ([lastViewController respondsToSelector:@selector(gestureBackDidTrigger)]) {
                  [(id<SFGestureBackable>)lastViewController gestureBackDidTrigger];

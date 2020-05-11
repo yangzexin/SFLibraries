@@ -21,7 +21,7 @@
 
 @property (nonatomic, assign) BOOL firstAppeared;
 
-@property (nonatomic, copy) void(^scrollAnimationCompletion)();
+@property (nonatomic, copy) void(^scrollAnimationCompletion)(void);
 
 @end
 
@@ -114,7 +114,7 @@
     [self setSelectedIndex:selectedIndex animated:animated completion:nil];
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)())completion {
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated completion:(void(^)(void))completion {
     if (selectedIndex != _selectedIndex) {
         if (!animated) {
             _selectedIndex = selectedIndex;

@@ -10,7 +10,7 @@
 
 @class SFCache;
 
-typedef NSString *(^SFCacheControlCacheKeyBuilder)();
+typedef NSString *(^SFCacheControlCacheKeyBuilder)(void);
 
 typedef BOOL (^SFCacheControlCacheValidator)(SFCache *cache);
 
@@ -31,7 +31,7 @@ typedef void(^SFCacheControlCacheFinishUpdate)(id object);
 @property (nonatomic, assign) BOOL interuptWhenCacheValid;
 
 // 取消请求的回调
-@property (nonatomic, copy) void(^cancelNotifier)();
+@property (nonatomic, copy) void(^cancelNotifier)(void);
 
 + (instancetype)cacheControl;
 

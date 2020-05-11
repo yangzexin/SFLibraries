@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) UIView *expandIndicatorView;
 
-@property (nonatomic, copy) void(^collapseStateDidChange)();
+@property (nonatomic, copy) void(^collapseStateDidChange)(void);
 
 - (void)fitToSuitableHeight;
 

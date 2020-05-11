@@ -10,9 +10,9 @@
 
 @interface SFAnimationDelegateProxy : NSObject <CAAnimationDelegate>
 
-@property (nonatomic, copy) void(^didStart)();
+@property (nonatomic, copy) void(^didStart)(void);
 @property (nonatomic, copy) void(^didFinish)(BOOL finished);
 
-+ (instancetype)proxyWithDidStart:(void(^)())didStart didFinish:(void(^)(BOOL))didFinish;
++ (instancetype)proxyWithDidStart:(void(^)(void))didStart didFinish:(void(^)(BOOL))didFinish;
 
 @end

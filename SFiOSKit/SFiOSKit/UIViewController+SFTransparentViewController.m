@@ -108,7 +108,7 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
     return existsViewController;
 }
 
-- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)())completion {
+- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController transparent:(BOOL)transparent animated:(BOOL)animated completion:(void(^)(void))completion {
     if (presentingTransparentViewController == nil) {
         NSLog(@"Warning:%@", @"viewController can't be nil");
         return;
@@ -172,11 +172,11 @@ static NSString *kTransparentViewControllerDismissingAnimationKey = @"kTranspare
     });
 }
 
-- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController animated:(BOOL)animated completion:(void(^)())completion {
+- (void)sf_presentTransparentViewController:(UIViewController *)presentingTransparentViewController animated:(BOOL)animated completion:(void(^)(void))completion {
     [self sf_presentTransparentViewController:presentingTransparentViewController transparent:YES animated:animated completion:completion];
 }
 
-- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)())completion {
+- (void)sf_dismissTransparentViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion {
     UIViewController *presentingTransparentViewController = [self sf_presentingTransparentViewController];
     UIViewController *parentTransparentViewController = self;
     if (presentingTransparentViewController == nil) {

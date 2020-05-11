@@ -41,8 +41,8 @@
 
 @interface UIView (SFTapSupport)
 
-- (void)sf_addTapListener:(void(^)())tapListener;
-- (void)sf_addTapListener:(void(^)())tapListener identifier:(NSString *)identifier;
+- (void)sf_addTapListener:(void(^)(void))tapListener;
+- (void)sf_addTapListener:(void(^)(void))tapListener identifier:(NSString *)identifier;
 - (void)sf_removeTapListenerWithIdentifier:(NSString *)identifier;
 
 @end

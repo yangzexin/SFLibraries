@@ -13,13 +13,13 @@
 
 @interface SFTapGestureRecognizer : UITapGestureRecognizer
 
-@property (nonatomic, copy) void(^tapHandler)();
+@property (nonatomic, copy) void(^tapHandler)(void);
 
 @end
 
 @implementation SFTapGestureRecognizer
 
-- (id)initWithTapHandler:(void(^)())tapHandler {
+- (id)initWithTapHandler:(void(^)(void))tapHandler {
     self = [self initWithTarget:self action:@selector(_tapped:)];
     
     self.tapHandler = tapHandler;
@@ -165,11 +165,11 @@
 
 @implementation UIView (SFTapSupport)
 
-- (void)sf_addTapListener:(void(^)())tapListener {
+- (void)sf_addTapListener:(void(^)(void))tapListener {
     [self sf_addTapListener:tapListener identifier:nil];
 }
 
-- (void)sf_addTapListener:(void(^)())tapListener identifier:(NSString *)identifier {
+- (void)sf_addTapListener:(void(^)(void))tapListener identifier:(NSString *)identifier {
     NSMutableDictionary *keyIdentifierValueTapListener = [self sf_associatedObjectWithKey:@"sf_keyIdentifierValueTapListener"];
     if (keyIdentifierValueTapListener == nil) {
         keyIdentifierValueTapListener = [NSMutableDictionary dictionary];
@@ -188,7 +188,7 @@
     if (gr == nil) {
         gr = [[SFTapGestureRecognizer alloc] initWithTapHandler:^{
             for (NSValue *blockValue in [keyIdentifierValueTapListener allValues]) {
-                void(^tmpTapListener)() = [blockValue sf_block];
+                void(^tmpTapListener)(void) = [blockValue sf_block];
                 tmpTapListener();
             }
         }];

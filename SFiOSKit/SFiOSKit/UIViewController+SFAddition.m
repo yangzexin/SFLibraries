@@ -32,11 +32,11 @@
     return srcController;
 }
 
-- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion {
+- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)(void))completion {
     [[self _topModalViewController] presentViewController:viewController animated:animated completion:completion];
 }
 
-- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)())completion {
+- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion {
     [[self _topModalViewController] dismissViewControllerAnimated:animated completion:completion];
 }
 

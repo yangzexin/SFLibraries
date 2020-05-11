@@ -17,7 +17,7 @@
 
 @interface SFGuidePlayer : UIView
 
-@property (nonatomic, copy) void(^guideDidPlayFinish)();
+@property (nonatomic, copy) void(^guideDidPlayFinish)(void);
 
 @property (nonatomic, weak) UIView<SFGuidePlayerPageIndicator> *pageIndicator;
 
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSArray *picturesFor35;
 @property (nonatomic, assign) BOOL showAnimated;
 
-@property (nonatomic, copy) UIView *(^viewForTapToFinish)();
+@property (nonatomic, copy) UIView *(^viewForTapToFinish)(void);
 
 - (void)playInViewController:(UIViewController *)viewController;
 - (void)finishPlayWithAnimated:(BOOL)animated;

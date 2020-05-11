@@ -12,11 +12,11 @@
 
 + (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier;
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion;
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion;
 
 + (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier;
 
-+ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion;
++ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion;
 
 + (void)dismissWithIdentifier:(NSString *)identifier;
 

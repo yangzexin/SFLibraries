@@ -77,7 +77,7 @@
     
     NSMutableArray *imageViews = [NSMutableArray array];
     [guideImages enumerateObjectsUsingBlock:^(UIImage *guideImage, NSUInteger idx, BOOL *stop) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(targetView.frame.size.width * idx, (SFIs3Dot5InchScreen ? _paddingTopFor35 : 0) + (SFDeviceSystemVersion < 7.0f ? (SFIs3Dot5InchScreen ? -5 : 10.0f) : 0.0f), targetView.frame.size.width, targetView.frame.size.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(targetView.frame.size.width * idx, (SFIs3Dot5InchScreen ? self->_paddingTopFor35 : 0) + (SFDeviceSystemVersion < 7.0f ? (SFIs3Dot5InchScreen ? -5 : 10.0f) : 0.0f), targetView.frame.size.width, targetView.frame.size.height)];
         imageView.image = guideImage;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -117,32 +117,32 @@
 }
 
 - (void)_stopPlayWithAnimated:(BOOL)animated fadeAnimation:(BOOL)fadeAnimation {
-    void(^animationCompletion)() = ^{
+    void(^animationCompletion)(void) = ^{
         [self removeFromSuperview];
-        if (_guideDidPlayFinish) {
-            _guideDidPlayFinish();
+        if (self->_guideDidPlayFinish) {
+            self->_guideDidPlayFinish();
             self.guideDidPlayFinish = nil;
         }
     };
-    void(^animation)() = nil;
+    void(^animation)(void) = nil;
     if (fadeAnimation) {
         animation = ^{
             self.alpha = 0.0f;
         };
     } else {
         animation = ^{
-            CGRect tmpRect = _scrollView.frame;
+            CGRect tmpRect = self->_scrollView.frame;
             tmpRect.origin.x = -tmpRect.size.width;
-            _scrollView.frame = tmpRect;
+            self->_scrollView.frame = tmpRect;
             
-            if (_pageIndicator) {
-                tmpRect = _pageIndicator.frame;
+            if (self->_pageIndicator) {
+                tmpRect = self->_pageIndicator.frame;
                 tmpRect.origin.x = -tmpRect.size.width;
-                _pageIndicator.frame = tmpRect;
+                self->_pageIndicator.frame = tmpRect;
             }
             
-            _backgroundView.alpha = 0.0f;
-            _scrollView.alpha = 0.0f;
+            self->_backgroundView.alpha = 0.0f;
+            self->_scrollView.alpha = 0.0f;
         };
     }
     

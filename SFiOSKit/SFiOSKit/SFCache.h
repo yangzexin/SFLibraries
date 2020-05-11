@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-OBJC_EXPORT NSString *SFCurrentApplicationIdentifier();
+OBJC_EXPORT NSString *SFCurrentApplicationIdentifier(void);
 
 @interface SFCache : NSObject <NSCoding>
 

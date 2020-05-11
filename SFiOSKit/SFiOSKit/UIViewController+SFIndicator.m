@@ -250,7 +250,7 @@
     [self toast:text hideAfterSeconds:1.70f identifier:identifier];
 }
 
-- (void)toast:(NSString *)text completion:(void(^)())completion {
+- (void)toast:(NSString *)text completion:(void(^)(void))completion {
     [self toast:text hideAfterSeconds:1.70f identifier:nil completion:completion];
 }
 
@@ -262,7 +262,7 @@
     [self toast:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:nil];
 }
 
-- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion {
     [SFToast toastInView:self.view text:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:completion];
 }
 

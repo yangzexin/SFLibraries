@@ -46,7 +46,7 @@
     return self;
 }
 
-- (void)animateShowWithCompletion:(void(^)())completion {
+- (void)animateShowWithCompletion:(void(^)(void))completion {
     self.backgroundView.alpha = 0.0f;
     self.textLabel.alpha = 0.0f;
     [UIView animateWithDuration:0.25f animations:^{
@@ -59,7 +59,7 @@
     }];
 }
 
-- (void)animateHideWithCompletion:(void(^)())completion {
+- (void)animateHideWithCompletion:(void(^)(void))completion {
     self.backgroundView.alpha = 0.72f;
     self.textLabel.alpha = 1.0f;
     [UIView animateWithDuration:0.25f animations:^{
@@ -146,11 +146,11 @@
     [self toastInView:view text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:nil];
 }
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion {
     [self toastInView:view text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
 }
 
-+ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds autoPositionForKeyboard:(BOOL)autoPositionForKeyboard identifier:(NSString *)identifier completion:(void(^)())completion {
++ (void)toastInView:(UIView *)view text:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds autoPositionForKeyboard:(BOOL)autoPositionForKeyboard identifier:(NSString *)identifier completion:(void(^)(void))completion {
     if (![[SFKeyboardStateListener sharedListener] isListening]) {
         [[SFKeyboardStateListener sharedListener] startListening];
     }
@@ -213,7 +213,7 @@
     [self toastWithText:text hideAfterSeconds:hideAfterSeconds identifier:identifier completion:nil];
 }
 
-+ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion {
++ (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion {
     [self toastInView:[[UIApplication sharedApplication] keyWindow] text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
 }
 

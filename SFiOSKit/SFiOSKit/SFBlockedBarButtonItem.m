@@ -10,7 +10,7 @@
 
 @interface SFBlockedBarButtonItem ()
 
-@property (nonatomic, copy) void(^tap)();
+@property (nonatomic, copy) void(^tap)(void);
 @property (nonatomic, strong) UITapGestureRecognizer *customViewTapGestureRecognizer;
 
 @end
@@ -52,7 +52,7 @@
     return self;
 }
 
-- (id)initWithCustomView:(UIView *)customView tap:(void(^)())tap {
+- (id)initWithCustomView:(UIView *)customView tap:(void(^)(void))tap {
     self = [super initWithCustomView:customView];
 
     if (tap) {
@@ -74,21 +74,21 @@
     [self tapped];
 }
 
-+ (instancetype)blockedBarButtonItemWithTitle:(NSString *)title tap:(void (^)())tap {
++ (instancetype)blockedBarButtonItemWithTitle:(NSString *)title tap:(void (^)(void))tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithTitle:title];
     tmp.tap = tap;
     
     return tmp;
 }
 
-+ (instancetype)blockedBarButtonItemWithImage:(UIImage *)image tap:(void (^)())tap {
++ (instancetype)blockedBarButtonItemWithImage:(UIImage *)image tap:(void (^)(void))tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithImage:image];
     tmp.tap = tap;
     
     return tmp;
 }
 
-+ (instancetype)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem tap:(void (^)())tap {
++ (instancetype)blockedBarButtonItemWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem tap:(void (^)(void))tap {
     SFBlockedBarButtonItem *tmp = [[SFBlockedBarButtonItem alloc] initWithBarButtonSystemItem:systemItem];
     tmp.tap = tap;
     
@@ -99,7 +99,7 @@
     return [[self class] blockedBarButtonItemWithCustomView:customView tap:nil];
 }
 
-+ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView tap:(void (^)())tap {
++ (instancetype)blockedBarButtonItemWithCustomView:(UIView *)customView tap:(void (^)(void))tap {
     SFBlockedBarButtonItem *item = [[SFBlockedBarButtonItem alloc] initWithCustomView:customView tap:tap];
     
     return item;

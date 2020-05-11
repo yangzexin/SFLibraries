@@ -57,9 +57,9 @@
 
 - (void)toast:(NSString *)text;
 - (void)toast:(NSString *)text identifier:(NSString *)identifier;
-- (void)toast:(NSString *)text completion:(void(^)())completion;
+- (void)toast:(NSString *)text completion:(void(^)(void))completion;
 - (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds;
 - (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier;
-- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)())completion;
+- (void)toast:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion;
 
 @end

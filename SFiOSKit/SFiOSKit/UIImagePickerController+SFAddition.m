@@ -54,6 +54,8 @@
     return self.imagePickerController;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     if (self.completion) {
         self.completion(@[image], NO);
@@ -67,6 +69,7 @@
         self.completion = nil;
     }
 }
+#pragma clang diagnostic pop
 
 @end
 

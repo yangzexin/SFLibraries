@@ -12,9 +12,9 @@
 
 #import <SFFoundation/SFFoundation.h>
 
-static NSOperationQueue *SFSharedDownloadImageQueue();
-static NSString *SFDownloadImageFolderPath();
-static NSMutableDictionary *SFKeyURLValueOperation();
+static NSOperationQueue *SFSharedDownloadImageQueue(void);
+static NSString *SFDownloadImageFolderPath(void);
+static NSMutableDictionary *SFKeyURLValueOperation(void);
 static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(UIImage *image, NSError *error), void(^previousCompletion)(UIImage *image, NSError *error));
 
 @interface SFDownloadImageOperation : NSOperation
@@ -31,7 +31,7 @@ static void SFDownloadImage(NSURL *url, CGFloat maxPixelSize, void(^completion)(
 
 @property (nonatomic, assign) CGFloat maxPixelSize;
 
-@property (nonatomic, copy) void(^whenFinished)();
+@property (nonatomic, copy) void(^whenFinished)(void);
 
 @end
 

@@ -18,16 +18,16 @@ typedef void(^SFAlertViewCompletion)(NSInteger buttonIndex, NSString *buttonTitl
 
 + (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion __attribute__((deprecated));
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)(void))completion __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion __attribute__((deprecated));
++ (UIAlertView *)sf_alertWithMessage:(NSString *)message completion:(void (^)(void))completion __attribute__((deprecated));
 
 @end
 
 @interface UIAlertView (SFAddition_confirmDialog)
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve __attribute__((deprecated));
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel __attribute__((deprecated));
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)(void))approve __attribute__((deprecated));
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)(void))approve cancel:(void(^)(void))cancel __attribute__((deprecated));
 
 @end
 

@@ -12,7 +12,7 @@
 
 - (NSMutableArray *)sf_viewControllersPopToMe;
 
-- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)())completion;
-- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)())completion;
+- (void)sf_recursivePresentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)sf_recursiveDismissViewControllerAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end

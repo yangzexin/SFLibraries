@@ -75,7 +75,7 @@ SFWrappableServant *SFChainedServant(id<SFServant> servant) {
 @implementation SFSyncWrappedServant
 
 - (void)servantStartingService {
-    NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
+    //NSAssert(![NSThread isMainThread], @"Can't start SFSyncWrappedServant in main thread, cause this will block main thread.");
     
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
     

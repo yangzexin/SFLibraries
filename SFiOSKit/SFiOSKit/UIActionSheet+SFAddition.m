@@ -44,6 +44,8 @@
 }
 
 #pragma mark - UIActionSheetDelegate
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (self.completion) {
         self.completion(buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
@@ -52,9 +54,12 @@
         CFRelease((__bridge CFTypeRef)(self));
     });
 }
+#pragma clang diagnostic pop
 
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 @implementation UIActionSheet (SFAddition)
 
 + (UIActionSheet *)sf_actionSheetWithTitle:(NSString *)title completion:(SFActionSheetDialogCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... {
@@ -96,4 +101,5 @@
 }
 
 @end
+#pragma clang diagnostic pop
 #pragma clang diagnostic pop

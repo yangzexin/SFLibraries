@@ -70,6 +70,8 @@
 }
 
 #pragma mark - CLLocationManagerDelegate
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSTimeInterval timeInterval = fabs([newLocation.timestamp timeIntervalSinceNow]);
     if (timeInterval < 10) {
@@ -81,6 +83,7 @@
     } else {
     }
 }
+#pragma clang diagnostic pop
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     [self notifyError:error];

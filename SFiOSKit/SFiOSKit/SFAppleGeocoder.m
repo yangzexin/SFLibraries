@@ -94,6 +94,8 @@
 }
 
 #pragma mark - MKReserveGeocoder
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
     [self notifySucceed:placemark];
     self.reverseGeocoder.delegate = nil;
@@ -102,6 +104,7 @@
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
     [self notifyFailed:error];
 }
+#pragma clang diagnostic pop
 
 @end
 
