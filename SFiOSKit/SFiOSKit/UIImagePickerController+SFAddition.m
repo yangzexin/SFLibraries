@@ -85,6 +85,8 @@
 
 @implementation SFImagePickerControllerWrapper
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (UIActionSheet *)pickImageByActionSheetInViewController:(UIViewController *)viewController completion:(SFMutipleImagePickerCompletion)completion {
     [viewController sf_setAssociatedObject:self key:@"_ImagePickerControllerWrapper"];
     NSMutableArray *imagePickerViewControllers = [NSMutableArray array];
@@ -178,3 +180,4 @@
 }
 
 @end
+#pragma clang diagnostic pop

@@ -10,6 +10,7 @@
 
 #import "SFGeocoder.h"
 
+__attribute__((deprecated))
 @interface SFGoogleGeocoder : NSObject <SFGeocoder> 
 
 @end

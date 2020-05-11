@@ -29,7 +29,7 @@
 }
 
 - (id)initWithTitle:(NSString *)title {
-    self = [super initWithTitle:title style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self = [super initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self initialize];
     

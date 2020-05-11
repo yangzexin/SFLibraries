@@ -8,6 +8,8 @@
 
 #import "UIActionSheet+SFAddition.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @interface SFActionSheetWrapper : NSObject <UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIActionSheet *actionSheet;
@@ -94,3 +96,4 @@
 }
 
 @end
+#pragma clang diagnostic pop

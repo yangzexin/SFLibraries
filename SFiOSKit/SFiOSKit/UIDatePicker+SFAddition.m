@@ -109,7 +109,7 @@
         titleLabel.textColor = [UIColor darkGrayColor];
     }
     titleLabel.text = options._title;
-    titleLabel.textAlignment = UITextAlignmentCenter;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.userInteractionEnabled = NO;
     titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

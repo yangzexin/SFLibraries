@@ -12,36 +12,36 @@ typedef void(^SFAlertViewCompletion)(NSInteger buttonIndex, NSString *buttonTitl
 
 @interface UIAlertView (SFAddition_quickAlert)
 
-+ (void)sf_dismissPresentingDialogAnimated:(BOOL)animated;
++ (void)sf_dismissPresentingDialogAnimated:(BOOL)animated __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ... __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList;
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(SFAlertViewCompletion)completion cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitleList:(NSArray *)otherButtonTitleList __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion;
++ (UIAlertView *)sf_alertWithTitle:(NSString *)title message:(NSString *)message completion:(void(^)())completion __attribute__((deprecated));
 
-+ (UIAlertView *)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion;
++ (UIAlertView *)sf_alertWithMessage:(NSString *)message completion:(void (^)())completion __attribute__((deprecated));
 
 @end
 
 @interface UIAlertView (SFAddition_confirmDialog)
 
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve;
-+ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel;
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve __attribute__((deprecated));
++ (void)sf_confirmWithTitle:(NSString *)title message:(NSString *)message approve:(void(^)())approve cancel:(void(^)())cancel __attribute__((deprecated));
 
 @end
 
 @interface UIAlertView (SFAddition_inputDialog)
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion;
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion __attribute__((deprecated));
 
-+ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message secureTextEntry:(BOOL)secureTextEntry cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion;
++ (UITextField *)sf_inputWithTitle:(NSString *)title message:(NSString *)message secureTextEntry:(BOOL)secureTextEntry cancelButtonTitle:(NSString *)cancelButtonTitle approveButtonTitle:(NSString *)approveButtonTitle completion:(void(^)(NSString *input, BOOL cancelled))completion __attribute__((deprecated));
 
 @end
 
 @interface UIAlertView (SFAddition)
 
-- (UILabel *)sf_messageLabel;
-- (UILabel *)sf_titleLabel;
+- (UILabel *)sf_messageLabel __attribute__((deprecated));
+- (UILabel *)sf_titleLabel __attribute__((deprecated));
 
 @end

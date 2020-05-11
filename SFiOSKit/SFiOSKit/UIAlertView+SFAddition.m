@@ -10,6 +10,8 @@
 
 #import <SFFoundation/SFFoundation.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 NSString *SFClosePresentingAlertViewOptionsAnimationStateKey = @"SFClosePresentingNotificationConfigAnimatedKey";
 NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotification";
 
@@ -278,3 +280,4 @@ NSString *SFClosePresentingAlertViewNotification = @"SFClosePresentingAlertNotif
 }
 
 @end
+#pragma clang diagnostic pop

@@ -10,6 +10,6 @@
 
 @interface UITextField (SFNotEmpty)
 
-- (BOOL)sf_isNotEmptyWithTips:(NSString *)tips;
+- (BOOL)sf_isNotEmptyWithTips:(NSString *)tips __attribute__((deprecated));
 
 @end
