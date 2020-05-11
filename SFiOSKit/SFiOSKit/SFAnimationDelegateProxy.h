@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SFAnimationDelegateProxy : NSObject
+@interface SFAnimationDelegateProxy : NSObject <CAAnimationDelegate>
 
 @property (nonatomic, copy) void(^didStart)();
 @property (nonatomic, copy) void(^didFinish)(BOOL finished);
