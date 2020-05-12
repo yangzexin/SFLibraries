@@ -244,7 +244,7 @@ static CGFloat const kPreviousViewShowWidth = 150;
     }
     
     __weak typeof(self) weakSelf = self;
-    [SFTrackProperty(self, disableGestureBack) change:^(id value) {
+    [SFTrackProperty(self, disableGestureBack) onChange:^(id value) {
         __strong typeof(weakSelf) self = weakSelf;
         self.panGestureRecognizer.enabled = !self.disableGestureBack;
     }];

@@ -49,12 +49,12 @@
     self.scrollView = scrollView;
     
     __weak typeof(self) weakSelf = self;
-    [SFTrackProperty(self.view, frame) change:^(id value) {
+    [SFTrackProperty(self.view, frame) onChange:^(id value) {
         __strong typeof(weakSelf) self = weakSelf;
         self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width * self.viewControllers.count, self.view.frame.size.height);
     }];
     
-    [SFTrackProperty(self, scrollable) change:^(id value) {
+    [SFTrackProperty(self, scrollable) onChange:^(id value) {
         __strong typeof(weakSelf) self = weakSelf;
         self.scrollView.scrollEnabled = self.scrollable;
     }];

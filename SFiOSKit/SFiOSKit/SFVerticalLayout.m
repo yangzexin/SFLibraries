@@ -43,7 +43,7 @@
     [self addSubview:self.tableView];
     
     __weak typeof(self) weakSelf = self;
-    [SFTrackProperty(self, separatorHidden) change:^(NSNumber *value) {
+    [SFTrackProperty(self, separatorHidden) onChange:^(NSNumber *value) {
         __strong typeof(weakSelf) self = weakSelf;
         self.tableView.separatorStyle = [value boolValue] ? UITableViewCellSeparatorStyleNone : UITableViewCellSeparatorStyleSingleLine;
     }];

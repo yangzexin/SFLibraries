@@ -15,7 +15,7 @@
 @property (nonatomic, copy) void(^observeStarted)(void);
 @property (nonatomic, copy) void(^cancelHandler)(void);
 
-- (instancetype)change:(void(^)(id value))change;
+- (instancetype)onChange:(void(^)(id value))change;
 - (void)cancel;
 
 @end

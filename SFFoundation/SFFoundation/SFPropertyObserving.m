@@ -17,7 +17,7 @@
 
 @implementation SFPropertyObserving
 
-- (instancetype)change:(void (^)(id))change {
+- (instancetype)onChange:(void (^)(id))change {
     if (!_observing) {
         self.observing = YES;
         self.changeBlock = change;

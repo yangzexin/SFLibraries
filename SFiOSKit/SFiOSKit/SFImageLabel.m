@@ -344,7 +344,7 @@ static CGFloat SFImageLabelDescentCallback(void *ref) {
     self.highlightedTextBackgroundColor = [UIColor colorWithRed:0 green:0 blue:1.0f alpha:.20f];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizerTrigger:)];
     __weak typeof(self) weakSelf = self;
-    [SFTrackProperty(self, detectedDataStringInteractable) change:^(id value) {
+    [SFTrackProperty(self, detectedDataStringInteractable) onChange:^(id value) {
         __strong typeof(weakSelf) self = weakSelf;
         self.tapGestureRecognizer.enabled = [value boolValue];
     }];
