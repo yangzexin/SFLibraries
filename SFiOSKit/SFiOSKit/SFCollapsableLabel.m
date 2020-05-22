@@ -18,8 +18,8 @@
 
 @implementation SFCollapsableLabel
 
-- (void)initialize {
-    [super initialize];
+- (void)initCompat {
+    [super initCompat];
     self.label = ({
         UILabel *label = [UILabel new];
         label.backgroundColor = [UIColor clearColor];

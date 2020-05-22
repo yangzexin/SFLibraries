@@ -24,6 +24,18 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame round:(BOOL)round roundSize:(CGFloat)roundSize backgroundColor:(UIColor *)backgroundColor {
+    self = [super initWithFrame:frame];
+    
+    _round = round;
+    _roundSize = roundSize;
+    self.backgroundColor = backgroundColor;
+    
+    [self initialize];
+    
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     
@@ -93,8 +105,10 @@
 }
 
 + (instancetype)blockedButtonWithTap:(void(^)(void))tap frame:(CGRect)frame addToSuperview:(UIView *)superview {
-    SFBlockedButton *button = [SFBlockedButton new];
+    SFBlockedButton *button = [[SFBlockedButton alloc] initWithFrame:frame round:YES roundSize:10 backgroundColor:[UIColor darkGrayColor]];
     button.tap = tap;
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
     
     if (!CGRectIsNull(frame)) {
         button.frame = frame;

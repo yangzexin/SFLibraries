@@ -13,6 +13,6 @@
 @property (nonatomic, copy) void(^didStart)(void);
 @property (nonatomic, copy) void(^didFinish)(BOOL finished);
 
-+ (instancetype)proxyWithDidStart:(void(^)(void))didStart didFinish:(void(^)(BOOL))didFinish;
++ (instancetype)proxyWithDidStart:(void(^)(void))didStart didFinish:(void(^)(BOOL finished))didFinish;
 
 @end

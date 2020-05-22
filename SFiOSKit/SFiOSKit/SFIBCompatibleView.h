@@ -10,6 +10,6 @@
 
 @interface SFIBCompatibleView : UIView
 
-- (void)initialize;
+- (void)initCompat;
 
 @end

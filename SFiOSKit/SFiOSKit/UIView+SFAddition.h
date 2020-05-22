@@ -37,12 +37,16 @@
 - (void)sf_setX:(CGFloat)x y:(CGFloat)y;
 - (void)sf_setWidth:(CGFloat)width height:(CGFloat)height;
 
+- (BOOL)sf_isPointInView:(CGPoint)point;
+
++ (BOOL)sf_isPointInFrame:(CGRect)frame point:(CGPoint)point;
+
 @end
 
 @interface UIView (SFTapSupport)
 
-- (void)sf_addTapListener:(void(^)(void))tapListener;
-- (void)sf_addTapListener:(void(^)(void))tapListener identifier:(NSString *)identifier;
+- (void)sf_addTapListener:(void(^)(UITapGestureRecognizer *gr))tapListener;
+- (void)sf_addTapListener:(void(^)(UITapGestureRecognizer *gr))tapListener identifier:(NSString *)identifier;
 - (void)sf_removeTapListenerWithIdentifier:(NSString *)identifier;
 
 @end

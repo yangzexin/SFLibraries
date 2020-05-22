@@ -19,8 +19,8 @@
 
 @implementation SFCircleProgressView
 
-- (void)initialize {
-    [super initialize];
+- (void)initCompat {
+    [super initCompat];
     self.backgroundColor = [UIColor clearColor];
     
     self.strokeLineWidth = 2.0f;

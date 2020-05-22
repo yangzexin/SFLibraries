@@ -21,8 +21,8 @@
 
 @implementation SFVerticalLayout
 
-- (void)initialize {
-    [super initialize];
+- (void)initCompat {
+    [super initCompat];
     
     self.views = [NSMutableArray array];
     

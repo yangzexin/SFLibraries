@@ -13,17 +13,17 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
-    [self initialize];
+    [self initCompat];
     
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self initialize];
+    [self initCompat];
 }
 
-- (void)initialize {
+- (void)initCompat {
     
 }
 

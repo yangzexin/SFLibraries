@@ -16,8 +16,8 @@
 
 @implementation SFPageIndicator
 
-- (void)initialize {
-    [super initialize];
+- (void)initCompat {
+    [super initCompat];
     self.spacing = 5.0f;
 }
 
