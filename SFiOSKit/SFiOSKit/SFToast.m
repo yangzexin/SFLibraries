@@ -214,7 +214,7 @@
 }
 
 + (void)toastWithText:(NSString *)text hideAfterSeconds:(NSTimeInterval)hideAfterSeconds identifier:(NSString *)identifier completion:(void(^)(void))completion {
-    [self toastInView:[[UIApplication sharedApplication] keyWindow] text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
+    [self toastInView:[[[UIApplication sharedApplication] windows] lastObject] text:text hideAfterSeconds:hideAfterSeconds autoPositionForKeyboard:YES identifier:identifier completion:completion];
 }
 
 + (void)dismissWithIdentifier:(NSString *)identifier {
